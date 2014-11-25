@@ -9,9 +9,6 @@ import framework.Screen;
  */
 public class Main {
     public static void main(String[] args) {
-        Game game = new DogWoodGame();
-        Screen gameScreen = new GameScreen();
-        game.setScreen(gameScreen);
-        Application application = new Application(game, "DogWood", 800, 600);
+        Application application = new Application(new DogWoodGame(), "DogWood", 800, 600);
     }
 }
