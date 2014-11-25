@@ -1,22 +1,22 @@
 package framework.graphics;
 
 /**
- * Created by Will on 2/12/14.
+ * @author William Gervasio
  */
-public class VertexAttribute {
-    private float[] data;
-    private int elementsPerVertex;
+public final class VertexAttribute {
+    private final float[] data;
+    private final int elementsPerVertex;
 
     public VertexAttribute(float[] data, int elementsPerVertex) {
         this.data = data;
         this.elementsPerVertex = elementsPerVertex;
     }
 
-    public float[] getData() {
+    public final float[] getData() {
         return data;
     }
 
-    public int getElementsPerVertex() {
+    public final int getElementsPerVertex() {
         return elementsPerVertex;
     }
 }

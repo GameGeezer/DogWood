@@ -15,14 +15,10 @@ import java.util.List;
  */
 public class Node<T> {
 
-    private List<Node<T>> subnodes;
+    private final List<Node<T>> subnodes = new ArrayList<Node<T>>();
 
     public Node() {
-        this(new ArrayList<Node<T>>());
-    }
 
-    public Node(List<Node<T>> subnodes) {
-        this.subnodes = subnodes;
     }
 
     /**
@@ -71,6 +67,4 @@ public class Node<T> {
     public List<Node<T>> getSubnodes() {
         return subnodes;
     }
-
-    public void setSubnodes(List<Node<T>> subnodes) {this.subnodes = subnodes;}
 }

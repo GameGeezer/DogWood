@@ -1,8 +1,8 @@
 package framework.scene.components;
 
 /**
- * Created by Will on 4/29/14.
+ * An Entity component is an object that can be attached to an entity
+ * @author William Gervasio
  */
-public interface EntityComponent {
-
+public abstract interface EntityComponent {
 }

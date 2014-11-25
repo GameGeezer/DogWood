@@ -5,27 +5,15 @@ package framework.util.math;
  */
 public class Matrix4 implements Cloneable {
 
-    private static final Matrix4 IDENTITY = new Matrix4(new float[]{
-           1, 0, 0, 0,
-           0, 1, 0, 0,
-           0, 0, 1, 0,
-           0, 0, 0, 1});
-
-    private static final Matrix4 ZERO = new Matrix4(new float[]{
-            0, 0, 0, 0,
-            0, 0, 0, 0,
-            0, 0, 0, 0,
-            0, 0, 0, 0});
+    public static final int  M00 = 0,  M10 = 1,  M20 =2,   M30 =3,
+            M01 = 4,  M11 = 5,  M21 = 6,  M31 = 7,
+            M02 = 8,  M12 = 9,  M22 = 10, M32 = 11,
+            M03 = 12, M13 = 13, M23 = 14, M33 = 15;
 
     private float[] matrix = new float[16];
 
-    public static final int M00 = 0,  M10 = 1,  M20 =2,   M30 =3,
-                             M01 = 4,  M11 = 5,  M21 = 6,  M31 = 7,
-                             M02 = 8,  M12 = 9,  M22 = 10, M32 = 11,
-                             M03 = 12, M13 = 13, M23 = 14, M33 = 15;
-
     public Matrix4() {
-        set(ZERO);
+        setIdentity();
     }
 
     public Matrix4(float[][] data) {
@@ -54,10 +42,20 @@ public class Matrix4 implements Cloneable {
         return this;
     }
 
+    /**
+     * TODO
+     * @param other
+     * @return
+     */
     public Matrix4 mul(Matrix4 other) {
         return this;
     }
 
+    /**
+     * TODO
+     * @param other
+     * @return
+     */
     public Matrix4 div(Matrix4 other) {
         return this;
     }
@@ -85,6 +83,24 @@ public class Matrix4 implements Cloneable {
         matrix[M01] = data[M01]; matrix[M11] = data[M11]; matrix[M21] = data[M21]; matrix[M31] = data[M31];
         matrix[M02] = data[M02]; matrix[M12] = data[M12]; matrix[M22] = data[M22]; matrix[M32] = data[M32];
         matrix[M03] = data[M03]; matrix[M13] = data[M13]; matrix[M23] = data[M23]; matrix[M33] = data[M33];
+
+        return this;
+    }
+
+    public Matrix4 setIdentity() {
+        matrix[M00] = 1; matrix[M10] = 0; matrix[M20] = 0; matrix[M30] = 0;
+        matrix[M01] = 0; matrix[M11] = 1; matrix[M21] = 0; matrix[M31] = 0;
+        matrix[M02] = 0; matrix[M12] = 0; matrix[M22] = 1; matrix[M32] = 0;
+        matrix[M03] = 0; matrix[M13] = 0; matrix[M23] = 0; matrix[M33] = 1;
+
+        return this;
+    }
+
+    public Matrix4 setZero() {
+        matrix[M00] = 0; matrix[M10] = 0; matrix[M20] = 0; matrix[M30] = 0;
+        matrix[M01] = 0; matrix[M11] = 0; matrix[M21] = 0; matrix[M31] = 0;
+        matrix[M02] = 0; matrix[M12] = 0; matrix[M22] = 0; matrix[M32] = 0;
+        matrix[M03] = 0; matrix[M13] = 0; matrix[M23] = 0; matrix[M33] = 0;
 
         return this;
     }

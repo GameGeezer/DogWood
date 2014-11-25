@@ -1,19 +1,14 @@
 package framework.graphics.opengl;
 
-/**
- *
- * @author William Gervasio
- *
- */
-
 import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
 
 /**
  * A VBO is used to store data from a float buffer. This is most commonly used for vertex data: position, normal, color, ect.
+ * @author William Gervasio
  */
-public class VBO {
+public final class VBO {
 
     private final int handle;
 
@@ -28,21 +23,21 @@ public class VBO {
     /**
      * Binds the buffer
      */
-    public void bind() {
+    public final void bind() {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, handle);
     }
 
     /**
      * Unbinds the buffer
      */
-    public void unbind() {
+    public final void unbind() {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
 
     /**
      * Destroys the buffer
      */
-    public void destroy() {
+    public final void destroy() {
         GL15.glDeleteBuffers(handle);
     }
 }

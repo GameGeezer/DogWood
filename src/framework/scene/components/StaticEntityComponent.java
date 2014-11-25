@@ -1,9 +1,9 @@
 package framework.scene.components;
 
-import framework.scene.components.EntityComponent;
-
 /**
- * Created by Will on 11/24/2014.
+ * A StaticEntityObject is an EntityComponent that will not request an update. I distinguish
+ * between dynamic and static EntityComponents to save checks in the Entity object.
+ * @author William Gervasio
  */
-public interface StaticEntityComponent extends EntityComponent {
+public interface StaticEntityComponent extends EntityComponent{
 }

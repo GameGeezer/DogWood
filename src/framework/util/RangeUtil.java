@@ -4,7 +4,7 @@ package framework.util;
  * @author William Gervasio
  */
 
-public class RangeUtil {
+public final class RangeUtil {
 
     /**
      * Used to force a value is within a given range
@@ -13,7 +13,7 @@ public class RangeUtil {
      * @param max
      * @return The new limited value
      */
-    public static float forceIntoRange(float value, float min, float max) {
+    public static final float forceIntoRange(float value, float min, float max) {
         return value <= max ? value >= min ? value : min : max;
     }
 
@@ -24,7 +24,7 @@ public class RangeUtil {
      * @param max
      * @return True if the value is within range.
      */
-    public static boolean isWithinRange(float value, float min, float max) {
+    public static final boolean isWithinRange(float value, float min, float max) {
         return value <= max ? value >= min ? true : false : false;
     }
 

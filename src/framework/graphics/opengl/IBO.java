@@ -8,7 +8,7 @@ import java.nio.IntBuffer;
  * A VBO is used to store data from a int buffer. This is most commonly used to store indices.
  * @author William Gervasio
  */
-public class IBO {
+public final class IBO {
 
     private final int handle;
 
@@ -23,14 +23,14 @@ public class IBO {
     /**
      * Bind the buffer
      */
-    public void bind() {
+    public final void bind() {
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, handle);
     }
 
     /**
      * Unbind the buffer
      */
-    public void unbind() {
+    public final void unbind() {
         //zero is reserved and acts as "no object"
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
     }
@@ -38,7 +38,7 @@ public class IBO {
     /**
      * Delete the buffer
      */
-    public void destroy() {
+    public final void destroy() {
         GL15.glDeleteBuffers(handle);
     }
 }

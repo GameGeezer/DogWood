@@ -15,7 +15,7 @@ public class Vector3 implements Cloneable {
         set(x, y, z);
     }
 
-    public Vector3 set(float x, float y, float z) {
+    public final Vector3 set(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -23,11 +23,11 @@ public class Vector3 implements Cloneable {
         return this;
     }
 
-    public Vector3 set(Vector3 other) {
+    public final Vector3 set(Vector3 other) {
         return set(other.x, other.y, other.z);
     }
 
-    public Vector3 add(float x, float y, float z) {
+    public final Vector3 add(float x, float y, float z) {
         this.x += x;
         this.y += y;
         this.z += z;
@@ -35,11 +35,11 @@ public class Vector3 implements Cloneable {
         return this;
     }
 
-    public Vector3 add(Vector3 other) {
+    public final Vector3 add(Vector3 other) {
         return add(other.x, other.y, other.z);
     }
 
-    public Vector3 sub(float x, float y, float z) {
+    public final Vector3 sub(float x, float y, float z) {
         this.x -= x;
         this.y -= y;
         this.z -= z;
@@ -47,11 +47,11 @@ public class Vector3 implements Cloneable {
         return this;
     }
 
-    public Vector3 sub(Vector3 other) {
+    public final Vector3 sub(Vector3 other) {
         return sub(other.x, other.y, other.z);
     }
 
-    public Vector3 mul(float x, float y, float z) {
+    public final Vector3 mul(float x, float y, float z) {
         this.x *= x;
         this.y *= y;
         this.z *= z;
@@ -59,11 +59,11 @@ public class Vector3 implements Cloneable {
         return this;
     }
 
-    public Vector3 mul(Vector3 other) {
+    public final Vector3 mul(Vector3 other) {
         return mul(other.x, other.y, other.z);
     }
 
-    public Vector3 div(float x, float y, float z) {
+    public final Vector3 div(float x, float y, float z) {
         this.x /= x;
         this.y /= y;
         this.z /= z;
@@ -71,31 +71,31 @@ public class Vector3 implements Cloneable {
         return this;
     }
 
-    public Vector3 div(Vector3 other) {
+    public final Vector3 div(Vector3 other) {
         return div(other.x, other.y, other.z);
     }
 
-    public Vector3 scale(float scalar) {
+    public final Vector3 scale(float scalar) {
         return mul(scalar, scalar, scalar);
     }
 
-    public float dot(Vector3 other) {
+    public final float dot(Vector3 other) {
         return (x * other.x) + (y * other.y + (z * other.z));
     }
 
-    public float length() {
+    public final float length() {
         return (float) Math.sqrt(length2());
     }
 
-    public float length2() {
+    public final float length2() {
         return (float) (x * x + y * y + z * z);
     }
 
-    public Vector3 invert() {
+    public final Vector3 invert() {
         return set(-x, -y, -z);
     }
 
-    public Vector3 inverse() {
+    public final Vector3 inverse() {
         return clone().invert();
     }
 

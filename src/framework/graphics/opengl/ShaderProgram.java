@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public class ShaderProgram {
 
-    private int handle;
+    private final int handle;
 
-    public ShaderProgram(String vertexShader, String fragmentShader, Map<Integer, String> attributes) throws GraphicsException {
+    public  ShaderProgram(String vertexShader, String fragmentShader, Map<Integer, String> attributes) throws GraphicsException {
         int vertexHandle, fragmentHandle;
 
         vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
@@ -79,21 +79,21 @@ public class ShaderProgram {
     /**
      * Bind the shader
      */
-    public void bind() {
+    public final void bind() {
         GL20.glUseProgram(handle);
     }
 
     /**
      * Unbind the shader
      */
-    public void unbind() {
+    public final void unbind() {
         GL20.glUseProgram(0);
     }
 
     /**
      * Delete the shader
      */
-    public void destroy() {
+    public final void destroy() {
         GL20.glDeleteProgram(handle);
     }
 
@@ -102,7 +102,7 @@ public class ShaderProgram {
      * @param uniform
      * @return
      */
-    public int getUniformLocation(String uniform) {
+    public final int getUniformLocation(String uniform) {
         return GL20.glGetUniformLocation(handle, uniform);
     }
 
@@ -113,7 +113,7 @@ public class ShaderProgram {
      * @return A handle to the compiled shader
      * @throws GraphicsException
      */
-    private int compileShader(String shader, int type) throws GraphicsException {
+    private final int compileShader(String shader, int type) throws GraphicsException {
         int handle = GL20.glCreateShader(type);
         GL20.glShaderSource(handle, shader);
         GL20.glCompileShader(handle);
@@ -137,7 +137,7 @@ public class ShaderProgram {
      * @param handle
      * @return True if propperly linked
      */
-    private boolean checkForLinkError(int handle) {
+    private final boolean checkForLinkError(int handle) {
         return GL20.glGetProgrami(handle, GL20.GL_LINK_STATUS) == GL11.GL_FALSE;
     }
 }

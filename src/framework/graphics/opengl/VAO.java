@@ -10,8 +10,7 @@ import java.util.Map;
 /**
  * @author William Gervasio
  */
-
-public class VAO {
+public final class VAO {
     private final Map<Integer, Descriptor> descriptors = new HashMap<Integer, Descriptor>();
 
     private final VBO vbo;
@@ -27,7 +26,7 @@ public class VAO {
         handle = GL30.glGenVertexArrays();
     }
 
-    public void init() {
+    public final void init() {
         GL30.glBindVertexArray(handle);
 
         vbo.bind();
@@ -50,7 +49,7 @@ public class VAO {
         descriptors.put(index, descriptor);
     }
 
-    public void draw() {
+    public final void draw() {
         GL30.glBindVertexArray(handle);
         GL11.glDrawElements(GL11.GL_TRIANGLES, size, GL11.GL_UNSIGNED_INT, 0);
     }

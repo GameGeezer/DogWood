@@ -1,7 +1,7 @@
 package framework.util;
 
 /**
- * Created by Will on 2/8/14.
+ * @author William Gervasio
  */
 public class Pair<K, V> {
     private K key;

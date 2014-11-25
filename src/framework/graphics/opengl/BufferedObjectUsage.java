@@ -1,12 +1,10 @@
 package framework.graphics.opengl;
 
-/**
- * @author william gervasio
- */
 import org.lwjgl.opengl.GL15;
 
 /**
  * Hints for OpenGL
+ * @author william gervasio
  */
 public class BufferedObjectUsage {
 

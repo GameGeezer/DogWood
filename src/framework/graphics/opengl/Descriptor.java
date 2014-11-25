@@ -4,7 +4,7 @@ package framework.graphics.opengl;
  * Descriptors are used to describe generic the data for generic attribute pointers.
  * @author William Gervasio
  */
-public class Descriptor {
+public final class Descriptor {
 
     private final int size;
     private final int type;
@@ -25,7 +25,7 @@ public class Descriptor {
      * The element count per vertex. e.g. 3(x, y, z) for position
      * @return
      */
-    public int getSize() {
+    public final int getSize() {
         return size;
     }
 
@@ -33,15 +33,15 @@ public class Descriptor {
      * The data type. e.g. GL_FLOAT
      * @return
      */
-    public int getType() {
+    public final int getType() {
         return type;
     }
 
     /**
-     * Whether to normalize the data
+     * Whether to normalize the data or not
      * @return
      */
-    public boolean isNormalized() {
+    public final boolean isNormalized() {
         return normalized;
     }
 
@@ -49,7 +49,7 @@ public class Descriptor {
      * How many bytes total to store all the vertices
      * @return
      */
-    public int getStride() {
+    public final int getStride() {
         return stride;
     }
 
@@ -57,7 +57,7 @@ public class Descriptor {
      * The offset in bytes of the first index
      * @return
      */
-    public int getPointer() {
+    public final int getPointer() {
         return pointer;
     }
 }
