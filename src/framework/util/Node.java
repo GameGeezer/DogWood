@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class Node<T> {
 
+    private Node parent;
     private final List<Node<T>> subnodes = new ArrayList<Node<T>>();
 
     public Node() {
@@ -27,6 +28,7 @@ public class Node<T> {
      */
     public void attach(Node<T> node) {
         subnodes.add(node);
+        node.parent = this;
     }
 
     /**
@@ -66,5 +68,9 @@ public class Node<T> {
 
     public List<Node<T>> getSubnodes() {
         return subnodes;
+    }
+
+    public Node<T> getParent() {
+        return parent;
     }
 }

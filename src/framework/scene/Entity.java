@@ -2,6 +2,7 @@ package framework.scene;
 
 import framework.scene.components.DynamicEntityComponent;
 import framework.scene.components.EntityComponent;
+import framework.util.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ import java.util.Map;
 /**
  * @author William Gervasio
  */
-public class Entity {
+public class Entity extends Node<Entity>{
 
     private Map<Class, List<EntityComponent>> components = new HashMap<Class, List<EntityComponent>>();
     private List<DynamicEntityComponent> dynamicComponents = new ArrayList<DynamicEntityComponent>();
