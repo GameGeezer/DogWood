@@ -1,22 +1,19 @@
 package game;
 
 import framework.Screen;
-import framework.graphics.Camera;
+import framework.graphics.Image;
 import framework.graphics.Sprite;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
-import framework.scene.components.EntityComponent;
-import framework.scene.components.PositionComponent;
-import framework.scene.components.ScaleComponent;
-import framework.scene.components.SpriteRenderComponent;
+import framework.scene.components.TransformComponent;
 import framework.util.FileUtil;
+import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.GraphicsException;
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,18 +26,18 @@ public class GameScreen implements Screen {
     private VAO vao;
     private ShaderProgram shader;
     private Sprite sprite;
+
     public void onPause() {
 
     }
 
     public void onResume() {
         Entity entity = new Entity();
-        PositionComponent positionComponent= new PositionComponent();
-        ScaleComponent scaleComponent = new ScaleComponent();
+        TransformComponent transform = new TransformComponent();
+        transform.translate(10, 10, 10);
         //Sprite sprite = new Sprite();
        // EntityComponent renderComponent = new SpriteRenderComponent(positionComponent, scaleComponent, sprite);
-        entity.addComponent(positionComponent);
-        entity.addComponent(scaleComponent);
+        entity.addComponent(transform);
         //entity.addComponent(renderComponent);
 
         Map<Integer, String> attributes = new HashMap<Integer, String>();
@@ -55,7 +52,17 @@ public class GameScreen implements Screen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        sprite = new Sprite(shader);
+        Image image = null;
+        try {
+            image = Image.loadPNG(new File("res/textures/poulpi.png"));
+            image.getWidth();
+        } catch (DogWoodException e) {
+
+        }
+        System.out.println(image.getWidth());
+        System.out.println(image.getHeight());
+        System.out.println(image.getBuffer());
+        sprite = new Sprite(image, shader);
     }
 
     public void onLeave() {

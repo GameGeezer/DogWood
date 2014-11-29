@@ -1,7 +1,7 @@
 package framework.scene;
 
-import framework.scene.components.DynamicEntityComponent;
-import framework.scene.components.EntityComponent;
+import framework.scene.components.IDynamicEntityComponent;
+import framework.scene.components.IEntityComponent;
 import framework.util.Node;
 
 import java.util.ArrayList;
@@ -12,50 +12,50 @@ import java.util.Map;
 /**
  * @author William Gervasio
  */
-public class Entity extends Node<Entity>{
+public class Entity {
 
-    private Map<Class, List<EntityComponent>> components = new HashMap<Class, List<EntityComponent>>();
-    private List<DynamicEntityComponent> dynamicComponents = new ArrayList<DynamicEntityComponent>();
+    private Map<Class, List<IEntityComponent>> components = new HashMap<Class, List<IEntityComponent>>();
+    private List<IDynamicEntityComponent> dynamicComponents = new ArrayList<IDynamicEntityComponent>();
 
     public Entity() {
 
     }
 
     public void update(int delta) {
-        for(DynamicEntityComponent component : dynamicComponents) {
+        for(IDynamicEntityComponent component : dynamicComponents) {
             component.update(delta);
         }
     }
 
-    public void addComponent(EntityComponent component) {
+    public void addComponent(IEntityComponent component) {
 
         if(components.get(component.getClass()) == null) {
-            components.put(component.getClass(), new ArrayList<EntityComponent>());
+            components.put(component.getClass(), new ArrayList<IEntityComponent>());
         }
         components.get(component.getClass()).add(component);
 
-        if(component instanceof DynamicEntityComponent) {
-            dynamicComponents.add((DynamicEntityComponent)component);
+        if(component instanceof IDynamicEntityComponent) {
+            dynamicComponents.add((IDynamicEntityComponent)component);
         }
     }
 
-    public void removeComponent(EntityComponent component) {
+    public void removeComponent(IEntityComponent component) {
         if(components.get(component.getClass()) == null) {
             return;
         }
         components.get(component.getClass()).remove(component);
 
-        if(component instanceof DynamicEntityComponent) {
+        if(component instanceof IDynamicEntityComponent) {
             dynamicComponents.remove(component);
         }
     }
 
-    public List<EntityComponent> getComponentsOfType(Class<? extends EntityComponent> type) {
+    public List<IEntityComponent> getComponentsOfType(Class<? extends IEntityComponent> type) {
         return components.get(type);
     }
 
-    public boolean hasComponent(EntityComponent component) {
-        List<EntityComponent> componentsOfType = getComponentsOfType(component.getClass());
+    public boolean hasComponent(IEntityComponent component) {
+        List<IEntityComponent> componentsOfType = getComponentsOfType(component.getClass());
         return componentsOfType == null ? false : componentsOfType.contains(component);
     }
 }
