@@ -20,7 +20,6 @@ public class Camera {
         this.height = height;
         this.near = near;
         this.far = far;
-
     }
 
     public Camera setTranslation(Vector2 translation) {
