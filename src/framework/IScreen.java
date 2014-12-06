@@ -1,10 +1,9 @@
 package framework;
 
 /**
- * @author William Gervasio
+ * Created by Will on 12/6/2014.
  */
-
-public interface Screen {
+public interface IScreen {
 
     public abstract void onPause();
 

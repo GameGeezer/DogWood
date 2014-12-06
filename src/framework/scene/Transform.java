@@ -1,6 +1,7 @@
 package framework.scene;
 
 import framework.util.math.Matrix4;
+import framework.util.math.Orientation;
 import framework.util.math.Quaternion;
 import framework.util.math.Vector3;
 
@@ -10,7 +11,7 @@ import framework.util.math.Vector3;
 public class Transform {
 
     private Matrix4 position = new Matrix4(), scale = new Matrix4(), model = new Matrix4();
-    private Quaternion rotation = new Quaternion();
+    private Orientation rotation = new Orientation();
 
     public Transform() {
 
@@ -60,7 +61,7 @@ public class Transform {
     }
 
     //rotation
-
+/*
     public void setRotationX(float value) {
         scale.data[Matrix4.M00] = value;
     }
@@ -84,7 +85,7 @@ public class Transform {
     public float getYaw() {
         return rotation.computeYaw();
     }
-
+*/
     //scale
 
     public void setScaleX(float value) {

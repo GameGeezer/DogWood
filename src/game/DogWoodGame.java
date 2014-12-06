@@ -1,14 +1,14 @@
 package game;
 
 import framework.Game;
-import framework.Screen;
+import framework.IScreen;
 
 /**
  * Created by Will on 4/29/14.
  */
 public class DogWoodGame extends Game{
     public void init() {
-        Screen gameScreen = new GameScreen();
+        IScreen gameScreen = new GameScreen();
         setScreen(gameScreen);
     }
 }

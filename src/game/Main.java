@@ -1,8 +1,6 @@
 package game;
 
 import framework.Application;
-import framework.Game;
-import framework.Screen;
 
 /**
  * Created by Will on 4/29/14.

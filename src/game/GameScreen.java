@@ -1,18 +1,17 @@
 package game;
 
-import framework.Screen;
+import framework.IScreen;
 import framework.graphics.Image;
 import framework.graphics.Sprite;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
 import framework.scene.components.TransformComponent;
-import framework.util.FileUtil;
+import framework.util.fileIO.FileUtil;
 import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.GraphicsException;
 import framework.util.math.Matrix4;
-import framework.util.math.Quaternion;
+import framework.util.math.Orientation;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +21,7 @@ import java.util.Map;
 /**
  * @author William Gervasio
  */
-public class GameScreen implements Screen {
+public class GameScreen implements IScreen {
 
     //private Camera camera = new Camera();
     private VAO vao;
@@ -67,7 +66,7 @@ public class GameScreen implements Screen {
         Matrix4 matrix2 = new Matrix4();
         Matrix4.multiply(matrix1, matrix2, matrix1);
 
-        Quaternion q1 = new Quaternion();
+        Orientation q1 = new Orientation();
 
         q1.setEuler(0, 0, (float)Math.PI / 2);
         q1.setEuler(0, 0, (float)Math.PI + .5f);
