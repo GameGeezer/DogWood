@@ -9,19 +9,17 @@ import framework.util.math.Vector2;
  */
 public final class SpriteRenderComponent implements IDynamicEntityComponent {
 
-    private final Vector2 position, scale, dimensions;
+    private final TransformComponent transformComponent;
     private final Sprite sprite;
     private final Camera camera;
 
-    public SpriteRenderComponent(Vector2 position, Vector2 scale, Vector2 dimensions, Sprite sprite, Camera camera) {
-        this.position = position;
-        this.scale = scale;
-        this.dimensions = dimensions;
+    public SpriteRenderComponent(Sprite sprite, TransformComponent transformComponent, Camera camera) {
+        this.transformComponent = transformComponent;
         this.sprite = sprite;
         this.camera = camera;
     }
 
     public void update(int delta) {
-
+        sprite.draw(camera, transformComponent.getModel());
     }
 }

@@ -9,6 +9,7 @@ import framework.scene.components.TransformComponent;
 import framework.util.FileUtil;
 import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.GraphicsException;
+import framework.util.math.Matrix4;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
@@ -63,6 +64,11 @@ public class GameScreen implements Screen {
         System.out.println(image.getHeight());
         System.out.println(image.getBuffer());
         sprite = new Sprite(image, shader);
+
+        Matrix4 matrix1 = new Matrix4();
+        Matrix4 matrix2 = new Matrix4();
+        Matrix4.multiply(matrix1, matrix2, matrix1);
+        System.out.println(matrix1.toString());
     }
 
     public void onLeave() {
@@ -75,6 +81,6 @@ public class GameScreen implements Screen {
 
     public void update(int delta) {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-        sprite.draw();
+        //sprite.draw();
     }
 }

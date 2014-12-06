@@ -159,4 +159,11 @@ public class Matrix4 implements Cloneable {
     public Matrix4 clone() {
         return new Matrix4(data);
     }
+
+    public String toString() {
+        return new String(data[M00] + " " + data[M10] + " " + data[M20] + " " + data[M30] + "\n" +
+                          data[M01] + " " + data[M11] + " " + data[M21] + " " + data[M31] + "\n" +
+                          data[M02] + " " + data[M12] + " " + data[M22] + " " + data[M32] + "\n" +
+                          data[M03] + " " + data[M13] + " " + data[M23] + " " + data[M33]);
+    }
 }
