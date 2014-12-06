@@ -2,6 +2,7 @@ package framework.util.math;
 
 /**
  * @author William Gervasio
+ * MAY HAVE AN ISSUE WITH GIMBAL LOCK WHEN CONVERTING TO EULER
  */
 public class Quaternion {
 
@@ -39,20 +40,34 @@ public class Quaternion {
         w /= length;
     }
 
-    public Quaternion setAxisAngle(Vector3 axis, float angle) {
+    public Quaternion normalize() {
+        float norm = (float) Math.sqrt(this.x * this.x + this.y * this.y + this.z
+                * this.z + this.w * this.w);
+        if (norm > 0.0f) {
+            this.x /= norm;
+            this.y /= norm;
+            this.z /= norm;
+            this.w /= norm;
+        } else {
+            this.x = (float) 0.0;
+            this.y = (float) 0.0;
+            this.z = (float) 0.0;
+            this.w = (float) 1.0;
+        }
 
         return this;
     }
 
-    public Quaternion setEuler(float yaw, float pitch, float roll) {
+
+    public Quaternion setEuler(float roll, float pitch, float yaw) {
         float cr, cp, cy, sr, sp, sy, cpcy, spsy;
 
-        cr = (float) Math.cos(roll/2);
+        cr = (float) Math.cos(roll / 2);
         cp = (float) Math.cos(pitch / 2);
         cy = (float) Math.cos(yaw / 2);
         sr = (float) Math.sin(roll / 2);
-        sp = (float) Math.sin(pitch/2);
-        sy = (float) Math.sin(yaw/2);
+        sp = (float) Math.sin(pitch / 2);
+        sy = (float) Math.sin(yaw / 2);
         cpcy = cp * cy;
         spsy = sp * sy;
         w = cr * cpcy + sr * spsy;
@@ -118,7 +133,7 @@ public class Quaternion {
         float sqy = y * y;
         float sqz = z * z;
         pitch = (float) Math.atan2(2 * y * w - 2 * x * z, 1 - 2 * sqy - 2 * sqz);
-        yaw = (float) Math.asin(2 * test);
+        yaw = (float) -Math.asin(2 * test);
         roll = (float) Math.atan2(2 * x * w - 2 * y * z, 1 - 2 * sqx - 2 * sqz);
 
         return new Vector3(roll, pitch, yaw);
@@ -139,20 +154,20 @@ public class Quaternion {
         float test = x * y + z * w;
 
         if (test > 0.499 || test < -0.499) {
-            return (float) Math.atan2(x, w) * Math.signum(test);
+            return (float) Math.atan2(x, w) * Math.signum(test) * 2;
         }
 
-        return (float) Math.atan2(2 * y * w - 2 * x * z, 1 - 2 * x * x - 2 * z * z);
+        return (float) Math.atan2(2 * y * w - 2 * x * z, 1 - 2 * y * y - 2 * z * z);
     }
 
     public float computeYaw() {
         float test = x * y + z * w;
 
         if (test > 0.499 || test < -0.499) {
-            return (float) Math.PI / 2 * Math.signum(test);
+            return (float) (Math.PI / 2) * Math.signum(test);
         }
 
-        return (float) Math.asin(2 * test);
+        return (float) -Math.asin(2 * test);
     }
 
     public float getX() {

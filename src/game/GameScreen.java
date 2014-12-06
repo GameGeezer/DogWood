@@ -10,6 +10,7 @@ import framework.util.FileUtil;
 import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.GraphicsException;
 import framework.util.math.Matrix4;
+import framework.util.math.Quaternion;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
@@ -60,15 +61,21 @@ public class GameScreen implements Screen {
         } catch (DogWoodException e) {
 
         }
-        System.out.println(image.getWidth());
-        System.out.println(image.getHeight());
-        System.out.println(image.getBuffer());
         sprite = new Sprite(image, shader);
 
         Matrix4 matrix1 = new Matrix4();
         Matrix4 matrix2 = new Matrix4();
         Matrix4.multiply(matrix1, matrix2, matrix1);
-        System.out.println(matrix1.toString());
+
+        Quaternion q1 = new Quaternion();
+
+        q1.setEuler(0, 0, (float)Math.PI / 2);
+        q1.setEuler(0, 0, (float)Math.PI + .5f);
+        q1.setEuler(0, 0, (float)Math.PI - (float)Math.PI / 4);
+        System.out.println(q1.computeEulerAngles().getX());
+        System.out.println(q1.computeEulerAngles().getZ());
+        System.out.println(q1.computeYaw());
+        System.out.println(Math.toDegrees(q1.computeYaw()));
     }
 
     public void onLeave() {

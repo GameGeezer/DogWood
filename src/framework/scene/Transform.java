@@ -65,24 +65,24 @@ public class Transform {
         scale.data[Matrix4.M00] = value;
     }
 
-    public float getRotationX() {
-        return scale.data[Matrix4.M00];
+    public float getRoll() {
+        return rotation.computeRoll();
     }
 
     public void setRotationY(float value) {
         scale.data[Matrix4.M11] = value;
     }
 
-    public float getRotationY() {
-        return scale.data[Matrix4.M11];
+    public float getPitch() {
+        return rotation.computePitch();
     }
 
     public void setRotationZ(float value) {
         scale.data[Matrix4.M22] = value;
     }
 
-    public float getRotationZ() {
-        return scale.data[Matrix4.M22];
+    public float getYaw() {
+        return rotation.computeYaw();
     }
 
     //scale
