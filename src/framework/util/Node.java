@@ -24,7 +24,7 @@ public class Node<T> {
 
     /**
      * Add node as a child
-     * @param node
+     * @param node The node being attached
      */
     public void attach(Node<T> node) {
         subnodes.add(node);
@@ -40,7 +40,7 @@ public class Node<T> {
 
     /**
      * Detach node if it is a direct child
-     * @param node
+     * @param node The node being detached
      */
     public void detach(Node<T> node) {
         subnodes.remove(node);
@@ -48,7 +48,7 @@ public class Node<T> {
 
     /**
      * Recursively detach a node
-     * @param node
+     * @param node The node being detached
      */
     public void deepDetach(T node) {
         subnodes.remove(node);
@@ -59,7 +59,7 @@ public class Node<T> {
 
     /**
      * Checks if the passed node is a direct child
-     * @param node
+     * @param node The node being searched for
      * @return
      */
     public boolean hasNode(Node<T> node) {
@@ -70,7 +70,7 @@ public class Node<T> {
         return subnodes;
     }
 
-    public Node<T> getParent() {
+    public Node getParent() {
         return parent;
     }
 }
