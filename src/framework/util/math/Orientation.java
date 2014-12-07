@@ -15,7 +15,6 @@ public class Orientation extends Quaternion {
 
     public Orientation setEuler(float roll, float pitch, float yaw) {
         float cr, cp, cy, sr, sp, sy, cpcy, spsy;
-
         cr = (float) Math.cos(roll / 2);
         cp = (float) Math.cos(pitch / 2);
         cy = (float) Math.cos(yaw / 2);
@@ -73,22 +72,24 @@ public class Orientation extends Quaternion {
         float roll, pitch, yaw;
         float test = x * y + z * w;
         if (test > 0.499) { // singularity at north pole
+            roll = 0;
             pitch = 2 * (float) Math.atan2(x, w);
             yaw = (float) Math.PI / 2;
-            roll = 0;
+
             return new Vector3(roll, pitch, yaw);
         } else if (test < -0.499) { // singularity at south pole
+            roll = 0;
             pitch = -2 * (float) Math.atan2(x, w);
             yaw = -(float) Math.PI / 2;
-            roll = 0;
+
             return new Vector3(roll, pitch, yaw);
         }
         float sqx = x * x;
         float sqy = y * y;
         float sqz = z * z;
-        pitch = (float) Math.atan2(2 * y * w - 2 * x * z, 1 - 2 * sqy - 2 * sqz);
-        yaw = (float) -Math.asin(2 * test);
         roll = (float) Math.atan2(2 * x * w - 2 * y * z, 1 - 2 * sqx - 2 * sqz);
+        pitch = (float) Math.atan2(2 * y * w - 2 * x * z, 1 - 2 * sqy - 2 * sqz);
+        yaw = (float) Math.asin(2 * test);
 
         return new Vector3(roll, pitch, yaw);
 
@@ -121,6 +122,7 @@ public class Orientation extends Quaternion {
             return (float) (Math.PI / 2) * Math.signum(test);
         }
 
-        return (float) -Math.asin(2 * test);
+        return (float) Math.asin(2 * test);
     }
+
 }

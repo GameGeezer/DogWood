@@ -9,6 +9,7 @@ import framework.scene.components.TransformComponent;
 import framework.util.fileIO.FileUtil;
 import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.GraphicsException;
+import framework.util.fileIO.WavefrontLoader;
 import framework.util.math.Matrix4;
 import framework.util.math.Orientation;
 import org.lwjgl.opengl.GL11;
@@ -47,34 +48,35 @@ public class GameScreen implements IScreen {
         attributes.put(2, "in_TextureCoord");
 
         try {
-            shader = new ShaderProgram(FileUtil.readText("res/TestShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
-        } catch (GraphicsException e) {
-            e.printStackTrace();
+            //shader = new ShaderProgram(FileUtil.readText("res/TestShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
+            WavefrontLoader loader = new WavefrontLoader();
+            loader.load(new File("res/models/UtahTeapot.obj"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         Image image = null;
         try {
             image = Image.loadPNG(new File("res/textures/poulpi.png"));
-            image.getWidth();
         } catch (DogWoodException e) {
 
         }
         sprite = new Sprite(image, shader);
 
+        /*
         Matrix4 matrix1 = new Matrix4();
         Matrix4 matrix2 = new Matrix4();
         Matrix4.multiply(matrix1, matrix2, matrix1);
 
         Orientation q1 = new Orientation();
 
-        q1.setEuler(0, 0, (float)Math.PI / 2);
-        q1.setEuler(0, 0, (float)Math.PI + .5f);
-        q1.setEuler(0, 0, (float)Math.PI - (float)Math.PI / 4);
+        q1.setEuler((float)Math.PI / 2, (float)Math.PI / 2, 0 );
         System.out.println(q1.computeEulerAngles().getX());
         System.out.println(q1.computeEulerAngles().getZ());
-        System.out.println(q1.computeYaw());
-        System.out.println(Math.toDegrees(q1.computeYaw()));
+        System.out.println(q1.computeRoll());
+        System.out.println("Roll: " + Math.toDegrees(q1.computeRoll()));
+        System.out.println("Pitch: " + Math.toDegrees(q1.computePitch()));
+        System.out.println("Yaw: " + Math.toDegrees(q1.computeYaw()));
+        */
     }
 
     public void onLeave() {
