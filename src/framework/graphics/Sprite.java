@@ -2,7 +2,10 @@ package framework.graphics;
 
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
-import framework.util.DatatypeUtil;
+import framework.graphics.vertices.IVertexAttribute;
+import framework.graphics.vertices.StaticVertexAttribute;
+import framework.graphics.vertices.VertexAttribute;
+import framework.util.dataTypes.DatatypeUtil;
 import framework.util.math.Matrix4;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
@@ -52,16 +55,16 @@ public class Sprite {
 
         int[] indices = {0, 1, 2, 0, 2, 3,};
 
-        List<VertexAttribute> attributes = new ArrayList<VertexAttribute>();
-        attributes.add(new VertexAttribute(vertices, 3));
-        attributes.add(new VertexAttribute(colors, 4));
-        attributes.add(new VertexAttribute(texCoords, 2));
+        List<IVertexAttribute> attributes = new ArrayList<>();
+        attributes.add(new StaticVertexAttribute(vertices, 3));
+        attributes.add(new StaticVertexAttribute(colors, 4));
+        attributes.add(new StaticVertexAttribute(texCoords, 2));
         mesh = new Mesh(indices, attributes);
     }
 
-    public void draw(Camera camera, Matrix4 model) {
+    public void draw() {
         shader.bind();
-
+        /*
         tempBuffer.reset();
         int projectionHandle = shader.getUniformLocation("u_projection");
         tempBuffer.put(camera.getProjection().data);
@@ -71,7 +74,7 @@ public class Sprite {
         tempBuffer.put(model.data);
         int modelHandle = shader.getUniformLocation("u_model");
         GL20.glUniformMatrix4(modelHandle, false, tempBuffer);
-
+        */
         texture.bind();
         mesh.draw();
         texture.unbind();

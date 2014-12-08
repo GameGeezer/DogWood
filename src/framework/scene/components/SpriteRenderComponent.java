@@ -20,6 +20,6 @@ public final class SpriteRenderComponent implements IDynamicEntityComponent {
     }
 
     public void update(int delta) {
-        sprite.draw(camera, transformComponent.getModel());
+        sprite.draw();
     }
 }

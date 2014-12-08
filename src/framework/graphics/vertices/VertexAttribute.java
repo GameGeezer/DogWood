@@ -1,4 +1,4 @@
-package framework.graphics;
+package framework.graphics.vertices;
 
 /**
  * @author William Gervasio

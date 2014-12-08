@@ -6,12 +6,10 @@ import framework.graphics.Sprite;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
 import framework.scene.components.TransformComponent;
-import framework.util.fileIO.FileUtil;
 import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.GraphicsException;
-import framework.util.fileIO.WavefrontLoader;
-import framework.util.math.Matrix4;
-import framework.util.math.Orientation;
+import framework.util.fileIO.FileUtil;
+import framework.util.fileIO.mesh.wavefront.WavefrontLoader;
 import org.lwjgl.opengl.GL11;
 
 import java.io.File;
@@ -48,9 +46,11 @@ public class GameScreen implements IScreen {
         attributes.put(2, "in_TextureCoord");
 
         try {
-            //shader = new ShaderProgram(FileUtil.readText("res/TestShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
+            shader = new ShaderProgram(FileUtil.readText("res/testShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
             WavefrontLoader loader = new WavefrontLoader();
             loader.load(new File("res/models/UtahTeapot.obj"));
+        } catch(GraphicsException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,6 +77,10 @@ public class GameScreen implements IScreen {
         System.out.println("Pitch: " + Math.toDegrees(q1.computePitch()));
         System.out.println("Yaw: " + Math.toDegrees(q1.computeYaw()));
         */
+
+        String[] components = "v1//vn1".split("/");
+        System.out.println(components.length);
+        System.out.println("v1//vn1".hashCode() == "v1//vn1".hashCode());
     }
 
     public void onLeave() {
@@ -89,6 +93,6 @@ public class GameScreen implements IScreen {
 
     public void update(int delta) {
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-        //sprite.draw();
+        sprite.draw();
     }
 }

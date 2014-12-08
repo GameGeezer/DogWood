@@ -1,4 +1,4 @@
-package framework.util;
+package framework.util.dataTypes;
 
 /**
  * @author William Gervasio

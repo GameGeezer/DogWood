@@ -1,12 +1,13 @@
-package framework.util;
+package framework.util.dataTypes;
 
 /**
  * Created by Will on 12/7/2014.
  */
-public class FloatArrayList {
-    private float[] data = new float[10];
+public class IntArrayList {
+    private int[] data = new int[10];
     private int size;
-    public FloatArrayList() {
+
+    public IntArrayList() {
 
     }
 
@@ -14,9 +15,9 @@ public class FloatArrayList {
         return size;
     }
 
-    public void add(float value) {
+    public void add(int value) {
         if(size == data.length - 1) {
-            float[] newDataArray = new float[data.length * 2];
+            int[] newDataArray = new int[data.length * 2];
             System.arraycopy(data, 0, newDataArray, 0, data.length);
             data = newDataArray;
         }
@@ -32,8 +33,8 @@ public class FloatArrayList {
         }
     }
 
-    public float[] getAsArray(){
-        float[] minimumArray = new float[size];
+    public int[] getAsArray(){
+        int[] minimumArray = new int[size];
         System.arraycopy(data, 0, minimumArray, 0, size);
         return minimumArray;
     }

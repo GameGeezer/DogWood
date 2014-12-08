@@ -1,7 +1,9 @@
 package framework.graphics;
 
 import framework.graphics.opengl.*;
-import framework.util.DatatypeUtil;
+import framework.graphics.vertices.IVertexAttribute;
+import framework.graphics.vertices.VertexAttribute;
+import framework.util.dataTypes.DatatypeUtil;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -17,16 +19,16 @@ public class Mesh {
 
     protected VAO vao;
 
-    private List<VertexAttribute> vertexElements;
+    private List<IVertexAttribute> vertexElements;
     private int[] indices;
 
-    public Mesh(int[] indices, List<VertexAttribute> vertexElements) {
+    public Mesh(int[] indices, List<IVertexAttribute> vertexElements) {
         this.indices = indices;
         this.vertexElements = vertexElements;
 
         //create Vertex Buffer
         FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(countTotalElements());
-        for (VertexAttribute element : vertexElements) {
+        for (IVertexAttribute element : vertexElements) {
             verticesBuffer.put(element.getData());
         }
         verticesBuffer.flip();
@@ -42,7 +44,7 @@ public class Mesh {
         vao = new VAO(vbo, ibo, indices.length);
         int offset = 0;
         int i = 0;
-        for (VertexAttribute element : vertexElements) {
+        for (IVertexAttribute element : vertexElements) {
             int sizeInBytes = element.getElementsPerVertex() * DatatypeUtil.FLOAT_SIZE_BYTES;
             int numberOfVertices = element.getData().length / element.getElementsPerVertex();
             vao.addVertexAttribute(i, new Descriptor(element.getElementsPerVertex(), GL11.GL_FLOAT, false, sizeInBytes, offset));
@@ -58,7 +60,7 @@ public class Mesh {
 
     private int countTotalElements() {
         int totalElementsCount = 0;
-        for (VertexAttribute element : vertexElements) {
+        for (IVertexAttribute element : vertexElements) {
             totalElementsCount += element.getData().length;
         }
         return totalElementsCount;
