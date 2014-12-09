@@ -13,7 +13,7 @@ import java.util.*;
  * Created by Will on 12/7/2014.
  */
 public class MeshBuilder {
-    
+
     private Map<String, DynamicVertexAttribute> components = new HashMap<String, DynamicVertexAttribute>();
     private IntArrayList indices = new IntArrayList();
 
