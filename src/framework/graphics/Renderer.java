@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
  * @author william gervasio
  */
 
-public class Renderer {
+public abstract class Renderer {
 
     public Renderer() {
         GL11.glEnable(GL11.GL_BLEND);

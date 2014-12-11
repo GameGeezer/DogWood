@@ -10,7 +10,7 @@ import framework.util.math.Vector3;
  */
 public class Transform {
 
-    private Matrix4 position = new Matrix4(), scale = new Matrix4(), model = new Matrix4();
+    private Matrix4 position = new Matrix4(), scale = new Matrix4();
     private Orientation rotation = new Orientation();
 
     public Transform() {
@@ -53,14 +53,10 @@ public class Transform {
         return setScale(scale.getX(), scale.getY(), scale.getZ());
     }
 
-    public Matrix4 getModel() {
-        model.set(rotation.computeMatrix());
-        Matrix4.multiply(model, position, model);
-
-        return model;
-    }
-
     //rotation
+    public Orientation getRotation() {
+        return rotation;
+    }
 /*
     public void setRotationX(float value) {
         scale.data[Matrix4.M00] = value;
@@ -88,6 +84,10 @@ public class Transform {
 */
     //scale
 
+    public Matrix4 getScale() {
+        return scale;
+    }
+
     public void setScaleX(float value) {
         scale.data[Matrix4.M00] = value;
     }
@@ -113,6 +113,10 @@ public class Transform {
     }
 
     //position
+
+    public Matrix4 getPosition() {
+        return position;
+    }
 
     public void setX(float value) {
         position.data[Matrix4.M30] = value;

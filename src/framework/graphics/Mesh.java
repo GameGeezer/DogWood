@@ -12,6 +12,7 @@ import java.nio.IntBuffer;
 import java.util.List;
 
 /**
+ * Given an array if indices and and a List of IVertexAttribues a Mesh generates a VAO.
  * @author william gervasio
  */
 
@@ -54,6 +55,9 @@ public class Mesh {
         vao.init();
     }
 
+    /**
+     * Draw the mesh
+     */
     public void draw() {
         vao.draw();
     }

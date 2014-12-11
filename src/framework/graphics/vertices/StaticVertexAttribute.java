@@ -1,7 +1,7 @@
 package framework.graphics.vertices;
 
 /**
- * Created by Will on 12/7/2014.
+ * An IVertexAttribute that cannot be altered.
  */
 public class StaticVertexAttribute implements IVertexAttribute {
     private final float[] data;
@@ -12,10 +12,12 @@ public class StaticVertexAttribute implements IVertexAttribute {
         this.elementsPerVertex = elementsPerVertex;
     }
 
+    @Override
     public final float[] getData() {
         return data;
     }
 
+    @Override
     public final int getElementsPerVertex() {
         return elementsPerVertex;
     }

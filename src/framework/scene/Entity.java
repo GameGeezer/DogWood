@@ -1,8 +1,7 @@
 package framework.scene;
 
-import framework.scene.components.IDynamicEntityComponent;
 import framework.scene.components.IEntityComponent;
-import framework.util.Node;
+import framework.scene.components.IUpdateEntityComponent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,27 +14,26 @@ import java.util.Map;
 public class Entity {
 
     private Map<Class, List<IEntityComponent>> components = new HashMap<Class, List<IEntityComponent>>();
-    private List<IDynamicEntityComponent> dynamicComponents = new ArrayList<IDynamicEntityComponent>();
+    private List<IUpdateEntityComponent> dynamicComponents = new ArrayList<IUpdateEntityComponent>();
 
     public Entity() {
 
     }
 
     public void update(int delta) {
-        for(IDynamicEntityComponent component : dynamicComponents) {
+        for(IUpdateEntityComponent component : dynamicComponents) {
             component.update(delta);
         }
     }
 
     public void addComponent(IEntityComponent component) {
-
         if(components.get(component.getClass()) == null) {
             components.put(component.getClass(), new ArrayList<IEntityComponent>());
         }
         components.get(component.getClass()).add(component);
 
-        if(component instanceof IDynamicEntityComponent) {
-            dynamicComponents.add((IDynamicEntityComponent)component);
+        if(component instanceof IUpdateEntityComponent) {
+            dynamicComponents.add((IUpdateEntityComponent) component);
         }
     }
 
@@ -45,13 +43,17 @@ public class Entity {
         }
         components.get(component.getClass()).remove(component);
 
-        if(component instanceof IDynamicEntityComponent) {
+        if(component instanceof IUpdateEntityComponent) {
             dynamicComponents.remove(component);
         }
     }
 
     public List<IEntityComponent> getComponentsOfType(Class<? extends IEntityComponent> type) {
         return components.get(type);
+    }
+
+    public boolean hasComponentOfType(Class<? extends IEntityComponent> type) {
+        return getComponentsOfType(type) != null;
     }
 
     public boolean hasComponent(IEntityComponent component) {

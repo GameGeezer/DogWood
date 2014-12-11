@@ -2,6 +2,7 @@ package framework.util.fileIO.mesh;
 
 import framework.graphics.Mesh;
 import framework.util.MeshBuilder;
+import framework.util.dataTypes.DatatypeUtil;
 import framework.util.dataTypes.FloatArrayList;
 import framework.util.dataTypes.IntArrayList;
 import framework.util.fileIO.FileUtil;
@@ -58,30 +59,41 @@ public class WavefrontLoader implements IMeshLoader {
             String[] data = line.split(" ");
             switch(data[TYPE_INDEX]) {
                 case "v":
-                    if(data.length != 4)
+                    if(data.length < 4)
                         throw new IOException("Line has an invalid number objects: " + line);
-                    positions.add(new Vector3(Float.parseFloat(data[1]), Float.parseFloat(data[2]), Float.parseFloat(data[3])));
+                    positions.add(new Vector3(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2]), DatatypeUtil.parseFloat(data[3])));
                     break;
                 case "vn":
-                    if(data.length != 4)
+                    if(data.length < 4)
                         throw new IOException("Line has an invalid number objects: " + line);
-                    normals.add(new Vector3(Float.parseFloat(data[1]), Float.parseFloat(data[2]), Float.parseFloat(data[3])));
+                    normals.add(new Vector3(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2]), DatatypeUtil.parseFloat(data[3])));
                     break;
                 case "vt":
-                    if(data.length != 3)
+                    if(data.length < 3)
                         throw new IOException("Line has an invalid number objects: " + line);
-                    textureCoordinates.add(new Vector2(Float.parseFloat(data[1]), Float.parseFloat(data[2])));
+                    textureCoordinates.add(new Vector2(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2])));
                     break;
                 case "f":
-                    if(data.length != 4)
+                    if(data.length < 4 || data.length > 5)
                         throw new IOException("Line has an invalid number objects: " + line);
-                    for(int i = 1; i < data.length; ++i) {
-                        if(!knownVertices.containsKey(data[i])) {
+                    for (int i = 1; i < data.length; ++i) {
+                        if (!knownVertices.containsKey(data[i])) {
                             buildVertex(data[i], builder);
                         }
-                        builder.addIndicie(knownVertices.get(data[i]));
                     }
-                    break;
+                    if(data.length == 4) {
+                        builder.addIndicie(knownVertices.get(data[1]));
+                        builder.addIndicie(knownVertices.get(data[2]));
+                        builder.addIndicie(knownVertices.get(data[3]));
+                    } else if(data.length == 5) {
+                        builder.addIndicie(knownVertices.get(data[1]));
+                        builder.addIndicie(knownVertices.get(data[2]));
+                        builder.addIndicie(knownVertices.get(data[3]));
+
+                        builder.addIndicie(knownVertices.get(data[2]));
+                        builder.addIndicie(knownVertices.get(data[3]));
+                        builder.addIndicie(knownVertices.get(data[4]));
+                    }
             }
         }
 
@@ -172,4 +184,10 @@ public class WavefrontLoader implements IMeshLoader {
         knownVertices.put(data, vertexCount);
         ++vertexCount;
     }
+/*
+    private String[] removeEmptyStrings(String[] data) {
+        Arr
+        ayList<String> str = new ArrayList<String>();
+    }
+    */
 }

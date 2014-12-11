@@ -27,6 +27,7 @@ public class Node<T> {
      * @param node The node being attached
      */
     public void attach(Node<T> node) {
+
         subnodes.add(node);
         node.parent = this;
     }
@@ -59,11 +60,23 @@ public class Node<T> {
 
     /**
      * Checks if the passed node is a direct child
-     * @param node The node being searched for
+     * @param child The node being searched for
      * @return
      */
-    public boolean hasNode(Node<T> node) {
-        return subnodes.contains(node);
+    public boolean hasChild(Node<T> child) {
+        return subnodes.contains(child);
+    }
+
+    public boolean hasChildRecursive(Node<T> child) {
+        if(hasChild(child)) {
+            return true;
+        } else {
+            for(Node<T> node : subnodes) {
+                node.hasChild(child);
+            }
+        }
+
+        return false;
     }
 
     public List<Node<T>> getSubnodes() {
