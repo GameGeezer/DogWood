@@ -9,7 +9,10 @@ import framework.scene.components.IUpdateEntityComponent;
 import framework.util.dataTypes.DatatypeUtil;
 import framework.util.exceptions.RequiredComponentsException;
 import framework.util.math.Matrix4;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL20;
 
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class MeshComponent extends IUpdateEntityComponent {
 
     private TransformComponent transformComponent;
 
-    private FloatBuffer projectionViewModelBuffer = FloatBuffer.allocate(DatatypeUtil.FLOAT_SIZE_BYTES * Matrix4.NUMBER_OF_CELLS);
+    private FloatBuffer projectionViewModelBuffer = BufferUtils.createFloatBuffer(DatatypeUtil.FLOAT_SIZE_BYTES * Matrix4.NUMBER_OF_CELLS);
     private Matrix4 projectionViewModelMatrix = new Matrix4();
 
 
@@ -43,19 +46,25 @@ public class MeshComponent extends IUpdateEntityComponent {
     @Override
     public void update(int delta) {
         shader.bind();
-        //int projectionViewModelHandle = shader.getUniformLocation("u_projectionViewModel");
-        //GL20.glUniformMatrix4(projectionViewModelHandle, false, createProjectionViewModelBuffer(camera));
+        int projectionViewModelHandle = shader.getUniformLocation("u_projectionViewModel");
+        GL20.glUniformMatrix4(projectionViewModelHandle, false, createProjectionViewModelBuffer());
 
         mesh.draw();
         shader.unbind();
     }
 
-    private FloatBuffer createProjectionViewModelBuffer(Camera camera) {
+    private FloatBuffer createProjectionViewModelBuffer() {
+
+        projectionViewModelBuffer = BufferUtils.createFloatBuffer(Matrix4.NUMBER_OF_CELLS);
+        projectionViewModelBuffer.put(transformComponent.createModel().data);
+        projectionViewModelBuffer.flip();
+        /*
         projectionViewModelMatrix.set(camera.getProjection());
         Matrix4.multiply(projectionViewModelMatrix, camera.getView(), projectionViewModelMatrix);
         Matrix4.multiply(projectionViewModelMatrix, transformComponent.createModel(), projectionViewModelMatrix);
         projectionViewModelBuffer.reset();
         projectionViewModelBuffer.put(camera.getProjection().data);
+        */
 
         return projectionViewModelBuffer;
     }

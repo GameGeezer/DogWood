@@ -27,6 +27,7 @@ public final class VAO {
     }
 
     public final void init() {
+
         GL30.glBindVertexArray(handle);
 
         vbo.bind();

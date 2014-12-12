@@ -22,6 +22,8 @@ public class Camera extends Entity {
         this.height = height;
         this.near = near;
         this.far = far;
+
+        float ratio = (float) width / height;
     }
 
     /**

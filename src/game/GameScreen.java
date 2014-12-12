@@ -58,6 +58,8 @@ public class GameScreen implements IScreen {
 
         Entity entity = new Entity();
         TransformComponent transform = new TransformComponent(entity);
+        transform.setTranslation(0, 0, 0);
+        transform.setScale(1, 2f, 1);
         entity.addComponent(transform);
         //transform.translate(10, 10, 10);
         try {
@@ -66,9 +68,6 @@ public class GameScreen implements IScreen {
         } catch (RequiredComponentsException e) {
             e.printStackTrace();
         }
-
-
-
 
         scene.addEntity(entity);
     }
