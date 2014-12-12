@@ -10,20 +10,19 @@ import org.lwjgl.util.vector.Matrix4f;
 /**
  * Created by Will on 2/7/14.
  */
-public class Camera extends Entity {
+public class Camera {
 
-    private Matrix4 view, projection;
-    private float width, height, near, far;
+    private Matrix4 view = new Matrix4(), projection = new Matrix4();
+    private float width, height, near, far, fieldOfView;
 
-    public Camera(float width, float height, float near, float far) {
-        view = new Matrix4();
-        projection = new Matrix4();
+    public Camera(float width, float height, float near, float far, float fieldOfView) {
         this.width = width;
         this.height = height;
         this.near = near;
         this.far = far;
+        this.fieldOfView = fieldOfView;
 
-        float ratio = (float) width / height;
+        updateProjectionMatrix();
     }
 
     /**
@@ -40,5 +39,20 @@ public class Camera extends Entity {
 
     public Matrix4 getProjection() {
         return projection;
+    }
+
+    private void updateProjectionMatrix() {
+        float aspectRatio = width / height;
+
+        float yScale = (float) (1 / Math.tan(Math.toDegrees(fieldOfView / 2)));
+        float xScale = yScale / aspectRatio;
+        float frustumLength = far - near;
+
+        projection.data[Matrix4.M00] = -xScale;
+        projection.data[Matrix4.M11] = yScale;
+        projection.data[Matrix4.M22] = -((far + near) / frustumLength);
+        projection.data[Matrix4.M23] = -1;
+        projection.data[Matrix4.M32] = -((2 * near * far) / frustumLength);
+        projection.data[Matrix4.M33] = 0;
     }
 }

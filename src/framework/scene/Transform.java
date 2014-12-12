@@ -11,7 +11,9 @@ import framework.util.math.Vector3;
 public class Transform {
 
     private Matrix4 position = new Matrix4(), scale = new Matrix4();
-    private Orientation rotation = new Orientation();
+    private Orientation orientation = new Orientation();
+
+
 
     public Transform() {
 
@@ -53,9 +55,25 @@ public class Transform {
         return setScale(scale.getX(), scale.getY(), scale.getZ());
     }
 
+    public Transform setOrientationEuler(float roll, float pitch, float yaw) {
+        orientation.setEuler(roll, pitch, yaw);
+
+        return this;
+    }
+
+    public Transform rotateEuler(float roll, float pitch, float yaw) {
+        orientation.rotateEuler(roll, pitch, yaw);
+
+        return this;
+    }
+
+    public Transform rotateEuler(Vector3 euler) {
+        return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
+    }
+
     //rotation
-    public Orientation getRotation() {
-        return rotation;
+    public Orientation getOrientation() {
+        return orientation;
     }
 /*
     public void setRotationX(float value) {

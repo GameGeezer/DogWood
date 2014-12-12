@@ -55,6 +55,22 @@ public class TransformComponent extends IEntityComponent {
         return setScale(scale.getX(), scale.getY(), scale.getZ());
     }
 
+    public TransformComponent setOrientationEuler(float roll, float pitch, float yaw) {
+        transform.setOrientationEuler(roll, pitch, yaw);
+
+        return this;
+    }
+
+    public TransformComponent rotateEuler(float roll, float pitch, float yaw) {
+        transform.rotateEuler(roll, pitch, yaw);
+
+        return this;
+    }
+
+    public TransformComponent rotateEuler(Vector3 euler) {
+        return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
+    }
+
     public void setParentTransform(TransformComponent parent) {
         this.parentTransfrom = parent;
     }
@@ -68,7 +84,7 @@ public class TransformComponent extends IEntityComponent {
     }
 
     public Matrix4 createModel() {
-        model.set(transform.getRotation().computeMatrix());
+        model.set(transform.getOrientation().computeMatrix());
         Matrix4.multiply(model, transform.getScale(), model);
         Matrix4.multiply(model, transform.getPosition(), model);
 
