@@ -4,12 +4,12 @@ import framework.IScreen;
 import framework.graphics.Camera;
 import framework.graphics.Image;
 import framework.graphics.Mesh;
-import framework.graphics.Sprite;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
 import framework.scene.Scene;
 import framework.util.exceptions.RequiredComponentsException;
 import game.components.MeshComponent;
+import game.components.SpriteRenderComponent;
 import game.components.TransformComponent;
 import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.GraphicsException;
@@ -29,7 +29,7 @@ public class GameScreen implements IScreen {
 
     private Scene scene = new Scene();
     TransformComponent transform;
-    private Camera camera = new Camera(800, 600, 0.1f, 100, 60);
+    private UniformCamera camera = new UniformCamera(800, 600, 0.1f, 100, 60);
 
     public void onPause() {
 
@@ -37,14 +37,18 @@ public class GameScreen implements IScreen {
 
     public void onResume() {
 
-        Map<Integer, String> attributes = new HashMap<Integer, String>();
-        attributes.put(0, "in_Position");
-        attributes.put(1, "in_Color");
-        attributes.put(2, "in_TextureCoord");
+
+
         ShaderProgram shader = null;
         Mesh teapot = null;
         try {
+            Map<Integer, String> attributes = new HashMap<Integer, String>();
+            attributes.put(0, "in_Position");
+            attributes.put(1, "in_Color");
+            attributes.put(2, "in_TextureCoord");
+
             shader = new ShaderProgram(FileUtil.readText("res/testShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
+
             WavefrontLoader loader = new WavefrontLoader();
             teapot = loader.load(new File("res/models/UtahTeapot.obj"));
         } catch(GraphicsException e) {
@@ -52,27 +56,21 @@ public class GameScreen implements IScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Image image = null;
-        try {
-            image = Image.loadPNG(new File("res/textures/poulpi.png"));
-        } catch (DogWoodException e) {
-
-        }
 
         Entity entity = new Entity();
         transform = new TransformComponent(entity);
-        transform.setTranslation(0, 0, 10);
-        transform.setScale(1, 2f, 1);
+       // transform.setScale(1, 0.5f, 1);
+        transform.setTranslation(0, 0f , 0f);
+        transform.addListener(shader);
+        camera.addListener(shader);
+        // transform.setScale(1, 2f, 1);
         transform.setOrientationEuler(0, (float)Math.PI , 0);
-        entity.addComponent(transform);
-        //transform.translate(10, 10, 10);
-        try {
-            MeshComponent meshComponent = new MeshComponent(entity, teapot, shader, camera);
-            entity.addComponent(meshComponent);
-        } catch (RequiredComponentsException e) {
-            e.printStackTrace();
-        }
 
+        //transform.translate(10, 10, 10);
+
+        MeshComponent meshComponent = new MeshComponent(entity, teapot, shader);
+        entity.addComponent(meshComponent);
+        entity.addComponent(transform);
         scene.addEntity(entity);
     }
 
@@ -85,8 +83,11 @@ public class GameScreen implements IScreen {
     }
 
     public void update(int delta) {
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+
         scene.update(delta);
-        transform.translate(0.01f, 0f, 0);
+        transform.rotateEuler(0, (float)Math.PI/ 200 , 0);
+        camera.setWidth(camera.getWidth() + .1f);
+       // transform.translate(0, 0.1f, 0.0f);
+       // transform.translate(0, 0.1f, 0.0f);
     }
 }

@@ -1,5 +1,7 @@
 #version 150 core
-uniform mat4 u_projectionViewModel;
+uniform mat4 u_projectionMatrix;
+uniform mat4 u_viewMatrix;
+uniform mat4 u_modelMatrix;
 
 in vec4 in_Position;
 in vec4 in_Color;
@@ -9,7 +11,7 @@ out vec4 pass_Color;
 out vec2 pass_TextureCoord;
 
 void main(void) {
-	gl_Position = u_projectionViewModel * in_Position;
+	gl_Position =  u_viewMatrix* u_modelMatrix * in_Position;
 	
 	pass_Color = in_Color;
 	pass_TextureCoord = in_TextureCoord;

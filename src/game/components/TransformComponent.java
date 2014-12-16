@@ -1,33 +1,34 @@
 package game.components;
 
+import framework.graphics.opengl.ShaderProgram;
+import framework.graphics.uniform.MatrixUniform;
 import framework.scene.Entity;
 import framework.scene.Transform;
-import framework.scene.components.IEntityComponent;
+import framework.scene.components.EntityComponent;
 import framework.util.math.Matrix4;
 import framework.util.math.Vector3;
+import game.IUniformWrapper;
 
 /**
  * Created by Will on 11/25/2014.
  */
-public class TransformComponent extends IEntityComponent {
+public class TransformComponent extends EntityComponent implements IUniformWrapper {
+
+    public static final String MODEL_UNIFORM = "u_modelMatrix";
+
+    private MatrixUniform modelUniform = new MatrixUniform(MODEL_UNIFORM, MatrixUniform.MatrixUniformType.MATRIX4);
 
     private Transform transform = new Transform();
-
-    private TransformComponent parentTransfrom = null;
     private Matrix4 model = new Matrix4();
 
     public TransformComponent(Entity parent) {
-        this(parent, null);
-    }
-
-    public TransformComponent(Entity parent, TransformComponent parentTransfrom) {
         super(parent);
-        setParentTransform(parentTransfrom);
+        updateModelUniform();
     }
 
     public TransformComponent translate(float x, float y, float z) {
         transform.translate(x, y, z);
-
+        updateModelUniform();
         return this;
     }
 
@@ -37,7 +38,7 @@ public class TransformComponent extends IEntityComponent {
 
     public TransformComponent setTranslation(float x, float y, float z) {
         transform.setTranslation(x, y, z);
-
+        updateModelUniform();
         return this;
     }
 
@@ -47,7 +48,7 @@ public class TransformComponent extends IEntityComponent {
 
     public TransformComponent setScale(float x, float y, float z) {
         transform.setScale(x, y, z);
-
+        updateModelUniform();
         return this;
     }
 
@@ -57,13 +58,13 @@ public class TransformComponent extends IEntityComponent {
 
     public TransformComponent setOrientationEuler(float roll, float pitch, float yaw) {
         transform.setOrientationEuler(roll, pitch, yaw);
-
+        updateModelUniform();
         return this;
     }
 
     public TransformComponent rotateEuler(float roll, float pitch, float yaw) {
         transform.rotateEuler(roll, pitch, yaw);
-
+        updateModelUniform();
         return this;
     }
 
@@ -71,28 +72,21 @@ public class TransformComponent extends IEntityComponent {
         return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
     }
 
-    public void setParentTransform(TransformComponent parent) {
-        this.parentTransfrom = parent;
+    @Override
+    public void addListener(ShaderProgram shader) {
+        modelUniform.addListener(shader);
     }
 
-    public TransformComponent getParentTransform() {
-        return parentTransfrom;
+    @Override
+    public void removeListener(ShaderProgram shader) {
+        modelUniform.removeListener(shader);
     }
 
-    public boolean hasParentTransform() {
-        return parentTransfrom != null;
-    }
-
-    public Matrix4 createModel() {
+    private void updateModelUniform() {
         model.set(transform.getOrientation().computeMatrix());
-        Matrix4.multiply(model, transform.getScale(), model);
         Matrix4.multiply(model, transform.getPosition(), model);
+        Matrix4.multiply(model, transform.getScale(), model);
 
-        if(hasParentTransform()) {
-            Matrix4 parentMatrix = parentTransfrom.createModel();
-            Matrix4.multiply(parentMatrix, model, model);
-            return model;
-        }
-        return model;
+        modelUniform.setUniformData(model.data);
     }
 }

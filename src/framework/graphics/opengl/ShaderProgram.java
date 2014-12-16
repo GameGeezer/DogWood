@@ -5,12 +5,14 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL32;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Map;
 
 /**
  * @author William Gervasio
  */
-public class ShaderProgram {
+public class ShaderProgram implements PropertyChangeListener {
 
     private final int handle;
 
@@ -43,7 +45,8 @@ public class ShaderProgram {
         GL20.glDeleteShader(fragmentHandle);
     }
 
-    public ShaderProgram(String vertexShader, String fragmentShader, String geometryShader, Map<Integer, String> attributes) throws GraphicsException {
+    public ShaderProgram(String vertexShader, String fragmentShader, String geometryShader, Map<Integer, String> attributes) throws GraphicsException
+    {
         int vertexHandle, fragmentHandle, geometryHandle;
 
         vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
@@ -56,8 +59,10 @@ public class ShaderProgram {
         GL20.glAttachShader(handle, fragmentHandle);
         GL20.glAttachShader(handle, geometryHandle);
 
-        if (attributes != null) {
-            for (Map.Entry<Integer, String> e : attributes.entrySet()) {
+        if (attributes != null)
+        {
+            for (Map.Entry<Integer, String> e : attributes.entrySet())
+            {
                 GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
             }
         }
@@ -135,9 +140,15 @@ public class ShaderProgram {
     /**
      * Makes sure the shader was linked preopperly
      * @param handle
-     * @return True if propperly linked
+     * @return True if properly linked
      */
     private final boolean checkForLinkError(int handle) {
         return GL20.glGetProgrami(handle, GL20.GL_LINK_STATUS) == GL11.GL_FALSE;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        System.out.println("Changed property: " + event.getPropertyName() + " [old -> "
+                + event.getOldValue() + "] | [new -> " + event.getNewValue() +"]");
     }
 }

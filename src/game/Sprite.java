@@ -1,5 +1,7 @@
-package framework.graphics;
+package game;
 
+import framework.graphics.Image;
+import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
 import framework.graphics.vertices.IVertexAttribute;
