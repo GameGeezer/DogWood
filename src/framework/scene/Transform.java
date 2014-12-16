@@ -14,15 +14,14 @@ public class Transform {
     private Orientation orientation = new Orientation();
 
 
-
     public Transform() {
 
     }
 
     public Transform translate(float x, float y, float z) {
-        position.data[Matrix4.M30] += x;
-        position.data[Matrix4.M31] += y;
-        position.data[Matrix4.M32] += z;
+        position.data[Matrix4.M03] += x;
+        position.data[Matrix4.M13] += y;
+        position.data[Matrix4.M23] += z;
 
         return this;
     }
@@ -32,9 +31,9 @@ public class Transform {
     }
 
     public Transform setTranslation(float x, float y, float z) {
-        position.data[Matrix4.M30] = x;
-        position.data[Matrix4.M31] = y;
-        position.data[Matrix4.M32] = z;
+        position.data[Matrix4.M03] = x;
+        position.data[Matrix4.M13] = y;
+        position.data[Matrix4.M23] = z;
 
         return this;
     }

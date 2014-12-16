@@ -83,9 +83,9 @@ public class TransformComponent extends EntityComponent implements IUniformWrapp
     }
 
     private void updateModelUniform() {
-        model.set(transform.getOrientation().computeMatrix());
+        model.set(transform.getScale());
+        Matrix4.multiply(model, transform.getOrientation().computeMatrix(), model);
         Matrix4.multiply(model, transform.getPosition(), model);
-        Matrix4.multiply(model, transform.getScale(), model);
 
         modelUniform.setUniformData(model.data);
     }

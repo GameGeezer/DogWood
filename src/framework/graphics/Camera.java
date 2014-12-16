@@ -91,15 +91,15 @@ public class Camera {
     protected void updateProjectionMatrix() {
         float aspectRatio = width / height;
 
-        float yScale = (float) (1 / Math.tan(Math.toDegrees(fieldOfView / 2)));
+        float yScale = (float) (1 / Math.tan(Math.toRadians(fieldOfView / 2)));
         float xScale = yScale / aspectRatio;
         float frustumLength = far - near;
 
-        projection.data[Matrix4.M00] = -xScale;
+        projection.data[Matrix4.M00] = xScale;
         projection.data[Matrix4.M11] = yScale;
         projection.data[Matrix4.M22] = -((far + near) / frustumLength);
-        projection.data[Matrix4.M23] = -1;
-        projection.data[Matrix4.M32] = -((2 * near * far) / frustumLength);
+        projection.data[Matrix4.M23] = -((2 * near * far) / frustumLength);
+        projection.data[Matrix4.M32] = -1;
         projection.data[Matrix4.M33] = 0;
     }
 }

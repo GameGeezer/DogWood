@@ -59,8 +59,9 @@ public class GameScreen implements IScreen {
 
         Entity entity = new Entity();
         transform = new TransformComponent(entity);
-       // transform.setScale(1, 0.5f, 1);
-        transform.setTranslation(0, 0f , 0f);
+        transform.setScale(1, 0.5f, 1);
+        transform.setTranslation(0, -0.5f , -10f);
+      //  transform.setScale(0.1f, 0.1f, 0.1f);
         transform.addListener(shader);
         camera.addListener(shader);
         // transform.setScale(1, 2f, 1);
@@ -86,7 +87,7 @@ public class GameScreen implements IScreen {
 
         scene.update(delta);
         transform.rotateEuler(0, (float)Math.PI/ 200 , 0);
-        camera.setWidth(camera.getWidth() + .1f);
+        //camera.setWidth(camera.getWidth() + .1f);
        // transform.translate(0, 0.1f, 0.0f);
        // transform.translate(0, 0.1f, 0.0f);
     }
