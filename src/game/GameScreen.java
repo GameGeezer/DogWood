@@ -15,6 +15,7 @@ import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.GraphicsException;
 import framework.util.fileIO.FileUtil;
 import framework.util.fileIO.mesh.WavefrontLoader;
+import game.components.UniformCameraReferenceComponent;
 import org.lwjgl.opengl.GL11;
 
 import java.io.File;
@@ -30,6 +31,7 @@ public class GameScreen implements IScreen {
     private Scene scene = new Scene();
     TransformComponent transform;
     private UniformCamera camera = new UniformCamera(800, 600, 0.1f, 100, 60);
+    Image octapus;
 
     public void onPause() {
 
@@ -40,6 +42,7 @@ public class GameScreen implements IScreen {
 
 
         ShaderProgram shader = null;
+        ShaderProgram shader2 = null;
         Mesh teapot = null;
         try {
             Map<Integer, String> attributes = new HashMap<Integer, String>();
@@ -48,30 +51,36 @@ public class GameScreen implements IScreen {
             attributes.put(2, "in_TextureCoord");
 
             shader = new ShaderProgram(FileUtil.readText("res/testShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
-
+            shader2 = new ShaderProgram(FileUtil.readText("res/testShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
             WavefrontLoader loader = new WavefrontLoader();
-            teapot = loader.load(new File("res/models/UtahTeapot.obj"));
-        } catch(GraphicsException e) {
+            teapot = loader.load(new File("res/models/sponza.obj"));
+            octapus = Image.loadPNG(new File("res/textures/poulpi.png"));
+        } catch(DogWoodException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
+
+
         Entity entity = new Entity();
-        transform = new TransformComponent(entity);
-        transform.setScale(1, 0.5f, 1);
-        transform.setTranslation(0, -0.5f , -10f);
-      //  transform.setScale(0.1f, 0.1f, 0.1f);
-        transform.addListener(shader);
-        camera.addListener(shader);
+        SpriteRenderComponent sprite = new SpriteRenderComponent(octapus,shader2);
+        transform = new TransformComponent();
+        transform.setScale(1, 1f, 1);
+        transform.setTranslation(0, -0.5f , -3f);
+        UniformCameraReferenceComponent cameraReference = new UniformCameraReferenceComponent( camera);
+        //camera.addListener(shader2);
         // transform.setScale(1, 2f, 1);
         transform.setOrientationEuler(0, (float)Math.PI , 0);
 
         //transform.translate(10, 10, 10);
 
-        MeshComponent meshComponent = new MeshComponent(entity, teapot, shader);
+        MeshComponent meshComponent = new MeshComponent(teapot, shader2);
         entity.addComponent(meshComponent);
         entity.addComponent(transform);
+        entity.addComponent(cameraReference);
+        entity.addComponent(sprite);
         scene.addEntity(entity);
     }
 
@@ -87,8 +96,5 @@ public class GameScreen implements IScreen {
 
         scene.update(delta);
         transform.rotateEuler(0, (float)Math.PI/ 200 , 0);
-        //camera.setWidth(camera.getWidth() + .1f);
-       // transform.translate(0, 0.1f, 0.0f);
-       // transform.translate(0, 0.1f, 0.0f);
     }
 }

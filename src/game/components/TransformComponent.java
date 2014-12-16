@@ -4,15 +4,14 @@ import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.uniform.MatrixUniform;
 import framework.scene.Entity;
 import framework.scene.Transform;
-import framework.scene.components.EntityComponent;
+import framework.scene.components.IUniformComponent;
 import framework.util.math.Matrix4;
 import framework.util.math.Vector3;
-import game.IUniformWrapper;
 
 /**
  * Created by Will on 11/25/2014.
  */
-public class TransformComponent extends EntityComponent implements IUniformWrapper {
+public class TransformComponent extends Entity.EntityComponent implements IUniformComponent {
 
     public static final String MODEL_UNIFORM = "u_modelMatrix";
 
@@ -21,8 +20,7 @@ public class TransformComponent extends EntityComponent implements IUniformWrapp
     private Transform transform = new Transform();
     private Matrix4 model = new Matrix4();
 
-    public TransformComponent(Entity parent) {
-        super(parent);
+    public TransformComponent() {
         updateModelUniform();
     }
 

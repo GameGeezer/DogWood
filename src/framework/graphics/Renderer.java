@@ -10,13 +10,15 @@ import org.lwjgl.opengl.GL11;
 public class Renderer {
 
     public Renderer() {
-        GL11.glFrontFace(GL11.GL_CCW);
-        GL11.glCullFace(GL11.GL_BACK);
-        GL11.glEnable(GL11.GL_CULL_FACE);
+        //GL11.glFrontFace(GL11.GL_CCW);
+       // GL11.glCullFace(GL11.GL_BACK);
+        GL11.glDisable(GL11.GL_CULL_FACE);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
 //
 // glEnable(GL_DEPTH_CLAMP);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
     }
 
     public void clearScreen() {
