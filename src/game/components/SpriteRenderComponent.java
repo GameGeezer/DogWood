@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * @author William Gervasio
  */
-public final class SpriteRenderComponent extends Entity.EntityComponent implements IDynamicComponent, IRenderComponent {
+public final class SpriteRenderComponent extends Entity.EntityComponent implements IRenderComponent {
 
     private ShaderProgram shader;
     private Texture texture;
@@ -62,7 +62,7 @@ public final class SpriteRenderComponent extends Entity.EntityComponent implemen
     }
 
     @Override
-    public void update(int delta) {
+    public void render(int delta) {
         shader.bind();
         texture.bind();
         mesh.draw();

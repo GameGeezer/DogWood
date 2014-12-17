@@ -50,10 +50,10 @@ public class GameScreen implements IScreen {
             attributes.put(1, "in_Color");
             attributes.put(2, "in_TextureCoord");
 
-            shader = new ShaderProgram(FileUtil.readText("res/testShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
-            shader2 = new ShaderProgram(FileUtil.readText("res/testShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
+           // shader = new ShaderProgram(FileUtil.readText("res/testShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
+            shader2 = new ShaderProgram(FileUtil.readText("res/shaders/BasicShader.vert"), FileUtil.readText("res/shaders/BasicShader.frag"), attributes);
             WavefrontLoader loader = new WavefrontLoader();
-            teapot = loader.load(new File("res/models/sponza.obj"));
+            teapot = loader.load(new File("res/models/lowPolyTree.obj"));
             octapus = Image.loadPNG(new File("res/textures/poulpi.png"));
         } catch(DogWoodException e) {
             e.printStackTrace();
@@ -67,7 +67,7 @@ public class GameScreen implements IScreen {
         Entity entity = new Entity();
         SpriteRenderComponent sprite = new SpriteRenderComponent(octapus,shader2);
         transform = new TransformComponent();
-        transform.setScale(1, 1f, 1);
+        transform.setScale(.1f, .1f, .1f);
         transform.setTranslation(0, -0.5f , -3f);
         UniformCameraReferenceComponent cameraReference = new UniformCameraReferenceComponent( camera);
         //camera.addListener(shader2);
@@ -80,7 +80,7 @@ public class GameScreen implements IScreen {
         entity.addComponent(meshComponent);
         entity.addComponent(transform);
         entity.addComponent(cameraReference);
-        entity.addComponent(sprite);
+      //  entity.addComponent(sprite);
         scene.addEntity(entity);
     }
 
@@ -93,7 +93,6 @@ public class GameScreen implements IScreen {
     }
 
     public void update(int delta) {
-
         scene.update(delta);
         transform.rotateEuler(0, (float)Math.PI/ 200 , 0);
     }

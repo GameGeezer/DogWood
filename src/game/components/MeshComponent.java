@@ -10,7 +10,7 @@ import framework.scene.components.IRenderComponent;
 /**
  * Created by Will on 12/8/2014.
  */
-public class MeshComponent extends EntityComponent implements IDynamicComponent, IRenderComponent {
+public class MeshComponent extends EntityComponent implements IRenderComponent {
 
     private Mesh mesh;
     private ShaderProgram shader;
@@ -23,7 +23,7 @@ public class MeshComponent extends EntityComponent implements IDynamicComponent,
     }
 
     @Override
-    public void update(int delta) {
+    public void render(int delta) {
         shader.bind();
         mesh.draw();
         shader.unbind();

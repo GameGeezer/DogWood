@@ -7,5 +7,7 @@ import framework.graphics.opengl.ShaderProgram;
  */
 public interface IRenderComponent  extends IComponentType {
 
+    public abstract void render(int delta);
+
     public abstract ShaderProgram getShader();
 }

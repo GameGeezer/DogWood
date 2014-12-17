@@ -174,7 +174,7 @@ public class WavefrontLoader implements IMeshLoader {
             Vector2 texCoord = textureCoordinates.get(index);
             builder.addToComponent(TEXCOORD_COMPONENT,  texCoord.getX(), texCoord.getY());
 
-            index = Integer.parseInt(components[1]) - 1;
+            index = Integer.parseInt(components[2]) - 1;
             Vector3 normal = normals.get(index);
             builder.addToComponent(NORMAL_COMPONENT,normal.getX(), normal.getY(), normal.getZ());
         } else {

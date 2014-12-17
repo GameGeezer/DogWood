@@ -27,6 +27,12 @@ public class Entity {
         }
     }
 
+    public void render(int delta) {
+        for(IRenderComponent component : renderComponents) {
+            component.render(delta);
+        }
+    }
+
     public void addComponent(EntityComponent component) {
         if(components.get(component.getClass()) == null) {
             components.put(component.getClass(), new ArrayList<>());

@@ -23,6 +23,7 @@ public class Scene  {
         renderer.clearScreen();
         for(Entity entity : entities) {
             entity.update(delta);
+            entity.render(delta);
         }
     }
 
