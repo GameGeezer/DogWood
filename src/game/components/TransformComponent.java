@@ -70,6 +70,30 @@ public class TransformComponent extends Entity.EntityComponent implements IUnifo
         return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
     }
 
+    public float getX() {
+        return transform.getX();
+    }
+
+    public float getY() {
+        return transform.getY();
+    }
+
+    public float getZ() {
+        return transform.getZ();
+    }
+
+    public float getScaleX() {
+        return transform.getScaleX();
+    }
+
+    public float getScaleY() {
+        return transform.getScaleY();
+    }
+
+    public float getScaleZ() {
+        return transform.getScaleZ();
+    }
+
     @Override
     public void addListener(ShaderProgram shader) {
         modelUniform.addListener(shader);
@@ -78,6 +102,16 @@ public class TransformComponent extends Entity.EntityComponent implements IUnifo
     @Override
     public void removeListener(ShaderProgram shader) {
         modelUniform.removeListener(shader);
+    }
+
+    @Override
+    public TransformComponent clone() {
+        TransformComponent component = new TransformComponent();
+        component.setTranslation(getX(), getY(), getZ());
+        component.setScale(getScaleX(), getScaleY(), getScaleZ());
+        component.rotateEuler(transform.getRoll(), transform.getPitch(), transform.getYaw());
+
+        return component;
     }
 
     private void updateModelUniform() {

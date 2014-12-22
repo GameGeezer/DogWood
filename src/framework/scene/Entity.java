@@ -1,16 +1,14 @@
 package framework.scene;
 
+import framework.input.Keyboard;
 import framework.scene.components.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author William Gervasio
  */
-public class Entity {
+public class Entity implements Cloneable {
 
     private Map<Class, List<EntityComponent>> components = new HashMap<>();
     private List<IDynamicComponent> dynamicComponents = new ArrayList<>();
@@ -50,6 +48,10 @@ public class Entity {
             uniformComponents.add((IUniformComponent) component);
             addSubscriptionToRenderComponents((IUniformComponent) component);
         }
+
+        if(component instanceof IKeyboardComponent) {
+            Keyboard.addListener((IKeyboardComponent) component);
+        }
     }
 
     public void removeComponent(EntityComponent component) {
@@ -68,6 +70,10 @@ public class Entity {
         if(component instanceof IUniformComponent) {
             uniformComponents.remove(component);
             removeSubscriptionFromRenderComponents((IUniformComponent) component);
+        }
+
+        if(component instanceof IKeyboardComponent) {
+            Keyboard.removeListener((IKeyboardComponent) component);
         }
     }
 
@@ -109,9 +115,24 @@ public class Entity {
     }
 
     /**
+     * TODO
+     * @return
+     */
+    public Entity clone() {
+        Entity entity = new Entity();
+        Iterator it = components.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+           // entity.addComponent(((EntityComponent) pairs.getValue()).clone());
+        }
+
+        return entity;
+    }
+
+    /**
      * Nested to hide the parentEntity variable from all classes except Entity.
      */
-    public static abstract class EntityComponent {
+    public static abstract class EntityComponent<T extends EntityComponent> implements Cloneable {
 
         private Entity parentEntity;
 
@@ -126,5 +147,14 @@ public class Entity {
         protected void setParent(Entity entity) {
             this.parentEntity = entity;
         }
+
+        public Entity getParent() {
+            return parentEntity;
+        }
+
+        /*
+        @Override
+        public abstract T clone();
+        */
     }
 }

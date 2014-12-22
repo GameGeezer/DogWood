@@ -74,31 +74,19 @@ public class Transform {
     public Orientation getOrientation() {
         return orientation;
     }
-/*
-    public void setRotationX(float value) {
-        scale.data[Matrix4.M00] = value;
-    }
 
     public float getRoll() {
-        return rotation.computeRoll();
-    }
-
-    public void setRotationY(float value) {
-        scale.data[Matrix4.M11] = value;
+        return orientation.getRoll();
     }
 
     public float getPitch() {
-        return rotation.computePitch();
-    }
-
-    public void setRotationZ(float value) {
-        scale.data[Matrix4.M22] = value;
+        return orientation.getPitch();
     }
 
     public float getYaw() {
-        return rotation.computeYaw();
+        return orientation.getYaw();
     }
-*/
+
     //scale
 
     public Matrix4 getScale() {

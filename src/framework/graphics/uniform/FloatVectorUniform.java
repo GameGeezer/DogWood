@@ -10,17 +10,19 @@ import java.nio.FloatBuffer;
  */
 public class FloatVectorUniform extends VectorUniform {
 
-    private FloatBuffer uniformData = FloatBuffer.allocate(uniformType.getNumberOfUniforms());
+    private FloatBuffer uniformData;
 
     public FloatVectorUniform(String uniformName, VectorUniformType uniformType) {
         super(uniformName, uniformType);
+        uniformData = BufferUtils.createFloatBuffer(uniformType.getNumberOfUniforms());
     }
 
     public void setUniformData(float... data) {
+
         uniformData.put(data, 0, uniformType.getNumberOfUniforms());
         uniformData.flip();
         updateListeningShaders();
-        uniformData = BufferUtils.createFloatBuffer(uniformType.getNumberOfUniforms());
+
     }
 
     protected void updateProgram(int handle) {

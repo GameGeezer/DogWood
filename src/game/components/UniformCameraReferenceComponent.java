@@ -24,4 +24,9 @@ public class UniformCameraReferenceComponent extends Entity.EntityComponent impl
     public void removeListener(ShaderProgram shader) {
         camera.removeListener(shader);
     }
+
+    public UniformCameraReferenceComponent clone() {
+        return new UniformCameraReferenceComponent(camera);
+    }
+
 }

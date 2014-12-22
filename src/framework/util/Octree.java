@@ -1,9 +1,10 @@
 package framework.util;
 
 /**
- * Created by Will on 12/17/2014.
+ * Created by Will on 12/17/2014
+ * TODO.
  */
-/*
+
 public class Octree {
 
     enum OctreePosition {
@@ -24,6 +25,8 @@ public class Octree {
         public int getId() {
             return id;
         }
+
+
     }
 
     private static final int FRONT = 1;
@@ -66,26 +69,6 @@ public class Octree {
 
         }
 
-
-
-        if (grid.val[0] < isolevel) cubeindex |= 1;
-        if (grid.val[1] < isolevel) cubeindex |= 2;
-        if (grid.val[2] < isolevel) cubeindex |= 4;
-        if (grid.val[3] < isolevel) cubeindex |= 8;
-        if (grid.val[4] < isolevel) cubeindex |= 16;
-        if (grid.val[5] < isolevel) cubeindex |= 32;
-        if (grid.val[6] < isolevel) cubeindex |= 64;
-        if (grid.val[7] < isolevel) cubeindex |= 128;
-
-        if(x > halfAcross) {
-            x -= halfAcross;
-        }
-        if(y > halfAcross) {
-            y -= halfAcross;
-        }
-        if(z > halfAcross) {
-            z -= halfAcross;
-        }
     }
 
     private int getCellIndexFromPosition(int x, int y, int z) {
@@ -99,23 +82,45 @@ public class Octree {
         switch(positionId) {
             case TOP_FRONT_LEFT:
                 return OctreePosition.TOP_FRONT_LEFT.getIndex();
-                break;
             case TOP_BACK_LEFT:
-                break;
+                return OctreePosition.TOP_BACK_LEFT.getIndex();
             case TOP_BACK_RIGHT:
-                break;
+                return OctreePosition.TOP_BACK_RIGHT.getIndex();
             case TOP_FRONT_RIGHT:
-                break;
+                return OctreePosition.TOP_FRONT_RIGHT.getIndex();
             case BOTTOM_FRONT_LEFT:
-                break;
+                return OctreePosition.BOTTOM_FRONT_LEFT.getIndex();
             case BOTTOM_BACK_LEFT:
-                break;
+                return OctreePosition.BOTTOM_BACK_LEFT.getIndex();
             case BOTTOM_BACK_RIGHT:
-                break;
+                return OctreePosition.BOTTOM_BACK_RIGHT.getIndex();
             case BOTTOM_FRONT_RIGHT:
-                break;
+                return OctreePosition.BOTTOM_FRONT_RIGHT.getIndex();
+            default:
+                throw new IndexOutOfBoundsException("");
         }
+    }
 
+    public int getIndexFromId(int positionId) {
+        switch(positionId) {
+            case TOP_FRONT_LEFT:
+                return OctreePosition.TOP_FRONT_LEFT.getIndex();
+            case TOP_BACK_LEFT:
+                return OctreePosition.TOP_BACK_LEFT.getIndex();
+            case TOP_BACK_RIGHT:
+                return OctreePosition.TOP_BACK_RIGHT.getIndex();
+            case TOP_FRONT_RIGHT:
+                return OctreePosition.TOP_FRONT_RIGHT.getIndex();
+            case BOTTOM_FRONT_LEFT:
+                return OctreePosition.BOTTOM_FRONT_LEFT.getIndex();
+            case BOTTOM_BACK_LEFT:
+                return OctreePosition.BOTTOM_BACK_LEFT.getIndex();
+            case BOTTOM_BACK_RIGHT:
+                return OctreePosition.BOTTOM_BACK_RIGHT.getIndex();
+            case BOTTOM_FRONT_RIGHT:
+                return OctreePosition.BOTTOM_FRONT_RIGHT.getIndex();
+            default:
+                throw new IndexOutOfBoundsException("");
+        }
     }
 }
-*/

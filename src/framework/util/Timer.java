@@ -4,8 +4,6 @@ package framework.util;
  * @author William Gervasio
  */
 
-import org.lwjgl.Sys;
-
 public class Timer {
 
     public long startTime, stopTime, totalTime;
@@ -24,7 +22,7 @@ public class Timer {
     public void start() {
         if (!running) {
             running = true;
-            startTime = getCurrentTimeMS();
+            startTime = System.currentTimeMillis() ;
         }
     }
 
@@ -34,7 +32,7 @@ public class Timer {
     public void pause() {
         if (running) {
             running = false;
-            stopTime = getCurrentTimeMS();
+            stopTime = System.currentTimeMillis() ;
             totalTime += stopTime - startTime;
         }
     }
@@ -43,7 +41,7 @@ public class Timer {
      * Resets the timer
      */
     public void reset() {
-        long time = getCurrentTimeMS();
+        long time = System.currentTimeMillis() ;
         startTime = time;
         stopTime = time;
         totalTime = 0;
@@ -55,7 +53,7 @@ public class Timer {
      */
     public long getElapsedTimeMS() {
         if (running) {
-            return getCurrentTimeMS() - startTime + totalTime;
+            return System.currentTimeMillis()  - startTime + totalTime;
         }
 
         return totalTime;
@@ -69,11 +67,4 @@ public class Timer {
         return (long) Math.floor(getElapsedTimeMS() / 1000);
     }
 
-    /**
-     * Get the current system time in milliseconds
-     * @return
-     */
-    public static long getCurrentTimeMS() {
-        return (Sys.getTime() * 1000) / Sys.getTimerResolution();
-    }
 }

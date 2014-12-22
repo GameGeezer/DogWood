@@ -1,13 +1,7 @@
 package framework.graphics;
 
-import framework.graphics.uniform.MatrixUniform;
-import framework.graphics.uniform.Uniform;
-import framework.scene.Entity;
-import framework.scene.Transform;
 import framework.util.math.Matrix4;
-import framework.util.math.Vector2;
 import framework.util.math.Vector3;
-import org.lwjgl.util.vector.Matrix4f;
 
 /**
  * Created by Will on 2/7/14.
