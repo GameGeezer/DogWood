@@ -7,6 +7,6 @@ import framework.Application;
  */
 public class Main {
     public static void main(String[] args) {
-        Application application = new Application(new DogWoodGame(), "DogWood", 800, 600);
+        Application application = new Application(new DogWoodGame(), "DogWood", 1200, 800);
     }
 }

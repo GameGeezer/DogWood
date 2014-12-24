@@ -1,19 +1,19 @@
 package framework.collision;
 
+import framework.util.RangeUtil;
+import framework.util.Region;
+
 /**
  * Created by Will on 12/18/2014.
  */
 public class AABB {
 
-    private float x, y, width, height, halfWidth, halfHeight;
+    private Region region;
 
     public AABB(float x, float y, float width, float height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.halfWidth = width / 2;
-        this.halfHeight = height / 2;
+        float halfWidth  = width / 2;
+        float halfHeight = height / 2;
+        region = new Region(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
     }
 
     public AABB(float width, float height) {
@@ -21,22 +21,47 @@ public class AABB {
     }
 
     public boolean collidesWith(AABB aabb) {
+        if(RangeUtil.isWithinRange(aabb.getLowerX(), region.getLowerX(), region.getUpperX()) ||
+                RangeUtil.isWithinRange(aabb.getUpperX(), region.getLowerX(), region.getUpperX())) {
+
+            if(RangeUtil.isWithinRange(aabb.getLowerY(), region.getLowerY(), region.getUpperY()) ||
+                    RangeUtil.isWithinRange(aabb.getUpperY(), region.getLowerY(), region.getUpperY())) {
+
+                return true;
+            }
+        }
         return false;
     }
 
-    public float getX() {
-        return x;
+    public float getLowerX() {
+        return region.getLowerX();
     }
 
-    public float getY() {
-        return y;
+    public float getLowerY() {
+        return region.getLowerY();
+    }
+
+    public float getUpperX() {
+        return region.getUpperX();
+    }
+
+    public float getUpperY() {
+        return region.getUpperY();
     }
 
     public float getWidth() {
-        return width;
+        return region.getWidth();
     }
 
     public float getHeight() {
-        return height;
+        return region.getHeight();
+    }
+
+    public float getX() {
+        return region.findCenterX();
+    }
+
+    public float getY() {
+        return region.findCenterY();
     }
 }

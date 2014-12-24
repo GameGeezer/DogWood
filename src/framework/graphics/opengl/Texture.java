@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
  */
 public class Texture {
 
-    private int handle, textureUnit;
+    private int handle, textureUnit, width, height;
 
     public Texture(Image image, int textureUnit) {
         this(image.getBuffer(), image.getWidth(), image.getHeight(), textureUnit);
@@ -23,8 +23,11 @@ public class Texture {
      * @param textureUnit i.e GL13.GL_TEXTURE0
      */
     public Texture(ByteBuffer buffer, int width, int height, int textureUnit) {
-        handle = GL11.glGenTextures();
+        this.handle = GL11.glGenTextures();
         this.textureUnit = textureUnit;
+        this.width = width;
+        this.height = height;
+
         GL13.glActiveTexture(textureUnit);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, handle);
 
@@ -47,5 +50,13 @@ public class Texture {
 
     public void destroy() {
         GL11.glDeleteTextures(handle);
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

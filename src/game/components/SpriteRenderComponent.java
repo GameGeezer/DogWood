@@ -5,13 +5,10 @@ import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
 import framework.graphics.uniform.FloatVectorUniform;
-import framework.graphics.uniform.IntVectorUniform;
 import framework.graphics.uniform.VectorUniform;
 import framework.graphics.vertices.IVertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
-import framework.scene.Entity;
-import framework.scene.components.IDynamicComponent;
-import framework.scene.components.IRenderComponent;
+import framework.scene.components.RenderComponent;
 import org.lwjgl.opengl.GL13;
 
 import java.util.ArrayList;
@@ -20,12 +17,11 @@ import java.util.List;
 /**
  * @author William Gervasio
  */
-public final class SpriteRenderComponent extends Entity.EntityComponent implements IRenderComponent {
+public final class SpriteRenderComponent extends RenderComponent {
 
     private ShaderProgram shader;
     private Texture texture;
     private Mesh mesh;
-    private Image image;
 
     private FloatVectorUniform flipTexCoords = new FloatVectorUniform("u_flipTextureCoordinates", VectorUniform.VectorUniformType.VECTOR2);
 
@@ -34,12 +30,12 @@ public final class SpriteRenderComponent extends Entity.EntityComponent implemen
     public SpriteRenderComponent(Image image, ShaderProgram shader) {
 
         this.shader = shader;
-        this.image = image;
         texture = new Texture(image, GL13.GL_TEXTURE0);
 
         float widthHeightRatio = (float)image.getWidth() / (float)image.getHeight();
         float xRatio = widthHeightRatio / 2f;
         float yRatio = 1 - xRatio;
+
         float[] vertices = {
                 -xRatio, yRatio, 0f,
                 -xRatio, -yRatio, 0f,
@@ -80,7 +76,6 @@ public final class SpriteRenderComponent extends Entity.EntityComponent implemen
         texture.bind();
         mesh.draw();
         texture.unbind();
-
         shader.unbind();
     }
 

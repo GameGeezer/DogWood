@@ -1,16 +1,16 @@
-package game.components;
+package game.components.player;
 
 import framework.input.Keyboard;
-import framework.scene.Entity;
-import framework.scene.components.IDynamicComponent;
-import framework.scene.components.IKeyboardComponent;
-
-import java.util.List;
+import framework.scene.Entity.EntityComponent;
+import framework.scene.components.KeyboardComponent;
+import game.components.SpriteRenderComponent;
+import game.components.TransformComponent;
 
 /**
  * Created by Will on 12/18/2014.
  */
-public class PlayerControllerComponent extends Entity.EntityComponent implements IDynamicComponent, IKeyboardComponent {
+
+public class PlayerControllerComponent extends KeyboardComponent {
 
     private boolean moveLeft = false;
     private boolean moveRight = false;
@@ -74,7 +74,7 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 
     private void flipAllSpritesX(boolean flipped) {
 
-        for(Entity.EntityComponent component :  getParent().getComponentsOfType(SpriteRenderComponent.class)) {
+        for(EntityComponent component :  getParent().getComponentsOfType(SpriteRenderComponent.class)) {
             SpriteRenderComponent spriteComponent = (SpriteRenderComponent) component;
             spriteComponent.setFlippedX(flipped);
         }

@@ -4,14 +4,14 @@ import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.uniform.MatrixUniform;
 import framework.scene.Entity;
 import framework.scene.Transform;
-import framework.scene.components.IUniformComponent;
+import framework.scene.components.UniformComponent;
 import framework.util.math.Matrix4;
 import framework.util.math.Vector3;
 
 /**
  * Created by Will on 11/25/2014.
  */
-public class TransformComponent extends Entity.EntityComponent implements IUniformComponent {
+public class TransformComponent extends UniformComponent {
 
     public static final String MODEL_UNIFORM = "u_modelMatrix";
 

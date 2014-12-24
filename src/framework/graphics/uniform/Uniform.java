@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Will on 12/10/2014.
+ * Uniforms are wrappers for data that need to be passed to a shader.
+ * ShaderPrograms subscribe to uniforms so that reusable data (i.e. the view and projection matrices
+ * created by a camera) can be stored in one place and be notified on its change.
+ * @author William Gervasio
  */
 public abstract class Uniform {
 

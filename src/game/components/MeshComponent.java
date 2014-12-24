@@ -2,15 +2,13 @@ package game.components;
 
 import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
-import framework.scene.Entity;
 import framework.scene.Entity.EntityComponent;
-import framework.scene.components.IDynamicComponent;
-import framework.scene.components.IRenderComponent;
+import framework.scene.components.RenderComponent;
 
 /**
  * Created by Will on 12/8/2014.
  */
-public class MeshComponent extends EntityComponent implements IRenderComponent {
+public class MeshComponent extends RenderComponent {
 
     private Mesh mesh;
     private ShaderProgram shader;

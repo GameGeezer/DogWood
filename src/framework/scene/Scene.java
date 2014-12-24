@@ -2,6 +2,8 @@ package framework.scene;
 
 import framework.graphics.Camera;
 import framework.graphics.Renderer;
+import framework.scene.components.RenderComponent;
+import framework.scene.components.UpdateComponent;
 import game.UniformCamera;
 
 import java.util.ArrayList;
@@ -20,10 +22,16 @@ public class Scene  {
     }
 
     public void update(int delta) {
+
         renderer.clearScreen();
+
         for(Entity entity : entities) {
-            entity.update(delta);
-            entity.render(delta);
+
+            List<UpdateComponent> updateComponents = (List<UpdateComponent>)(List<?>) entity.getComponentsOfType(UpdateComponent.class);
+            updateComponents.forEach((component) -> component.update(delta));
+
+            List<RenderComponent> renderComponents = (List<RenderComponent>)(List<?>) entity.getComponentsOfType(RenderComponent.class);
+            renderComponents.forEach((component) -> component.render(delta));
         }
     }
 

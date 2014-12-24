@@ -1,11 +1,13 @@
 package game;
 
 import framework.IScreen;
+import framework.collision.AABB;
 import framework.graphics.Image;
 import framework.graphics.Mesh;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
 import framework.scene.Scene;
+import framework.scene.components.UniformComponent;
 import game.components.*;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
@@ -61,10 +63,23 @@ public class GameScreen implements IScreen {
 
         entity.addComponent(transform);
         entity.addComponent(new UniformCameraReferenceComponent( camera));
-        entity.addComponent(new PlayerControllerComponent());
+        //entity.addComponent(new PlayerControllerComponent());
 
         entity.addComponent(sprite);
         scene.addEntity(entity);
+
+        Entity.EntityComponent entityComponent = sprite;
+
+        System.out.println(sprite);
+        System.out.println(entityComponent);
+
+        AABB aabb1 = new AABB(5,5, 5,5);
+        AABB aabb2 = new AABB(7,7, 1,1);
+        System.out.println(aabb1.collidesWith(aabb2));
+        Class c1= UniformComponent.class;
+        Class c2 = UniformCameraReferenceComponent.class;
+
+
     }
 
     public void onLeave() {
@@ -77,7 +92,7 @@ public class GameScreen implements IScreen {
 
     public void update(int delta) {
         scene.update(delta);
-        System.out.println(delta);
+       // System.out.println(delta);
        // transform.rotateEuler(0, (float)Math.PI/ 200 , 0);
     }
 }
