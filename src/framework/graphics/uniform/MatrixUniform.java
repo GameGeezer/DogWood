@@ -1,13 +1,12 @@
 package framework.graphics.uniform;
 
-import framework.util.math.Matrix4;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
 import java.nio.FloatBuffer;
 
 /**
- * Created by Will on 12/12/2014.
+ * @author William Gervasio
  */
 public class MatrixUniform extends Uniform {
 

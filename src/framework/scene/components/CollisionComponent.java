@@ -1,6 +1,5 @@
 package framework.scene.components;
 
-import framework.collision.ICollidable;
 import framework.scene.Entity.EntityComponent;
 
 /**

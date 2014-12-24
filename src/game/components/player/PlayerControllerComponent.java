@@ -20,22 +20,6 @@ public class PlayerControllerComponent extends KeyboardComponent {
     }
 
     @Override
-    public void update(int delta) {
-
-        List<Entity.EntityComponent> transformComponents = getParent().getComponentsOfType(TransformComponent.class);
-
-        if(transformComponents.size() == 0)
-            return;
-
-        TransformComponent transformComponent = (TransformComponent) transformComponents.get(0);
-
-        if(moveLeft)
-            transformComponent.translate(-0.05f, 0 , 0);
-        if(moveRight)
-            transformComponent.translate(0.05f, 0 , 0);
-    }
-
-    @Override
     public void onKeyUp(int keyCode) {
         if(Keyboard.KEY_A == keyCode) {
             moveLeft = false;
@@ -78,5 +62,15 @@ public class PlayerControllerComponent extends KeyboardComponent {
             SpriteRenderComponent spriteComponent = (SpriteRenderComponent) component;
             spriteComponent.setFlippedX(flipped);
         }
+    }
+
+    public boolean isMoveLeft() {
+
+        return moveLeft;
+    }
+
+    public boolean isMoveRight() {
+
+        return moveRight;
     }
 }

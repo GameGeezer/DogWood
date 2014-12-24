@@ -1,11 +1,11 @@
 package framework.scene.components;
 
-import framework.scene.Entity;
+import framework.scene.Entity.EntityComponent;
 
 /**
- * Created by Will on 12/16/2014.
+ * @author William Gervasio
  */
-public abstract class UpdateComponent extends Entity.EntityComponent {
+public abstract class UpdateComponent extends EntityComponent {
 
     public abstract void update(int delta);
 

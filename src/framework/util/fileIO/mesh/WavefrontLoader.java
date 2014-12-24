@@ -3,10 +3,7 @@ package framework.util.fileIO.mesh;
 import framework.graphics.Mesh;
 import framework.util.MeshBuilder;
 import framework.util.dataTypes.DatatypeUtil;
-import framework.util.dataTypes.FloatArrayList;
-import framework.util.dataTypes.IntArrayList;
 import framework.util.fileIO.FileUtil;
-import framework.util.fileIO.loaderTypes.IMeshLoader;
 import framework.util.math.Vector2;
 import framework.util.math.Vector3;
 
@@ -18,9 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Will on 12/6/2014.
+ * @author William Gervasio
  */
-public class WavefrontLoader implements IMeshLoader {
+public class WavefrontLoader {
 
     enum VertexType {
         POSITION, POSITION_TEXCOORD, POSITION_NORMAL, POSITION_TEXCOORD_NORMAL
@@ -184,10 +181,4 @@ public class WavefrontLoader implements IMeshLoader {
         knownVertices.put(data, vertexCount);
         ++vertexCount;
     }
-/*
-    private String[] removeEmptyStrings(String[] data) {
-        Arr
-        ayList<String> str = new ArrayList<String>();
-    }
-    */
 }

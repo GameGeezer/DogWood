@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * @author William Gervasio
  */
-public class Entity implements Cloneable {
+public final class Entity implements Cloneable {
 
     private Map<Class, List<EntityComponent>> components = new HashMap<>();
 
@@ -64,8 +64,7 @@ public class Entity implements Cloneable {
             while (it.hasNext()) {
 
                 Map.Entry pairs = (Map.Entry)it.next();
-                System.out.println(type);
-                System.out.println((Class)pairs.getKey());
+
                 if(type.isAssignableFrom((Class)pairs.getKey())) {
 
                     relatedComponents.addAll(components.get(pairs.getKey()));
@@ -83,7 +82,9 @@ public class Entity implements Cloneable {
     }
 
     public boolean hasComponent(EntityComponent component) {
+
         List<EntityComponent> componentsOfType = getComponentsOfType(component.getClass());
+
         return componentsOfType != null && componentsOfType.contains(component);
     }
 

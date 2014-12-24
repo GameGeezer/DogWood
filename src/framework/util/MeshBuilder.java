@@ -36,9 +36,13 @@ public class MeshBuilder {
     }
 
     public Mesh build() {
+
         List<IVertexAttribute> attributes = new ArrayList<>();
+
         Iterator it = components.entrySet().iterator();
+
         while (it.hasNext()) {
+
             Map.Entry pairs = (Map.Entry)it.next();
             attributes.add((DynamicVertexAttribute)pairs.getValue());
         }

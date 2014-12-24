@@ -18,26 +18,16 @@ public abstract class UniformComponent extends Entity.EntityComponent {
     @Override
     protected void onAttach() {
 
-        List<EntityComponent> renderComponents = getParent().getComponentsOfType(RenderComponent.class);
+        List<RenderComponent> renderComponents = (List<RenderComponent>)(List<?>) getParent().getComponentsOfType(RenderComponent.class);
 
-        for(EntityComponent component : renderComponents) {
-
-            RenderComponent renderCast = (RenderComponent) component;
-
-            addListener(renderCast.getShader());
-        }
+        renderComponents.forEach((component) -> addListener(component.getShader()));
     }
 
     @Override
     protected void onDetach() {
 
-        List<EntityComponent> renderComponents = getParent().getComponentsOfType(RenderComponent.class);
+        List<RenderComponent> renderComponents = (List<RenderComponent>)(List<?>) getParent().getComponentsOfType(RenderComponent.class);
 
-        for(EntityComponent component : renderComponents) {
-
-            RenderComponent renderCast = (RenderComponent) component;
-
-            removeListener(renderCast.getShader());
-        }
+        renderComponents.forEach((component) -> removeListener(component.getShader()));
     }
 }

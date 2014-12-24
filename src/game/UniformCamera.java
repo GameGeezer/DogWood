@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Will on 12/14/2014.
  */
-public class UniformCamera implements IUniformWrapper {
+public class UniformCamera {
 
     public static final String PROJECTION_UNIFORM = "u_projectionMatrix";
     public static final String VIEW_UNIFORM = "u_viewMatrix";
@@ -80,13 +80,11 @@ public class UniformCamera implements IUniformWrapper {
         updateProjectionUniform();
     }
 
-    @Override
     public void addListener(ShaderProgram shader) {
         projectionUniform.addListener(shader);
         viewUniform.addListener(shader);
     }
 
-    @Override
     public void removeListener(ShaderProgram shader) {
         projectionUniform.removeListener(shader);
         viewUniform.removeListener(shader);

@@ -8,6 +8,7 @@ public class Region {
     private float lowerX, lowerY, upperX, upperY, width, height;
 
     public Region(float x1, float y1, float x2, float y2) {
+
         this.lowerX = x1;
         this.lowerY = y1;
         this.upperX = x2;
@@ -18,6 +19,7 @@ public class Region {
     }
 
     public Region setLower(float x1, float y1) {
+
         this.lowerX = x1;
         this.lowerY = y1;
 
@@ -28,6 +30,7 @@ public class Region {
     }
 
     public Region setUpper(float x2, float y2) {
+
         this.upperX = x2;
         this.upperY = y2;
 
@@ -38,6 +41,7 @@ public class Region {
     }
 
     public Region shift(float x, float y) {
+
         this.lowerX += x;
         this.lowerY += y;
         this.upperX += x;
@@ -81,17 +85,21 @@ public class Region {
     }
 
     private void updateBounds() {
+
         width = Math.abs(upperX - lowerX);
+
         height = Math.abs(upperY - lowerY);
     }
 
     private void ensureStateLegality() {
         if(lowerX > upperX) {
+
             float x = lowerX;
             lowerX = upperX;
             upperX = x;
         }
         if(lowerY > upperY) {
+
             float y = lowerY;
             lowerY = upperY;
             upperY = y;

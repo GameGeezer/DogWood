@@ -12,6 +12,8 @@ import game.components.*;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import framework.util.fileIO.mesh.WavefrontLoader;
+import game.components.player.PlayerControllerComponent;
+import game.components.player.PlayerUpdateComponent;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,23 +65,11 @@ public class GameScreen implements IScreen {
 
         entity.addComponent(transform);
         entity.addComponent(new UniformCameraReferenceComponent( camera));
-        //entity.addComponent(new PlayerControllerComponent());
+        entity.addComponent(new PlayerControllerComponent());
+        entity.addComponent(new PlayerUpdateComponent());
 
         entity.addComponent(sprite);
         scene.addEntity(entity);
-
-        Entity.EntityComponent entityComponent = sprite;
-
-        System.out.println(sprite);
-        System.out.println(entityComponent);
-
-        AABB aabb1 = new AABB(5,5, 5,5);
-        AABB aabb2 = new AABB(7,7, 1,1);
-        System.out.println(aabb1.collidesWith(aabb2));
-        Class c1= UniformComponent.class;
-        Class c2 = UniformCameraReferenceComponent.class;
-
-
     }
 
     public void onLeave() {

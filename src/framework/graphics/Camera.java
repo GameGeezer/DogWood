@@ -12,6 +12,7 @@ public class Camera {
     protected float width, height, near, far, fieldOfView;
 
     public Camera(float width, float height, float near, float far, float fieldOfView) {
+
         this.width = width;
         this.height = height;
         this.near = near;
@@ -58,31 +59,37 @@ public class Camera {
     }
 
     public void setWidth(float width) {
+
         this.width = width;
         updateProjectionMatrix();
     }
 
     public void setHeight(float height) {
+
         this.height = height;
         updateProjectionMatrix();
     }
 
     public void setNear(float near) {
+
         this.near = near;
         updateProjectionMatrix();
     }
 
     public void setFar(float far) {
+
         this.far = far;
         updateProjectionMatrix();
     }
 
     public void setFieldOfView(float fieldOfView) {
+
         this.fieldOfView = fieldOfView;
         updateProjectionMatrix();
     }
 
     protected void updateProjectionMatrix() {
+
         float aspectRatio = width / height;
 
         float yScale = (float) (1 / Math.tan(Math.toRadians(fieldOfView / 2)));
