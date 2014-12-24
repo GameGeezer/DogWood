@@ -19,7 +19,6 @@ import java.util.List;
  */
 public final class SpriteRenderComponent extends RenderComponent {
 
-    private ShaderProgram shader;
     private Texture texture;
     private Mesh mesh;
 
@@ -29,7 +28,8 @@ public final class SpriteRenderComponent extends RenderComponent {
 
     public SpriteRenderComponent(Image image, ShaderProgram shader) {
 
-        this.shader = shader;
+        super(shader);
+
         texture = new Texture(image, GL13.GL_TEXTURE0);
 
         float widthHeightRatio = (float)image.getWidth() / (float)image.getHeight();
@@ -72,16 +72,11 @@ public final class SpriteRenderComponent extends RenderComponent {
 
     @Override
     public void render(int delta) {
-        shader.bind();
+        getShader().bind();
         texture.bind();
         mesh.draw();
         texture.unbind();
-        shader.unbind();
-    }
-
-    @Override
-    public ShaderProgram getShader() {
-        return shader;
+        getShader().unbind();
     }
 
     public void setFlippedX(boolean flipped) {

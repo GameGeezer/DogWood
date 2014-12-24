@@ -11,24 +11,18 @@ import framework.scene.components.RenderComponent;
 public class MeshComponent extends RenderComponent {
 
     private Mesh mesh;
-    private ShaderProgram shader;
 
     public MeshComponent(Mesh mesh, ShaderProgram shader) {
 
-        this.mesh = mesh;
-        this.shader = shader;
+        super(shader);
 
+        this.mesh = mesh;
     }
 
     @Override
     public void render(int delta) {
-        shader.bind();
+        getShader().bind();
         mesh.draw();
-        shader.unbind();
-    }
-
-    @Override
-    public ShaderProgram getShader() {
-        return shader;
+        getShader().unbind();
     }
 }

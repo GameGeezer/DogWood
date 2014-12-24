@@ -5,7 +5,7 @@ import framework.input.Keyboard;
 import framework.scene.Entity.EntityComponent;
 
 /**
- * Created by Will on 12/19/2014.
+ * @author William Gervasio
  */
 public abstract class KeyboardComponent extends EntityComponent implements IKeyboardListener {
 

@@ -6,13 +6,20 @@ import framework.scene.Entity.EntityComponent;
 import java.util.List;
 
 /**
- * Created by Will on 12/16/2014.
+ * A RenderComponent is a EntityComponent that forces a render(int delta) to be implemented.
+ *
+ * @author William Gervasio
  */
 public abstract class RenderComponent extends EntityComponent {
 
-    public abstract void render(int delta);
+    private ShaderProgram shader;
 
-    public abstract ShaderProgram getShader();
+    public RenderComponent(ShaderProgram shader) {
+
+        this.shader = shader;
+    }
+
+    public abstract void render(int delta);
 
     @Override
     protected void onAttach() {
@@ -28,5 +35,9 @@ public abstract class RenderComponent extends EntityComponent {
         List<UniformComponent> uniformComponents = (List<UniformComponent>)(List<?>) getParent().getComponentsOfType(UniformComponent.class);
 
         uniformComponents.forEach((component) -> component.removeListener(getShader()));
+    }
+
+    public ShaderProgram getShader() {
+        return shader;
     }
 }

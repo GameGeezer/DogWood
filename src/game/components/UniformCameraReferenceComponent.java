@@ -8,6 +8,7 @@ import game.UniformCamera;
  * Created by Will on 12/16/2014.
  */
 public class UniformCameraReferenceComponent extends UniformComponent {
+
     private UniformCamera camera;
 
     public UniformCameraReferenceComponent(UniformCamera camera) {
@@ -23,9 +24,4 @@ public class UniformCameraReferenceComponent extends UniformComponent {
     public void removeListener(ShaderProgram shader) {
         camera.removeListener(shader);
     }
-
-    public UniformCameraReferenceComponent clone() {
-        return new UniformCameraReferenceComponent(camera);
-    }
-
 }

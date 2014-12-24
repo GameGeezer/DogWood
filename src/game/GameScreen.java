@@ -26,7 +26,6 @@ import java.util.Map;
 public class GameScreen implements IScreen {
 
     private Scene scene = new Scene();
-    private TransformComponent transform;
     private UniformCamera camera = new UniformCamera(800, 600, 0.1f, 100, 60);
     private Image octapus;
 
@@ -43,7 +42,7 @@ public class GameScreen implements IScreen {
             Map<Integer, String> attributes = new HashMap<Integer, String>();
             attributes.put(0, "in_Position");
             attributes.put(1, "in_Color");
-            attributes.put(2, "in_TextureC-------------------------------------------------=d");
+            attributes.put(2, "in_TextureCoord");
 
            // shader = new ShaderProgram(FileUtil.readText("res/testShader.vert"), FileUtil.readText("res/TestShader.frag"), attributes);
             shader2 = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
@@ -59,7 +58,7 @@ public class GameScreen implements IScreen {
         SpriteRenderComponent sprite = new SpriteRenderComponent(octapus,shader2);
         sprite.setFlippedX(true);
         sprite.setFlippedY(false);
-        transform = new TransformComponent();
+        TransformComponent transform = new TransformComponent();
         transform.setTranslation(0, -0.5f , -3f);
         transform.setOrientationEuler(0, (float)Math.PI , 0);
 
@@ -81,8 +80,7 @@ public class GameScreen implements IScreen {
     }
 
     public void update(int delta) {
+
         scene.update(delta);
-       // System.out.println(delta);
-       // transform.rotateEuler(0, (float)Math.PI/ 200 , 0);
     }
 }

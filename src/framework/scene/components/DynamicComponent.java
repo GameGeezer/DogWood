@@ -3,7 +3,7 @@ package framework.scene.components;
 import framework.scene.Entity.EntityComponent;
 
 /**
- * Created by Will on 12/23/2014.
+ * @author William Gervasio
  */
 public abstract class DynamicComponent extends EntityComponent {
 

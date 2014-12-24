@@ -7,7 +7,7 @@ import framework.scene.Entity.EntityComponent;
 import java.util.List;
 
 /**
- * Created by Will on 12/16/2014.
+ * @author William Gervasio
  */
 public abstract class UniformComponent extends Entity.EntityComponent {
 
