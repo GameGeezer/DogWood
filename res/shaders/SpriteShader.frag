@@ -8,5 +8,7 @@ out vec4 out_Color;
 
 void main(void) {
 
-	out_Color = texture(texture_diffuse, pass_TextureCoord);
+	vec4 texel = texture(texture_diffuse, pass_TextureCoord);
+
+	out_Color = texel;
 }

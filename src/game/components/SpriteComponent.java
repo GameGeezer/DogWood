@@ -25,11 +25,9 @@ public class SpriteComponent extends RenderComponent {
     private Texture texture;
     private Mesh mesh;
 
-    private int flippedX, flippedY;
 
     private Matrix4 textureMatrix = new Matrix4();
     private MatrixUniform textureMatrixUniform = new MatrixUniform("u_textureMatrix", MatrixUniform.MatrixUniformType.MATRIX4);
-    private FloatVectorUniform flipTexCoordsUniform = new FloatVectorUniform("u_flipTextureCoordinates", VectorUniform.VectorUniformType.VECTOR2);
 
     public SpriteComponent(Image image, ShaderProgram shader, int cellsWide, int cellsHigh) {
 
@@ -67,13 +65,11 @@ public class SpriteComponent extends RenderComponent {
         mesh = new Mesh(indices, attributes);
 
         textureMatrixUniform.addListener(shader);
-        flipTexCoordsUniform.addListener(shader);
 
-        textureMatrix.data[Matrix4.M03] = 0.5f;
-        textureMatrix.data[Matrix4.M13] = 0.5f;
+        textureMatrix.data[Matrix4.M03] = 0f;
+        textureMatrix.data[Matrix4.M13] = 0f;
 
         updateTextureMatrix();
-        setFlipped(false, false);
     }
 
     @Override
@@ -85,25 +81,6 @@ public class SpriteComponent extends RenderComponent {
         getShader().unbind();
     }
 
-    public void setFlippedX(boolean flipped) {
-        flippedX = flipped ? -1 : 1;
-        updateFlippedTexcoordBuffer();
-    }
-
-    public void setFlippedY(boolean flipped) {
-        flippedY = flipped ? -1 : 1;
-        updateFlippedTexcoordBuffer();
-    }
-
-    public void setFlipped(boolean isFlippedX, boolean isFlippedY) {
-        flippedX = isFlippedX ? -1 : 1;
-        flippedY = isFlippedY ? -1 : 1;
-        updateFlippedTexcoordBuffer();
-    }
-
-    private void updateFlippedTexcoordBuffer() {
-        flipTexCoordsUniform.setUniformData(flippedX, flippedY);
-    }
 
     private void updateTextureMatrix() {
 

@@ -40,7 +40,7 @@ public class GameScreen implements IScreen {
             attributes.put(1, "in_TextureCoord");
 
             shader = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
-            spriteSheet = Image.loadPNG(new File("res/textures/player.png"));
+            spriteSheet = Image.loadPNG(new File("res/textures/walkingSprite1.png"));
         } catch(DogWoodException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -49,12 +49,13 @@ public class GameScreen implements IScreen {
 
         Entity entity = new Entity();
 
-        SpriteComponent sprite = new SpriteComponent(spriteSheet,shader, 2, 2);
+        SpriteComponent sprite = new SpriteComponent(spriteSheet,shader, 3, 4);
         entity.addComponent(sprite);
 
         TransformComponent transform = new TransformComponent();
         transform.setTranslation(0, -0.5f , -3f);
         transform.setOrientationEuler(0, (float)Math.PI , 0);
+        transform.setScale(0.25f, 0.25f, 0.25f);
         entity.addComponent(transform);
 
         entity.addComponent(new UniformCameraReferenceComponent( camera));

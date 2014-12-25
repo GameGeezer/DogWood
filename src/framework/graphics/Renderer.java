@@ -2,6 +2,8 @@ package framework.graphics;
 
 import framework.scene.Scene;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL14;
+import org.lwjgl.opengl.GL20;
 
 /**
  * @author william gervasio
@@ -17,6 +19,7 @@ public class Renderer {
 //
 // glEnable(GL_DEPTH_CLAMP);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
+
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
     }

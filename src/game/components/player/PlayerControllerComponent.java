@@ -1,7 +1,6 @@
 package game.components.player;
 
 import framework.input.Keyboard;
-import framework.scene.Entity.EntityComponent;
 import framework.scene.components.KeyboardComponent;
 import game.components.SpriteComponent;
 
@@ -23,13 +22,13 @@ public class PlayerControllerComponent extends KeyboardComponent {
         if(Keyboard.KEY_A == keyCode) {
             moveLeft = false;
             if (moveRight) {
-                flipAllSpritesX(true);
+               // flipAllSpritesX(true);
             }
         }
         if(Keyboard.KEY_D == keyCode) {
             moveRight = false;
             if(moveLeft) {
-                flipAllSpritesX(false);
+               // flipAllSpritesX(false);
             }
         }
     }
@@ -39,13 +38,13 @@ public class PlayerControllerComponent extends KeyboardComponent {
         if(Keyboard.KEY_A == keyCode) {
             moveLeft = true;
             if(!moveRight) {
-                flipAllSpritesX(false);
+               // flipAllSpritesX(false);
             }
         }
         if(Keyboard.KEY_D == keyCode) {
             moveRight = true;
             if(!moveLeft) {
-                flipAllSpritesX(true);
+                //flipAllSpritesX(true);
             }
         }
     }
@@ -53,14 +52,6 @@ public class PlayerControllerComponent extends KeyboardComponent {
     @Override
     public void onKeyRepeat(int keyCode) {
 
-    }
-
-    private void flipAllSpritesX(boolean flipped) {
-
-        for(EntityComponent component :  getParent().getComponentsOfType(SpriteComponent.class)) {
-            SpriteComponent spriteComponent = (SpriteComponent) component;
-            spriteComponent.setFlippedX(flipped);
-        }
     }
 
     public boolean isMoveLeft() {

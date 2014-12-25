@@ -13,7 +13,7 @@ out vec2 pass_TextureCoord;
 
 void main(void) {
 
-	pass_TextureCoord = (u_textureMatrix * vec4(in_TextureCoord, 0.0f, 1.0f)).xy * u_flipTextureCoordinates;
+	pass_TextureCoord = (u_textureMatrix * vec4(in_TextureCoord, 0.0f, 1.0f)).xy;
 
 	gl_Position = u_projectionMatrix * u_viewMatrix* u_modelMatrix * in_Position;
 }
