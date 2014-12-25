@@ -2,31 +2,36 @@ package game.components;
 
 import framework.graphics.Image;
 import framework.graphics.Mesh;
+import framework.graphics.TextureAtlas;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
 import framework.graphics.uniform.FloatVectorUniform;
+import framework.graphics.uniform.MatrixUniform;
 import framework.graphics.uniform.VectorUniform;
 import framework.graphics.vertices.IVertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
 import framework.scene.components.RenderComponent;
+import framework.util.math.Matrix4;
 import org.lwjgl.opengl.GL13;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author William Gervasio
+ * Created by Will on 12/24/2014.
  */
-public final class SpriteRenderComponent extends RenderComponent {
+public class SpriteComponent extends RenderComponent {
 
     private Texture texture;
     private Mesh mesh;
 
-    private FloatVectorUniform flipTexCoords = new FloatVectorUniform("u_flipTextureCoordinates", VectorUniform.VectorUniformType.VECTOR2);
-
     private int flippedX, flippedY;
 
-    public SpriteRenderComponent(Image image, ShaderProgram shader) {
+    private Matrix4 textureMatrix = new Matrix4();
+    private MatrixUniform textureMatrixUniform = new MatrixUniform("u_textureMatrix", MatrixUniform.MatrixUniformType.MATRIX4);
+    private FloatVectorUniform flipTexCoordsUniform = new FloatVectorUniform("u_flipTextureCoordinates", VectorUniform.VectorUniformType.VECTOR2);
+
+    public SpriteComponent(Image image, ShaderProgram shader, int cellsWide, int cellsHigh) {
 
         super(shader);
 
@@ -43,31 +48,32 @@ public final class SpriteRenderComponent extends RenderComponent {
                 xRatio, yRatio, 0f,
         };
 
-
-        float[] colors = {
-                1f, 0f, 0f, 1f,
-                0f, 1f, 0f, 1f,
-                0f, 0f, 1f, 1f,
-                1f, 1f, 1f, 1f,
-        };
+        float texcoordX = (1.0f /  (float) cellsWide) ;
+        float texcoordY = (1.0f /  (float) cellsHigh) ;
 
         float[] texCoords = {
                 0f, 0f,
-                0f, 1f,
-                1f, 1f,
-                1f, 0f,
+                0f, texcoordY,
+                texcoordX, texcoordY,
+                texcoordX, 0f,
         };
 
         int[] indices = {0, 1, 2, 0, 2, 3,};
 
         List<IVertexAttribute> attributes = new ArrayList<>();
         attributes.add(new StaticVertexAttribute(vertices, 3));
-        attributes.add(new StaticVertexAttribute(colors, 4));
         attributes.add(new StaticVertexAttribute(texCoords, 2));
+
         mesh = new Mesh(indices, attributes);
 
-        flipTexCoords.addListener(shader);
+        textureMatrixUniform.addListener(shader);
+        flipTexCoordsUniform.addListener(shader);
 
+        textureMatrix.data[Matrix4.M03] = 0.5f;
+        textureMatrix.data[Matrix4.M13] = 0.5f;
+
+        updateTextureMatrix();
+        setFlipped(false, false);
     }
 
     @Override
@@ -96,6 +102,11 @@ public final class SpriteRenderComponent extends RenderComponent {
     }
 
     private void updateFlippedTexcoordBuffer() {
-        flipTexCoords.setUniformData(flippedX, flippedY);
+        flipTexCoordsUniform.setUniformData(flippedX, flippedY);
+    }
+
+    private void updateTextureMatrix() {
+
+        textureMatrixUniform.setUniformData(textureMatrix.data);
     }
 }

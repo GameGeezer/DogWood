@@ -26,17 +26,14 @@ public final class Entity implements Cloneable {
 
         component.onAttach();
 
-        Iterator it = components.entrySet().iterator();
+        components.entrySet().forEach((mapEntry) -> {
 
-        while (it.hasNext()) {
+            if((mapEntry.getKey()).isAssignableFrom(component.getClass())) {
 
-            Map.Entry pairs = (Map.Entry)it.next();
-
-            if(((Class)pairs.getKey()).isAssignableFrom(component.getClass())) {
-
-                components.get(pairs.getKey()).add(component);
+                components.get(mapEntry.getKey()).add(component);
             }
-        }
+        });
+
     }
 
     public void removeComponent(EntityComponent component) {
@@ -59,17 +56,13 @@ public final class Entity implements Cloneable {
 
             List<EntityComponent> relatedComponents = new ArrayList<>();
 
-            Iterator it = components.entrySet().iterator();
+            components.entrySet().forEach((mapEntry) -> {
 
-            while (it.hasNext()) {
+                if(type.isAssignableFrom(mapEntry.getKey())) {
 
-                Map.Entry pairs = (Map.Entry)it.next();
-
-                if(type.isAssignableFrom((Class)pairs.getKey())) {
-
-                    relatedComponents.addAll(components.get(pairs.getKey()));
+                    relatedComponents.addAll(components.get(mapEntry.getKey()));
                 }
-            }
+            });
 
             components.put(type, relatedComponents);
         }

@@ -1,4 +1,4 @@
-package framework.util.fileIO.mesh;
+package framework.util.fileIO;
 
 import framework.graphics.Mesh;
 import framework.util.MeshBuilder;

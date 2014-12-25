@@ -3,8 +3,7 @@ package game.components.player;
 import framework.input.Keyboard;
 import framework.scene.Entity.EntityComponent;
 import framework.scene.components.KeyboardComponent;
-import game.components.SpriteRenderComponent;
-import game.components.TransformComponent;
+import game.components.SpriteComponent;
 
 /**
  * Created by Will on 12/18/2014.
@@ -58,8 +57,8 @@ public class PlayerControllerComponent extends KeyboardComponent {
 
     private void flipAllSpritesX(boolean flipped) {
 
-        for(EntityComponent component :  getParent().getComponentsOfType(SpriteRenderComponent.class)) {
-            SpriteRenderComponent spriteComponent = (SpriteRenderComponent) component;
+        for(EntityComponent component :  getParent().getComponentsOfType(SpriteComponent.class)) {
+            SpriteComponent spriteComponent = (SpriteComponent) component;
             spriteComponent.setFlippedX(flipped);
         }
     }

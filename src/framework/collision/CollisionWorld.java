@@ -18,6 +18,7 @@ public class CollisionWorld {
         List<ICollidable> collisions = new ArrayList<>();
 
         for(ICollidable targetCollidable : collidables) {
+
             if(targetCollidable instanceof AABB && checkingCollidable.collidesWith((AABB) targetCollidable)) {
                 collisions.add(targetCollidable);
             }

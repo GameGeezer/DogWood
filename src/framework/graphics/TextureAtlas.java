@@ -21,8 +21,11 @@ public class TextureAtlas {
 
     public TextureAtlas split(int width, int height) {
 
-        int cellsWide = texture.getWidth() % width;
-        int cellsHigh = texture.getHeight() % height;
+        if(texture.getWidth() % width != 0 || texture.getHeight() % height != 0)
+            return this;
+
+        int cellsWide = texture.getWidth() / width;
+        int cellsHigh = texture.getHeight() / height;
 
         for(int i = 0; i < cellsWide; ++i) {
 
@@ -51,5 +54,10 @@ public class TextureAtlas {
         regions.clear();
 
         return this;
+    }
+
+    public Region getRegion(int index) {
+
+        return regions.get(index);
     }
 }
