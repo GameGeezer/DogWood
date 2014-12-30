@@ -1,9 +1,7 @@
 package framework.graphics.uniform;
 
-import java.nio.Buffer;
-
 /**
- * Created by Will on 12/12/2014.
+ * @author William Gervasio
  */
 public abstract class VectorUniform extends Uniform{
 
@@ -28,7 +26,8 @@ public abstract class VectorUniform extends Uniform{
         this.uniformType = uniformType;
     }
 
-    public int getNumberOfUniforms() {
+    @Override
+    public int getNumberOfElements() {
         return uniformType.getNumberOfUniforms();
     }
 }

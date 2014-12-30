@@ -17,39 +17,53 @@ public abstract class Uniform {
     private final List<ShaderProgram> listeners = new ArrayList<ShaderProgram>();
     private final String uniformName;
 
+    /**
+     * Create a Uniform object associated with a uniform of passed "uniformName"
+     *
+     * @param uniformName
+     */
     public Uniform(String uniformName) {
+
         this.uniformName = uniformName;
     }
 
     /**
      * Subscribe to the uniform. If the uniform is changed all listeners will be updated
+     *
      * @param listener
      */
     public void addListener(ShaderProgram listener) {
-        passUniformToShader(listener);
 
+        // Passes the uniform data to the shader
+        passUniformToShader(listener);
+        // Subscribe the shader for future updates
         listeners.add(listener);
     }
 
     /**
-     * Remove teh shader from the list of Shaders to be updated when the uniform is changed.
+     * Remove the shader from the list of ShaderPrograms to be updated when the uniform is changed
+     *
      * @param listener
      */
     public void removeListener(ShaderProgram listener) {
         listeners.remove(listener);
     }
 
-    protected void updateListeningShaders() {
-        for(ShaderProgram shader : listeners) {
-            passUniformToShader(shader);
-        }
-    }
+    /**
+     *
+     * @return the number of elements in the uniform
+     */
+    public abstract int getNumberOfElements();
 
-    public abstract int getNumberOfUniforms();
+    protected void updateListeningShaders() {
+
+        listeners.forEach((shader) -> passUniformToShader(shader));
+    }
 
     protected abstract void updateProgram(int uniformHandle);
 
     private void passUniformToShader(ShaderProgram shader) {
+
         shader.bind();
         int uniformHandle = shader.getUniformLocation(uniformName);
         updateProgram(uniformHandle);

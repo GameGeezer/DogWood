@@ -78,4 +78,17 @@ public final class VAO {
 
         GL30.glBindVertexArray(0);
     }
+
+    /**
+     * Delete the VertexArray and it's corresponding FBO and IBO
+     */
+    public final void destroy() {
+
+        // Delete the vertex array
+        GL30.glDeleteVertexArrays(handle);
+
+        fbo.destroy();
+
+        ibo.destroy();
+    }
 }

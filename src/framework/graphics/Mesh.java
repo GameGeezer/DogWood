@@ -23,6 +23,11 @@ public class Mesh {
     private List<IVertexAttribute> vertexElements;
     private int[] indices;
 
+    /**
+     *
+     * @param indices
+     * @param vertexElements
+     */
     public Mesh(int[] indices, List<IVertexAttribute> vertexElements) {
         this.indices = indices;
         this.vertexElements = vertexElements;
@@ -59,14 +64,26 @@ public class Mesh {
      * Draw the mesh
      */
     public void draw() {
+
         vao.draw();
     }
 
+    /**
+     * Destroy the VAO
+     */
+    public void destroy() {
+
+        vao.destroy();
+    }
+
     private int countTotalElements() {
+
         int totalElementsCount = 0;
+
         for (IVertexAttribute element : vertexElements) {
             totalElementsCount += element.getData().length;
         }
+
         return totalElementsCount;
     }
 }

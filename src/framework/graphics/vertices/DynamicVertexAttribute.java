@@ -13,20 +13,24 @@ public class DynamicVertexAttribute implements IVertexAttribute{
     private final int elementsPerVertex;
 
     public DynamicVertexAttribute(int elementsPerVertex) {
+
         this.elementsPerVertex = elementsPerVertex;
     }
 
     @Override
     public float[] getData() {
+
         return vertexData.getAsArray();
     }
 
     @Override
     public int getElementsPerVertex() {
+
         return elementsPerVertex;
     }
 
     public void addData(float... data) {
+
         for(int i = 0; i < data.length; ++i) {
             vertexData.add(data[i]);
         }

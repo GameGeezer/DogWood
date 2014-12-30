@@ -10,12 +10,23 @@ import java.beans.PropertyChangeListener;
 import java.util.Map;
 
 /**
+ * ShaderPrograms manage shaders for the opengl pipeline.
+ *
  * @author William Gervasio
  */
 public class ShaderProgram {
 
     private final int handle;
 
+
+    /**
+     * Create a shader with vertex shader and fragment shader stages.
+     *
+     * @param vertexShader The vertex shader source
+     * @param fragmentShader The fragment shader source
+     * @param attributes
+     * @throws GraphicsException
+     */
     public  ShaderProgram(String vertexShader, String fragmentShader, Map<Integer, String> attributes) throws GraphicsException {
 
         // Create the shader and grab the handle
@@ -29,18 +40,21 @@ public class ShaderProgram {
         GL20.glAttachShader(handle, vertexHandle);
         GL20.glAttachShader(handle, fragmentHandle);
 
+        // Bind all of the attributes of name(value) to a location(Key)
         for(Map.Entry<Integer, String> e : attributes.entrySet()) {
 
             GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
         }
 
+        // Try and link the program
         GL20.glLinkProgram(handle);
 
-        if(checkForLinkError(handle)) {
-
+        // Check if there was any errors while linking
+        if(checkForLinkError(handle))
             throw new GraphicsException("Failed to link shader");
-        }
 
+
+        // Now that the program is created we can free memory
         GL20.glDetachShader(handle, vertexHandle);
         GL20.glDetachShader(handle, fragmentHandle);
         GL20.glDeleteShader(vertexHandle);
@@ -48,11 +62,11 @@ public class ShaderProgram {
     }
 
     /**
-     * Create a ShaderProgram with fragment, vertex, and geometry stages.
+     * Create a ShaderProgram with vertex, fragment, and geometry stages.
      *
-     * @param vertexShader
-     * @param fragmentShader
-     * @param geometryShader
+     * @param vertexShader The vertex shader source
+     * @param fragmentShader The fragment shader source
+     * @param geometryShader The geometry shader source
      * @param attributes
      * @throws GraphicsException
      */
@@ -70,16 +84,19 @@ public class ShaderProgram {
         GL20.glAttachShader(handle, fragmentHandle);
         GL20.glAttachShader(handle, geometryHandle);
 
+        // Bind all of the attributes of name(value) to a location(Key)
         for (Map.Entry<Integer, String> e : attributes.entrySet()) {
             GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
         }
 
+        // Try and link the program
         GL20.glLinkProgram(handle);
 
-        if (checkForLinkError(handle)) {
+        // Check if there was any errors while linking
+        if (checkForLinkError(handle))
             throw new GraphicsException("Failed to link shader");
-        }
 
+        // Now that the program is created we can free memory
         GL20.glDetachShader(handle, vertexHandle);
         GL20.glDetachShader(handle, fragmentHandle);
         GL20.glDetachShader(handle, geometryHandle);

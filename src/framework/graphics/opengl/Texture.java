@@ -24,7 +24,7 @@ public class Texture {
      * @param textureUnit i.e GL13.GL_TEXTURE0
      */
     public Texture(ByteBuffer buffer, int width, int height, int textureUnit) {
-        
+
         this.handle = GL11.glGenTextures();
         this.textureUnit = textureUnit;
         this.width = width;

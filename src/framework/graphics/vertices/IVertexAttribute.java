@@ -2,6 +2,7 @@ package framework.graphics.vertices;
 
 /**
  * An IVertexAttribute is a wrapper for data being used to create a mesh.
+ *
  * @author William Gervasio
  */
 public interface IVertexAttribute {
