@@ -1,10 +1,12 @@
-package framework.scene;
+package game;
 
-import framework.graphics.Camera;
-import framework.graphics.Renderer;
+/**
+ * Created by Will on 12/30/2014.
+ */
+
+import framework.scene.Entity;
 import framework.scene.components.RenderComponent;
 import framework.scene.components.UpdateComponent;
-import game.UniformCamera;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,12 @@ public class Scene  {
 
             List<UpdateComponent> updateComponents = (List<UpdateComponent>)(List<?>) entity.getComponentsOfType(UpdateComponent.class);
             updateComponents.forEach((component) -> component.update(delta));
+        }
+    }
+
+    public void render(int delta) {
+
+        for(Entity entity : entities) {
 
             List<RenderComponent> renderComponents = (List<RenderComponent>)(List<?>) entity.getComponentsOfType(RenderComponent.class);
             renderComponents.forEach((component) -> component.render(delta));
@@ -36,6 +44,7 @@ public class Scene  {
     }
 
     public void addEntity(Entity entity) {
+
         entities.add(entity);
     }
 }

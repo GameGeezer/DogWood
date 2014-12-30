@@ -2,14 +2,11 @@ package game;
 
 import framework.IScreen;
 import framework.graphics.Image;
-import framework.graphics.Mesh;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
-import framework.scene.Scene;
 import game.components.*;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
-import framework.util.fileIO.WavefrontLoader;
 import game.components.player.PlayerControllerComponent;
 import game.components.player.PlayerUpdateComponent;
 
@@ -49,18 +46,22 @@ public class GameScreen implements IScreen {
 
         Entity entity = new Entity();
 
-        SpriteComponent sprite = new SpriteComponent(spriteSheet,shader, 3, 4);
-        entity.addComponent(sprite);
+        try {
+            SpriteComponent sprite = new SpriteComponent(spriteSheet, shader, 3, 4);
+            entity.addComponent(sprite);
 
-        TransformComponent transform = new TransformComponent();
-        transform.setTranslation(0, -0.5f , -3f);
-        transform.setOrientationEuler(0, (float)Math.PI , 0);
-        transform.setScale(0.25f, 0.25f, 0.25f);
-        entity.addComponent(transform);
+            TransformComponent transform = new TransformComponent();
+            transform.setTranslation(0, -0.5f, -3f);
+            transform.setOrientationEuler(0, (float) Math.PI, 0);
+            transform.setScale(0.25f, 0.25f, 0.25f);
+            entity.addComponent(transform);
 
-        entity.addComponent(new UniformCameraReferenceComponent( camera));
-        entity.addComponent(new PlayerControllerComponent());
-        entity.addComponent(new PlayerUpdateComponent());
+            entity.addComponent(new UniformCameraReferenceComponent(camera));
+            entity.addComponent(new PlayerControllerComponent());
+            entity.addComponent(new PlayerUpdateComponent());
+        } catch(DogWoodException e) {
+            e.printStackTrace();
+        }
 
 
         scene.addEntity(entity);
@@ -77,5 +78,6 @@ public class GameScreen implements IScreen {
     public void update(int delta) {
 
         scene.update(delta);
+        scene.render(delta);
     }
 }

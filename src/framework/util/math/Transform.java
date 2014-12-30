@@ -1,12 +1,9 @@
-package framework.scene;
-
-import framework.util.math.Matrix4;
-import framework.util.math.Orientation;
-import framework.util.math.Quaternion;
-import framework.util.math.Vector3;
+package framework.util.math;
 
 /**
- * Created by Will on 12/6/2014.
+ * A transform stores an objects position, scale, and orientation
+ *
+ * @author William Gervasio
  */
 public class Transform {
 

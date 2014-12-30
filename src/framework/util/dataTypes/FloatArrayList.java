@@ -32,7 +32,7 @@ public class FloatArrayList {
 
     public void remove(int position) {
         int indexesUntilTheEnd = position - size;
-        if(position >=0 && indexesUntilTheEnd > 0) {
+        if(position >= 0 && indexesUntilTheEnd > 0) {
             System.arraycopy(data, position + 1, data, position, indexesUntilTheEnd);
             --size;
         }

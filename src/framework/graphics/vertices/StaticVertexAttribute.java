@@ -1,7 +1,5 @@
 package framework.graphics.vertices;
 
-import framework.util.exceptions.DogWoodException;
-
 /**
  * An IVertexAttribute that cannot be altered. Fastest if all the data for the attribute is known up front.
  *

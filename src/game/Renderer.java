@@ -1,9 +1,7 @@
-package framework.graphics;
+package game;
 
-import framework.scene.Scene;
+import framework.graphics.Color;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GL20;
 
 /**
  * @author william gervasio

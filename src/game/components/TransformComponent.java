@@ -2,8 +2,7 @@ package game.components;
 
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.uniform.MatrixUniform;
-import framework.scene.Entity;
-import framework.scene.Transform;
+import framework.util.math.Transform;
 import framework.scene.components.UniformComponent;
 import framework.util.math.Matrix4;
 import framework.util.math.Vector3;

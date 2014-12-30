@@ -1,10 +1,11 @@
 package framework.scene;
 
+import framework.util.exceptions.DogWoodException;
+
 import java.util.*;
 
 /**
  * @author William Gervasio
- * BUG: Entities can share components - why - only one parent is allowed. multiple parents? nah
  */
 public final class Entity implements Cloneable {
 
@@ -14,7 +15,12 @@ public final class Entity implements Cloneable {
 
     }
 
-    public void addComponent(EntityComponent component) {
+    public void addComponent(EntityComponent component) throws DogWoodException {
+
+        if(component.hasParent()) {
+
+            throw new DogWoodException("Cannot attach component: Already attached to another entity");
+        }
 
         if(components.get(component.getClass()) == null) {
 
@@ -94,14 +100,22 @@ public final class Entity implements Cloneable {
         }
 
         public List<EntityComponent> getComponentsOfType(Class type) {
+
             return parentEntity.getComponentsOfType(type);
         }
 
         public Entity getParent() {
+
             return parentEntity;
         }
 
+        public boolean hasParent() {
+
+            return parentEntity != null;
+        }
+
         protected void setParent(Entity entity) {
+
             this.parentEntity = entity;
         }
 
