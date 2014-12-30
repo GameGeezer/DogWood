@@ -12,30 +12,32 @@ import java.util.Map;
 /**
  * @author William Gervasio
  */
-public class ShaderProgram implements PropertyChangeListener {
+public class ShaderProgram {
 
     private final int handle;
 
     public  ShaderProgram(String vertexShader, String fragmentShader, Map<Integer, String> attributes) throws GraphicsException {
-        int vertexHandle, fragmentHandle;
 
-        vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
-        fragmentHandle = compileShader(fragmentShader, GL20.GL_FRAGMENT_SHADER);
-
+        // Create the shader and grab the handle
         handle = GL20.glCreateProgram();
 
+        // Compile the vertex and fragment shaders then grab their handles. Throw an exception if they can't be compiled
+        int vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
+        int fragmentHandle = compileShader(fragmentShader, GL20.GL_FRAGMENT_SHADER);
+
+        // Attach the the vertex and fragment shaders to the program.
         GL20.glAttachShader(handle, vertexHandle);
         GL20.glAttachShader(handle, fragmentHandle);
 
-        if (attributes != null) {
-            for (Map.Entry<Integer, String> e : attributes.entrySet()) {
-                GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
-            }
+        for(Map.Entry<Integer, String> e : attributes.entrySet()) {
+
+            GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
         }
 
         GL20.glLinkProgram(handle);
 
-        if (checkForLinkError(handle)) {
+        if(checkForLinkError(handle)) {
+
             throw new GraphicsException("Failed to link shader");
         }
 
@@ -45,26 +47,31 @@ public class ShaderProgram implements PropertyChangeListener {
         GL20.glDeleteShader(fragmentHandle);
     }
 
-    public ShaderProgram(String vertexShader, String fragmentShader, String geometryShader, Map<Integer, String> attributes) throws GraphicsException
-    {
-        int vertexHandle, fragmentHandle, geometryHandle;
+    /**
+     * Create a ShaderProgram with fragment, vertex, and geometry stages.
+     *
+     * @param vertexShader
+     * @param fragmentShader
+     * @param geometryShader
+     * @param attributes
+     * @throws GraphicsException
+     */
+    public ShaderProgram(String vertexShader, String fragmentShader, String geometryShader, Map<Integer, String> attributes) throws GraphicsException {
 
-        vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
-        fragmentHandle = compileShader(fragmentShader, GL20.GL_FRAGMENT_SHADER);
-        geometryHandle = compileShader(geometryShader, GL32.GL_GEOMETRY_SHADER);
-
+        // Create the shader and grab the handle
         handle = GL20.glCreateProgram();
+
+        // Compile the vertex, fragment, and geometry shaders then grab their handles. Throw an exception if they can't be compiled
+        int vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
+        int fragmentHandle = compileShader(fragmentShader, GL20.GL_FRAGMENT_SHADER);
+        int geometryHandle = compileShader(geometryShader, GL32.GL_GEOMETRY_SHADER);
 
         GL20.glAttachShader(handle, vertexHandle);
         GL20.glAttachShader(handle, fragmentHandle);
         GL20.glAttachShader(handle, geometryHandle);
 
-        if (attributes != null)
-        {
-            for (Map.Entry<Integer, String> e : attributes.entrySet())
-            {
-                GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
-            }
+        for (Map.Entry<Integer, String> e : attributes.entrySet()) {
+            GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
         }
 
         GL20.glLinkProgram(handle);
@@ -104,6 +111,7 @@ public class ShaderProgram implements PropertyChangeListener {
 
     /**
      * Finds the location of a uniform
+     *
      * @param uniform
      * @return
      */
@@ -113,16 +121,22 @@ public class ShaderProgram implements PropertyChangeListener {
 
     /**
      * Compiles a vertex, fragment, or geometry shader
+     *
      * @param shader
      * @param type
      * @return A handle to the compiled shader
      * @throws GraphicsException
      */
     private final int compileShader(String shader, int type) throws GraphicsException {
+
         int handle = GL20.glCreateShader(type);
+
+        // Link the source
         GL20.glShaderSource(handle, shader);
+        // Compile the shader
         GL20.glCompileShader(handle);
 
+        // If the shader failed to compile throw an exception
         if (GL20.glGetShaderi(handle, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
             switch (type) {
                 case GL20.GL_VERTEX_SHADER:
@@ -138,17 +152,13 @@ public class ShaderProgram implements PropertyChangeListener {
     }
 
     /**
-     * Makes sure the shader was linked preopperly
+     * Check to see if the shader was linked properly
+     *
      * @param handle
      * @return True if properly linked
      */
     private final boolean checkForLinkError(int handle) {
-        return GL20.glGetProgrami(handle, GL20.GL_LINK_STATUS) == GL11.GL_FALSE;
-    }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        System.out.println("Changed property: " + event.getPropertyName() + " [old -> "
-                + event.getOldValue() + "] | [new -> " + event.getNewValue() +"]");
+        return GL20.glGetProgrami(handle, GL20.GL_LINK_STATUS) == GL11.GL_FALSE;
     }
 }

@@ -17,12 +17,14 @@ public class Texture {
     public Texture(Image image, int textureUnit) {
         this(image.getBuffer(), image.getWidth(), image.getHeight(), textureUnit);
     }
+
     /**
      *
      * @param buffer
      * @param textureUnit i.e GL13.GL_TEXTURE0
      */
     public Texture(ByteBuffer buffer, int width, int height, int textureUnit) {
+        
         this.handle = GL11.glGenTextures();
         this.textureUnit = textureUnit;
         this.width = width;

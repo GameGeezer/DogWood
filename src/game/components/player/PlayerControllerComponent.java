@@ -2,6 +2,7 @@ package game.components.player;
 
 import framework.input.Keyboard;
 import framework.scene.components.KeyboardComponent;
+import game.SpriteAnimation;
 import game.components.SpriteComponent;
 
 /**
@@ -13,7 +14,17 @@ public class PlayerControllerComponent extends KeyboardComponent {
     private boolean moveLeft = false;
     private boolean moveRight = false;
 
+    SpriteAnimation walkLeftAnimation;
+    SpriteAnimation walkRightAnimation;
+    SpriteAnimation walkUpAnimation;
+    SpriteAnimation walkDownAnimation;
+
     public PlayerControllerComponent() {
+
+        walkLeftAnimation = new SpriteAnimation();
+        walkRightAnimation = new SpriteAnimation();
+        walkUpAnimation = new SpriteAnimation();
+        walkDownAnimation = new SpriteAnimation();
 
     }
 

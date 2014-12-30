@@ -1,63 +1,36 @@
 package framework.graphics;
 
 import framework.graphics.opengl.Texture;
-import framework.util.Region;
-
-import java.util.ArrayList;
-import java.util.List;
+import framework.util.math.Matrix4;
 
 /**
- * Created by Will on 12/21/2014.
+ * Created by Will on 12/27/2014.
  */
 public class TextureAtlas {
 
     private Texture texture;
-    private List<Region> regions = new ArrayList();
+    private Matrix4 textureMatrix = new Matrix4();
+    private int cellWidth, cellHeight, cellsWide, cellsHigh;
+    private float textureCoordinateWidth, textureCoordinateHeight;
 
-    public TextureAtlas(Texture texture) {
-
-        this.texture = texture;
+    public TextureAtlas(Texture texture, int cellWidth, int cellHeight) {
+        this.cellWidth = cellWidth;
+        this.cellHeight = cellHeight;
+        cellsWide = (int) Math.floor(texture.getWidth() / cellWidth);
+        cellsHigh = (int) Math.floor(texture.getHeight() / cellHeight);
+        textureCoordinateWidth = (1.0f /  (float) cellsWide) ;
+        textureCoordinateHeight = (1.0f /  (float) cellsHigh) ;
     }
 
-    public TextureAtlas split(int width, int height) {
+    public void selectCell(int cell) {
 
-        if(texture.getWidth() % width != 0 || texture.getHeight() % height != 0)
-            return this;
-
-        int cellsWide = texture.getWidth() / width;
-        int cellsHigh = texture.getHeight() / height;
-
-        for(int i = 0; i < cellsWide; ++i) {
-
-            for(int j = 0; j < cellsHigh; ++j) {
-
-                float lowerX = i * width;
-                float lowerY = j * height;
-                float upperX = (i * width) + width;
-                float upperY = (j * height) + height;
-
-                regions.add(new Region(lowerX, lowerY, upperX, upperY));
-            }
-        }
-        return this;
     }
 
-    public TextureAtlas addRegion(float x1, float y1, float x2, float y2) {
-
-        regions.add(new Region(x1, y1, x2, y2));
-
-        return this;
+    public void bindTexture() {
+        texture.bind();
     }
 
-    public TextureAtlas clearRegions() {
-
-        regions.clear();
-
-        return this;
-    }
-
-    public Region getRegion(int index) {
-
-        return regions.get(index);
+    public void unbindTexture() {
+        texture.unbind();
     }
 }

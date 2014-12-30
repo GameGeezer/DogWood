@@ -2,12 +2,9 @@ package game.components;
 
 import framework.graphics.Image;
 import framework.graphics.Mesh;
-import framework.graphics.TextureAtlas;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
-import framework.graphics.uniform.FloatVectorUniform;
 import framework.graphics.uniform.MatrixUniform;
-import framework.graphics.uniform.VectorUniform;
 import framework.graphics.vertices.IVertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
 import framework.scene.components.RenderComponent;
@@ -25,7 +22,6 @@ public class SpriteComponent extends RenderComponent {
     private Texture texture;
     private Mesh mesh;
 
-
     private Matrix4 textureMatrix = new Matrix4();
     private MatrixUniform textureMatrixUniform = new MatrixUniform("u_textureMatrix", MatrixUniform.MatrixUniformType.MATRIX4);
 
@@ -35,7 +31,34 @@ public class SpriteComponent extends RenderComponent {
 
         texture = new Texture(image, GL13.GL_TEXTURE0);
 
-        float widthHeightRatio = (float)image.getWidth() / (float)image.getHeight();
+        mesh = createMesh(texture.getWidth(), texture.getHeight(), cellsWide, cellsHigh);
+
+        textureMatrixUniform.addListener(shader);
+
+        textureMatrix.data[Matrix4.M03] = 0f;
+        textureMatrix.data[Matrix4.M13] = 0f;
+
+        updateTextureMatrix();
+    }
+
+    @Override
+    public void render(int delta) {
+        getShader().bind();
+        texture.bind();
+        mesh.draw();
+        texture.unbind();
+        getShader().unbind();
+    }
+
+
+    private void updateTextureMatrix() {
+
+        textureMatrixUniform.setUniformData(textureMatrix.data);
+    }
+
+    private Mesh createMesh(int width, int height, int cellsWide, int cellsHigh) {
+
+        float widthHeightRatio = (float)width / (float)height;
         float xRatio = widthHeightRatio / 2f;
         float yRatio = 1 - xRatio;
 
@@ -62,28 +85,6 @@ public class SpriteComponent extends RenderComponent {
         attributes.add(new StaticVertexAttribute(vertices, 3));
         attributes.add(new StaticVertexAttribute(texCoords, 2));
 
-        mesh = new Mesh(indices, attributes);
-
-        textureMatrixUniform.addListener(shader);
-
-        textureMatrix.data[Matrix4.M03] = 0f;
-        textureMatrix.data[Matrix4.M13] = 0f;
-
-        updateTextureMatrix();
-    }
-
-    @Override
-    public void render(int delta) {
-        getShader().bind();
-        texture.bind();
-        mesh.draw();
-        texture.unbind();
-        getShader().unbind();
-    }
-
-
-    private void updateTextureMatrix() {
-
-        textureMatrixUniform.setUniformData(textureMatrix.data);
+        return new Mesh(indices, attributes);
     }
 }

@@ -2,7 +2,6 @@ package framework.graphics;
 
 import framework.graphics.opengl.*;
 import framework.graphics.vertices.IVertexAttribute;
-import framework.graphics.vertices.VertexAttribute;
 import framework.util.dataTypes.DatatypeUtil;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -13,6 +12,7 @@ import java.util.List;
 
 /**
  * Given an array if indices and and a List of IVertexAttribues a Mesh generates a VAO.
+ *
  * @author william gervasio
  */
 
@@ -33,7 +33,7 @@ public class Mesh {
             verticesBuffer.put(element.getData());
         }
         verticesBuffer.flip();
-        VBO vbo = new VBO(verticesBuffer, BufferedObjectUsage.STATIC_DRAW);
+        FBO fbo = new FBO(verticesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
         //create indexBuffer
         IntBuffer indicesBuffer = BufferUtils.createIntBuffer(indices.length);
@@ -42,7 +42,7 @@ public class Mesh {
         IBO ibo = new IBO(indicesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
         //create the VAO
-        vao = new VAO(vbo, ibo, indices.length);
+        vao = new VAO(fbo, ibo, indices.length);
         int offset = 0;
         int i = 0;
         for (IVertexAttribute element : vertexElements) {

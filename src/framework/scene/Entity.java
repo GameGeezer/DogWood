@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * @author William Gervasio
+ * BUG: Entities can share components - why - only one parent is allowed. multiple parents? nah
  */
 public final class Entity implements Cloneable {
 
