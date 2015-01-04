@@ -3,7 +3,6 @@ package game.components.player;
 import framework.input.Keyboard;
 import framework.scene.components.KeyboardComponent;
 import game.SpriteAnimation;
-import game.components.SpriteComponent;
 
 /**
  * Created by Will on 12/18/2014.

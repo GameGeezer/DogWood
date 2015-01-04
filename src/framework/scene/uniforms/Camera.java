@@ -1,15 +1,24 @@
-package framework.graphics;
+package framework.scene.uniforms;
 
+import framework.graphics.opengl.ShaderProgram;
+import framework.graphics.uniform.IUniformWrapper;
+import framework.graphics.uniform.MatrixUniform;
 import framework.util.math.Matrix4;
 import framework.util.math.Vector3;
 
 /**
  * Created by Will on 2/7/14.
  */
-public class Camera {
+public class Camera implements IUniformWrapper {
 
-    protected Matrix4 view = new Matrix4(), projection = new Matrix4();
-    protected float width, height, near, far, fieldOfView;
+    public static final String PROJECTION_UNIFORM = "u_projectionMatrix";
+    public static final String VIEW_UNIFORM = "u_viewMatrix";
+
+    private final Matrix4 view = new Matrix4(), projection = new Matrix4();
+    private float width, height, near, far, fieldOfView;
+
+    private final MatrixUniform projectionUniform = new MatrixUniform(PROJECTION_UNIFORM, MatrixUniform.MatrixUniformType.MATRIX4);
+    private final MatrixUniform viewUniform = new MatrixUniform(VIEW_UNIFORM, MatrixUniform.MatrixUniformType.MATRIX4);
 
     public Camera(float width, float height, float near, float far, float fieldOfView) {
 
@@ -19,7 +28,9 @@ public class Camera {
         this.far = far;
         this.fieldOfView = fieldOfView;
 
-        updateProjectionMatrix();
+        updateView();
+
+        updateProjection();
     }
 
     /**
@@ -61,34 +72,58 @@ public class Camera {
     public void setWidth(float width) {
 
         this.width = width;
-        updateProjectionMatrix();
+
+        updateProjection();
     }
 
     public void setHeight(float height) {
 
         this.height = height;
-        updateProjectionMatrix();
+
+        updateProjection();
     }
 
     public void setNear(float near) {
 
         this.near = near;
-        updateProjectionMatrix();
+
+        updateProjection();
     }
 
     public void setFar(float far) {
 
         this.far = far;
-        updateProjectionMatrix();
+
+        updateProjection();
     }
 
     public void setFieldOfView(float fieldOfView) {
 
         this.fieldOfView = fieldOfView;
-        updateProjectionMatrix();
+
+        updateProjection();
     }
 
-    protected void updateProjectionMatrix() {
+    @Override
+    public void addListener(ShaderProgram shader) {
+
+        projectionUniform.addListener(shader);
+        viewUniform.addListener(shader);
+    }
+
+    @Override
+    public void removeListener(ShaderProgram shader) {
+
+        projectionUniform.removeListener(shader);
+        viewUniform.removeListener(shader);
+    }
+
+    private void updateView() {
+
+        viewUniform.setUniformData(view.data);
+    }
+
+    private void updateProjection() {
 
         float aspectRatio = width / height;
 
@@ -102,5 +137,7 @@ public class Camera {
         projection.data[Matrix4.M23] = -((2 * near * far) / frustumLength);
         projection.data[Matrix4.M32] = -1;
         projection.data[Matrix4.M33] = 0;
+
+        projectionUniform.setUniformData(projection.data);
     }
 }

@@ -1,28 +1,29 @@
-package game.components;
+package framework.scene.components.graphics;
 
+import framework.graphics.Image;
 import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
-import framework.graphics.opengl.Texture;
 import framework.scene.components.RenderComponent;
 
 /**
- * Created by Will on 12/25/2014.
+ * Created by Will on 1/4/2015.
  */
-public class TileMapComponent extends RenderComponent {
+public class MeshComponent extends RenderComponent {
 
-    private Texture texture;
     private Mesh mesh;
 
-    public TileMapComponent(ShaderProgram shader) {
+    public MeshComponent(Mesh mesh, Image image, ShaderProgram shader) {
+
         super(shader);
 
+        this.mesh = mesh;
     }
 
+    @Override
     public void render(int delta) {
+
         getShader().bind();
-        texture.bind();
         mesh.draw();
-        texture.unbind();
         getShader().unbind();
     }
 }

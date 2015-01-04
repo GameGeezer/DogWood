@@ -92,6 +92,7 @@ public class Region {
     }
 
     private void ensureStateLegality() {
+
         if(lowerX > upperX) {
 
             float x = lowerX;

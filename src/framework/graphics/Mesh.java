@@ -29,10 +29,11 @@ public class Mesh {
      * @param vertexElements
      */
     public Mesh(int[] indices, List<IVertexAttribute> vertexElements) {
+
         this.indices = indices;
         this.vertexElements = vertexElements;
 
-        //create Vertex Buffer
+        //create vertex buffer (FBO)
         FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(countTotalElements());
         for (IVertexAttribute element : vertexElements) {
             verticesBuffer.put(element.getData());
@@ -40,23 +41,31 @@ public class Mesh {
         verticesBuffer.flip();
         FBO fbo = new FBO(verticesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
-        //create indexBuffer
+        /*
+            Create index buffer (IBO)
+         */
         IntBuffer indicesBuffer = BufferUtils.createIntBuffer(indices.length);
         indicesBuffer.put(indices);
         indicesBuffer.flip();
         IBO ibo = new IBO(indicesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
-        //create the VAO
+        /*
+            Create the VAO
+         */
         vao = new VAO(fbo, ibo, indices.length);
         int offset = 0;
         int i = 0;
+
         for (IVertexAttribute element : vertexElements) {
+            // Find the number of bytes per element for the attribute
             int sizeInBytes = element.getElementsPerVertex() * DatatypeUtil.FLOAT_SIZE_BYTES;
+            // Find the number of vertices contained within the attribute data
             int numberOfVertices = element.getData().length / element.getElementsPerVertex();
             vao.addVertexAttribute(i, new Descriptor(element.getElementsPerVertex(), GL11.GL_FLOAT, false, sizeInBytes, offset));
             offset += sizeInBytes * numberOfVertices;
             ++i;
         }
+
         vao.init();
     }
 

@@ -163,7 +163,7 @@ public class WavefrontLoader {
             if(!expectedVertexType.equals(VertexType.POSITION_TEXCOORD_NORMAL))
                 throw new IOException("Inconsistant vertex: " + data);
 
-            int index = Integer.parseInt(components[0]) - 1;
+            int index = Math.abs(Integer.parseInt(components[0])) - 1;
             Vector3 position = positions.get(index);
             builder.addToComponent(POSITION_COMPONENT, position.getX(), position.getY(), position.getZ());
 

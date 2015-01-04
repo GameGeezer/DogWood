@@ -1,7 +1,7 @@
 package framework.scene.components;
 
 import framework.graphics.opengl.ShaderProgram;
-import framework.scene.Entity;
+import framework.graphics.uniform.IUniformWrapper;
 import framework.scene.Entity.EntityComponent;
 
 import java.util.List;
@@ -9,11 +9,7 @@ import java.util.List;
 /**
  * @author William Gervasio
  */
-public abstract class UniformComponent extends Entity.EntityComponent {
-
-    public abstract void addListener(ShaderProgram shader);
-
-    public abstract void removeListener(ShaderProgram shader);
+public abstract class UniformComponent extends EntityComponent implements IUniformWrapper {
 
     @Override
     protected void onAttach() {

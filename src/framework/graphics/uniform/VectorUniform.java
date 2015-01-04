@@ -11,6 +11,7 @@ public abstract class VectorUniform extends Uniform{
         private int numberOfUniforms;
 
         VectorUniformType(int numberOfUniforms) {
+
             this.numberOfUniforms = numberOfUniforms;
         }
 
@@ -22,12 +23,15 @@ public abstract class VectorUniform extends Uniform{
     protected final VectorUniformType uniformType;
 
     public VectorUniform(String name, VectorUniformType uniformType) {
+
         super(name);
+
         this.uniformType = uniformType;
     }
 
     @Override
     public int getNumberOfElements() {
+
         return uniformType.getNumberOfUniforms();
     }
 }

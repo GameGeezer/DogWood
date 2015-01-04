@@ -1,4 +1,4 @@
-package game.components;
+package framework.scene.components.util;
 
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.uniform.MatrixUniform;
@@ -20,52 +20,67 @@ public class TransformComponent extends UniformComponent {
     private Matrix4 model = new Matrix4();
 
     public TransformComponent() {
+
         updateModelUniform();
     }
 
     public TransformComponent translate(float x, float y, float z) {
+
         transform.translate(x, y, z);
         updateModelUniform();
+
         return this;
     }
 
     public TransformComponent translate(Vector3 translation) {
+
         return translate(translation.getX(), translation.getY(), translation.getZ());
     }
 
     public TransformComponent setTranslation(float x, float y, float z) {
+
         transform.setTranslation(x, y, z);
         updateModelUniform();
+
         return this;
     }
 
     public TransformComponent setTranslation(Vector3 translation) {
+
         return setTranslation(translation.getX(), translation.getY(), translation.getZ());
     }
 
     public TransformComponent setScale(float x, float y, float z) {
+
         transform.setScale(x, y, z);
         updateModelUniform();
+
         return this;
     }
 
     public TransformComponent setScale(Vector3 scale) {
+
         return setScale(scale.getX(), scale.getY(), scale.getZ());
     }
 
     public TransformComponent setOrientationEuler(float roll, float pitch, float yaw) {
+
         transform.setOrientationEuler(roll, pitch, yaw);
         updateModelUniform();
+
         return this;
     }
 
     public TransformComponent rotateEuler(float roll, float pitch, float yaw) {
+
         transform.rotateEuler(roll, pitch, yaw);
         updateModelUniform();
+
         return this;
     }
 
     public TransformComponent rotateEuler(Vector3 euler) {
+
         return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
     }
 
@@ -105,7 +120,9 @@ public class TransformComponent extends UniformComponent {
 
     @Override
     public TransformComponent clone() {
+
         TransformComponent component = new TransformComponent();
+
         component.setTranslation(getX(), getY(), getZ());
         component.setScale(getScaleX(), getScaleY(), getScaleZ());
         component.rotateEuler(transform.getRoll(), transform.getPitch(), transform.getYaw());
@@ -114,7 +131,9 @@ public class TransformComponent extends UniformComponent {
     }
 
     private void updateModelUniform() {
+
         model.set(transform.getScale());
+
         Matrix4.multiply(model, transform.getOrientation().computeMatrix(), model);
         Matrix4.multiply(model, transform.getPosition(), model);
 

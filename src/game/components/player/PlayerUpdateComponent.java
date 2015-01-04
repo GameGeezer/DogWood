@@ -1,8 +1,7 @@
 package game.components.player;
 
-import framework.scene.Entity.EntityComponent;
 import framework.scene.components.UpdateComponent;
-import game.components.TransformComponent;
+import framework.scene.components.util.TransformComponent;
 
 import java.util.List;
 
@@ -33,5 +32,7 @@ public class PlayerUpdateComponent extends UpdateComponent {
 
         if(controllerComponent.isMoveRight())
             transformComponent.translate(0.05f, 0 , 0);
+
+        transformComponent.rotateEuler(0,(float) Math.PI / 100, 0);
     }
 }

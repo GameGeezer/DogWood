@@ -1,27 +1,27 @@
-package game.components;
+package framework.scene.components.util;
 
+import framework.scene.uniforms.Camera;
 import framework.graphics.opengl.ShaderProgram;
 import framework.scene.components.UniformComponent;
-import game.UniformCamera;
 
 /**
- * Created by Will on 12/16/2014.
+ * Created by Will on 1/4/2015.
  */
-public class UniformCameraReferenceComponent extends UniformComponent {
+public class CameraReferenceComponent extends UniformComponent {
 
-    private UniformCamera camera;
+    private Camera camera;
 
-    public UniformCameraReferenceComponent(UniformCamera camera) {
+    public CameraReferenceComponent(Camera camera) {
+
         this.camera = camera;
     }
-
-    @Override
     public void addListener(ShaderProgram shader) {
+
         camera.addListener(shader);
     }
 
-    @Override
     public void removeListener(ShaderProgram shader) {
+
         camera.removeListener(shader);
     }
 }

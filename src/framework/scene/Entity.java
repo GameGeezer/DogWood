@@ -17,26 +17,27 @@ public final class Entity implements Cloneable {
 
     public void addComponent(EntityComponent component) throws DogWoodException {
 
+        // Make sure the component isn't already attached to another entity
         if(component.hasParent()) {
 
             throw new DogWoodException("Cannot attach component: Already attached to another entity");
         }
-
+        // Check to see if a component of this type has been seen
         if(components.get(component.getClass()) == null) {
-
+            // If it hasn't add a list of the type to the map for easy access
             components.put(component.getClass(), new ArrayList<>());
         }
-
+        // Add the component to the map
         components.get(component.getClass()).add(component);
-
+        // Set the component's parent to this object
         component.setParent(this);
-
+        // Call the component specific "onAttach" method
         component.onAttach();
-
+        // Loop each entry in the map
         components.entrySet().forEach((mapEntry) -> {
-
+            // Check to see if the entry type is a parent type of the entity
             if((mapEntry.getKey()).isAssignableFrom(component.getClass())) {
-
+                // If it is then add a reference to the entity at that index.
                 components.get(mapEntry.getKey()).add(component);
             }
         });
