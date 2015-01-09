@@ -15,6 +15,7 @@ import org.lwjgl.opengl.*;
 import java.nio.ByteBuffer;
 
 /**
+ * THIS IS A MESS AND IS MOSTLY TUTORIAL CODE FROM LWJWL'S WEBSITE. MAKE ME PRETTY
  * @author William Gervasio
  */
 
@@ -29,12 +30,12 @@ public class Application {
     private long window;
 
     public Application(Game game, String title, int width, int height) {
+
         this.game = game;
         initLWJGL(title, width, height);
-        start();
     }
 
-    public final void initLWJGL(String title, int width, int height) {
+    public void initLWJGL(String title, int width, int height) {
         glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
 
         // Initialize GLFW. Most GLFW functions will not work before doing this.
@@ -100,7 +101,6 @@ public class Application {
             //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
             glfwSwapBuffers(window); // swap the color buffers
-
 
             final int delta = (int) timer.getElapsedTimeMS();
             timer.reset();

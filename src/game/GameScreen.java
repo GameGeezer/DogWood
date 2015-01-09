@@ -10,6 +10,7 @@ import framework.graphics.Mesh;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
 import framework.util.fileIO.WavefrontLoader;
+import framework.util.math.Vector2;
 import game.components.*;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
@@ -87,6 +88,11 @@ public class GameScreen implements IScreen {
         } catch(DogWoodException e) {
             e.printStackTrace();
         }
+        Vector2 projectionTest = new Vector2(5, 100);
+        Vector2 projectionTest2 = new Vector2(5, 1);
+        System.out.println(Vector2.RIGHT.getX());
+        System.out.println(projectionTest.projectAlong(projectionTest2).getX());
+        System.out.println(projectionTest.getY());
     }
 
     public void onLeave() {

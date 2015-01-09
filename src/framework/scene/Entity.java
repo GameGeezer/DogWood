@@ -46,35 +46,41 @@ public final class Entity implements Cloneable {
 
     public void removeComponent(EntityComponent component) {
 
+        // Return early if the list isn't there to prevent a null reference exception
         if(components.get(component.getClass()) == null) {
 
             return;
         }
 
-        components.get(component.getClass()).remove(component);
+        // Remove the component from every entry
+        components.entrySet().forEach((mapEntry) -> {
 
-        component.setParent(null);
-
+            mapEntry.getValue().remove(component);
+        });
+        // Call the Component specific "onDetach" method
         component.onDetach();
+        // Remove this as a parent from the component
+        component.setParent(null);
     }
 
     public List<EntityComponent> getComponentsOfType(Class type) {
 
+        // If there isn't a reference to components if this type they may still exist as parent components
         if(!hasComponentOfType(type)) {
-
+            // Create a new list so all the related components can be compiled in one place
             List<EntityComponent> relatedComponents = new ArrayList<>();
-
+            // Loop over every entry in the map
             components.entrySet().forEach((mapEntry) -> {
-
+                // If the map key (A "Class" value) is an assignable type of "type" add it to the list
                 if(type.isAssignableFrom(mapEntry.getKey())) {
 
                     relatedComponents.addAll(components.get(mapEntry.getKey()));
                 }
             });
-
+            // Add the new list to the map
             components.put(type, relatedComponents);
         }
-
+        // Return the list
         return components.get(type);
     }
 
