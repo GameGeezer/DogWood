@@ -66,7 +66,7 @@ public final class Entity implements Cloneable {
     public List<EntityComponent> getComponentsOfType(Class type) {
 
         // If there isn't a reference to components if this type they may still exist as parent components
-        if(!hasComponentOfType(type)) {
+        if(components.get(type) == null) {
             // Create a new list so all the related components can be compiled in one place
             List<EntityComponent> relatedComponents = new ArrayList<>();
             // Loop over every entry in the map
@@ -85,7 +85,10 @@ public final class Entity implements Cloneable {
     }
 
     public boolean hasComponentOfType(Class type) {
-        return components.get(type) != null;
+
+        List<EntityComponent> componentsOfType = components.get(type);
+
+        return componentsOfType != null && componentsOfType.size() > 0;
     }
 
     public boolean hasComponent(EntityComponent component) {
