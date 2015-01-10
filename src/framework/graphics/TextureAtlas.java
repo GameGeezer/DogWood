@@ -18,8 +18,8 @@ public class TextureAtlas {
         this.cellHeight = cellHeight;
         cellsWide = (int) Math.floor(texture.getWidth() / cellWidth);
         cellsHigh = (int) Math.floor(texture.getHeight() / cellHeight);
-        textureCoordinateWidth = (1.0f /  (float) cellsWide) ;
-        textureCoordinateHeight = (1.0f /  (float) cellsHigh) ;
+        textureCoordinateWidth = (1.0f / (float) cellsWide);
+        textureCoordinateHeight = (1.0f / (float) cellsHigh);
     }
 
     public void selectCell(int cell) {

@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * A generic node class
+ *
  * @param <T> The type of data being stored as a node
  */
 public class Node<T> {
@@ -24,6 +25,7 @@ public class Node<T> {
 
     /**
      * Add node as a child
+     *
      * @param node The node being attached
      */
     public void attach(Node<T> node) {
@@ -41,6 +43,7 @@ public class Node<T> {
 
     /**
      * Detach node if it is a direct child
+     *
      * @param node The node being detached
      */
     public void detach(Node<T> node) {
@@ -49,6 +52,7 @@ public class Node<T> {
 
     /**
      * Recursively detach a node
+     *
      * @param node The node being detached
      */
     public void deepDetach(T node) {
@@ -60,6 +64,7 @@ public class Node<T> {
 
     /**
      * Checks if the passed node is a direct child
+     *
      * @param child The node being searched for
      * @return
      */
@@ -68,10 +73,10 @@ public class Node<T> {
     }
 
     public boolean hasChildRecursive(Node<T> child) {
-        if(hasChild(child)) {
+        if (hasChild(child)) {
             return true;
         } else {
-            for(Node<T> node : subnodes) {
+            for (Node<T> node : subnodes) {
                 node.hasChild(child);
             }
         }

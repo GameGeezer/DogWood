@@ -103,15 +103,14 @@ public class Vector2 implements Cloneable {
         return (float) Math.sqrt(length2());
     }
 
-    public float length2()
-    {
+    public float length2() {
 
         return x * x + y * y;
     }
 
     public Vector2 invert() {
 
-        return (Vector2) set(-x, -y);
+        return set(-x, -y);
     }
 
     public Vector2 normalize() {
@@ -169,33 +168,39 @@ public class Vector2 implements Cloneable {
         return new Vector2(x, y);
     }
 
+    public static void projectAlongX(Vector2 vector, Vector2 result) {
+
+        result.set(vector.dot(RIGHT), 0);
+    }
+
+    public static void projectAlongY(Vector2 vector, Vector2 result) {
+
+        result.set(0, vector.dot(UP));
+    }
+
+    public static void project(Vector2 vector, Vector2 against, Vector2 result) {
+
+        float dp = vector.dot(against);
+        float dpByLength2 = dp / against.length2();
+
+        float x = dpByLength2 * against.getX();
+        float y = dpByLength2 * against.getY();
+
+        result.set(x, y);
+    }
+
+    public static void findRightHandNormal(Vector2 vector, Vector2 resultVector) {
+
+        resultVector.set(-vector.getY(), vector.getX());
+    }
+
+    public static void findLeftHandNormal(Vector2 vector, Vector2 resultVector) {
+
+        resultVector.set(vector.getY(), -vector.getX());
+    }
+
     public Float[] getElements() {
 
         return new Float[]{x, y};
-    }
-
-    public Vector2 projectAlongX() {
-
-        float dp = dot(RIGHT);
-        x = dp;
-        y = 0;
-
-        return this;
-    }
-
-    public Vector2 projectAlongY() {
-
-        return this;
-    }
-
-    public Vector2 projectAlong(Vector2 vector) {
-
-        float dp = dot(vector);
-        float dpByLength2 = dp / vector.length2();
-
-        x = dpByLength2 * vector.getX();
-        y = dpByLength2 * vector.getY();
-
-        return this;
     }
 }

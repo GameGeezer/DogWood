@@ -28,6 +28,7 @@ public class IntVectorUniform extends VectorUniform {
 
     }
 
+    @Override
     protected void updateProgram(int handle) {
 
         switch (uniformType) {

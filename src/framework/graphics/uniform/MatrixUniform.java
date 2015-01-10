@@ -52,6 +52,7 @@ public class MatrixUniform extends Uniform {
         return uniformType.getNumberOfUniforms();
     }
 
+    @Override
     protected void updateProgram(int uniformHandle) {
 
         switch (uniformType) {

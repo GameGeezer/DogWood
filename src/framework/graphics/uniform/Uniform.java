@@ -50,7 +50,6 @@ public abstract class Uniform {
     }
 
     /**
-     *
      * @return the number of elements in the uniform
      */
     public abstract int getNumberOfElements();
@@ -69,7 +68,6 @@ public abstract class Uniform {
     protected abstract void updateProgram(int uniformHandle);
 
     /**
-     *
      * @param shader the program to be updated
      */
     private void passUniformToShader(ShaderProgram shader) {

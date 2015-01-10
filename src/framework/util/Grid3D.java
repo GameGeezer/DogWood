@@ -14,7 +14,7 @@ public class Grid3D<E> {
         this.height = height;
         this.depth = depth;
 
-        grid = (E[][][])new Object[length][height][depth];
+        grid = (E[][][]) new Object[length][height][depth];
     }
 
     public E get(int x, int y, int z) {
@@ -27,7 +27,7 @@ public class Grid3D<E> {
         return length;
     }
 
-    public int getHeight(){
+    public int getHeight() {
 
         return height;
     }

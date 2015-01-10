@@ -14,9 +14,8 @@ public final class FBO {
     private final int handle;
 
     /**
-     *
      * @param buffer A buffer containing data that needs to be passed to the GPU
-     * @param usage An opengl hint describing how the data may be used
+     * @param usage  An opengl hint describing how the data may be used
      */
     public FBO(FloatBuffer buffer, int usage) {
 

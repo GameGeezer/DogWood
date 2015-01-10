@@ -18,12 +18,12 @@ public final class Entity implements Cloneable {
     public void addComponent(EntityComponent component) throws DogWoodException {
 
         // Make sure the component isn't already attached to another entity
-        if(component.hasParent()) {
+        if (component.hasParent()) {
 
             throw new DogWoodException("Cannot attach component: Already attached to another entity");
         }
         // Check to see if a component of this type has been seen
-        if(components.get(component.getClass()) == null) {
+        if (components.get(component.getClass()) == null) {
             // If it hasn't add a list of the type to the map for easy access
             components.put(component.getClass(), new ArrayList<>());
         }
@@ -36,7 +36,7 @@ public final class Entity implements Cloneable {
         // Loop each entry in the map
         components.entrySet().forEach((mapEntry) -> {
             // Check to see if the entry type is a parent type of the entity
-            if((mapEntry.getKey()).isAssignableFrom(component.getClass())) {
+            if ((mapEntry.getKey()).isAssignableFrom(component.getClass())) {
                 // If it is then add a reference to the entity at that index.
                 components.get(mapEntry.getKey()).add(component);
             }
@@ -47,7 +47,7 @@ public final class Entity implements Cloneable {
     public void removeComponent(EntityComponent component) {
 
         // Return early if the list isn't there to prevent a null reference exception
-        if(components.get(component.getClass()) == null) {
+        if (components.get(component.getClass()) == null) {
 
             return;
         }
@@ -66,13 +66,13 @@ public final class Entity implements Cloneable {
     public List<EntityComponent> getComponentsOfType(Class type) {
 
         // If there isn't a reference to components if this type they may still exist as parent components
-        if(components.get(type) == null) {
+        if (components.get(type) == null) {
             // Create a new list so all the related components can be compiled in one place
             List<EntityComponent> relatedComponents = new ArrayList<>();
             // Loop over every entry in the map
             components.entrySet().forEach((mapEntry) -> {
                 // If the map key (A "Class" value) is an assignable type of "type" add it to the list
-                if(type.isAssignableFrom(mapEntry.getKey())) {
+                if (type.isAssignableFrom(mapEntry.getKey())) {
 
                     relatedComponents.addAll(components.get(mapEntry.getKey()));
                 }

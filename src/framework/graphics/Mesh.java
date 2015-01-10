@@ -24,7 +24,6 @@ public class Mesh {
     private int[] indices;
 
     /**
-     *
      * @param indices
      * @param vertexElements
      */

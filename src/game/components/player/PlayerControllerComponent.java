@@ -29,31 +29,31 @@ public class PlayerControllerComponent extends KeyboardComponent {
 
     @Override
     public void onKeyUp(int keyCode) {
-        if(Keyboard.KEY_A == keyCode) {
+        if (Keyboard.KEY_A == keyCode) {
             moveLeft = false;
             if (moveRight) {
-               // flipAllSpritesX(true);
+                // flipAllSpritesX(true);
             }
         }
-        if(Keyboard.KEY_D == keyCode) {
+        if (Keyboard.KEY_D == keyCode) {
             moveRight = false;
-            if(moveLeft) {
-               // flipAllSpritesX(false);
+            if (moveLeft) {
+                // flipAllSpritesX(false);
             }
         }
     }
 
     @Override
     public void onKeyDown(int keyCode) {
-        if(Keyboard.KEY_A == keyCode) {
+        if (Keyboard.KEY_A == keyCode) {
             moveLeft = true;
-            if(!moveRight) {
-               // flipAllSpritesX(false);
+            if (!moveRight) {
+                // flipAllSpritesX(false);
             }
         }
-        if(Keyboard.KEY_D == keyCode) {
+        if (Keyboard.KEY_D == keyCode) {
             moveRight = true;
-            if(!moveLeft) {
+            if (!moveLeft) {
                 //flipAllSpritesX(true);
             }
         }

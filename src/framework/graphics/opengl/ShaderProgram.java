@@ -22,12 +22,12 @@ public class ShaderProgram {
     /**
      * Create a shader with vertex shader and fragment shader stages.
      *
-     * @param vertexShader The vertex shader source
+     * @param vertexShader   The vertex shader source
      * @param fragmentShader The fragment shader source
      * @param attributes
      * @throws GraphicsException
      */
-    public  ShaderProgram(String vertexShader, String fragmentShader, Map<Integer, String> attributes) throws GraphicsException {
+    public ShaderProgram(String vertexShader, String fragmentShader, Map<Integer, String> attributes) throws GraphicsException {
 
         // Create the shader and grab the handle
         handle = GL20.glCreateProgram();
@@ -41,7 +41,7 @@ public class ShaderProgram {
         GL20.glAttachShader(handle, fragmentHandle);
 
         // Bind all of the attributes of name(value) to a location(Key)
-        for(Map.Entry<Integer, String> e : attributes.entrySet()) {
+        for (Map.Entry<Integer, String> e : attributes.entrySet()) {
 
             GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
         }
@@ -50,7 +50,7 @@ public class ShaderProgram {
         GL20.glLinkProgram(handle);
 
         // Check if there was any errors while linking
-        if(checkForLinkError(handle))
+        if (checkForLinkError(handle))
             throw new GraphicsException("Failed to link shader");
 
 
@@ -64,7 +64,7 @@ public class ShaderProgram {
     /**
      * Create a ShaderProgram with vertex, fragment, and geometry stages.
      *
-     * @param vertexShader The vertex shader source
+     * @param vertexShader   The vertex shader source
      * @param fragmentShader The fragment shader source
      * @param geometryShader The geometry shader source
      * @param attributes

@@ -14,10 +14,9 @@ public class DatatypeUtil {
         if (strNumber != null && strNumber.length() > 0) {
             try {
                 return Float.parseFloat(strNumber);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 throw new IOException("Float could not be parsed: " + strNumber);
             }
-        }
-        else return 0;
+        } else return 0;
     }
 }

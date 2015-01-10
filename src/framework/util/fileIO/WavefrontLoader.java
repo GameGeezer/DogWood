@@ -22,6 +22,7 @@ public class WavefrontLoader {
     enum VertexType {
         POSITION, POSITION_TEXCOORD, POSITION_NORMAL, POSITION_TEXCOORD_NORMAL
     }
+
     //The index of the data type i.e. "v" is vertex and "vn" is vertex normal
     private final int TYPE_INDEX = 0;
 
@@ -52,37 +53,37 @@ public class WavefrontLoader {
         MeshBuilder builder = new MeshBuilder();
         setExpectedVertexFormat(lines, builder);
 
-        for(String line : lines) {
+        for (String line : lines) {
             String[] data = line.split(" ");
-            switch(data[TYPE_INDEX]) {
+            switch (data[TYPE_INDEX]) {
                 case "v":
-                    if(data.length < 4)
+                    if (data.length < 4)
                         throw new IOException("Line has an invalid number objects: " + line);
                     positions.add(new Vector3(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2]), DatatypeUtil.parseFloat(data[3])));
                     break;
                 case "vn":
-                    if(data.length < 4)
+                    if (data.length < 4)
                         throw new IOException("Line has an invalid number objects: " + line);
                     normals.add(new Vector3(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2]), DatatypeUtil.parseFloat(data[3])));
                     break;
                 case "vt":
-                    if(data.length < 3)
+                    if (data.length < 3)
                         throw new IOException("Line has an invalid number objects: " + line);
                     textureCoordinates.add(new Vector2(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2])));
                     break;
                 case "f":
-                    if(data.length < 4 || data.length > 5)
+                    if (data.length < 4 || data.length > 5)
                         throw new IOException("Line has an invalid number objects: " + line);
                     for (int i = 1; i < data.length; ++i) {
                         if (!knownVertices.containsKey(data[i])) {
                             buildVertex(data[i], builder);
                         }
                     }
-                    if(data.length == 4) {
+                    if (data.length == 4) {
                         builder.addIndicie(knownVertices.get(data[1]));
                         builder.addIndicie(knownVertices.get(data[2]));
                         builder.addIndicie(knownVertices.get(data[3]));
-                    } else if(data.length == 5) {
+                    } else if (data.length == 5) {
                         builder.addIndicie(knownVertices.get(data[1]));
                         builder.addIndicie(knownVertices.get(data[2]));
                         builder.addIndicie(knownVertices.get(data[3]));
@@ -97,28 +98,28 @@ public class WavefrontLoader {
         return builder.build();
     }
 
-    private void setExpectedVertexFormat(String[] lines, MeshBuilder builder) throws  IOException{
+    private void setExpectedVertexFormat(String[] lines, MeshBuilder builder) throws IOException {
         String sampleFace = null;
-        for(String line : lines) {
+        for (String line : lines) {
             String[] data = line.split(" ");
-            if(data[TYPE_INDEX].equals("f"))
+            if (data[TYPE_INDEX].equals("f"))
                 sampleFace = data[1];
         }
 
-        if(sampleFace == null)
+        if (sampleFace == null)
             throw new IOException("No Faces found, cannot parse");
 
         String[] components = sampleFace.split("//");
         builder.createComponent(POSITION_COMPONENT, POSITION_SIZE);
-        if(components.length == 2) {
+        if (components.length == 2) {
             expectedVertexType = VertexType.POSITION_NORMAL;
             builder.createComponent(NORMAL_COMPONENT, NORMAL_SIZE);
-        } else if((components = sampleFace.split("/")).length == 1) {
+        } else if ((components = sampleFace.split("/")).length == 1) {
             expectedVertexType = VertexType.POSITION;
-        } else if(components.length == 2) {
+        } else if (components.length == 2) {
             expectedVertexType = VertexType.POSITION_TEXCOORD;
             builder.createComponent(TEXCOORD_COMPONENT, TEXCOORD_SIZE);
-        } else if(components.length == 3) {
+        } else if (components.length == 3) {
             expectedVertexType = VertexType.POSITION_TEXCOORD_NORMAL;
             builder.createComponent(TEXCOORD_COMPONENT, TEXCOORD_SIZE);
             builder.createComponent(NORMAL_COMPONENT, NORMAL_SIZE);
@@ -129,8 +130,8 @@ public class WavefrontLoader {
 
     private void buildVertex(String data, MeshBuilder builder) throws IOException {
         String[] components = data.split("//");
-        if(components.length == 2) { // position normal
-            if(!expectedVertexType.equals(VertexType.POSITION_NORMAL))
+        if (components.length == 2) { // position normal
+            if (!expectedVertexType.equals(VertexType.POSITION_NORMAL))
                 throw new IOException("Inconsistant vertex: " + data);
             int index = Integer.parseInt(components[0]) - 1;
             Vector3 position = positions.get(index);
@@ -140,15 +141,15 @@ public class WavefrontLoader {
             Vector3 normal = normals.get(index);
             builder.addToComponent(NORMAL_COMPONENT, normal.getX(), normal.getY(), normal.getZ());
 
-        } else if((components = data.split("/")).length == 1) { // position
-            if(!expectedVertexType.equals(VertexType.POSITION))
+        } else if ((components = data.split("/")).length == 1) { // position
+            if (!expectedVertexType.equals(VertexType.POSITION))
                 throw new IOException("Inconsistant vertex: " + data);
             int index = Integer.parseInt(components[0]) - 1;
             Vector3 position = positions.get(index);
             builder.addToComponent(POSITION_COMPONENT, position.getX(), position.getY(), position.getZ());
 
-        } else if(components.length == 2) { // position texcoord
-            if(!expectedVertexType.equals(VertexType.POSITION_TEXCOORD))
+        } else if (components.length == 2) { // position texcoord
+            if (!expectedVertexType.equals(VertexType.POSITION_TEXCOORD))
                 throw new IOException("Inconsistant vertex: " + data);
 
             int index = Integer.parseInt(components[0]) - 1;
@@ -157,10 +158,10 @@ public class WavefrontLoader {
 
             index = Integer.parseInt(components[1]) - 1;
             Vector2 vec2 = textureCoordinates.get(index);
-            builder.addToComponent(TEXCOORD_COMPONENT,vec2.getX(), vec2.getY());
+            builder.addToComponent(TEXCOORD_COMPONENT, vec2.getX(), vec2.getY());
 
-        } else if(components.length == 3) { // position texcoord normal
-            if(!expectedVertexType.equals(VertexType.POSITION_TEXCOORD_NORMAL))
+        } else if (components.length == 3) { // position texcoord normal
+            if (!expectedVertexType.equals(VertexType.POSITION_TEXCOORD_NORMAL))
                 throw new IOException("Inconsistant vertex: " + data);
 
             int index = Math.abs(Integer.parseInt(components[0])) - 1;
@@ -169,11 +170,11 @@ public class WavefrontLoader {
 
             index = Integer.parseInt(components[1]) - 1;
             Vector2 texCoord = textureCoordinates.get(index);
-            builder.addToComponent(TEXCOORD_COMPONENT,  texCoord.getX(), texCoord.getY());
+            builder.addToComponent(TEXCOORD_COMPONENT, texCoord.getX(), texCoord.getY());
 
             index = Integer.parseInt(components[2]) - 1;
             Vector3 normal = normals.get(index);
-            builder.addToComponent(NORMAL_COMPONENT,normal.getX(), normal.getY(), normal.getZ());
+            builder.addToComponent(NORMAL_COMPONENT, normal.getX(), normal.getY(), normal.getZ());
         } else {
             throw new IOException("Vertex could not be parsed: " + data);
         }

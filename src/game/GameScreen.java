@@ -1,6 +1,7 @@
 package game;
 
 import framework.IScreen;
+import framework.physics.AABB;
 import framework.scene.components.graphics.TexturedMeshComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
@@ -53,7 +54,7 @@ public class GameScreen implements IScreen {
             playerImage = Image.loadPNG(new File("res/textures/player.png"));
             WavefrontLoader meshLoader = new WavefrontLoader();
             teapotMesh = meshLoader.load(new File("res/models/utahTeapot.obj"));
-        } catch(DogWoodException e) {
+        } catch (DogWoodException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,14 +86,14 @@ public class GameScreen implements IScreen {
             spriteEntity.addComponent(new PlayerUpdateComponent());
             scene.addEntity(spriteEntity);
             scene.addEntity(meshEntity);
-        } catch(DogWoodException e) {
+        } catch (DogWoodException e) {
             e.printStackTrace();
         }
-        Vector2 projectionTest = new Vector2(5, 100);
-        Vector2 projectionTest2 = new Vector2(5, 1);
-        System.out.println(Vector2.RIGHT.getX());
-        System.out.println(projectionTest.projectAlong(projectionTest2).getX());
-        System.out.println(projectionTest.getY());
+        AABB aabb1 = new AABB(0, 0, 5, 5);
+        AABB aabb2 = new AABB(0, 0, 5, 5);
+        aabb2.move(5, 5);
+        aabb2.move(-5, -5);
+        System.out.println(aabb1.collidesWith(aabb2));
     }
 
     public void onLeave() {
@@ -104,7 +105,7 @@ public class GameScreen implements IScreen {
     }
 
     public void update(int delta) {
-        teapotTransform.rotateEuler(0, (float)Math.PI / 100 ,0);
+        teapotTransform.rotateEuler(0, (float) Math.PI / 100, 0);
         scene.update(delta);
         scene.render(delta);
     }

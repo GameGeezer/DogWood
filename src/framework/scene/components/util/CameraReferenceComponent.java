@@ -15,6 +15,7 @@ public class CameraReferenceComponent extends UniformComponent {
 
         this.camera = camera;
     }
+
     public void addListener(ShaderProgram shader) {
 
         camera.addListener(shader);

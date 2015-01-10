@@ -14,7 +14,7 @@ public abstract class UniformComponent extends EntityComponent implements IUnifo
     @Override
     protected void onAttach() {
 
-        List<RenderComponent> renderComponents = (List<RenderComponent>)(List<?>) getParent().getComponentsOfType(RenderComponent.class);
+        List<RenderComponent> renderComponents = (List<RenderComponent>) (List<?>) getParent().getComponentsOfType(RenderComponent.class);
 
         renderComponents.forEach((component) -> addListener(component.getShader()));
     }
@@ -22,7 +22,7 @@ public abstract class UniformComponent extends EntityComponent implements IUnifo
     @Override
     protected void onDetach() {
 
-        List<RenderComponent> renderComponents = (List<RenderComponent>)(List<?>) getParent().getComponentsOfType(RenderComponent.class);
+        List<RenderComponent> renderComponents = (List<RenderComponent>) (List<?>) getParent().getComponentsOfType(RenderComponent.class);
 
         renderComponents.forEach((component) -> removeListener(component.getShader()));
     }

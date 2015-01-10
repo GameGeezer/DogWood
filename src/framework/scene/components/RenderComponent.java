@@ -24,7 +24,7 @@ public abstract class RenderComponent extends EntityComponent {
     @Override
     protected void onAttach() {
 
-        List<UniformComponent> uniformComponents = (List<UniformComponent>)(List<?>) getParent().getComponentsOfType(UniformComponent.class);
+        List<UniformComponent> uniformComponents = (List<UniformComponent>) (List<?>) getParent().getComponentsOfType(UniformComponent.class);
 
         uniformComponents.forEach((component) -> component.addListener(getShader()));
     }
@@ -32,7 +32,7 @@ public abstract class RenderComponent extends EntityComponent {
     @Override
     protected void onDetach() {
 
-        List<UniformComponent> uniformComponents = (List<UniformComponent>)(List<?>) getParent().getComponentsOfType(UniformComponent.class);
+        List<UniformComponent> uniformComponents = (List<UniformComponent>) (List<?>) getParent().getComponentsOfType(UniformComponent.class);
 
         uniformComponents.forEach((component) -> component.removeListener(getShader()));
     }

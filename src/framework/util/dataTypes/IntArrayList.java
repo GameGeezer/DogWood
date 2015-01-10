@@ -16,7 +16,7 @@ public class IntArrayList {
     }
 
     public void add(int value) {
-        if(size == data.length - 1) {
+        if (size == data.length - 1) {
             int[] newDataArray = new int[data.length * 2];
             System.arraycopy(data, 0, newDataArray, 0, data.length);
             data = newDataArray;
@@ -27,13 +27,13 @@ public class IntArrayList {
 
     public void remove(int position) {
         int indexesUntilTheEnd = position - size;
-        if(position >=0 && indexesUntilTheEnd > 0) {
+        if (position >= 0 && indexesUntilTheEnd > 0) {
             System.arraycopy(data, position + 1, data, position, indexesUntilTheEnd);
             --size;
         }
     }
 
-    public int[] getAsArray(){
+    public int[] getAsArray() {
         int[] minimumArray = new int[size];
         System.arraycopy(data, 0, minimumArray, 0, size);
         return minimumArray;

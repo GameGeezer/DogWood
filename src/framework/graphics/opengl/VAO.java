@@ -58,8 +58,7 @@ public final class VAO {
     }
 
     /**
-     *
-     * @param index The position of the attribute in the vertex shader
+     * @param index      The position of the attribute in the vertex shader
      * @param descriptor How the data is formatted
      */
     public final void addVertexAttribute(final int index, final Descriptor descriptor) {

@@ -26,7 +26,7 @@ public class Room {
 
     public void setLayer(int[] data) throws DogWoodException {
 
-        if(data.length % width != 0) {
+        if (data.length % width != 0) {
 
             throw new DogWoodException("Room data is not divisible by width");
         }

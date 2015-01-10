@@ -24,7 +24,7 @@ public abstract class Game {
 
     public void setScreen(IScreen screen) {
 
-        if(this.screen != null)
+        if (this.screen != null)
             this.screen.onLeave();
 
         this.screen = screen;

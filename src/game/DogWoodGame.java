@@ -6,7 +6,7 @@ import framework.IScreen;
 /**
  * Created by Will on 4/29/14.
  */
-public class DogWoodGame extends Game{
+public class DogWoodGame extends Game {
 
     public void init() {
 

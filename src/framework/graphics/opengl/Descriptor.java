@@ -14,9 +14,8 @@ public final class Descriptor {
     private final int pointer;
 
     /**
-     *
-     * @param size The number of elements per vertex
-     * @param type The data type. "GL_FLOAT" for example
+     * @param size       The number of elements per vertex
+     * @param type       The data type. "GL_FLOAT" for example
      * @param normalized Whether the data should be normalized or not
      * @param stride
      * @param pointer

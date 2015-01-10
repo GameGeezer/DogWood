@@ -22,7 +22,7 @@ public class Timer {
     public void start() {
         if (!running) {
             running = true;
-            startTime = System.currentTimeMillis() ;
+            startTime = System.currentTimeMillis();
         }
     }
 
@@ -32,7 +32,7 @@ public class Timer {
     public void pause() {
         if (running) {
             running = false;
-            stopTime = System.currentTimeMillis() ;
+            stopTime = System.currentTimeMillis();
             totalTime += stopTime - startTime;
         }
     }
@@ -41,26 +41,24 @@ public class Timer {
      * Resets the timer
      */
     public void reset() {
-        long time = System.currentTimeMillis() ;
+        long time = System.currentTimeMillis();
         startTime = time;
         stopTime = time;
         totalTime = 0;
     }
 
     /**
-     *
      * @return The current elapsed time in milliseconds
      */
     public long getElapsedTimeMS() {
         if (running) {
-            return System.currentTimeMillis()  - startTime + totalTime;
+            return System.currentTimeMillis() - startTime + totalTime;
         }
 
         return totalTime;
     }
 
     /**
-     *
      * @return The current elapsed time in seconds
      */
     public long getElapsedTimeSec() {

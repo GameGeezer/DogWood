@@ -23,7 +23,7 @@ public class Orientation extends Quaternion {
     }
 
     public Orientation setEuler(Vector3 euler) {
-         return setEuler(euler.getX(), euler.getY(), euler.getZ());
+        return setEuler(euler.getX(), euler.getY(), euler.getZ());
     }
 
     public Orientation rotateEuler(float roll, float pitch, float yaw) {
@@ -48,9 +48,9 @@ public class Orientation extends Quaternion {
 
         Matrix4 matrix = new Matrix4();
 
-        matrix.data[Matrix4.M00] = ( sqx - sqy -sqz + sqw) * inverseSquare;
-        matrix.data[Matrix4.M11] = (-sqx + sqy -sqz + sqw) * inverseSquare;
-        matrix.data[Matrix4.M22] = (-sqx - sqy +sqz + sqw) * inverseSquare;
+        matrix.data[Matrix4.M00] = (sqx - sqy - sqz + sqw) * inverseSquare;
+        matrix.data[Matrix4.M11] = (-sqx + sqy - sqz + sqw) * inverseSquare;
+        matrix.data[Matrix4.M22] = (-sqx - sqy + sqz + sqw) * inverseSquare;
 
         float temp1 = x * y;
         float temp2 = z * w;

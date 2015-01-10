@@ -1,6 +1,7 @@
 package framework.util.math;
 
 /**
+ * TODO
  * Created by Will on 1/8/2015.
  */
 public class LinearInterpolation {
@@ -23,6 +24,7 @@ public class LinearInterpolation {
 
     /**
      * TODO
+     *
      * @param delta
      * @return
      */

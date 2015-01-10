@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author William Gervasio
  */
-public class Scene  {
+public class Scene {
 
     private List<Entity> entities = new ArrayList<Entity>();
     private Renderer renderer = new Renderer();
@@ -27,18 +27,18 @@ public class Scene  {
 
         renderer.clearScreen();
 
-        for(Entity entity : entities) {
+        for (Entity entity : entities) {
 
-            List<UpdateComponent> updateComponents = (List<UpdateComponent>)(List<?>) entity.getComponentsOfType(UpdateComponent.class);
+            List<UpdateComponent> updateComponents = (List<UpdateComponent>) (List<?>) entity.getComponentsOfType(UpdateComponent.class);
             updateComponents.forEach((component) -> component.update(delta));
         }
     }
 
     public void render(int delta) {
 
-        for(Entity entity : entities) {
+        for (Entity entity : entities) {
 
-            List<RenderComponent> renderComponents = (List<RenderComponent>)(List<?>) entity.getComponentsOfType(RenderComponent.class);
+            List<RenderComponent> renderComponents = (List<RenderComponent>) (List<?>) entity.getComponentsOfType(RenderComponent.class);
             renderComponents.forEach((component) -> component.render(delta));
         }
     }

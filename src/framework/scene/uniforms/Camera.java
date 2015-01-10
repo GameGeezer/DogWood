@@ -35,6 +35,7 @@ public class Camera implements IUniformWrapper {
 
     /**
      * TODO
+     *
      * @param point
      */
     public void lookAt(Vector3 point) {
@@ -66,7 +67,7 @@ public class Camera implements IUniformWrapper {
     }
 
     public float getFieldOfView() {
-        return  fieldOfView;
+        return fieldOfView;
     }
 
     public void setWidth(float width) {

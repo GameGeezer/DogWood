@@ -11,8 +11,7 @@ public class StaticVertexAttribute implements IVertexAttribute {
     private final int elementsPerVertex;
 
     /**
-     *
-     * @param data An array of data for all the vertices.
+     * @param data              An array of data for all the vertices.
      * @param elementsPerVertex The number of elements  in the array for each vertex.
      */
     public StaticVertexAttribute(float[] data, int elementsPerVertex) {

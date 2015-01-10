@@ -9,10 +9,11 @@ public class FileUtil {
 
     /**
      * Parses a file for the text
+     *
      * @param fileLocation
      * @return The text as a String
      */
-    public static String readText(String fileLocation) throws IOException{
+    public static String readText(String fileLocation) throws IOException {
         StringBuilder shaderString = new StringBuilder();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileLocation));

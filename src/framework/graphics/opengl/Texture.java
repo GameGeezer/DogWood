@@ -19,7 +19,6 @@ public class Texture {
     }
 
     /**
-     *
      * @param buffer
      * @param textureUnit i.e GL13.GL_TEXTURE0
      */

@@ -2,7 +2,7 @@ package framework.util.math;
 
 /**
  * @author William Gervasio
- * MAY HAVE AN ISSUE WITH GIMBAL LOCK WHEN CONVERTING TO EULER
+ *         MAY HAVE AN ISSUE WITH GIMBAL LOCK WHEN CONVERTING TO EULER
  */
 public class Quaternion {
 

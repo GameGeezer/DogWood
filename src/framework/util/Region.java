@@ -1,29 +1,55 @@
 package framework.util;
 
+import framework.util.math.Vector2;
+
 /**
  * Created by Will on 12/23/2014.
  */
 public class Region {
 
-    private float lowerX, lowerY, upperX, upperY, width, height;
+    private Vector2 lower, upper;
+    private float width, height;
 
     public Region(float x1, float y1, float x2, float y2) {
 
-        this.lowerX = x1;
-        this.lowerY = y1;
-        this.upperX = x2;
-        this.upperY = y2;
+        lower = new Vector2(x1, y1);
+        upper = new Vector2(x2, y2);
 
-        ensureStateLegality();
+        ensureStateLegalityX();
+        ensureStateLegalityY();
+
         updateBounds();
     }
 
     public Region setLower(float x1, float y1) {
 
-        this.lowerX = x1;
-        this.lowerY = y1;
+        lower.set(x1, y1);
 
-        ensureStateLegality();
+        ensureStateLegalityX();
+        ensureStateLegalityY();
+
+        updateBounds();
+
+        return this;
+    }
+
+    public Region setLowerX(float x) {
+
+        lower.setX(x);
+
+        ensureStateLegalityX();
+
+        updateBounds();
+
+        return this;
+    }
+
+    public Region setLowerY(float y) {
+
+        lower.setY(y);
+
+        ensureStateLegalityY();
+
         updateBounds();
 
         return this;
@@ -31,10 +57,33 @@ public class Region {
 
     public Region setUpper(float x2, float y2) {
 
-        this.upperX = x2;
-        this.upperY = y2;
+        upper.set(x2, y2);
 
-        ensureStateLegality();
+        ensureStateLegalityX();
+        ensureStateLegalityY();
+
+        updateBounds();
+
+        return this;
+    }
+
+    public Region setUpperX(float x) {
+
+        upper.setX(x);
+
+        ensureStateLegalityX();
+
+        updateBounds();
+
+        return this;
+    }
+
+    public Region setUpperY(float y) {
+
+        upper.setY(y);
+
+        ensureStateLegalityY();
+
         updateBounds();
 
         return this;
@@ -42,69 +91,76 @@ public class Region {
 
     public Region shift(float x, float y) {
 
-        this.lowerX += x;
-        this.lowerY += y;
-        this.upperX += x;
-        this.upperY += y;
-
-        updateBounds();
+        lower.add(x, y);
+        upper.add(x, y);
 
         return this;
     }
 
     public float getLowerX() {
-        return lowerX;
+
+        return lower.getX();
     }
 
     public float getLowerY() {
-        return lowerY;
+
+        return lower.getY();
     }
 
     public float getUpperX() {
-        return upperX;
+
+        return upper.getX();
     }
 
     public float getUpperY() {
-        return upperY;
+
+        return upper.getY();
     }
 
     public float findCenterX() {
-        return lowerX + (width / 2);
+
+        return lower.getX() + (width / 2);
     }
 
     public float findCenterY() {
-        return lowerY + (height / 2);
+
+        return lower.getY() + (height / 2);
     }
 
     public float getWidth() {
+
         return width;
     }
 
     public float getHeight() {
+
         return height;
     }
 
     private void updateBounds() {
 
-        width = Math.abs(upperX - lowerX);
+        width = Math.abs(upper.getX() - lower.getX());
 
-        height = Math.abs(upperY - lowerY);
+        height = Math.abs(upper.getY() - lower.getY());
     }
 
-    private void ensureStateLegality() {
+    private void ensureStateLegalityX() {
 
-        if(lowerX > upperX) {
+        if (getLowerX() > getUpperX()) {
 
-            float x = lowerX;
-            lowerX = upperX;
-            upperX = x;
+            float x = getLowerX();
+            lower.setX(getUpperX());
+            upper.setX(x);
         }
-        if(lowerY > upperY) {
+    }
 
-            float y = lowerY;
-            lowerY = upperY;
-            upperY = y;
+    private void ensureStateLegalityY() {
+
+        if (lower.getY() > upper.getY()) {
+
+            float y = lower.getY();
+            lower.setY(upper.getY());
+            upper.setY(y);
         }
-
     }
 }

@@ -43,8 +43,8 @@ public class MeshBuilder {
 
         while (it.hasNext()) {
 
-            Map.Entry pairs = (Map.Entry)it.next();
-            attributes.add((DynamicVertexAttribute)pairs.getValue());
+            Map.Entry pairs = (Map.Entry) it.next();
+            attributes.add((DynamicVertexAttribute) pairs.getValue());
         }
 
         return new Mesh(indices.getAsArray(), attributes);

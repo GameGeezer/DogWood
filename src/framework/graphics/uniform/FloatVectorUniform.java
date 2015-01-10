@@ -27,6 +27,7 @@ public class FloatVectorUniform extends VectorUniform {
         updateListeningShaders();
     }
 
+    @Override
     protected void updateProgram(int handle) {
 
         switch (uniformType) {

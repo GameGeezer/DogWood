@@ -58,7 +58,7 @@ public class SpriteComponent extends RenderComponent {
 
     private Mesh createMesh(int width, int height, int cellsWide, int cellsHigh) {
 
-        float widthHeightRatio = (float)width / (float)height;
+        float widthHeightRatio = (float) width / (float) height;
         float xRatio = widthHeightRatio / 2f;
         float yRatio = 1 - xRatio;
 
@@ -69,8 +69,8 @@ public class SpriteComponent extends RenderComponent {
                 xRatio, yRatio, 0f,
         };
 
-        float texcoordX = (1.0f /  (float) cellsWide) ;
-        float texcoordY = (1.0f /  (float) cellsHigh) ;
+        float texcoordX = (1.0f / (float) cellsWide);
+        float texcoordY = (1.0f / (float) cellsHigh);
 
         float[] texCoords = {
                 0f, 0f,

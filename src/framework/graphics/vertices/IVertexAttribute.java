@@ -9,12 +9,14 @@ public interface IVertexAttribute {
 
     /**
      * The data as a float array
+     *
      * @return
      */
     public abstract float[] getData();
 
     /**
      * How many indexes in the data make up one vertex
+     *
      * @return
      */
     public abstract int getElementsPerVertex();

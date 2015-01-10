@@ -5,6 +5,7 @@ import framework.util.RangeUtil;
 
 /**
  * A color object is used to store r, g, b, a values as floats on the interval of [0, 1]
+ *
  * @author William Gervasio
  */
 public final class Color implements Cloneable {
@@ -24,6 +25,7 @@ public final class Color implements Cloneable {
 
     /**
      * Increase r, g, b by a percentage. The percentage must be in decimal form on the interval of [0, 1]
+     *
      * @param percentage
      * @return
      */
@@ -39,6 +41,7 @@ public final class Color implements Cloneable {
 
     /**
      * Decrease r, g, b by a percentage. The percentage must be in decimal form on the interval of [0, 1]
+     *
      * @param percentage
      * @return
      */
@@ -54,6 +57,7 @@ public final class Color implements Cloneable {
 
     /**
      * Set r, g, b, a values to the passed values
+     *
      * @param r
      * @param g
      * @param b
@@ -107,6 +111,7 @@ public final class Color implements Cloneable {
 
     /**
      * Creates a float[] of r, g, b, a
+     *
      * @return
      */
     public final float[] getElements() {
@@ -115,6 +120,7 @@ public final class Color implements Cloneable {
 
     /**
      * Forces r, g, b, a float values within the desired range of [0, 1]
+     *
      * @return
      */
     private final Color clamp() {
