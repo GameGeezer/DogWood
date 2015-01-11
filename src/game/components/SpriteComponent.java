@@ -7,7 +7,7 @@ import framework.graphics.opengl.Texture;
 import framework.graphics.uniform.MatrixUniform;
 import framework.graphics.vertices.IVertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
-import framework.scene.components.RenderComponent;
+import framework.scene.components.graphics.RenderComponent;
 import framework.util.math.Matrix4;
 import org.lwjgl.opengl.GL13;
 

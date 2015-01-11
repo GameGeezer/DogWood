@@ -1,6 +1,5 @@
-package framework.scene.components;
+package framework.scene.components.graphics;
 
-import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.uniform.IUniformWrapper;
 import framework.scene.Entity.EntityComponent;
 

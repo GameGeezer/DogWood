@@ -3,7 +3,7 @@ package framework.scene.components.util;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.uniform.MatrixUniform;
 import framework.util.math.Transform;
-import framework.scene.components.UniformComponent;
+import framework.scene.components.graphics.UniformComponent;
 import framework.util.math.Matrix4;
 import framework.util.math.Vector3;
 

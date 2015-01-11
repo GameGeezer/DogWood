@@ -4,7 +4,6 @@ import framework.graphics.Image;
 import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
-import framework.scene.components.RenderComponent;
 import org.lwjgl.opengl.GL13;
 
 /**

@@ -1,7 +1,7 @@
 package game.components.player;
 
 import framework.input.Keyboard;
-import framework.scene.components.KeyboardComponent;
+import framework.scene.components.io.KeyboardComponent;
 import game.SpriteAnimation;
 
 /**

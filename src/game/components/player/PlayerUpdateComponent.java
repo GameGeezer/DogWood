@@ -1,6 +1,6 @@
 package game.components.player;
 
-import framework.scene.components.UpdateComponent;
+import framework.scene.components.util.UpdateComponent;
 import framework.scene.components.util.TransformComponent;
 
 import java.util.List;

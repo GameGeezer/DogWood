@@ -1,4 +1,4 @@
-package framework.scene.components;
+package framework.scene.components.io;
 
 import framework.input.IKeyboardListener;
 import framework.input.Keyboard;
