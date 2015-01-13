@@ -31,5 +31,4 @@ public final class RangeUtil {
 
         return value <= max ? value >= min ? true : false : false;
     }
-
 }

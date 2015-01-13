@@ -1,4 +1,4 @@
-package framework.scene.components.graphics;
+package framework.scene.components;
 
 import framework.graphics.opengl.ShaderProgram;
 import framework.scene.Entity.EntityComponent;
@@ -35,6 +35,24 @@ public abstract class RenderComponent extends EntityComponent {
         List<UniformComponent> uniformComponents = (List<UniformComponent>) (List<?>) getParent().getComponentsOfType(UniformComponent.class);
 
         uniformComponents.forEach((component) -> component.removeListener(getShader()));
+    }
+
+    @Override
+    protected void onComponentAttachedToParent(EntityComponent component) {
+
+        if(component instanceof UniformComponent) {
+
+            ((UniformComponent) component).addListener(getShader());
+        }
+    }
+
+    @Override
+    protected void onComponentDetachedFromParent(EntityComponent component) {
+
+        if(component instanceof UniformComponent) {
+
+            ((UniformComponent) component).removeListener(getShader());
+        }
     }
 
     public ShaderProgram getShader() {

@@ -3,6 +3,7 @@ package framework.scene.components.graphics;
 import framework.graphics.Image;
 import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
+import framework.scene.components.RenderComponent;
 
 /**
  * Created by Will on 1/4/2015.

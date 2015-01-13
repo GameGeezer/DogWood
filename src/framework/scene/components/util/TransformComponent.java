@@ -1,16 +1,19 @@
 package framework.scene.components.util;
 
 import framework.graphics.opengl.ShaderProgram;
+import framework.graphics.uniform.IUniformWrapper;
 import framework.graphics.uniform.MatrixUniform;
+import framework.scene.Entity.EntityComponent;
+import framework.scene.components.UniformComponent;
+import framework.util.exceptions.EntityException;
 import framework.util.math.Transform;
-import framework.scene.components.graphics.UniformComponent;
 import framework.util.math.Matrix4;
 import framework.util.math.Vector3;
 
 /**
  * Created by Will on 11/25/2014.
  */
-public class TransformComponent extends UniformComponent {
+public class TransformComponent extends UniformComponent implements IUniformWrapper {
 
     public static final String MODEL_UNIFORM = "u_modelMatrix";
 
@@ -22,6 +25,32 @@ public class TransformComponent extends UniformComponent {
     public TransformComponent() {
 
         updateModelUniform();
+    }
+
+    @Override
+    protected void onAttach() throws EntityException {
+
+        if(getParent().getComponentsOfType(TransformComponent.class).size() > 1) {
+
+            removeSelfFromParent();
+
+            throw  new EntityException("Only one TransformComponent may be attached to an entity");
+        }
+    }
+
+    @Override
+    protected void onDetach() {
+
+    }
+
+    @Override
+    protected void onComponentAttachedToParent(EntityComponent component) {
+
+    }
+
+    @Override
+    protected void onComponentDetachedFromParent(EntityComponent component) {
+
     }
 
     public TransformComponent translate(float x, float y, float z) {
@@ -82,6 +111,11 @@ public class TransformComponent extends UniformComponent {
     public TransformComponent rotateEuler(Vector3 euler) {
 
         return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
+    }
+
+    public Transform getTransform() {
+
+        return transform;
     }
 
     public float getX() {

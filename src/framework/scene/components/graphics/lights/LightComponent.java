@@ -2,7 +2,7 @@ package framework.scene.components.graphics.lights;
 
 import framework.graphics.Color;
 import framework.graphics.opengl.ShaderProgram;
-import framework.scene.components.graphics.RenderComponent;
+import framework.scene.components.RenderComponent;
 
 /**
  * Created by Will on 1/4/2015.

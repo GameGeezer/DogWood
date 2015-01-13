@@ -1,4 +1,4 @@
-package framework.scene.components.util;
+package framework.scene.components;
 
 import framework.scene.Entity.EntityComponent;
 
@@ -15,14 +15,4 @@ public abstract class UpdateComponent extends EntityComponent {
      * @param delta The time between frames
      */
     public abstract void update(int delta);
-
-    @Override
-    protected void onAttach() {
-
-    }
-
-    @Override
-    protected void onDetach() {
-
-    }
 }

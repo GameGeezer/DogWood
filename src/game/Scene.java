@@ -5,8 +5,9 @@ package game;
  */
 
 import framework.scene.Entity;
-import framework.scene.components.graphics.RenderComponent;
-import framework.scene.components.util.UpdateComponent;
+import framework.scene.components.RenderComponent;
+import framework.scene.components.UpdateComponent;
+import framework.scene.uniforms.Camera;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +17,11 @@ import java.util.List;
  */
 public class Scene {
 
-    private List<Entity> entities = new ArrayList<Entity>();
-    private Renderer renderer = new Renderer();
+    private static List<Entity> entities = new ArrayList<Entity>();
+    private static Renderer renderer = new Renderer();
+    private static Camera camera = new Camera(800, 600, 0.1f, 100, 60);
 
-    public Scene() {
-
-    }
-
-    public void update(int delta) {
+    public static void update(int delta) {
 
         renderer.clearScreen();
 
@@ -34,7 +32,7 @@ public class Scene {
         }
     }
 
-    public void render(int delta) {
+    public static void render(int delta) {
 
         for (Entity entity : entities) {
 
@@ -43,8 +41,18 @@ public class Scene {
         }
     }
 
-    public void addEntity(Entity entity) {
+    public static void addEntity(Entity entity) {
 
         entities.add(entity);
+    }
+
+    public static void removeEntity(Entity entity) {
+
+        entities.remove(entity);
+    }
+
+    public static Camera getCamera() {
+
+        return camera;
     }
 }

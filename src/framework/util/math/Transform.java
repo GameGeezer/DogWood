@@ -130,26 +130,26 @@ public class Transform {
     }
 
     public void setX(float value) {
-        position.data[Matrix4.M30] = value;
+        position.data[Matrix4.M03] = value;
     }
 
     public float getX() {
-        return position.data[Matrix4.M30];
+        return position.data[Matrix4.M03];
     }
 
     public void setY(float value) {
-        position.data[Matrix4.M31] = value;
+        position.data[Matrix4.M13] = value;
     }
 
     public float getY() {
-        return position.data[Matrix4.M31];
+        return position.data[Matrix4.M13];
     }
 
     public void setZ(float value) {
-        position.data[Matrix4.M32] = value;
+        position.data[Matrix4.M23] = value;
     }
 
     public float getZ() {
-        return position.data[Matrix4.M32];
+        return position.data[Matrix4.M23];
     }
 }

@@ -1,8 +1,9 @@
 package framework.scene.components.util;
 
+import framework.scene.Entity;
 import framework.scene.uniforms.Camera;
 import framework.graphics.opengl.ShaderProgram;
-import framework.scene.components.graphics.UniformComponent;
+import framework.scene.components.UniformComponent;
 
 /**
  * Created by Will on 1/4/2015.
@@ -16,11 +17,33 @@ public class CameraReferenceComponent extends UniformComponent {
         this.camera = camera;
     }
 
+    @Override
+    protected void onAttach() {
+
+    }
+
+    @Override
+    protected void onDetach() {
+
+    }
+
+    @Override
+    protected void onComponentAttachedToParent(Entity.EntityComponent component) {
+
+    }
+
+    @Override
+    protected void onComponentDetachedFromParent(Entity.EntityComponent component) {
+
+    }
+
+    @Override
     public void addListener(ShaderProgram shader) {
 
         camera.addListener(shader);
     }
 
+    @Override
     public void removeListener(ShaderProgram shader) {
 
         camera.removeListener(shader);

@@ -1,6 +1,7 @@
 package framework.scene;
 
 import framework.util.exceptions.DogWoodException;
+import framework.util.exceptions.EntityException;
 
 import java.util.*;
 
@@ -15,18 +16,27 @@ public final class Entity implements Cloneable {
 
     }
 
-    public void addComponent(EntityComponent component) throws DogWoodException {
+    public void addComponent(EntityComponent component) throws EntityException {
 
         // Make sure the component isn't already attached to another entity
         if (component.hasParent()) {
 
-            throw new DogWoodException("Cannot attach component: Already attached to another entity");
+            throw new EntityException("Cannot attach component: Already attached to another entity");
         }
         // Check to see if a component of this type has been seen
         if (components.get(component.getClass()) == null) {
             // If it hasn't add a list of the type to the map for easy access
             components.put(component.getClass(), new ArrayList<>());
         }
+        // Notify every component that a new one has been added in case they're interested
+        components.entrySet().forEach((mapEntry) -> {
+
+            mapEntry.getValue().forEach((componentEntry)-> {
+
+                componentEntry.onComponentAttachedToParent(component);
+            });
+        });
+
         // Add the component to the map
         components.get(component.getClass()).add(component);
         // Set the component's parent to this object
@@ -56,6 +66,11 @@ public final class Entity implements Cloneable {
         components.entrySet().forEach((mapEntry) -> {
 
             mapEntry.getValue().remove(component);
+
+            mapEntry.getValue().forEach((componentEntry)-> {
+
+                componentEntry.onComponentDetachedFromParent(component);
+            });
         });
         // Call the Component specific "onDetach" method
         component.onDetach();
@@ -129,8 +144,17 @@ public final class Entity implements Cloneable {
             this.parentEntity = entity;
         }
 
-        protected abstract void onAttach();
+        protected void removeSelfFromParent() {
+
+            parentEntity.removeComponent(this);
+        }
+
+        protected abstract void onAttach() throws EntityException;
 
         protected abstract void onDetach();
+
+        protected abstract void onComponentAttachedToParent(EntityComponent component);
+
+        protected abstract void onComponentDetachedFromParent(EntityComponent component);
     }
 }

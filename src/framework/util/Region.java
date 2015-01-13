@@ -137,6 +137,16 @@ public class Region {
         return height;
     }
 
+    public Vector2 getLower() {
+
+        return lower;
+    }
+
+    public Vector2 getUpper() {
+
+        return upper;
+    }
+
     private void updateBounds() {
 
         width = Math.abs(upper.getX() - lower.getX());

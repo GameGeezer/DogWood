@@ -4,14 +4,14 @@ import framework.util.Region;
 import framework.util.math.Vector2;
 
 /**
- * Created by Will on 1/5/2015.
+ * Created by Will on 1/11/2015.
  */
-public class AABB implements ICollidable {
+public class AABB {
 
     private float x, y, halfWidth, halfHeight;
     private Region region;
 
-    public AABB(float x, float y, int width, int height) {
+    public AABB(float x, float y, float width, float height) {
 
         this.x = x;
         this.y = y;
@@ -19,20 +19,7 @@ public class AABB implements ICollidable {
         halfWidth = width / 2;
         halfHeight = height / 2;
 
-        region = new Region(x - halfWidth, y - halfHeight, x + halfWidth, x + halfHeight);
-    }
-
-    public boolean collidesWith(AABB aabb) {
-
-        boolean overlapsX = region.getUpperX() > aabb.region.getLowerX() && region.getLowerX() < aabb.region.getUpperX();
-        boolean overlapsY = region.getUpperY() > aabb.region.getLowerY() && region.getLowerY() < aabb.region.getUpperY();
-
-        return overlapsX && overlapsY;
-    }
-
-    public boolean collidesWith(Circle circle) {
-
-        return true;
+        region = new Region(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
     }
 
     public void setWidth(float width) {
@@ -59,6 +46,32 @@ public class AABB implements ICollidable {
         this.y += y;
     }
 
+    public float getX() {
+
+        return x;
+    }
+
+    public float getY() {
+
+        return y;
+    }
+
+    public void setX(float x) {
+
+        float xDifference = this.x - x;
+        region.shift(xDifference, 0);
+
+        this.x = x;
+    }
+
+    public void setY(float y) {
+
+        float yDifference = this.y - y;
+        region.shift(0, yDifference);
+
+        this.y = y;
+    }
+
     public float getWidth() {
 
         return region.getWidth();
@@ -67,5 +80,35 @@ public class AABB implements ICollidable {
     public float getHeight() {
 
         return region.getHeight();
+    }
+
+    public float getLowerX() {
+
+        return region.getLowerX();
+    }
+
+    public float getLowerY() {
+
+        return region.getLowerY();
+    }
+
+    public float getUpperX() {
+
+        return region.getUpperX();
+    }
+
+    public float getUpperY() {
+
+        return region.getUpperY() ;
+    }
+
+    public Vector2 getLower() {
+
+        return region.getLower();
+    }
+
+    public Vector2 getUpper() {
+
+        return region.getUpper();
     }
 }

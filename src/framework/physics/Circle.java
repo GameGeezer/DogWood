@@ -1,22 +1,47 @@
 package framework.physics;
 
 /**
- * Created by Will on 1/6/2015.
- */
-public class Circle implements ICollidable {
+ * Created by Will on 1/11/2015.
+ * */
+public class Circle {
 
     private float x, y, radius;
 
-    public boolean collidesWith(AABB aabb) {
-        return false;
+    public Circle(float x, float y, float radius) {
+
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
     }
 
-    public boolean collidesWith(Circle circle) {
+    public void move(float x, float y) {
 
-        float radiusDifference = radius - circle.radius;
-        float xDifference = x - circle.x;
-        float yDifference = y - circle.y;
+        this.x += x;
+        this.y += y;
+    }
 
-        return radiusDifference * radiusDifference > (xDifference * xDifference) + (yDifference * yDifference);
+    public float getX() {
+
+        return x;
+    }
+
+    public float getY() {
+
+        return y;
+    }
+
+    public void setX(float x) {
+
+        this.x = x;
+    }
+
+    public void setY(float y) {
+
+        this.y = y;
+    }
+
+    public float getRadius() {
+
+        return radius;
     }
 }
