@@ -68,7 +68,7 @@ public class DynamicComponent extends UpdateComponent {
         velocity.setX(x);
     }
 
-    public void setVelocity(float y) {
+    public void setVelocityY(float y) {
 
         velocity.setY(y);
     }

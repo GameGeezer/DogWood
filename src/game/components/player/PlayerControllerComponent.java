@@ -13,10 +13,11 @@ import framework.util.fileIO.FileUtil;
 import game.Scene;
 import game.components.DynamicComponent;
 import game.components.SpriteComponent;
+import game.enemies.Debris;
+import game.weapons.BasicBullet;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,31 +28,23 @@ import java.util.Map;
 
 public class PlayerControllerComponent extends Entity.EntityComponent implements IKeyboardListener {
 
+    private List<DynamicComponent> dynamicComponents;
+
     private boolean moveLeft = false;
     private boolean moveRight = false;
 
-    private Image bulletImage;
-    private String bulletVertexShader, bulletFragmentShader;
-    private List<Entity> bullets = new ArrayList<>();
+    private boolean moveUp = false;
+    private boolean moveDown = false;
 
     public PlayerControllerComponent() {
 
-        try {
 
-            bulletImage = Image.loadPNG(new File("res/textures/BulletImage.png"));
-            bulletVertexShader = FileUtil.readText("res/shaders/SpriteShader.vert");
-            bulletFragmentShader = FileUtil.readText("res/shaders/SpriteShader.frag");
-
-        } catch(DogWoodException e) {
-
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     protected void onAttach() {
+
+        dynamicComponents = (List<DynamicComponent>) (List<?>) getParent().getComponentsOfType(DynamicComponent.class);
 
         Keyboard.addListener(this);
     }
@@ -80,12 +73,18 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 
             case Keyboard.KEY_A:
                 moveLeft = false;
-
                 break;
 
             case Keyboard.KEY_D:
                 moveRight = false;
+                break;
 
+            case Keyboard.KEY_W:
+                moveUp = false;
+                break;
+
+            case Keyboard.KEY_S:
+                moveDown = false;
                 break;
         }
     }
@@ -101,7 +100,14 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 
             case Keyboard.KEY_D:
                 moveRight = true;
-                
+                break;
+
+            case Keyboard.KEY_W:
+                moveUp = true;
+                break;
+
+            case Keyboard.KEY_S:
+                moveDown = true;
                 break;
 
             case Keyboard.KEY_SPACE:
@@ -125,50 +131,25 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
         return moveRight;
     }
 
+    public boolean isMoveUp() {
+
+        return moveUp;
+    }
+
+    public boolean isMoveDown() {
+
+        return moveDown;
+    }
+
     private void fireBullet() {
-
-        ShaderProgram bulletShader = null;
-
-        try {
-            Map<Integer, String> attributes = new HashMap<>();
-            attributes.put(0, "in_Position");
-            attributes.put(1, "in_TextureCoord");
-
-            bulletShader = new ShaderProgram(bulletVertexShader, bulletFragmentShader, attributes);
-
-        } catch (DogWoodException e) {
-            e.printStackTrace();
-        }
 
         List<TransformComponent> transformComponents = (List<TransformComponent>) (List<?>) getParent().getComponentsOfType(TransformComponent.class);
         TransformComponent transformComponent = transformComponents.get(0);
 
-        Entity bulletEntity = new Entity();
-
-        TransformComponent bulletTransform = new TransformComponent();
-        bulletTransform.setTranslation(transformComponent.getX(), transformComponent.getY(), -3f);
-        bulletTransform.setScale(0.1f, 0.1f, 0);
-
         List<DynamicComponent> dynamicComponents = (List<DynamicComponent>) (List<?>) getParent().getComponentsOfType(DynamicComponent.class);
         DynamicComponent dynamicComponent = dynamicComponents.get(0);
 
-        DynamicComponent bulletDynamicComponent = new DynamicComponent(2f, 2f);
-        bulletDynamicComponent.setVelocity(dynamicComponent.getVelocityX(), dynamicComponent.getVelocityY() + 1);
-
-        try {
-
-            SpriteComponent sprite = new SpriteComponent(bulletImage, bulletShader, 1, 1);
-            bulletEntity.addComponent(sprite);
-            bulletEntity.addComponent(bulletTransform);
-            bulletEntity.addComponent(bulletDynamicComponent);
-            bulletEntity.addComponent(new CameraReferenceComponent(Scene.getCamera()));
-            bulletEntity.addComponent(new AABBComponent(0, 0, 1, 1));
-
-        } catch (DogWoodException e) {
-            e.printStackTrace();
-        }
-
-        Scene.addEntity(bulletEntity);
-        bullets.add(bulletEntity);
+        BasicBullet bullet = new BasicBullet(transformComponent, dynamicComponent);
+        Scene.addEntity(bullet);
     }
 }

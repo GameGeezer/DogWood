@@ -5,6 +5,7 @@ import framework.scene.components.UpdateComponent;
 import framework.scene.components.util.TransformComponent;
 import framework.util.RangeUtil;
 import framework.util.math.Vector2;
+import game.Scene;
 import game.components.DynamicComponent;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class PlayerUpdateComponent extends UpdateComponent {
 
     private List<DynamicComponent> dynamicComponents;
     private List<PlayerControllerComponent> controllerComponents;
+    private List<TransformComponent> transformComponents;
+    private float rotationAlongArc = (float) Math.PI / 5f / 2f;
+    private float depth = -5;
 
     @Override
     protected void onAttach() {
@@ -23,6 +27,8 @@ public class PlayerUpdateComponent extends UpdateComponent {
         dynamicComponents = (List<DynamicComponent>) (List<?>) getParent().getComponentsOfType(DynamicComponent.class);
 
         controllerComponents = (List<PlayerControllerComponent>) (List<?>) getParent().getComponentsOfType(PlayerControllerComponent.class);
+
+        transformComponents = (List<TransformComponent>) (List<?>) getParent().getComponentsOfType(TransformComponent.class);
     }
 
     @Override
@@ -57,6 +63,16 @@ public class PlayerUpdateComponent extends UpdateComponent {
             dynamicComponent.setAccelerationX(1.8f);
         }
 
+        if (controllerComponent.isMoveUp()) {
+
+            dynamicComponent.setAccelerationY(1.8f);
+        }
+
+        if (controllerComponent.isMoveDown()) {
+
+            dynamicComponent.setAccelerationY(-1.8f);
+        }
+
         if(!controllerComponent.isMoveLeft() && !controllerComponent.isMoveRight() || controllerComponent.isMoveLeft() && controllerComponent.isMoveRight()) {
 
             if(dynamicComponent.getVelocityX() > 0.05f) {
@@ -68,6 +84,20 @@ public class PlayerUpdateComponent extends UpdateComponent {
             else {
                 dynamicComponent.setVelocityX(0);
                 dynamicComponent.setAccelerationX(0);
+            }
+        }
+
+        if(!controllerComponent.isMoveUp() && !controllerComponent.isMoveDown() || controllerComponent.isMoveUp() && controllerComponent.isMoveDown()) {
+
+            if(dynamicComponent.getVelocityY() > 0.05f) {
+
+                dynamicComponent.setAccelerationY(-1f);
+            } else if(dynamicComponent.getVelocityY() < -0.05f)
+
+                dynamicComponent.setAccelerationY(1f);
+            else {
+                dynamicComponent.setVelocityY(0);
+                dynamicComponent.setAccelerationY(0);
             }
         }
     }

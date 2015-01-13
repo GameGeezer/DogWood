@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * @author William Gervasio
  */
-public final class Entity implements Cloneable {
+public class Entity implements Cloneable {
 
     private Map<Class, List<EntityComponent>> components = new HashMap<>();
 

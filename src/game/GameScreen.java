@@ -64,7 +64,8 @@ public class GameScreen implements IScreen {
             spriteEntity.addComponent(new PlayerControllerComponent());
             spriteEntity.addComponent(new PlayerUpdateComponent());
             spriteEntity.addComponent(new AABBComponent(0, 0, 1, 1));
-            spriteEntity.addComponent(new DynamicComponent(0.8f, 0));
+            spriteEntity.addComponent(new DynamicComponent(0.8f, .8f));
+            spriteEntity.addComponent(new ArcAtDepthComponent());
 
             Scene.addEntity(spriteEntity);
 
