@@ -10,7 +10,7 @@ import java.nio.FloatBuffer;
  */
 public class FloatVectorUniform extends VectorUniform {
 
-    private FloatBuffer uniformData;
+    private final FloatBuffer uniformData;
 
     public FloatVectorUniform(String uniformName, VectorUniformType uniformType) {
 
@@ -19,7 +19,7 @@ public class FloatVectorUniform extends VectorUniform {
         uniformData = BufferUtils.createFloatBuffer(uniformType.getNumberOfUniforms());
     }
 
-    public void setUniformData(float... data) {
+    public final void setUniformData(float... data) {
 
         uniformData.put(data, 0, uniformType.getNumberOfUniforms());
         uniformData.flip();
@@ -28,7 +28,7 @@ public class FloatVectorUniform extends VectorUniform {
     }
 
     @Override
-    protected void updateProgram(int handle) {
+    protected final void updateProgram(int handle) {
 
         switch (uniformType) {
 

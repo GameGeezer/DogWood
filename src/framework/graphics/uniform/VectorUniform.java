@@ -30,7 +30,7 @@ public abstract class VectorUniform extends Uniform {
     }
 
     @Override
-    public int getNumberOfElements() {
+    public final int getNumberOfElements() {
 
         return uniformType.getNumberOfUniforms();
     }

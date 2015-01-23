@@ -16,10 +16,12 @@ public final class Color implements Cloneable {
     private float r, g, b, a;
 
     public Color() {
+
         this(MINIMUM_CHANNEL_VALUE, MINIMUM_CHANNEL_VALUE, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
     }
 
     public Color(float r, float g, float b, float a) {
+        
         set(r, g, b, a);
     }
 
@@ -30,6 +32,7 @@ public final class Color implements Cloneable {
      * @return
      */
     public final Color brighten(float percentage) {
+
         percentage += 1;
 
         r *= percentage;
@@ -46,6 +49,7 @@ public final class Color implements Cloneable {
      * @return
      */
     public final Color darken(float percentage) {
+
         percentage = 1 - percentage;
 
         r *= percentage;
@@ -65,6 +69,7 @@ public final class Color implements Cloneable {
      * @return
      */
     public final Color set(float r, float g, float b, float a) {
+
         this.r = r;
         this.g = g;
         this.b = b;
@@ -74,38 +79,50 @@ public final class Color implements Cloneable {
     }
 
     public final Color setRed(float r) {
+
         this.r = RangeUtil.forceIntoRange(r, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
+
         return this;
     }
 
     public final float getRed() {
+
         return r;
     }
 
     public final Color setGreen(float g) {
+
         this.g = RangeUtil.forceIntoRange(g, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
+
         return this;
     }
 
     public final float getGreen() {
+
         return g;
     }
 
     public final Color setBlue(float b) {
+
         this.b = RangeUtil.forceIntoRange(b, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
+
         return this;
     }
 
     public final float getBlue() {
+
         return b;
     }
 
     public final Color setAlpha(float a) {
+
         this.a = RangeUtil.forceIntoRange(a, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
+
         return this;
     }
 
     public final float getAlpha() {
+
         return a;
     }
 
@@ -115,6 +132,7 @@ public final class Color implements Cloneable {
      * @return
      */
     public final float[] getElements() {
+
         return new float[]{r, g, b, a};
     }
 
@@ -134,6 +152,7 @@ public final class Color implements Cloneable {
     }
 
     public final Color clone() {
+
         return new Color(r, g, b, a);
     }
 }

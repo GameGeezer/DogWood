@@ -8,27 +8,27 @@ import java.nio.FloatBuffer;
 /**
  * @author William Gervasio
  */
-public class MatrixUniform extends Uniform {
+public final class MatrixUniform extends Uniform {
 
     public enum MatrixUniformType {
 
         MATRIX2(4), MATRIX3(9), MATRIX4(16);
 
-        private int numberOfUniforms;
+        private final int numberOfUniforms;
 
         MatrixUniformType(int numberOfUniforms) {
 
             this.numberOfUniforms = numberOfUniforms;
         }
 
-        public int getNumberOfUniforms() {
+        public final int getNumberOfUniforms() {
 
             return numberOfUniforms;
         }
     }
 
-    private MatrixUniformType uniformType;
-    private FloatBuffer uniformData;
+    private final MatrixUniformType uniformType;
+    private final FloatBuffer uniformData;
 
     public MatrixUniform(String uniformName, MatrixUniformType uniformType) {
 
@@ -38,7 +38,7 @@ public class MatrixUniform extends Uniform {
         uniformData = BufferUtils.createFloatBuffer(uniformType.getNumberOfUniforms());
     }
 
-    public void setUniformData(float... data) {
+    public final void setUniformData(float... data) {
 
         uniformData.put(data, 0, uniformType.getNumberOfUniforms());
         uniformData.flip();
@@ -47,13 +47,13 @@ public class MatrixUniform extends Uniform {
     }
 
     @Override
-    public int getNumberOfElements() {
+    public final int getNumberOfElements() {
 
         return uniformType.getNumberOfUniforms();
     }
 
     @Override
-    protected void updateProgram(int uniformHandle) {
+    protected final void updateProgram(int uniformHandle) {
 
         switch (uniformType) {
 

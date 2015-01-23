@@ -9,7 +9,6 @@ import framework.scene.components.util.TransformComponent;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import game.Scene;
-import game.components.ArcAtDepthComponent;
 import game.components.DynamicComponent;
 import game.components.SpriteComponent;
 

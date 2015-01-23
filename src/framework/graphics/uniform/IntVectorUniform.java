@@ -8,9 +8,9 @@ import java.nio.IntBuffer;
 /**
  * @author William Gervasio
  */
-public class IntVectorUniform extends VectorUniform {
+public final class IntVectorUniform extends VectorUniform {
 
-    private IntBuffer uniformData;
+    private final IntBuffer uniformData;
 
     public IntVectorUniform(String uniformName, VectorUniform.VectorUniformType uniformType) {
 
@@ -19,7 +19,7 @@ public class IntVectorUniform extends VectorUniform {
         uniformData = BufferUtils.createIntBuffer(uniformType.getNumberOfUniforms());
     }
 
-    public void setUniformData(int... data) {
+    public final void setUniformData(int... data) {
 
         uniformData.put(data, 0, uniformType.getNumberOfUniforms());
         uniformData.flip();
@@ -29,7 +29,7 @@ public class IntVectorUniform extends VectorUniform {
     }
 
     @Override
-    protected void updateProgram(int handle) {
+    protected final void updateProgram(int handle) {
 
         switch (uniformType) {
 

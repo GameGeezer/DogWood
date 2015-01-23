@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * @author William Gervasio
  */
-public class ShaderProgram {
+public final class ShaderProgram {
 
     private final int handle;
 

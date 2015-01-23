@@ -32,7 +32,7 @@ public abstract class Uniform {
      *
      * @param listener
      */
-    public void addListener(ShaderProgram listener) {
+    public final void addListener(ShaderProgram listener) {
 
         // Passes the uniform data to the shader
         passUniformToShader(listener);
@@ -45,7 +45,8 @@ public abstract class Uniform {
      *
      * @param listener
      */
-    public void removeListener(ShaderProgram listener) {
+    public final void removeListener(ShaderProgram listener) {
+
         listeners.remove(listener);
     }
 
@@ -54,7 +55,7 @@ public abstract class Uniform {
      */
     public abstract int getNumberOfElements();
 
-    protected void updateListeningShaders() {
+    protected final void updateListeningShaders() {
 
         listeners.forEach((shader) -> passUniformToShader(shader));
     }
@@ -70,7 +71,7 @@ public abstract class Uniform {
     /**
      * @param shader the program to be updated
      */
-    private void passUniformToShader(ShaderProgram shader) {
+    private final void passUniformToShader(ShaderProgram shader) {
 
         shader.bind();
 
