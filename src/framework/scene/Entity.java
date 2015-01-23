@@ -138,11 +138,6 @@ public class Entity implements Cloneable {
             return parentEntity != null;
         }
 
-        protected void setParent(Entity entity) {
-
-            this.parentEntity = entity;
-        }
-
         protected void removeSelfFromParent() {
 
             parentEntity.removeComponent(this);
@@ -155,5 +150,10 @@ public class Entity implements Cloneable {
         protected abstract void onComponentAttachedToParent(EntityComponent component);
 
         protected abstract void onComponentDetachedFromParent(EntityComponent component);
+
+        private void setParent(Entity entity) {
+
+            this.parentEntity = entity;
+        }
     }
 }
