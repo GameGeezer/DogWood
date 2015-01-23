@@ -33,6 +33,7 @@ public class DynamicVertexAttribute implements IVertexAttribute {
     public void addData(float... data) {
 
         for (int i = 0; i < data.length; ++i) {
+
             vertexData.add(data[i]);
         }
     }

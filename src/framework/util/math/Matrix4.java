@@ -8,9 +8,9 @@ public class Matrix4 implements Cloneable {
     public static int NUMBER_OF_CELLS = 16;
 
     public static final int M00 = 0, M10 = 1, M20 = 2, M30 = 3,
-            M01 = 4, M11 = 5, M21 = 6, M31 = 7,
-            M02 = 8, M12 = 9, M22 = 10, M32 = 11,
-            M03 = 12, M13 = 13, M23 = 14, M33 = 15;
+                            M01 = 4, M11 = 5, M21 = 6, M31 = 7,
+                            M02 = 8, M12 = 9, M22 = 10, M32 = 11,
+                            M03 = 12, M13 = 13, M23 = 14, M33 = 15;
 
     public float[] data = new float[16];
 
@@ -27,6 +27,7 @@ public class Matrix4 implements Cloneable {
     }
 
     public static void add(Matrix4 left, Matrix4 right, Matrix4 target) {
+
         target.data[M00] = left.data[M00] + right.data[M00];
         target.data[M10] = left.data[M10] + right.data[M10];
         target.data[M20] = left.data[M20] + right.data[M20];
@@ -46,6 +47,7 @@ public class Matrix4 implements Cloneable {
     }
 
     public static void subtract(Matrix4 left, Matrix4 right, Matrix4 target) {
+
         target.data[M00] = left.data[M00] - right.data[M00];
         target.data[M10] = left.data[M10] - right.data[M10];
         target.data[M20] = left.data[M20] - right.data[M20];
@@ -65,6 +67,7 @@ public class Matrix4 implements Cloneable {
     }
 
     public static void multiply(Matrix4 left, Matrix4 right, Matrix4 target) {
+
         float m00 = left.data[M00] * right.data[M00] + left.data[M10] * right.data[M01] + left.data[M20] * right.data[M02] + left.data[M30] * right.data[M03];
         float m10 = left.data[M00] * right.data[M10] + left.data[M10] * right.data[M11] + left.data[M20] * right.data[M12] + left.data[M30] * right.data[M13];
         float m20 = left.data[M00] * right.data[M20] + left.data[M10] * right.data[M21] + left.data[M20] * right.data[M22] + left.data[M30] * right.data[M23];
@@ -115,6 +118,7 @@ public class Matrix4 implements Cloneable {
     }
 
     public Matrix4 set(Matrix4 other) {
+
         data[M00] = other.data[M00];
         data[M10] = other.data[M10];
         data[M20] = other.data[M20];
@@ -136,6 +140,7 @@ public class Matrix4 implements Cloneable {
     }
 
     public Matrix4 set(float[][] data) {
+
         this.data[M00] = data[0][0];
         this.data[M10] = data[1][0];
         this.data[M20] = data[2][0];
@@ -157,6 +162,7 @@ public class Matrix4 implements Cloneable {
     }
 
     public Matrix4 set(float[] data) {
+
         this.data[M00] = data[M00];
         this.data[M10] = data[M10];
         this.data[M20] = data[M20];
@@ -178,6 +184,7 @@ public class Matrix4 implements Cloneable {
     }
 
     public Matrix4 loadIdentity() {
+
         data[M00] = 1;
         data[M10] = 0;
         data[M20] = 0;
@@ -199,6 +206,7 @@ public class Matrix4 implements Cloneable {
     }
 
     public Matrix4 loadZero() {
+
         data[M00] = 0;
         data[M10] = 0;
         data[M20] = 0;
@@ -220,11 +228,14 @@ public class Matrix4 implements Cloneable {
     }
 
     public Matrix4 clone() {
+
         return new Matrix4(data);
     }
 
     public String toString() {
-        return new String(data[M00] + " " + data[M10] + " " + data[M20] + " " + data[M30] + "\n" +
+
+        return new String(
+                data[M00] + " " + data[M10] + " " + data[M20] + " " + data[M30] + "\n" +
                 data[M01] + " " + data[M11] + " " + data[M21] + " " + data[M31] + "\n" +
                 data[M02] + " " + data[M12] + " " + data[M22] + " " + data[M32] + "\n" +
                 data[M03] + " " + data[M13] + " " + data[M23] + " " + data[M33]);

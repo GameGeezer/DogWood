@@ -12,28 +12,35 @@ public class Orientation extends Quaternion {
     }
 
     public Orientation(float roll, float pitch, float yaw) {
+
         setEuler(roll, pitch, yaw);
     }
 
     public Orientation setEuler(float roll, float pitch, float yaw) {
+
         eulerRepresentation.set(roll, pitch, yaw);
+
         createFromEuler(eulerRepresentation.getX(), eulerRepresentation.getY(), eulerRepresentation.getZ());
 
         return this;
     }
 
     public Orientation setEuler(Vector3 euler) {
+
         return setEuler(euler.getX(), euler.getY(), euler.getZ());
     }
 
     public Orientation rotateEuler(float roll, float pitch, float yaw) {
+
         eulerRepresentation.add(roll, pitch, yaw);
+
         createFromEuler(eulerRepresentation.getX(), eulerRepresentation.getY(), eulerRepresentation.getZ());
 
         return this;
     }
 
     public Orientation rotateEuler(Vector3 euler) {
+
         return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
     }
 
@@ -71,27 +78,34 @@ public class Orientation extends Quaternion {
     }
 
     public float getRoll() {
+
         return eulerRepresentation.getX();
     }
 
     public float getPitch() {
+
         return eulerRepresentation.getY();
     }
 
     public float getYaw() {
+
         return eulerRepresentation.getZ();
     }
 
     private void createFromEuler(float roll, float pitch, float yaw) {
+
         float cr, cp, cy, sr, sp, sy, cpcy, spsy;
+
         cr = (float) Math.cos(roll / 2);
         cp = (float) Math.cos(pitch / 2);
         cy = (float) Math.cos(yaw / 2);
         sr = (float) Math.sin(roll / 2);
         sp = (float) Math.sin(pitch / 2);
         sy = (float) Math.sin(yaw / 2);
+
         cpcy = cp * cy;
         spsy = sp * sy;
+
         w = cr * cpcy + sr * spsy;
         x = sr * cpcy - cr * spsy;
         y = cr * sp * cy + sr * cp * sy;

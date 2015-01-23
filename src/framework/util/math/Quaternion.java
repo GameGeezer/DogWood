@@ -13,15 +13,11 @@ public class Quaternion {
     }
 
     public static void multiply(Quaternion left, Quaternion right, Quaternion targer) {
-        float x = left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z;
-        float y = left.w * right.x + left.x * right.w + left.y * right.z - left.z * right.y;
-        float z = left.w * right.y - left.x * right.z + left.y * right.w + left.z * right.x;
-        float w = left.w * right.z + left.x * right.y - left.y * right.x + left.z * right.w;
 
-        targer.x = x;
-        targer.y = y;
-        targer.z = z;
-        targer.w = w;
+        targer.x = left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z;
+        targer.y = left.w * right.x + left.x * right.w + left.y * right.z - left.z * right.y;
+        targer.z = left.w * right.y - left.x * right.z + left.y * right.w + left.z * right.x;
+        targer.w = left.w * right.z + left.x * right.y - left.y * right.x + left.z * right.w;
     }
 
     public float length2() {
@@ -33,7 +29,9 @@ public class Quaternion {
     }
 
     public void inverse() {
+
         float length = length2();
+
         x /= length;
         y /= length;
         z /= length;
@@ -41,14 +39,18 @@ public class Quaternion {
     }
 
     public Quaternion normalize() {
-        float norm = (float) Math.sqrt(this.x * this.x + this.y * this.y + this.z
-                * this.z + this.w * this.w);
+
+        float norm = (float) Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
+
         if (norm > 0.0f) {
+
             this.x /= norm;
             this.y /= norm;
             this.z /= norm;
             this.w /= norm;
+
         } else {
+
             this.x = (float) 0.0;
             this.y = (float) 0.0;
             this.z = (float) 0.0;
@@ -59,34 +61,42 @@ public class Quaternion {
     }
 
     public float getX() {
+
         return x;
     }
 
     public float getY() {
+
         return y;
     }
 
     public float getZ() {
+
         return z;
     }
 
     public float getW() {
+
         return w;
     }
 
     public void setX(float x) {
+
         this.x = x;
     }
 
     public void setY(float y) {
+
         this.y = y;
     }
 
     public void setZ(float z) {
+
         this.z = z;
     }
 
     public void setW(float w) {
+
         this.w = w;
     }
 }
