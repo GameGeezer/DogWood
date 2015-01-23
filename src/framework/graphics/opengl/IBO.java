@@ -17,13 +17,13 @@ public final class IBO {
      * @param buffer A buffer containing data that needs to be passed to the GPU
      * @param usage  An opengl hint describing how the data may be used
      */
-    public IBO(IntBuffer buffer, int usage) {
+    public IBO(IntBuffer buffer, BufferedObjectUsage usage) {
 
         handle = GL15.glGenBuffers();
 
         bind();
 
-        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, usage);
+        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, usage.ID);
 
         unbind();
     }

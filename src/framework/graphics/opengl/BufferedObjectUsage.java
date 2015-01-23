@@ -7,15 +7,22 @@ import org.lwjgl.opengl.GL15;
  *
  * @author william gervasio
  */
-public class BufferedObjectUsage {
+public enum BufferedObjectUsage {
 
-    public static final int STATIC_DRAW = GL15.GL_STATIC_DRAW;
-    public static final int STATIC_READ = GL15.GL_STATIC_READ;
-    public static final int STATIC_COPY = GL15.GL_STATIC_COPY;
-    public static final int STREAM_DRAW = GL15.GL_STREAM_DRAW;
-    public static final int STREAM_READ = GL15.GL_STREAM_READ;
-    public static final int STREAM_COPY = GL15.GL_STREAM_COPY;
-    public static final int DYNAMIC_DRAW = GL15.GL_DYNAMIC_DRAW;
-    public static final int DYNAMIC_READ = GL15.GL_DYNAMIC_READ;
-    public static final int DYNAMIC_COPY = GL15.GL_DYNAMIC_COPY;
+    STATIC_DRAW(GL15.GL_STATIC_DRAW),
+    STATIC_READ(GL15.GL_STATIC_READ),
+    STATIC_COPY(GL15.GL_STREAM_DRAW),
+    STREAM_DRAW(GL15.GL_STREAM_DRAW),
+    STREAM_READ(GL15.GL_STREAM_READ),
+    STREAM_COPY(GL15.GL_STREAM_COPY),
+    DYNAMIC_DRAW(GL15.GL_DYNAMIC_DRAW),
+    DYNAMIC_READ(GL15.GL_DYNAMIC_READ),
+    DYNAMIC_COPY(GL15.GL_DYNAMIC_COPY);
+
+    public final int ID;
+
+    BufferedObjectUsage(int id) {
+
+        ID = id;
+    }
 }

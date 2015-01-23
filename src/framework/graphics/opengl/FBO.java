@@ -17,13 +17,13 @@ public final class FBO {
      * @param buffer A buffer containing data that needs to be passed to the GPU
      * @param usage  An opengl hint describing how the data may be used
      */
-    public FBO(FloatBuffer buffer, int usage) {
+    public FBO(FloatBuffer buffer, BufferedObjectUsage usage) {
 
         handle = GL15.glGenBuffers();
 
         bind();
 
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, usage);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, usage.ID);
 
         unbind();
     }

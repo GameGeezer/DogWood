@@ -1,6 +1,5 @@
 package framework.scene;
 
-import framework.util.exceptions.DogWoodException;
 import framework.util.exceptions.EntityException;
 
 import java.util.*;
