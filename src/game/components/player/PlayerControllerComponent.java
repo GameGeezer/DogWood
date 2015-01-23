@@ -1,26 +1,15 @@
 package game.components.player;
 
-import framework.graphics.Image;
-import framework.graphics.opengl.ShaderProgram;
 import framework.input.IKeyboardListener;
 import framework.input.Keyboard;
 import framework.scene.Entity;
-import framework.scene.components.physics.AABBComponent;
-import framework.scene.components.util.CameraReferenceComponent;
+import framework.scene.components.UpdateComponent;
 import framework.scene.components.util.TransformComponent;
-import framework.util.exceptions.DogWoodException;
-import framework.util.fileIO.FileUtil;
 import game.Scene;
 import game.components.DynamicComponent;
-import game.components.SpriteComponent;
-import game.enemies.Debris;
 import game.weapons.BasicBullet;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Will on 12/18/2014.

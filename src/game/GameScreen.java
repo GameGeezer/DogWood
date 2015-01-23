@@ -30,6 +30,7 @@ public class GameScreen implements IScreen {
     public void onResume() {
 
         ShaderProgram shader = null;
+        ShaderProgram shader2 = null;
         Image spriteSheet = null;
 
         try {
@@ -38,6 +39,7 @@ public class GameScreen implements IScreen {
             attributes.put(1, "in_TextureCoord");
 
             shader = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
+            shader2 = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
             spriteSheet = Image.loadPNG(new File("res/textures/ShipImage.png"));
 
         } catch (DogWoodException e) {
@@ -46,30 +48,31 @@ public class GameScreen implements IScreen {
             e.printStackTrace();
         }
 
+        Entity collisionTestEntity = new Entity();
+
+        TransformComponent ctTransform = new TransformComponent();
+        ctTransform.setTranslation(-1, 0f, -3f);
+        ctTransform.setScale(0.3f, 0.3f, 0);
 
         //create sprite
         Entity spriteEntity = new Entity();
 
-        TransformComponent spriteTransform = new TransformComponent();
-        spriteTransform.setTranslation(0, -1f, -3f);
-        spriteTransform.setOrientationEuler(0, (float) Math.PI, 0);
-        spriteTransform.setScale(0.3f, 0.3f, 0);
+        Player player = new Player();
+
+        Scene.addEntity(player);
 
         try {
 
-            SpriteComponent sprite = new SpriteComponent(spriteSheet, shader, 1, 1);
-            spriteEntity.addComponent(sprite);
-            spriteEntity.addComponent(spriteTransform);
-            spriteEntity.addComponent(new CameraReferenceComponent(Scene.getCamera()));
-            spriteEntity.addComponent(new PlayerControllerComponent());
-            spriteEntity.addComponent(new PlayerUpdateComponent());
-            spriteEntity.addComponent(new AABBComponent(0, 0, 1, 1));
-            spriteEntity.addComponent(new DynamicComponent(0.8f, .8f));
-            spriteEntity.addComponent(new ArcAtDepthComponent());
+            SpriteComponent ctsprite = new SpriteComponent(spriteSheet, shader2, 1, 1);
+            collisionTestEntity.addComponent(ctsprite);
+            collisionTestEntity.addComponent(ctTransform);
+            collisionTestEntity.addComponent(new CameraReferenceComponent(Scene.getCamera()));
+            collisionTestEntity.addComponent(new AABBComponent(0, 0, 1, 1));
 
-            Scene.addEntity(spriteEntity);
+            Scene.addEntity(collisionTestEntity);
 
         } catch (DogWoodException e) {
+
             e.printStackTrace();
         }
     }

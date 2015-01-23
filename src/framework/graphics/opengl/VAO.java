@@ -54,7 +54,12 @@ public final class VAO {
 
         }
 
+
+
         GL30.glBindVertexArray(0);
+
+        fbo.unbind();
+        ibo.unbind();
     }
 
     /**

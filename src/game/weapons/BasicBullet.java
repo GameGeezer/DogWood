@@ -75,7 +75,6 @@ public class BasicBullet extends Entity {
             addComponent(bulletDynamicComponent);
             addComponent(new CameraReferenceComponent(Scene.getCamera()));
             addComponent(new AABBComponent(0, 0, 1, 1));
-            addComponent(new ArcAtDepthComponent());
 
         } catch (DogWoodException e) {
             e.printStackTrace();
