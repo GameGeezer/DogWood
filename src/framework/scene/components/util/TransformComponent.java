@@ -1,8 +1,8 @@
 package framework.scene.components.util;
 
 import framework.graphics.opengl.ShaderProgram;
-import framework.graphics.uniform.IUniformWrapper;
-import framework.graphics.uniform.MatrixUniform;
+import framework.graphics.opengl.uniform.IUniformWrapper;
+import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.scene.Entity.EntityComponent;
 import framework.scene.components.UniformComponent;
 import framework.util.exceptions.EntityException;

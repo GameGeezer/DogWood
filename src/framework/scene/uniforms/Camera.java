@@ -1,8 +1,8 @@
 package framework.scene.uniforms;
 
 import framework.graphics.opengl.ShaderProgram;
-import framework.graphics.uniform.IUniformWrapper;
-import framework.graphics.uniform.MatrixUniform;
+import framework.graphics.opengl.uniform.IUniformWrapper;
+import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.util.math.Matrix4;
 import framework.util.math.Vector3;
 

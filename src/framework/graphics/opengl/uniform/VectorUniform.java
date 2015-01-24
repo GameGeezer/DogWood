@@ -1,4 +1,4 @@
-package framework.graphics.uniform;
+package framework.graphics.opengl.uniform;
 
 /**
  * @author William Gervasio

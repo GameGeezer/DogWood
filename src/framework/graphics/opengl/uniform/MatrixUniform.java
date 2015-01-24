@@ -1,4 +1,4 @@
-package framework.graphics.uniform;
+package framework.graphics.opengl.uniform;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;

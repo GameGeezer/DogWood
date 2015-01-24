@@ -1,9 +1,7 @@
 package framework.scene.components;
 
-import framework.graphics.uniform.IUniformWrapper;
+import framework.graphics.opengl.uniform.IUniformWrapper;
 import framework.scene.Entity.EntityComponent;
-
-import java.util.List;
 
 /**
  * @author William Gervasio

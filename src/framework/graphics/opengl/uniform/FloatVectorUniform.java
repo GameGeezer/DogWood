@@ -1,31 +1,30 @@
-package framework.graphics.uniform;
+package framework.graphics.opengl.uniform;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
-import java.nio.IntBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * @author William Gervasio
  */
-public final class IntVectorUniform extends VectorUniform {
+public class FloatVectorUniform extends VectorUniform {
 
-    private final IntBuffer uniformData;
+    private final FloatBuffer uniformData;
 
-    public IntVectorUniform(String uniformName, VectorUniform.VectorUniformType uniformType) {
+    public FloatVectorUniform(String uniformName, VectorUniformType uniformType) {
 
         super(uniformName, uniformType);
 
-        uniformData = BufferUtils.createIntBuffer(uniformType.getNumberOfUniforms());
+        uniformData = BufferUtils.createFloatBuffer(uniformType.getNumberOfUniforms());
     }
 
-    public final void setUniformData(int... data) {
+    public final void setUniformData(float... data) {
 
         uniformData.put(data, 0, uniformType.getNumberOfUniforms());
         uniformData.flip();
 
         updateListeningShaders();
-
     }
 
     @Override

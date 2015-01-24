@@ -4,7 +4,7 @@ import framework.graphics.Image;
 import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
-import framework.graphics.uniform.MatrixUniform;
+import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.graphics.vertices.IVertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
 import framework.scene.components.RenderComponent;
