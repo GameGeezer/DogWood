@@ -1,6 +1,8 @@
 package framework.graphics;
 
 import framework.graphics.opengl.*;
+import framework.graphics.opengl.bufferObjects.IBO;
+import framework.graphics.opengl.bufferObjects.VBO;
 import framework.graphics.vertices.IVertexAttribute;
 import framework.util.dataTypes.DatatypeUtil;
 import org.lwjgl.BufferUtils;

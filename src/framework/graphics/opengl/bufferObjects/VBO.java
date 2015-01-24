@@ -1,15 +1,16 @@
-package framework.graphics.opengl;
+package framework.graphics.opengl.bufferObjects;
 
+import framework.graphics.opengl.BufferedObjectUsage;
 import org.lwjgl.opengl.GL15;
 
-import java.nio.IntBuffer;
+import java.nio.FloatBuffer;
 
 /**
- * A IBO is used to store data from a int buffer. This is most commonly used to store indices.
+ * A VBO is used to store data from a float buffer. This is most commonly used for vertex data: position, normal, color, ect.
  *
  * @author William Gervasio
  */
-public final class IBO {
+public final class VBO {
 
     private final int handle;
 
@@ -17,32 +18,32 @@ public final class IBO {
      * @param buffer A buffer containing data that needs to be passed to the GPU
      * @param usage  An opengl hint describing how the data may be used
      */
-    public IBO(IntBuffer buffer, BufferedObjectUsage usage) {
+    public VBO(FloatBuffer buffer, BufferedObjectUsage usage) {
 
         handle = GL15.glGenBuffers();
 
         bind();
 
-        GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, usage.ID);
+        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, usage.ID);
 
         unbind();
     }
 
     /**
-     * Bind the buffer
+     * Binds the buffer
      */
     public final void bind() {
 
-        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, handle);
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, handle);
     }
 
     /**
-     * Unbind the buffer
+     * Unbinds the buffer
      */
     public final void unbind() {
 
         //zero is reserved and acts as "no object"
-        GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
 
     /**

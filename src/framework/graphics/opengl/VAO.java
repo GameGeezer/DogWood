@@ -1,5 +1,7 @@
 package framework.graphics.opengl;
 
+import framework.graphics.opengl.bufferObjects.IBO;
+import framework.graphics.opengl.bufferObjects.VBO;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
