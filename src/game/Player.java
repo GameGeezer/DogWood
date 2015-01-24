@@ -30,7 +30,7 @@ public class Player extends Entity {
 
         try {
 
-            image = Image.loadPNG(new File("res/textures/poulpi.png"));
+            image = Image.loadPNG(new File("res/textures/poulpi.png"), Image.ImageFormat.RGBA);
             vertexShader = FileUtil.readText("res/shaders/SpriteShader.vert");
             fragmentShader = FileUtil.readText("res/shaders/SpriteShader.frag");
 

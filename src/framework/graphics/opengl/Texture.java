@@ -13,21 +13,19 @@ import java.nio.ByteBuffer;
 public class Texture {
 
     private int handle, textureUnit, width, height;
-
-    public Texture(Image image, int textureUnit) {
-        this(image.getBuffer(), image.getWidth(), image.getHeight(), textureUnit);
-    }
+    private OGLColorType colorType;
 
     /**
      * @param buffer
      * @param textureUnit i.e GL13.GL_TEXTURE0
      */
-    public Texture(ByteBuffer buffer, int width, int height, int textureUnit) {
+    public Texture(int width, int height, int textureUnit, OGLColorType colorType, ByteBuffer buffer) {
 
         this.handle = GL11.glGenTextures();
         this.textureUnit = textureUnit;
         this.width = width;
         this.height = height;
+        this.colorType = colorType;
 
         GL13.glActiveTexture(textureUnit);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, handle);
@@ -36,28 +34,44 @@ public class Texture {
         GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
 
         // Upload the texture data and generate mip maps (for scaling)
-        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, width, height, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer);
+        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, colorType.ID, width, height, 0, colorType.RGBA.ID, GL11.GL_UNSIGNED_BYTE, buffer);
         GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
     }
 
+    public Texture(int width, int height, int textureUnit, OGLColorType colorType) {
+
+        this(width, height, textureUnit, colorType, null);
+    }
+
+    public Texture(Image image, int textureUnit) {
+
+        this(image.getWidth(), image.getHeight(), textureUnit, OGLColorType.RGBA8, image.getBuffer());
+    }
+
     public void bind() {
+
         GL13.glActiveTexture(textureUnit);
+
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, handle);
     }
 
-    public void unbind() {
+    public void unbind()
+    {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
     }
 
     public void destroy() {
+
         GL11.glDeleteTextures(handle);
     }
 
-    public int getWidth() {
+    public int getWidth()
+    {
         return width;
     }
 
     public int getHeight() {
+
         return height;
     }
 }

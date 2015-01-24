@@ -40,7 +40,7 @@ public class GameScreen implements IScreen {
 
             shader = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
             shader2 = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
-            spriteSheet = Image.loadPNG(new File("res/textures/ShipImage.png"));
+            spriteSheet = Image.loadPNG(new File("res/textures/ShipImage.png"), Image.ImageFormat.RGBA);
 
         } catch (DogWoodException e) {
             e.printStackTrace();

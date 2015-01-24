@@ -3,6 +3,7 @@ package framework.graphics.opengl;
 import framework.util.exceptions.GraphicsException;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.GL32;
 
 import java.beans.PropertyChangeEvent;
@@ -133,7 +134,13 @@ public final class ShaderProgram {
      * @return
      */
     public final int getUniformLocation(String uniform) {
+
         return GL20.glGetUniformLocation(handle, uniform);
+    }
+
+    public final int getUniformBlockLocation(String uniformBlock) {
+
+        return GL31.glGetUniformBlockIndex(handle,uniformBlock);
     }
 
     /**

@@ -38,6 +38,7 @@ public class Application {
     }
 
     public void initLWJGL(String title, int width, int height) {
+
         glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
 
         // Initialize GLFW. Most GLFW functions will not work before doing this.
