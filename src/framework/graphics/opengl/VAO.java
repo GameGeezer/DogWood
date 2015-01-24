@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The VAO (Vertex Array Object) wraps an FBO and IBO and uses vertex attribute pointers to describe
- * how data in the FBO should be passed to the shader.
+ * The VAO (Vertex Array Object) wraps an VBO and IBO and uses vertex attribute pointers to describe
+ * how data in the VBO should be passed to the shader.
  *
  * @author William Gervasio
  */
@@ -17,14 +17,14 @@ public final class VAO {
 
     private final Map<Integer, Descriptor> descriptors = new HashMap<Integer, Descriptor>();
 
-    private final FBO fbo;
+    private final VBO vbo;
     private final IBO ibo;
     private final int handle;
     private final int size;
 
-    public VAO(FBO FBO, IBO ibo, int size) {
+    public VAO(VBO vbo, IBO ibo, int size) {
 
-        this.fbo = FBO;
+        this.vbo = vbo;
         this.ibo = ibo;
         this.size = size;
 
@@ -38,7 +38,7 @@ public final class VAO {
 
         GL30.glBindVertexArray(handle);
 
-        fbo.bind();
+        vbo.bind();
         ibo.bind();
 
         for (int i : descriptors.keySet()) {
@@ -58,7 +58,7 @@ public final class VAO {
 
         GL30.glBindVertexArray(0);
 
-        fbo.unbind();
+        vbo.unbind();
         ibo.unbind();
     }
 
@@ -84,14 +84,14 @@ public final class VAO {
     }
 
     /**
-     * Delete the VertexArray and it's corresponding FBO and IBO
+     * Delete the VertexArray and it's corresponding VBO and IBO
      */
     public final void destroy() {
 
         // Delete the vertex array
         GL30.glDeleteVertexArrays(handle);
 
-        fbo.destroy();
+        vbo.destroy();
 
         ibo.destroy();
     }

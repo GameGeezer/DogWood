@@ -32,13 +32,13 @@ public class Mesh {
         this.indices = indices;
         this.vertexElements = vertexElements;
 
-        //create vertex buffer (FBO)
+        //create vertex buffer (VBO)
         FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(countTotalElements());
         for (IVertexAttribute element : vertexElements) {
             verticesBuffer.put(element.getData());
         }
         verticesBuffer.flip();
-        FBO fbo = new FBO(verticesBuffer, BufferedObjectUsage.STATIC_DRAW);
+        VBO vbo = new VBO(verticesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
         /*
             Create index buffer (IBO)
@@ -51,7 +51,7 @@ public class Mesh {
         /*
             Create the VAO
          */
-        vao = new VAO(fbo, ibo, indices.length);
+        vao = new VAO(vbo, ibo, indices.length);
         int offset = 0;
         int i = 0;
 
