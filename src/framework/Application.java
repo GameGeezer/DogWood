@@ -21,36 +21,53 @@ import java.nio.ByteBuffer;
  * @author William Gervasio
  */
 
-public class Application {
+public class Application implements Runnable {
 
-    private Game game;
-    private Timer timer = new Timer();
+    private final Game game;
+    private final String title;
+    private final int width;
+    private final int height;
+
+    private final Timer timer;
 
     private GLFWErrorCallback errorCallback;
     private GLFWKeyCallback keyCallback;
 
     private long window;
 
-    public Application(Game game, String title, int width, int height) {
-
+    public Application ( Game game, String title, int width, int height ) {
         this.game = game;
-        initLWJGL(title, width, height);
+        this.title = title;
+        this.width = width;
+        this.height = height;
+        timer = new Timer ();
     }
 
-    public void initLWJGL(String title, int width, int height) {
+    @Override
+    public void run () {
+        try {
+            init ();
+            loop ();
+
+            glfwDestroyWindow ( window );
+            keyCallback.release ();
+        } finally {
+            glfwTerminate ();
+            errorCallback.release ();
+        }
+    }
+
+    private void init () {
 
         glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
 
-        // Initialize GLFW. Most GLFW functions will not work before doing this.
         if (glfwInit() != GL11.GL_TRUE)
             throw new IllegalStateException("Unable to initialize GLFW");
 
-        // Configure our window
         glfwDefaultWindowHints(); // optional, the current window hints are already the default
         glfwWindowHint(GLFW_VISIBLE, GL_FALSE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE); // the window will be resizable
 
-        // Create the window
         window = glfwCreateWindow(width, height, title, NULL, NULL);
         if (window == NULL)
             throw new RuntimeException("Failed to create the GLFW window");
@@ -65,54 +82,43 @@ public class Application {
             }
         });
 
-        // Get the resolution of the primary monitor
-        ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-        // Center our window
+        final ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
+        // Center the window on the screen
         glfwSetWindowPos(
                 window,
                 (GLFWvidmode.width(vidmode) - width) / 2,
                 (GLFWvidmode.height(vidmode) - height) / 2
         );
 
-        // Make the OpenGL context current
         glfwMakeContextCurrent(window);
-        // Enable v-sync
+
+        // Enable VSYNC
         glfwSwapInterval(1);
 
-        // Make the window visible
         glfwShowWindow(window);
     }
 
-    public final void start() {
+    private void loop () {
 
+        GLContext.createFromCurrent ();
 
-        // This line is critical for LWJGL's interoperation with GLFW's
-        // OpenGL context, or any context that is managed externally.
-        // LWJGL detects the context that is current in the current thread,
-        // creates the ContextCapabilities instance and makes the OpenGL
-        // bindings available for use.
-        GLContext.createFromCurrent();
+        glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
 
-        // Set the clear color
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        game.init ();
+        timer.start ();
 
-        game.init();
-        timer.start();
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key.
-        while (glfwWindowShouldClose(window) == GL_FALSE) {
+        while ( glfwWindowShouldClose ( window ) == GL_FALSE ) {
             //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-            glfwSwapBuffers(window); // swap the color buffers
+            glfwSwapBuffers ( window ); // swap the color buffers
 
-            final int delta = (int) timer.getElapsedTimeMS();
-            timer.reset();
+            final int delta = ( int ) timer.getElapsedTimeMS ();
+            timer.reset ();
 
-            game.update(delta);
+            game.update ( delta );
 
-            // Poll for window events. The key callback above will only be
-            // invoked during this call.
-            glfwPollEvents();
+            glfwPollEvents ();
         }
 
     }

@@ -14,7 +14,7 @@
 #########################
 # Ignore compiler output
 #========================
-out/**/*
+out/
 
 ############################
 # Ignore Hotspot error logs

@@ -1,15 +1,25 @@
 package game;
 
 import framework.Application;
+import framework.Game;
 
 /**
  * Created by Will on 4/29/14.
  */
 public class Main {
 
-    public static void main(String[] args) {
+	public static void main ( final String[] args ) {
 
-        Application application = new Application(new DogWoodGame(), "DogWood", 1200, 800);
-        application.start();
-    }
+		final Game game = new DogWoodGame ();
+
+		final String TITLE = "DogWood";
+		final int WIDTH = 800;
+		final int HEIGHT = 600;
+
+		final Runnable application = new Application ( game, TITLE, WIDTH, HEIGHT );
+
+		final Thread applicationThread = new Thread ( application, "Application Thread" );
+		applicationThread.start ();
+
+	}
 }
