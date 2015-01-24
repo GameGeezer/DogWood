@@ -1,0 +1,22 @@
+#####################
+# DogWood .gitignore
+#====================
+# Erik Ginter
+# Will Gervasio
+#====================
+
+################################
+# Ignore IntelliJ project files
+#===============================
+.idea/vcs.xml
+.idea/workspace.xml
+
+#########################
+# Ignore compiler output
+#========================
+out/**/*
+
+############################
+# Ignore Hotspot error logs
+#===========================
+hs_err_pid*
