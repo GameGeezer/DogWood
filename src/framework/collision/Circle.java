@@ -1,4 +1,4 @@
-package framework.physics;
+package framework.collision;
 
 /**
  * Created by Will on 1/11/2015.

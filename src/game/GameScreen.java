@@ -1,7 +1,7 @@
 package game;
 
 import framework.IScreen;
-import framework.scene.components.physics.AABBComponent;
+import framework.scene.components.collision.AABBComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
 import framework.graphics.Image;
@@ -10,8 +10,6 @@ import framework.scene.Entity;
 import game.components.*;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
-import game.components.player.PlayerControllerComponent;
-import game.components.player.PlayerUpdateComponent;
 
 import java.io.File;
 import java.io.IOException;

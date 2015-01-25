@@ -4,7 +4,7 @@ import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.uniform.IUniformWrapper;
 import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.scene.Entity.EntityComponent;
-import framework.scene.components.UniformComponent;
+import framework.scene.components.graphics.UniformComponent;
 import framework.util.exceptions.EntityException;
 import framework.util.math.Transform;
 import framework.util.math.Matrix4;

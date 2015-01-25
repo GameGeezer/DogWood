@@ -5,9 +5,9 @@ package game;
  */
 
 import framework.scene.Entity;
-import framework.scene.components.RenderComponent;
-import framework.scene.components.UpdateComponent;
-import framework.scene.uniforms.Camera;
+import framework.scene.components.graphics.RenderComponent;
+import framework.scene.components.util.UpdateComponent;
+import framework.scene.Camera;
 
 import java.util.ArrayList;
 import java.util.List;

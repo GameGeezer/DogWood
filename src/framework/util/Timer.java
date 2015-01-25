@@ -10,6 +10,7 @@ public class Timer {
     public boolean running;
 
     public Timer() {
+
         startTime = 0;
         stopTime = 0;
         totalTime = 0;
@@ -20,8 +21,11 @@ public class Timer {
      * Start the timer
      */
     public void start() {
+
         if (!running) {
+
             running = true;
+
             startTime = System.currentTimeMillis();
         }
     }
@@ -30,7 +34,9 @@ public class Timer {
      * Pause the timer
      */
     public void pause() {
+
         if (running) {
+
             running = false;
             stopTime = System.currentTimeMillis();
             totalTime += stopTime - startTime;
@@ -41,7 +47,9 @@ public class Timer {
      * Resets the timer
      */
     public void reset() {
-        long time = System.currentTimeMillis();
+
+        final long time = System.currentTimeMillis();
+
         startTime = time;
         stopTime = time;
         totalTime = 0;
@@ -51,7 +59,9 @@ public class Timer {
      * @return The current elapsed time in milliseconds
      */
     public long getElapsedTimeMS() {
+
         if (running) {
+
             return System.currentTimeMillis() - startTime + totalTime;
         }
 
@@ -61,8 +71,9 @@ public class Timer {
     /**
      * @return The current elapsed time in seconds
      */
-    public long getElapsedTimeSec() {
-        return (long) Math.floor(getElapsedTimeMS() / 1000);
+    public double getElapsedTimeSec() {
+
+        return (long) Math.floor(getElapsedTimeMS() / 1000.0d);
     }
 
 }

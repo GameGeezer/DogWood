@@ -1,4 +1,4 @@
-package framework.scene.uniforms;
+package framework.scene;
 
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.uniform.IUniformWrapper;

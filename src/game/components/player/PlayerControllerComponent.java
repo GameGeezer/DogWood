@@ -4,7 +4,7 @@ import framework.input.KeyboardListener;
 import framework.scene.Entity;
 import framework.scene.components.util.TransformComponent;
 import game.Scene;
-import game.components.DynamicComponent;
+import framework.scene.components.util.DynamicComponent;
 import game.weapons.BasicBullet;
 
 import java.util.List;

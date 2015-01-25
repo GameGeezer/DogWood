@@ -1,4 +1,4 @@
-package framework.scene.components;
+package framework.scene.components.collision;
 
 import framework.scene.Entity;
 import framework.scene.components.util.TransformComponent;

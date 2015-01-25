@@ -46,7 +46,7 @@ public class Image {
 
         try {
 
-            InputStream is = new FileInputStream(file);
+            final InputStream is = new FileInputStream(file);
             PNGDecoder decoder = new PNGDecoder(is);
 
             buffer = ByteBuffer.allocateDirect(format.ELEMENT_COUNT * decoder.getWidth() * decoder.getHeight());

@@ -1,12 +1,9 @@
 package game.components.player;
 
 import framework.scene.Entity;
-import framework.scene.components.UpdateComponent;
+import framework.scene.components.util.UpdateComponent;
 import framework.scene.components.util.TransformComponent;
-import framework.util.RangeUtil;
-import framework.util.math.Vector2;
-import game.Scene;
-import game.components.DynamicComponent;
+import framework.scene.components.util.DynamicComponent;
 
 import java.util.List;
 

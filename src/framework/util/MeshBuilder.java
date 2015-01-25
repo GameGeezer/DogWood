@@ -14,8 +14,8 @@ import java.util.*;
  */
 public class MeshBuilder {
 
-    private Map<String, DynamicVertexAttribute> components = new HashMap<String, DynamicVertexAttribute>();
-    private IntArrayList indices = new IntArrayList();
+    private final Map<String, DynamicVertexAttribute> components = new HashMap<String, DynamicVertexAttribute>();
+    private final IntArrayList indices = new IntArrayList();
 
     public MeshBuilder() {
 
@@ -39,11 +39,12 @@ public class MeshBuilder {
 
         List<IVertexAttribute> attributes = new ArrayList<>();
 
-        Iterator it = components.entrySet().iterator();
+        final Iterator it = components.entrySet().iterator();
 
         while (it.hasNext()) {
 
-            Map.Entry pairs = (Map.Entry) it.next();
+            final Map.Entry pairs = (Map.Entry) it.next();
+
             attributes.add((DynamicVertexAttribute) pairs.getValue());
         }
 

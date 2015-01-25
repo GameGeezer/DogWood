@@ -1,9 +1,8 @@
 package game.enemies;
 
 import framework.scene.Entity;
-import framework.scene.components.UpdateComponent;
+import framework.scene.components.util.UpdateComponent;
 import framework.scene.components.util.TransformComponent;
-import game.components.DynamicComponent;
 
 import java.util.List;
 

@@ -41,17 +41,13 @@ public class Mesh {
         verticesBuffer.flip();
         final VBO vbo = new VBO(verticesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
-        /*
-            Create index buffer (IBO)
-         */
+        // Create the Index Buffer (IBO)
         IntBuffer indicesBuffer = BufferUtils.createIntBuffer(indices.length);
         indicesBuffer.put(indices);
         indicesBuffer.flip();
         final IBO ibo = new IBO(indicesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
-        /*
-            Create the VAO
-         */
+        // Create the Vertex Array Object (VAO)
         vao = new VAO(vbo, ibo, indices.length);
         int offset = 0;
         int i = 0;

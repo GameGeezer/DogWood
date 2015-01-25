@@ -1,8 +1,6 @@
-package framework.scene.components.physics;
+package framework.scene.components.collision;
 
-import framework.physics.AABB;
-import framework.physics.Circle;
-import framework.scene.components.CollisionComponent;
+import framework.collision.Circle;
 
 /**
  * Created by Will on 1/11/2015.

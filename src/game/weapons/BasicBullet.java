@@ -3,13 +3,13 @@ package game.weapons;
 import framework.graphics.Image;
 import framework.graphics.opengl.ShaderProgram;
 import framework.scene.Entity;
-import framework.scene.components.physics.AABBComponent;
+import framework.scene.components.collision.AABBComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import game.Scene;
-import game.components.DynamicComponent;
+import framework.scene.components.util.DynamicComponent;
 import game.components.SpriteComponent;
 
 import java.io.File;

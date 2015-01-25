@@ -1,7 +1,6 @@
-package framework.scene.components.physics;
+package framework.scene.components.collision;
 
-import framework.physics.AABB;
-import framework.scene.components.CollisionComponent;
+import framework.collision.AABB;
 
 /**
  * Created by Will on 1/10/2015.

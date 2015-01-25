@@ -25,9 +25,9 @@ public class FloatArrayList {
 
     public void add(float value) {
 
-        if (size == data.length - 1) {
+        if(size == data.length - 1) {
 
-            float[] newDataArray = new float[data.length * 2];
+            final float[] newDataArray = new float[data.length * 2];
 
             System.arraycopy(data, 0, newDataArray, 0, data.length);
 
@@ -41,18 +41,19 @@ public class FloatArrayList {
 
     public void remove(int position) {
 
-        int indexesUntilTheEnd = position - size;
+        final int indexesUntilTheEnd = position - size;
 
-        if (position >= 0 && indexesUntilTheEnd > 0) {
+        if(position >= 0 && indexesUntilTheEnd > 0) {
 
             System.arraycopy(data, position + 1, data, position, indexesUntilTheEnd);
+
             --size;
         }
     }
 
     public float[] getAsArray() {
 
-        float[] minimumArray = new float[size];
+        final float[] minimumArray = new float[size];
 
         System.arraycopy(data, 0, minimumArray, 0, size);
 

@@ -1,9 +1,9 @@
 package framework.scene.components.util;
 
 import framework.scene.Entity;
-import framework.scene.uniforms.Camera;
+import framework.scene.Camera;
 import framework.graphics.opengl.ShaderProgram;
-import framework.scene.components.UniformComponent;
+import framework.scene.components.graphics.UniformComponent;
 
 /**
  * Created by Will on 1/4/2015.

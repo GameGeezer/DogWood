@@ -68,7 +68,7 @@ public final class Color implements Cloneable {
      * @param a
      * @return
      */
-    public final Color set(float r, float g, float b, float a) {
+    public final Color set(final float r, final float g, final float b, final float a) {
 
         this.r = r;
         this.g = g;

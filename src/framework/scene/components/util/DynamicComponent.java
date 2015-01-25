@@ -1,7 +1,7 @@
-package game.components;
+package framework.scene.components.util;
 
 import framework.scene.Entity;
-import framework.scene.components.UpdateComponent;
+import framework.scene.components.util.UpdateComponent;
 import framework.scene.components.util.TransformComponent;
 import framework.util.RangeUtil;
 import framework.util.math.Vector2;
@@ -9,7 +9,9 @@ import framework.util.math.Vector2;
 import java.util.List;
 
 /**
- * Created by Will on 1/13/2015.
+ * Assumes a transformComponent has been attached to the entity or will be attached to the entity before update is called
+ *
+ * @author William Gervasio
  */
 public class DynamicComponent extends UpdateComponent {
 
@@ -46,7 +48,7 @@ public class DynamicComponent extends UpdateComponent {
     @Override
     public void update(int delta) {
 
-        float deltaOverAThousand = delta / 1000f;
+        final float deltaOverAThousand = delta / 1000f;
 
         velocity.add(acceleration.getX() * deltaOverAThousand, acceleration.getY() * deltaOverAThousand);
 

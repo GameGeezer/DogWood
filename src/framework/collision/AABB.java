@@ -1,4 +1,4 @@
-package framework.physics;
+package framework.collision;
 
 import framework.util.Region;
 import framework.util.math.Vector2;
