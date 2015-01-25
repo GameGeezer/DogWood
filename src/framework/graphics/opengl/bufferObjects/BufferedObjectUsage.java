@@ -1,4 +1,4 @@
-package framework.graphics.opengl;
+package framework.graphics.opengl.bufferObjects;
 
 import org.lwjgl.opengl.GL15;
 

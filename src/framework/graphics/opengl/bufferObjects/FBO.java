@@ -29,4 +29,9 @@ public final class FBO {
 
         GL30.glDeleteFramebuffers(handle);
     }
+
+    public final boolean checkForErrors() {
+
+        return GL30.glCheckFramebufferStatus(GL30.GL_FRAMEBUFFER) == GL30.GL_FRAMEBUFFER_COMPLETE;
+    }
 }

@@ -5,7 +5,7 @@ import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
 import framework.graphics.opengl.uniform.MatrixUniform;
-import framework.graphics.vertices.IVertexAttribute;
+import framework.graphics.vertices.VertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
 import framework.scene.components.graphics.RenderComponent;
 import framework.util.math.Matrix4;
@@ -29,7 +29,7 @@ public class SpriteComponent extends RenderComponent {
 
         super(shader);
 
-        texture = new Texture(image, GL13.GL_TEXTURE0);
+        texture = new Texture(image, 0);
 
         mesh = createMesh(texture.getWidth(), texture.getHeight(), cellsWide, cellsHigh);
 
@@ -81,7 +81,7 @@ public class SpriteComponent extends RenderComponent {
 
         int[] indices = {0, 1, 2, 0, 2, 3,};
 
-        List<IVertexAttribute> attributes = new ArrayList<>();
+        List<VertexAttribute> attributes = new ArrayList<>();
         attributes.add(new StaticVertexAttribute(vertices, 3));
         attributes.add(new StaticVertexAttribute(texCoords, 2));
 

@@ -31,8 +31,8 @@ public class Player extends Entity {
         try {
 
             image = Image.loadPNG(new File("res/textures/poulpi.png"), Image.ImageFormat.RGBA);
-            vertexShader = FileUtil.readText("res/shaders/SpriteShader.vert");
-            fragmentShader = FileUtil.readText("res/shaders/SpriteShader.frag");
+            vertexShader = FileUtil.readText("res/shaders/DeferredMeshShader.vert");
+            fragmentShader = FileUtil.readText("res/shaders/DeferredMeshShader.frag");
 
         } catch(DogWoodException e) {
 

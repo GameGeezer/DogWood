@@ -2,9 +2,7 @@ package framework.util;
 
 import framework.graphics.Mesh;
 import framework.graphics.vertices.DynamicVertexAttribute;
-import framework.graphics.vertices.IVertexAttribute;
-import framework.graphics.vertices.StaticVertexAttribute;
-import framework.util.dataTypes.FloatArrayList;
+import framework.graphics.vertices.VertexAttribute;
 import framework.util.dataTypes.IntArrayList;
 
 import java.util.*;
@@ -37,7 +35,7 @@ public class MeshBuilder {
 
     public Mesh build() {
 
-        List<IVertexAttribute> attributes = new ArrayList<>();
+        List<VertexAttribute> attributes = new ArrayList<>();
 
         final Iterator it = components.entrySet().iterator();
 

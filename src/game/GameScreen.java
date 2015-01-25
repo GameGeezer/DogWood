@@ -1,6 +1,7 @@
 package game;
 
 import framework.IScreen;
+import framework.graphics.DeferredRenderer;
 import framework.scene.components.collision.AABBComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
@@ -21,6 +22,8 @@ import java.util.Map;
  */
 public class GameScreen implements IScreen {
 
+    private DeferredRenderer renderer;
+
     public void onPause() {
 
     }
@@ -40,6 +43,7 @@ public class GameScreen implements IScreen {
             shader2 = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
             spriteSheet = Image.loadPNG(new File("res/textures/ShipImage.png"), Image.ImageFormat.RGBA);
 
+            renderer = new DeferredRenderer(800, 600);
         } catch (DogWoodException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -86,6 +90,8 @@ public class GameScreen implements IScreen {
     public void update(int delta) {
 
         Scene.update(delta);
+        renderer.beginDrawing();
         Scene.render(delta);
+        renderer.endDrawing();
     }
 }

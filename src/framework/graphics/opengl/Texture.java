@@ -1,6 +1,7 @@
 package framework.graphics.opengl;
 
 import framework.graphics.Image;
+import framework.graphics.opengl.bufferObjects.AttachmentType;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL30;
@@ -19,10 +20,10 @@ public class Texture {
      * @param buffer
      * @param textureUnit i.e GL13.GL_TEXTURE0
      */
-    public Texture(final int width, final int height, final int textureUnit, final OGLColorType colorType, final ByteBuffer buffer) {
+    public Texture(final int width, final int height, final int relativeTextureUnit, final OGLColorType colorType, final ByteBuffer buffer) {
 
         this.handle = GL11.glGenTextures();
-        this.textureUnit = textureUnit;
+        this.textureUnit = GL13.GL_TEXTURE0 + relativeTextureUnit;
         this.width = width;
         this.height = height;
         this.colorType = colorType;
@@ -46,6 +47,11 @@ public class Texture {
     public Texture(final Image image, final int textureUnit) {
 
         this(image.getWidth(), image.getHeight(), textureUnit, OGLColorType.RGBA8, image.getBuffer());
+    }
+
+    public final void attachToFBO(final AttachmentType attachment) {
+        // Add this texture as a buffer to the Frame Buffer Objects
+        GL30.glFramebufferTexture2D(GL30.GL_FRAMEBUFFER, attachment.ID, GL11.GL_TEXTURE_2D, handle, 0);
     }
 
     public void bind() {
@@ -74,5 +80,10 @@ public class Texture {
     public int getHeight() {
 
         return height;
+    }
+
+    public int getUnit() {
+
+        return textureUnit;
     }
 }

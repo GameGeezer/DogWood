@@ -3,12 +3,12 @@ package framework.graphics.vertices;
 import framework.util.dataTypes.FloatArrayList;
 
 /**
- * DynamicVertexAttribute is an IVertexAttribute that can be added to. This is useful if not all the
+ * DynamicVertexAttribute is a VertexAttribute that can be added to. This is useful if not all the
  * data for the attribute is known upfront and needs to be built.
  *
  * @author William Gervasio
  */
-public class DynamicVertexAttribute implements IVertexAttribute {
+public class DynamicVertexAttribute implements VertexAttribute {
 
     private final FloatArrayList vertexData = new FloatArrayList();
     private final int elementsPerVertex;

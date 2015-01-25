@@ -1,11 +1,11 @@
 package framework.graphics.vertices;
 
 /**
- * An IVertexAttribute that cannot be altered. Fastest if all the data for the attribute is known up front.
+ * A VertexAttribute that cannot be altered. Fastest if all the data for the attribute is known up front.
  *
  * @author William Gervasio
  */
-public class StaticVertexAttribute implements IVertexAttribute {
+public class StaticVertexAttribute implements VertexAttribute {
 
     private final float[] data;
     private final int elementsPerVertex;

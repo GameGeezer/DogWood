@@ -1,6 +1,5 @@
 package framework.graphics.opengl.bufferObjects;
 
-import framework.graphics.opengl.BufferedObjectUsage;
 import org.lwjgl.opengl.GL15;
 
 import java.nio.FloatBuffer;
