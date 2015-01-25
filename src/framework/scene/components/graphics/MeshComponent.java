@@ -1,6 +1,5 @@
 package framework.scene.components.graphics;
 
-import framework.graphics.Image;
 import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 
@@ -11,7 +10,7 @@ public class MeshComponent extends RenderComponent {
 
     private Mesh mesh;
 
-    public MeshComponent(Mesh mesh, Image image, ShaderProgram shader) {
+    public MeshComponent(Mesh mesh, ShaderProgram shader) {
 
         super(shader);
 

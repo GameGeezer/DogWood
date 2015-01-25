@@ -39,7 +39,7 @@ public class DeferredRenderer {
     public DeferredRenderer(final int width, final int height) throws GraphicsException{
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glDisable(GL11.GL_CULL_FACE); // Enable later
+        GL11.glEnable(GL11.GL_CULL_FACE); // Enable later
 
         positionBuffer = new Texture(width, height, POSITION_BUFFER_BINDING, OGLColorType.RGBA16F);
         normalBuffer = new Texture(width, height, NORMAL_BUFFER_BINDING, OGLColorType.RGBA16F);
