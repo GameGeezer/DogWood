@@ -5,6 +5,9 @@ import org.lwjgl.glfw.GLFWScrollCallback;
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * @author Erik Ginter
+ */
 public final class MouseScrollCallback extends GLFWScrollCallback {
 
 	public final Collection < MouseScrollListener > listeners;

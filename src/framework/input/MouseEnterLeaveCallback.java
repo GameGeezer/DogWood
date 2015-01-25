@@ -8,6 +8,9 @@ import java.util.HashSet;
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 
+/**
+ * @author Erik Ginter
+ */
 public final class MouseEnterLeaveCallback extends GLFWCursorEnterCallback {
 
 	public final Collection < MouseEnterLeaveListener > listeners;

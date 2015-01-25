@@ -9,6 +9,9 @@ import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 import static org.lwjgl.glfw.GLFW.GLFW_REPEAT;
 
+/**
+ * @author Erik Ginter
+ */
 public final class KeyboardCallback extends GLFWKeyCallback {
 
 	public static KeyboardCallback KEYBOARD = new KeyboardCallback ();

@@ -1,7 +1,7 @@
 package framework.input;
 
 /**
- * Created by Will on 12/19/2014.
+ * @author Erik Ginter
  */
 public interface KeyboardListener {
 

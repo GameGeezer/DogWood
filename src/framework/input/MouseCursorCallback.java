@@ -5,6 +5,9 @@ import org.lwjgl.glfw.GLFWCursorPosCallback;
 import java.util.Collection;
 import java.util.HashSet;
 
+/**
+ * @author Erik Ginter
+ */
 public final class MouseCursorCallback extends GLFWCursorPosCallback {
 
 	public final Collection < MouseCursorListener > listeners;
