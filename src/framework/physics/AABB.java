@@ -9,7 +9,7 @@ import framework.util.math.Vector2;
 public class AABB {
 
     private float x, y, halfWidth, halfHeight;
-    private Region region;
+    private final Region region;
 
     public AABB(float x, float y, float width, float height) {
 

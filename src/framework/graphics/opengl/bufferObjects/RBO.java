@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL30;
 /**
  * Render buffer object
  */
-public class RBO {
+public final class RBO {
 
     enum RenderBufferStorage {
 
@@ -29,7 +29,12 @@ public class RBO {
         GL30.glBindRenderbuffer(GL30.GL_RENDERBUFFER, 0);
     }
 
-    public void unbind() {
+    public final void bind() {
+        // Zero is reserved and unbinds the current render buffer
+        GL30.glBindRenderbuffer(GL30.GL_RENDERBUFFER, handle);
+    }
+
+    public final void unbind() {
         // Zero is reserved and unbinds the current render buffer
         GL30.glBindRenderbuffer(GL30.GL_RENDERBUFFER, 0);
     }

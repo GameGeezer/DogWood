@@ -28,14 +28,14 @@ public final class ShaderProgram {
      * @param attributes
      * @throws GraphicsException
      */
-    public ShaderProgram(String vertexShader, String fragmentShader, Map<Integer, String> attributes) throws GraphicsException {
+    public ShaderProgram(final String vertexShader, final String fragmentShader, final Map<Integer, String> attributes) throws GraphicsException {
 
         // Create the shader and grab the handle
         handle = GL20.glCreateProgram();
 
         // Compile the vertex and fragment shaders then grab their handles. Throw an exception if they can't be compiled
-        int vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
-        int fragmentHandle = compileShader(fragmentShader, GL20.GL_FRAGMENT_SHADER);
+        final int vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
+        final int fragmentHandle = compileShader(fragmentShader, GL20.GL_FRAGMENT_SHADER);
 
         // Attach the the vertex and fragment shaders to the program.
         GL20.glAttachShader(handle, vertexHandle);
@@ -51,8 +51,10 @@ public final class ShaderProgram {
         GL20.glLinkProgram(handle);
 
         // Check if there was any errors while linking
-        if (checkForLinkError(handle))
+        if (checkForLinkError(handle)) {
+
             throw new GraphicsException("Failed to link shader");
+        }
 
 
         // Now that the program is created we can free memory
@@ -71,15 +73,15 @@ public final class ShaderProgram {
      * @param attributes
      * @throws GraphicsException
      */
-    public ShaderProgram(String vertexShader, String fragmentShader, String geometryShader, Map<Integer, String> attributes) throws GraphicsException {
+    public ShaderProgram(final String vertexShader, final String fragmentShader, final String geometryShader, final Map<Integer, String> attributes) throws GraphicsException {
 
         // Create the shader and grab the handle
         handle = GL20.glCreateProgram();
 
         // Compile the vertex, fragment, and geometry shaders then grab their handles. Throw an exception if they can't be compiled
-        int vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
-        int fragmentHandle = compileShader(fragmentShader, GL20.GL_FRAGMENT_SHADER);
-        int geometryHandle = compileShader(geometryShader, GL32.GL_GEOMETRY_SHADER);
+        final int vertexHandle = compileShader(vertexShader, GL20.GL_VERTEX_SHADER);
+        final int fragmentHandle = compileShader(fragmentShader, GL20.GL_FRAGMENT_SHADER);
+        final int geometryHandle = compileShader(geometryShader, GL32.GL_GEOMETRY_SHADER);
 
         GL20.glAttachShader(handle, vertexHandle);
         GL20.glAttachShader(handle, fragmentHandle);
@@ -87,6 +89,7 @@ public final class ShaderProgram {
 
         // Bind all of the attributes of name(value) to a location(Key)
         for (Map.Entry<Integer, String> e : attributes.entrySet()) {
+
             GL20.glBindAttribLocation(handle, e.getKey(), e.getValue());
         }
 
@@ -94,8 +97,10 @@ public final class ShaderProgram {
         GL20.glLinkProgram(handle);
 
         // Check if there was any errors while linking
-        if (checkForLinkError(handle))
+        if (checkForLinkError(handle)) {
+
             throw new GraphicsException("Failed to link shader");
+        }
 
         // Now that the program is created we can free memory
         GL20.glDetachShader(handle, vertexHandle);
@@ -110,6 +115,7 @@ public final class ShaderProgram {
      * Bind the shader
      */
     public final void bind() {
+
         GL20.glUseProgram(handle);
     }
 
@@ -117,6 +123,7 @@ public final class ShaderProgram {
      * Unbind the shader
      */
     public final void unbind() {
+
         GL20.glUseProgram(0);
     }
 
@@ -124,6 +131,7 @@ public final class ShaderProgram {
      * Delete the shader
      */
     public final void destroy() {
+
         GL20.glDeleteProgram(handle);
     }
 
@@ -133,12 +141,12 @@ public final class ShaderProgram {
      * @param uniform
      * @return
      */
-    public final int getUniformLocation(String uniform) {
+    public final int getUniformLocation(final String uniform) {
 
         return GL20.glGetUniformLocation(handle, uniform);
     }
 
-    public final int getUniformBlockLocation(String uniformBlock) {
+    public final int getUniformBlockLocation(final String uniformBlock) {
 
         return GL31.glGetUniformBlockIndex(handle,uniformBlock);
     }
@@ -151,9 +159,9 @@ public final class ShaderProgram {
      * @return A handle to the compiled shader
      * @throws GraphicsException
      */
-    private final int compileShader(String shader, int type) throws GraphicsException {
+    private final int compileShader(final String shader, final int type) throws GraphicsException {
 
-        int handle = GL20.glCreateShader(type);
+        final int handle = GL20.glCreateShader(type);
 
         // Link the source
         GL20.glShaderSource(handle, shader);
@@ -162,13 +170,21 @@ public final class ShaderProgram {
 
         // If the shader failed to compile throw an exception
         if (GL20.glGetShaderi(handle, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+
             switch (type) {
+
                 case GL20.GL_VERTEX_SHADER:
                     throw new GraphicsException("Failed to compile vertex shader");
+
                 case GL20.GL_FRAGMENT_SHADER:
                     throw new GraphicsException("Failed to compile fragment shader");
+
                 case GL32.GL_GEOMETRY_SHADER:
                     throw new GraphicsException("Failed to compile geometry shader");
+
+                default:
+                    // Should never be hit
+                    throw new GraphicsException("Failed to compile unknown shader shader");
             }
         }
 
@@ -181,7 +197,7 @@ public final class ShaderProgram {
      * @param handle
      * @return True if properly linked
      */
-    private final boolean checkForLinkError(int handle) {
+    private final boolean checkForLinkError(final int handle) {
 
         return GL20.glGetProgrami(handle, GL20.GL_LINK_STATUS) == GL11.GL_FALSE;
     }

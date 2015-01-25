@@ -12,14 +12,14 @@ import java.nio.ByteBuffer;
  */
 public class Texture {
 
-    private int handle, textureUnit, width, height;
+    private final int handle, textureUnit, width, height;
     private OGLColorType colorType;
 
     /**
      * @param buffer
      * @param textureUnit i.e GL13.GL_TEXTURE0
      */
-    public Texture(int width, int height, int textureUnit, OGLColorType colorType, ByteBuffer buffer) {
+    public Texture(final int width, final int height, final int textureUnit, final OGLColorType colorType, final ByteBuffer buffer) {
 
         this.handle = GL11.glGenTextures();
         this.textureUnit = textureUnit;
@@ -38,12 +38,12 @@ public class Texture {
         GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
     }
 
-    public Texture(int width, int height, int textureUnit, OGLColorType colorType) {
+    public Texture(final int width, final int height, final int textureUnit, final OGLColorType colorType) {
 
         this(width, height, textureUnit, colorType, null);
     }
 
-    public Texture(Image image, int textureUnit) {
+    public Texture(final Image image, final int textureUnit) {
 
         this(image.getWidth(), image.getHeight(), textureUnit, OGLColorType.RGBA8, image.getBuffer());
     }
@@ -57,6 +57,7 @@ public class Texture {
 
     public void unbind()
     {
+
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
     }
 
@@ -65,8 +66,8 @@ public class Texture {
         GL11.glDeleteTextures(handle);
     }
 
-    public int getWidth()
-    {
+    public int getWidth() {
+
         return width;
     }
 

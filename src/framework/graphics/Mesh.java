@@ -20,10 +20,10 @@ import java.util.List;
 
 public class Mesh {
 
-    protected VAO vao;
+    protected final VAO vao;
 
-    private List<IVertexAttribute> vertexElements;
-    private int[] indices;
+    private final List<IVertexAttribute> vertexElements;
+
 
     /**
      * @param indices
@@ -31,7 +31,6 @@ public class Mesh {
      */
     public Mesh(int[] indices, List<IVertexAttribute> vertexElements) {
 
-        this.indices = indices;
         this.vertexElements = vertexElements;
 
         //create vertex buffer (VBO)
@@ -40,7 +39,7 @@ public class Mesh {
             verticesBuffer.put(element.getData());
         }
         verticesBuffer.flip();
-        VBO vbo = new VBO(verticesBuffer, BufferedObjectUsage.STATIC_DRAW);
+        final VBO vbo = new VBO(verticesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
         /*
             Create index buffer (IBO)
@@ -48,7 +47,7 @@ public class Mesh {
         IntBuffer indicesBuffer = BufferUtils.createIntBuffer(indices.length);
         indicesBuffer.put(indices);
         indicesBuffer.flip();
-        IBO ibo = new IBO(indicesBuffer, BufferedObjectUsage.STATIC_DRAW);
+        final IBO ibo = new IBO(indicesBuffer, BufferedObjectUsage.STATIC_DRAW);
 
         /*
             Create the VAO
@@ -59,9 +58,9 @@ public class Mesh {
 
         for (IVertexAttribute element : vertexElements) {
             // Find the number of bytes per element for the attribute
-            int sizeInBytes = element.getElementsPerVertex() * DatatypeUtil.FLOAT_SIZE_BYTES;
+            final int sizeInBytes = element.getElementsPerVertex() * DatatypeUtil.FLOAT_SIZE_BYTES;
             // Find the number of vertices contained within the attribute data
-            int numberOfVertices = element.getData().length / element.getElementsPerVertex();
+            final int numberOfVertices = element.getData().length / element.getElementsPerVertex();
             vao.addVertexAttribute(i, new Descriptor(element.getElementsPerVertex(), GL11.GL_FLOAT, false, sizeInBytes, offset));
             offset += sizeInBytes * numberOfVertices;
             ++i;
@@ -91,6 +90,7 @@ public class Mesh {
         int totalElementsCount = 0;
 
         for (IVertexAttribute element : vertexElements) {
+
             totalElementsCount += element.getData().length;
         }
 

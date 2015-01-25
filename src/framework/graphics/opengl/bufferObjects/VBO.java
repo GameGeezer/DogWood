@@ -18,7 +18,7 @@ public final class VBO {
      * @param buffer A buffer containing data that needs to be passed to the GPU
      * @param usage  An opengl hint describing how the data may be used
      */
-    public VBO(FloatBuffer buffer, BufferedObjectUsage usage) {
+    public VBO(final FloatBuffer buffer, final BufferedObjectUsage usage) {
 
         handle = GL15.glGenBuffers();
 
