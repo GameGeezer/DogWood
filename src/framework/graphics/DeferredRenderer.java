@@ -86,7 +86,7 @@ public class DeferredRenderer {
 
         fbo.unbind();
 
-        diffuseBuffer.bind();
+        positionBuffer.bind();
         GL11.glBegin(GL11.GL_QUADS);
 
         GL11.glTexCoord2f(0.0f, 0.0f);
@@ -103,7 +103,7 @@ public class DeferredRenderer {
 
         GL11.glEnd();
 
-        diffuseBuffer.unbind();
+        positionBuffer.unbind();
     }
 
     public void destroy() {
