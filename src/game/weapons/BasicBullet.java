@@ -30,8 +30,8 @@ public class BasicBullet extends Entity {
         try {
 
             bulletImage = Image.loadPNG(new File("res/textures/BulletImage.png"), Image.ImageFormat.RGBA);
-            bulletVertexShader = FileUtil.readText("res/shaders/SpriteShader.vert");
-            bulletFragmentShader = FileUtil.readText("res/shaders/SpriteShader.frag");
+            bulletVertexShader = FileUtil.readText("res/shaders/DeferredMeshShader.vert");
+            bulletFragmentShader = FileUtil.readText("res/shaders/DeferredMeshShader.frag");
 
         } catch(DogWoodException e) {
 
@@ -51,7 +51,8 @@ public class BasicBullet extends Entity {
 
             Map<Integer, String> attributes = new HashMap<>();
             attributes.put(0, "in_Position");
-            attributes.put(1, "in_TextureCoord");
+            attributes.put(1, "in_Normal");
+            attributes.put(2, "in_TextureCoord");
 
             bulletShader = new ShaderProgram(bulletVertexShader, bulletFragmentShader, attributes);
 

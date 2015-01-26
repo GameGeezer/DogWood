@@ -69,6 +69,13 @@ public class SpriteComponent extends RenderComponent {
                 xRatio, yRatio, 0f,
         };
 
+        float[] normals = {
+                0f, 0f, 1f,
+                0f, 0f, 1f,
+                0f, 0f, 1f,
+                0f, 0f, 1f,
+        };
+
         float texcoordX = (1.0f / (float) cellsWide);
         float texcoordY = (1.0f / (float) cellsHigh);
 
@@ -83,6 +90,7 @@ public class SpriteComponent extends RenderComponent {
 
         List<VertexAttribute> attributes = new ArrayList<>();
         attributes.add(new StaticVertexAttribute(vertices, 3));
+        attributes.add(new StaticVertexAttribute(normals, 3));
         attributes.add(new StaticVertexAttribute(texCoords, 2));
 
         return new Mesh(indices, attributes);

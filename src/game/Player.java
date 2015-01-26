@@ -51,7 +51,8 @@ public class Player extends Entity {
 
             Map<Integer, String> attributes = new HashMap<>();
             attributes.put(0, "in_Position");
-            attributes.put(1, "in_TextureCoord");
+            attributes.put(1, "in_Normal");
+            attributes.put(2, "in_TextureCoord");
 
             SpriteComponent sprite = new SpriteComponent(image, new ShaderProgram(vertexShader, fragmentShader, attributes), 1, 1);
             addComponent(sprite);

@@ -39,7 +39,7 @@ public class DeferredRenderer {
     public DeferredRenderer(final int width, final int height) throws GraphicsException{
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glEnable(GL11.GL_CULL_FACE); // Enable later
+        GL11.glEnable(GL11.GL_CULL_FACE);
 
         positionBuffer = new Texture(width, height, POSITION_BUFFER_BINDING, OGLColorType.RGBA16F);
         normalBuffer = new Texture(width, height, NORMAL_BUFFER_BINDING, OGLColorType.RGBA16F);
@@ -57,11 +57,11 @@ public class DeferredRenderer {
         normalBuffer.attachToFBO(AttachmentType.COLOR_ATTACHMENT1);
         diffuseBuffer.attachToFBO(AttachmentType.COLOR_ATTACHMENT2);
 
-        final IntBuffer buffer = BufferUtils.createIntBuffer(4);
+        final IntBuffer buffer = BufferUtils.createIntBuffer(3);
         buffer.put(0, AttachmentType.COLOR_ATTACHMENT0.ID);
         buffer.put(1, AttachmentType.COLOR_ATTACHMENT1.ID);
         buffer.put(2, AttachmentType.COLOR_ATTACHMENT2.ID);
-        //buffer.put(specularBuffer.getUnit(), GL_COLOR_ATTACHMENT3);
+
         buffer.rewind();
         // Creates an array of buffers that the fragment shader will output to
         GL20.glDrawBuffers(buffer);
@@ -69,6 +69,9 @@ public class DeferredRenderer {
         if(!fbo.checkForErrors()) {
             throw new GraphicsException("Could not compile FBO");
         }
+
+        fboDepthBuffer.unbind();
+        fbo.unbind();
     }
 
     public void beginDrawing() {
@@ -77,14 +80,13 @@ public class DeferredRenderer {
 
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
-        //fbo.unbind();
     }
 
     public void endDrawing() {
 
         fbo.unbind();
 
-        positionBuffer.bind();
+        diffuseBuffer.bind();
         GL11.glBegin(GL11.GL_QUADS);
 
         GL11.glTexCoord2f(0.0f, 0.0f);
@@ -101,7 +103,7 @@ public class DeferredRenderer {
 
         GL11.glEnd();
 
-        positionBuffer.unbind();
+        diffuseBuffer.unbind();
     }
 
     public void destroy() {
