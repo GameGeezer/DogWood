@@ -1,5 +1,6 @@
 package framework;
 
+import framework.input.KeyboardCallback;
 import framework.input.KeyboardListener;
 import framework.util.Timer;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -9,7 +10,6 @@ import org.lwjgl.opengl.GLContext;
 
 import java.nio.ByteBuffer;
 
-import static framework.input.KeyboardCallback.KEYBOARD;
 import static org.lwjgl.glfw.Callbacks.errorCallbackPrint;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.glfw.GLFW.GLFW_RESIZABLE;
@@ -43,6 +43,8 @@ import static org.lwjgl.system.MemoryUtil.NULL;
  */
 public class Application implements Runnable {
 
+	public static final KeyboardCallback KEYBOARD = new KeyboardCallback ();
+
 	private final Game game;
 	private final String title;
 	private final int width;
@@ -54,7 +56,7 @@ public class Application implements Runnable {
 
 	private long window;
 
-	public Application ( Game game, String title, int width, int height ) {
+	public Application ( final Game game, final String title, final int width, final int height ) {
 		this.game = game;
 		this.title = title;
 		this.width = width;

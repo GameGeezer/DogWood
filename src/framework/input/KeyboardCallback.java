@@ -2,6 +2,7 @@ package framework.input;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 
+import java.lang.annotation.Inherited;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -10,11 +11,13 @@ import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 import static org.lwjgl.glfw.GLFW.GLFW_REPEAT;
 
 /**
+ * A GLFWKeyCallback for dispatching KeyboardListener events.
+ *
  * @author Erik Ginter
+ * @see org.lwjgl.glfw.GLFWKeyCallback
+ * @see framework.input.KeyboardListener
  */
 public final class KeyboardCallback extends GLFWKeyCallback {
-
-	public static KeyboardCallback KEYBOARD = new KeyboardCallback ();
 
 	public final Collection < KeyboardListener > listeners;
 

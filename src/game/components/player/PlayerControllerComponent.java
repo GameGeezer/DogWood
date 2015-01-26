@@ -2,14 +2,14 @@ package game.components.player;
 
 import framework.input.KeyboardListener;
 import framework.scene.Entity;
+import framework.scene.components.util.DynamicComponent;
 import framework.scene.components.util.TransformComponent;
 import game.Scene;
-import framework.scene.components.util.DynamicComponent;
 import game.weapons.BasicBullet;
 
 import java.util.List;
 
-import static framework.input.KeyboardCallback.KEYBOARD;
+import static framework.Application.KEYBOARD;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
