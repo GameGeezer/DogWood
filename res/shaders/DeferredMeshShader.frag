@@ -11,6 +11,9 @@ void main(void) {
 
 	vec4 texel = texture(texture_diffuse, pass_TextureCoord);
 
+	if(texel.a < 0.5) {
+		discard;
+	}
 	gl_FragData[0] = texel;
 	gl_FragData[1] = pass_Normal;
 	gl_FragData[2] = texel;

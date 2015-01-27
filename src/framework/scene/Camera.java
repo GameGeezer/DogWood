@@ -4,6 +4,7 @@ import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.uniform.IUniformWrapper;
 import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.util.math.Matrix4;
+import framework.util.math.Transform;
 import framework.util.math.Vector3;
 
 /**
@@ -20,6 +21,8 @@ public class Camera implements IUniformWrapper {
     private final MatrixUniform projectionUniform = new MatrixUniform(PROJECTION_UNIFORM, MatrixUniform.MatrixUniformType.MATRIX4);
     private final MatrixUniform viewUniform = new MatrixUniform(VIEW_UNIFORM, MatrixUniform.MatrixUniformType.MATRIX4);
 
+    private final Transform transform = new Transform();
+
     public Camera(float width, float height, float near, float far, float fieldOfView) {
 
         this.width = width;
@@ -31,6 +34,18 @@ public class Camera implements IUniformWrapper {
         updateView();
 
         updateProjection();
+    }
+
+    public void move(float x, float y, float z) {
+
+        transform.translate(-x, -y, -z);
+        updateView();
+    }
+
+    public void rotate(float roll, float pitch, float yaw) {
+
+        transform.rotateEuler(-roll, -pitch, -yaw);
+        updateView();
     }
 
     /**
@@ -119,11 +134,6 @@ public class Camera implements IUniformWrapper {
         viewUniform.removeListener(shader);
     }
 
-    private void updateView() {
-
-        viewUniform.setUniformData(view.data);
-    }
-
     private void updateProjection() {
 
         float aspectRatio = width / height;
@@ -140,5 +150,15 @@ public class Camera implements IUniformWrapper {
         projection.data[Matrix4.M33] = 0;
 
         projectionUniform.setUniformData(projection.data);
+    }
+
+    private void updateView() {
+
+        view.set(transform.getScale());
+
+        Matrix4.multiply(view, transform.getOrientation().computeMatrix(), view);
+        Matrix4.multiply(view, transform.getPosition(), view);
+
+        viewUniform.setUniformData(view.data);
     }
 }
