@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by Will on 1/23/2015.
@@ -41,9 +42,9 @@ public class DeferredRenderer {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_CULL_FACE);
 
-        positionBuffer = new Texture(width, height, POSITION_BUFFER_BINDING, OGLColorType.RGBA16F);
-        normalBuffer = new Texture(width, height, NORMAL_BUFFER_BINDING, OGLColorType.RGBA16F);
-        diffuseBuffer = new Texture(width, height, DIFFUSE_BUFFER_BINDING, OGLColorType.RGBA16F);
+        positionBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT0.ID, OGLColorType.RGBA16F);
+        normalBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT1.ID, OGLColorType.RGBA16F);
+        diffuseBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT2.ID, OGLColorType.RGBA16F);
 
         screenTexture = new Texture(width, height, SCREEN_BUFFER_BINDING, OGLColorType.RGBA8);
 
@@ -77,16 +78,16 @@ public class DeferredRenderer {
     public void beginDrawing() {
 
         fbo.bind();
-
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
     }
 
     public void endDrawing() {
 
+
         fbo.unbind();
 
-        positionBuffer.bind();
+        diffuseBuffer.bind();
         GL11.glBegin(GL11.GL_QUADS);
 
         GL11.glTexCoord2f(0.0f, 0.0f);
@@ -103,7 +104,7 @@ public class DeferredRenderer {
 
         GL11.glEnd();
 
-        positionBuffer.unbind();
+        diffuseBuffer.unbind();
     }
 
     public void destroy() {

@@ -20,10 +20,10 @@ public class Texture {
      * @param buffer
      * @param textureUnit i.e GL13.GL_TEXTURE0
      */
-    public Texture(final int width, final int height, final int relativeTextureUnit, final OGLColorType colorType, final ByteBuffer buffer) {
+    public Texture(final int width, final int height, final int textureUnit, final OGLColorType colorType, final ByteBuffer buffer) {
 
         this.handle = GL11.glGenTextures();
-        this.textureUnit = GL13.GL_TEXTURE0 + relativeTextureUnit;
+        this.textureUnit = textureUnit;
         this.width = width;
         this.height = height;
         this.colorType = colorType;
