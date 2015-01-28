@@ -1,9 +1,9 @@
 package game.components.player;
 
 import framework.scene.Entity;
+import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.util.UpdateComponent;
 import framework.scene.components.util.TransformComponent;
-import framework.scene.components.util.DynamicComponent;
 
 import java.util.List;
 
@@ -12,20 +12,17 @@ import java.util.List;
  */
 public class PlayerUpdateComponent extends UpdateComponent {
 
-    private List<DynamicComponent> dynamicComponents;
     private List<PlayerControllerComponent> controllerComponents;
-    private List<TransformComponent> transformComponents;
+    private List<PhysicsBodyComponent> bodyComponents;
     private float rotationAlongArc = (float) Math.PI / 5f / 2f;
     private float depth = -5;
 
     @Override
     protected void onAttach() {
 
-        dynamicComponents = (List<DynamicComponent>) (List<?>) getParent().getComponentsOfType(DynamicComponent.class);
-
         controllerComponents = (List<PlayerControllerComponent>) (List<?>) getParent().getComponentsOfType(PlayerControllerComponent.class);
 
-        transformComponents = (List<TransformComponent>) (List<?>) getParent().getComponentsOfType(TransformComponent.class);
+        bodyComponents = (List<PhysicsBodyComponent>) (List<?>) getParent().getComponentsOfType(PhysicsBodyComponent.class);
     }
 
     @Override
@@ -46,30 +43,31 @@ public class PlayerUpdateComponent extends UpdateComponent {
     @Override
     public void update(int delta) {
 
-        DynamicComponent dynamicComponent = dynamicComponents.get(0);
+
+        PhysicsBodyComponent bodyComponent = bodyComponents.get(0);
 
         PlayerControllerComponent controllerComponent = controllerComponents.get(0);
 
         if (controllerComponent.isMoveLeft()) {
-
-            dynamicComponent.setAccelerationX(-1.8f);
+            bodyComponent.move(-1/30f, 0);
         }
 
         if (controllerComponent.isMoveRight()) {
 
-            dynamicComponent.setAccelerationX(1.8f);
+            bodyComponent.move(1 / 30f, 0);
         }
 
         if (controllerComponent.isMoveUp()) {
 
-            dynamicComponent.setAccelerationY(1.8f);
+            bodyComponent.move(0, 1 / 30f);
         }
 
         if (controllerComponent.isMoveDown()) {
 
-            dynamicComponent.setAccelerationY(-1.8f);
+            bodyComponent.move(0, -1 / 30f);
         }
 
+        /*
         if(!controllerComponent.isMoveLeft() && !controllerComponent.isMoveRight() || controllerComponent.isMoveLeft() && controllerComponent.isMoveRight()) {
 
             if(dynamicComponent.getVelocityX() > 0.05f) {
@@ -97,5 +95,6 @@ public class PlayerUpdateComponent extends UpdateComponent {
                 dynamicComponent.setAccelerationY(0);
             }
         }
+        */
     }
 }

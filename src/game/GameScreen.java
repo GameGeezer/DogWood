@@ -3,7 +3,6 @@ package game;
 import framework.IScreen;
 import framework.graphics.DeferredRenderer;
 import framework.graphics.Mesh;
-import framework.scene.components.collision.AABBComponent;
 import framework.scene.components.graphics.MeshComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
@@ -11,7 +10,6 @@ import framework.graphics.Image;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
 import framework.util.fileIO.WavefrontLoader;
-import game.components.*;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 
@@ -76,7 +74,6 @@ public class GameScreen implements IScreen {
             collisionTestEntity.addComponent(ctsprite);
             collisionTestEntity.addComponent(ctTransform);
             collisionTestEntity.addComponent(new CameraReferenceComponent(Scene.getCamera()));
-            collisionTestEntity.addComponent(new AABBComponent(0, 0, 1, 1));
 
             Scene.addEntity(collisionTestEntity);
 

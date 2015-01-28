@@ -2,12 +2,6 @@ package game.components.player;
 
 import framework.input.KeyboardListener;
 import framework.scene.Entity;
-import framework.scene.components.util.DynamicComponent;
-import framework.scene.components.util.TransformComponent;
-import game.Scene;
-import game.weapons.BasicBullet;
-
-import java.util.List;
 
 import static framework.Application.KEYBOARD;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
@@ -92,7 +86,7 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 				break;
 
 			case GLFW_KEY_SPACE:
-				fireBullet ();
+			//	fireBullet ();
 				break;
 
 		}
@@ -119,6 +113,7 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 		return moveDown;
 	}
 
+	/*
 	private void fireBullet () {
 		final List < TransformComponent > transformComponents = ( List < TransformComponent > ) ( List < ? > ) getParent ().getComponentsOfType ( TransformComponent.class );
 		final TransformComponent transformComponent = transformComponents.get ( 0 );
@@ -129,4 +124,5 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 		final BasicBullet bullet = new BasicBullet ( transformComponent, dynamicComponent );
 		Scene.addEntity ( bullet );
 	}
+	*/
 }

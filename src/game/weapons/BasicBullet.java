@@ -3,13 +3,11 @@ package game.weapons;
 import framework.graphics.Image;
 import framework.graphics.opengl.ShaderProgram;
 import framework.scene.Entity;
-import framework.scene.components.collision.AABBComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import game.Scene;
-import framework.scene.components.util.DynamicComponent;
 import game.components.SpriteComponent;
 
 import java.io.File;
@@ -43,7 +41,7 @@ public class BasicBullet extends Entity {
 
     private TransformComponent bulletTransform;
 
-    public BasicBullet(TransformComponent transform, DynamicComponent dynamic) {
+    public BasicBullet(TransformComponent transform) {
 
         ShaderProgram bulletShader = null;
 
@@ -64,17 +62,12 @@ public class BasicBullet extends Entity {
         bulletTransform.setTranslation(transform.getX(), transform.getY(), transform.getZ());
         bulletTransform.setScale(0.1f, 0.1f, 0);
 
-        DynamicComponent bulletDynamicComponent = new DynamicComponent(2f, 2f);
-        bulletDynamicComponent.setVelocity(dynamic.getVelocityX(), dynamic.getVelocityY() + 1);
-
         try {
 
             SpriteComponent sprite = new SpriteComponent(bulletImage, bulletShader, 1, 1);
             addComponent(sprite);
             addComponent(bulletTransform);
-            addComponent(bulletDynamicComponent);
             addComponent(new CameraReferenceComponent(Scene.getCamera()));
-            addComponent(new AABBComponent(0, 0, 1, 1));
 
         } catch (DogWoodException e) {
             e.printStackTrace();

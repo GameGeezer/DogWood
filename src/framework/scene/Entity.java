@@ -45,7 +45,7 @@ public class Entity implements Cloneable {
         // Loop each entry in the map
         components.entrySet().forEach((mapEntry) -> {
             // Check to see if the entry type is a parent type of the entity
-            if ((mapEntry.getKey()).isAssignableFrom(component.getClass())) {
+            if ((mapEntry.getKey()).isAssignableFrom(component.getClass()) && !mapEntry.getKey().equals(component.getClass())) {
                 // If it is then add a reference to the entity at that index.
                 components.get(mapEntry.getKey()).add(component);
             }

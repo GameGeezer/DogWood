@@ -133,16 +133,19 @@ public class TransformComponent extends UniformComponent implements IUniformWrap
     public void setX(float x) {
 
         transform.setX(x);
+        updateModelUniform();
     }
 
     public void setY(float y) {
 
         transform.setY(y);
+        updateModelUniform();
     }
 
     public void setZ(float z) {
 
         transform.setZ(z);
+        updateModelUniform();
     }
 
 

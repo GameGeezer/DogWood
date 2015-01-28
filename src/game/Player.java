@@ -3,15 +3,16 @@ package game;
 import framework.graphics.Image;
 import framework.graphics.opengl.ShaderProgram;
 import framework.scene.Entity;
-import framework.scene.components.collision.AABBComponent;
+import framework.scene.components.collision.BoxFixtureComponent;
+import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
-import framework.scene.components.util.DynamicComponent;
 import game.components.SpriteComponent;
 import game.components.player.PlayerControllerComponent;
 import game.components.player.PlayerUpdateComponent;
+import org.jbox2d.dynamics.BodyType;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,8 +61,8 @@ public class Player extends Entity {
             addComponent(new CameraReferenceComponent(Scene.getCamera()));
             addComponent(new PlayerControllerComponent());
             addComponent(new PlayerUpdateComponent());
-            addComponent(new AABBComponent(0, 0, 1, 1));
-            addComponent(new DynamicComponent(0.8f, .8f));
+            addComponent(new PhysicsBodyComponent(BodyType.DYNAMIC));
+            addComponent(new BoxFixtureComponent(1, 1, 0, 0, 0));
 
         } catch (DogWoodException e) {
 

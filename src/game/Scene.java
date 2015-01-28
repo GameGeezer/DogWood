@@ -5,6 +5,7 @@ package game;
  */
 
 import framework.scene.Entity;
+import framework.scene.PhysicsWorld;
 import framework.scene.components.graphics.RenderComponent;
 import framework.scene.components.util.UpdateComponent;
 import framework.scene.Camera;
@@ -18,12 +19,11 @@ import java.util.List;
 public class Scene {
 
     private static List<Entity> entities = new ArrayList<Entity>();
-    private static Renderer renderer = new Renderer();
     private static Camera camera = new Camera(800, 600, 0.1f, 100, 60);
 
     public static void update(int delta) {
 
-        renderer.clearScreen();
+        PhysicsWorld.WORLD.step(delta / 1000f, 8 , 3);
 
         for (Entity entity : entities) {
 

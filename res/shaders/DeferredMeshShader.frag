@@ -14,7 +14,7 @@ void main(void) {
 	if(texel.a < 0.5) {
 		discard;
 	}
-	gl_FragData[0] = texel;
+	gl_FragData[0] = pass_Position;
 	gl_FragData[1] = pass_Normal;
 	gl_FragData[2] = texel;
 }
