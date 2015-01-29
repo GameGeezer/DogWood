@@ -10,31 +10,26 @@ import framework.util.dataTypes.FloatArrayList;
  */
 public class DynamicVertexAttribute implements VertexAttribute {
 
-    private final FloatArrayList vertexData = new FloatArrayList();
-    private final int elementsPerVertex;
+	private final FloatArrayList vertexData = new FloatArrayList ();
+	private final int elementsPerVertex;
 
-    public DynamicVertexAttribute(int elementsPerVertex) {
+	public DynamicVertexAttribute ( final int elementsPerVertex ) {
+		this.elementsPerVertex = elementsPerVertex;
+	}
 
-        this.elementsPerVertex = elementsPerVertex;
-    }
+	@Override
+	public float [] getData () {
+		return vertexData.toArray ();
+	}
 
-    @Override
-    public float[] getData() {
+	@Override
+	public int getElementsPerVertex () {
+		return elementsPerVertex;
+	}
 
-        return vertexData.getAsArray();
-    }
-
-    @Override
-    public int getElementsPerVertex() {
-
-        return elementsPerVertex;
-    }
-
-    public void addData(float... data) {
-
-        for (int i = 0; i < data.length; ++i) {
-
-            vertexData.add(data[i]);
-        }
-    }
+	public void addData ( final float... data ) {
+		for ( int i = 0; i < data.length; ++i ) {
+			vertexData.add ( data [ i ] );
+		}
+	}
 }

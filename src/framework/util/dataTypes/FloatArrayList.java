@@ -6,57 +6,57 @@ package framework.util.dataTypes;
  */
 public class FloatArrayList {
 
-    private float[] data;
-    private int size;
+	private static final int DEFAULT_INITIAL_CAPACITY = 10;
+	private static final float DEFAULT_GROWTH_FACTOR = 2.0f;
 
-    public FloatArrayList() {
-        this(10);
-    }
+	private float [] data;
+	private int size;
+	private final float growth;
 
-    public FloatArrayList(int startingSize) {
+	public FloatArrayList () {
+		this ( DEFAULT_INITIAL_CAPACITY, DEFAULT_GROWTH_FACTOR );
+	}
 
-        data = new float[startingSize];
-    }
+	public FloatArrayList ( final int capacity ) {
+		this ( capacity, DEFAULT_GROWTH_FACTOR );
+	}
 
-    public int size() {
+	public FloatArrayList ( final int capacity, final float growthFactor ) {
+		data = new float [ capacity ];
+		size = 0;
+		growth = growthFactor;
+	}
 
-        return size;
-    }
+	public int size () {
+		return size;
+	}
 
-    public void add(float value) {
+	public void add ( final float value ) {
+		if ( size == data.length - 1 ) {
+			final float [] newDataArray = new float [ ( int ) ( data.length * growth ) ];
+			System.arraycopy ( data, 0, newDataArray, 0, data.length );
+			data = newDataArray;
+		}
+		data[ size ] = value;
+		++size;
+	}
 
-        if(size == data.length - 1) {
+	public void remove ( final int position ) {
+		final int indexesUntilTheEnd = position - size;
+		if ( position >= 0 && indexesUntilTheEnd > 0 ) {
+			System.arraycopy ( data, position + 1, data, position, indexesUntilTheEnd );
+			--size;
+		}
+	}
 
-            final float[] newDataArray = new float[data.length * 2];
+	public void clear () {
+		size = 0;
+	}
 
-            System.arraycopy(data, 0, newDataArray, 0, data.length);
+	public float [] toArray () {
+		final float [] minimumArray = new float [ size ];
+		System.arraycopy ( data, 0, minimumArray, 0, size );
+		return minimumArray;
+	}
 
-            data = newDataArray;
-        }
-
-        data[size] = value;
-
-        ++size;
-    }
-
-    public void remove(int position) {
-
-        final int indexesUntilTheEnd = position - size;
-
-        if(position >= 0 && indexesUntilTheEnd > 0) {
-
-            System.arraycopy(data, position + 1, data, position, indexesUntilTheEnd);
-
-            --size;
-        }
-    }
-
-    public float[] getAsArray() {
-
-        final float[] minimumArray = new float[size];
-
-        System.arraycopy(data, 0, minimumArray, 0, size);
-
-        return minimumArray;
-    }
 }

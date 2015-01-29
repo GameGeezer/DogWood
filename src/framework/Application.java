@@ -71,6 +71,7 @@ public class Application implements Runnable {
 			loop ();
 
 			glfwDestroyWindow ( window );
+			KEYBOARD.listeners.clear ();
 			KEYBOARD.release ();
 		} finally {
 			glfwTerminate ();
@@ -99,7 +100,9 @@ public class Application implements Runnable {
 
 		KEYBOARD.listeners.add ( new KeyboardListener () {
 			@Override
-			public void onKeyDown ( int keyCode ) {
+			public void onKeyDown ( final int keyCode ) {
+				System.out.println ("Key pressed: " + keyCode );
+				System.out.println ( GLFW_KEY_ESCAPE );
 				if ( keyCode == GLFW_KEY_ESCAPE ) {
 					glfwWindowShouldClose ( window );
 				}

@@ -2,7 +2,6 @@ package framework.input;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 
-import java.lang.annotation.Inherited;
 import java.util.Collection;
 import java.util.HashSet;
 

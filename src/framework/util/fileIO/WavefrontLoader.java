@@ -3,7 +3,6 @@ package framework.util.fileIO;
 import framework.graphics.Mesh;
 import framework.util.MeshBuilder;
 import framework.util.dataTypes.DatatypeUtil;
-import framework.util.fileIO.FileUtil;
 import framework.util.math.Vector2;
 import framework.util.math.Vector3;
 
@@ -79,18 +78,18 @@ public class WavefrontLoader {
                             buildVertex(data[i], builder);
                         }
                     }
-                    if (data.length == 4) {
-                        builder.addIndicie(knownVertices.get(data[1]));
-                        builder.addIndicie(knownVertices.get(data[2]));
-                        builder.addIndicie(knownVertices.get(data[3]));
-                    } else if (data.length == 5) {
-                        builder.addIndicie(knownVertices.get(data[1]));
-                        builder.addIndicie(knownVertices.get(data[2]));
-                        builder.addIndicie(knownVertices.get(data[3]));
+                    if ( data.length == 4 ) {
+                        builder.addIndex ( knownVertices.get ( data [ 1 ] ) );
+                        builder.addIndex ( knownVertices.get ( data [ 2 ] ) );
+                        builder.addIndex ( knownVertices.get ( data [ 3 ] ) );
+                    } else if ( data.length == 5 ) {
+                        builder.addIndex ( knownVertices.get ( data [ 1 ] ) );
+                        builder.addIndex ( knownVertices.get ( data [ 2 ] ) );
+                        builder.addIndex ( knownVertices.get ( data [ 3 ] ) );
 
-                        builder.addIndicie(knownVertices.get(data[2]));
-                        builder.addIndicie(knownVertices.get(data[3]));
-                        builder.addIndicie(knownVertices.get(data[4]));
+                        builder.addIndex ( knownVertices.get ( data [ 2 ] ) );
+                        builder.addIndex ( knownVertices.get ( data [ 3 ] ) );
+                        builder.addIndex ( knownVertices.get ( data [ 4 ] ) );
                     }
             }
         }

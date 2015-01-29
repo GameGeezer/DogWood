@@ -5,48 +5,57 @@ package framework.util.dataTypes;
  */
 public class IntArrayList {
 
-    private int[] data = new int[10];
-    private int size;
+	private static final int DEFAULT_INITAL_CAPACITY = 10;
+	private static final float DEFAULT_GROWTH_FACTOR = 2.0f;
 
-    public IntArrayList() {
+	private int [] data;
+	private int size;
+	private final float growth;
 
-    }
+	public IntArrayList () {
+		this ( DEFAULT_INITAL_CAPACITY, DEFAULT_GROWTH_FACTOR );
+	}
 
-    public int size() {
-        return size;
-    }
+	public IntArrayList ( final int capacity ) {
+		this ( capacity, DEFAULT_GROWTH_FACTOR );
+	}
 
-    public void add(int value) {
+	public IntArrayList ( final int capacity, final float growthFactor ) {
+		data = new int [ capacity ];
+		size = 0;
+		growth = growthFactor;
+	}
 
-        if (size == data.length - 1) {
+	public int size () {
+		return size;
+	}
 
-            int[] newDataArray = new int[data.length * 2];
+	public void add ( final int value ) {
+		if ( size == data.length - 1 ) {
+			final int [] newDataArray = new int [ ( int ) ( data.length * growth ) ];
+			System.arraycopy ( data, 0, newDataArray, 0, data.length );
+			data = newDataArray;
+		}
+		data [ size ] = value;
+		++size;
+	}
 
-            System.arraycopy(data, 0, newDataArray, 0, data.length);
+	public void remove ( final int position ) {
+		final int indexesUntilTheEnd = position - size;
+		if ( position >= 0 && indexesUntilTheEnd > 0 ) {
+			System.arraycopy ( data, position + 1, data, position, indexesUntilTheEnd );
+			--size;
+		}
+	}
 
-            data = newDataArray;
-        }
+	public void clear () {
+		size = 0;
+	}
 
-        data[size] = value;
+	public int [] toArray () {
+		final int [] minimumArray = new int [ size ];
+		System.arraycopy ( data, 0, minimumArray, 0, size );
+		return minimumArray;
+	}
 
-        ++size;
-    }
-
-    public void remove(int position) {
-
-        int indexesUntilTheEnd = position - size;
-
-        if (position >= 0 && indexesUntilTheEnd > 0) {
-
-            System.arraycopy(data, position + 1, data, position, indexesUntilTheEnd);
-
-            --size;
-        }
-    }
-
-    public int[] getAsArray() {
-        int[] minimumArray = new int[size];
-        System.arraycopy(data, 0, minimumArray, 0, size);
-        return minimumArray;
-    }
 }

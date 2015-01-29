@@ -9,12 +9,13 @@ import framework.scene.components.util.TransformComponent;
 import framework.graphics.Image;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
-import framework.util.fileIO.WavefrontLoader;
+import framework.util.fileIO.OBJLoader;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,10 +46,25 @@ public class GameScreen implements IScreen {
             treeShader = new ShaderProgram(FileUtil.readText("res/shaders/DeferredMeshShader.vert"), FileUtil.readText("res/shaders/DeferredMeshShader.frag"), attributes);
             shader2 = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
             spriteSheet = Image.loadPNG(new File("res/textures/ShipImage.png"), Image.ImageFormat.RGBA);
-            WavefrontLoader wvLoader = new WavefrontLoader();
-            treeMesh = wvLoader.load(new File("res/models/UtahTeapot.obj"));
 
-            renderer = new DeferredRenderer(800, 600);
+//            WavefrontLoader wvLoader = new WavefrontLoader();
+//            treeMesh = wvLoader.load(new File("res/models/UtahTeapot.obj"));
+
+	        /// TODO ( ERIK, WILL ): Delete until models are needed
+	        try {
+		        treeMesh = OBJLoader.LOADER.loadModel ( "res/models/UtahTeapot.obj" );
+		        final Mesh cube = OBJLoader.LOADER.loadModel ( "res/models/cube.obj" );
+		        final Mesh fern = OBJLoader.LOADER.loadModel ( "res/models/fern.obj" );
+		        final Mesh lowPolyTree = OBJLoader.LOADER.loadModel ( "res/models/lowPolyTree.obj" );
+		        final Mesh tree = OBJLoader.LOADER.loadModel ( "res/models/tree.obj" );
+		        if ( cube != null && fern != null && lowPolyTree != null && tree != null ) {
+			        System.out.println ( "I'd say the loader works satisfactorily, wouldn't you?" );
+		        }
+	        } catch ( final ParseException e ) {
+		        e.printStackTrace ();
+	        }
+
+	        renderer = new DeferredRenderer(800, 600);
         } catch (DogWoodException e) {
             e.printStackTrace();
         } catch (IOException e) {
