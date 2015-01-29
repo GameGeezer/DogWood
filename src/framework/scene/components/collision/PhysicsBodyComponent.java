@@ -45,6 +45,20 @@ public class PhysicsBodyComponent extends UpdateComponent {
         body.getTransform().p.addLocal(x, y);
     }
 
+    public float getLinearVelocityX(){
+
+        return body.getLinearVelocity().x;
+    }
+
+    public float getLinearVelocityY(){
+
+        return body.getLinearVelocity().y;
+    }
+
+    public void applyFor() {
+        //body.a();
+    }
+
     @Override
     protected void onAttach() throws EntityException {
 
