@@ -25,6 +25,7 @@ import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
@@ -101,10 +102,8 @@ public class Application implements Runnable {
 		KEYBOARD.listeners.add ( new KeyboardListener () {
 			@Override
 			public void onKeyDown ( final int keyCode ) {
-				System.out.println ("Key pressed: " + keyCode );
-				System.out.println ( GLFW_KEY_ESCAPE );
 				if ( keyCode == GLFW_KEY_ESCAPE ) {
-					glfwWindowShouldClose ( window );
+					glfwSetWindowShouldClose ( window, GL_TRUE );
 				}
 			}
 		} );

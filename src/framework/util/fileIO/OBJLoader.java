@@ -93,6 +93,9 @@ public class OBJLoader {
 		normals = new ArrayList < float [] > ();
 
 		builder = new MeshBuilder ();
+		builder.createComponent ( POSITION_COMPONENT, POSITION_SIZE );
+		builder.createComponent ( TEXCOORD_COMPONENT, TEXCOORD_SIZE );
+		builder.createComponent ( NORMAL_COMPONENT, NORMAL_SIZE );
 
 	}
 
@@ -248,7 +251,6 @@ public class OBJLoader {
 		final FaceModel currentModel;
 
 		final float [] pRef = vertices.get ( positionIndex - 1 );
-		builder.createComponent ( POSITION_COMPONENT, POSITION_SIZE  );
 		builder.addToComponent ( POSITION_COMPONENT, pRef );
 
 		if ( scanner.hasNext ( "/" ) ) {
@@ -261,7 +263,6 @@ public class OBJLoader {
 				if ( texCoordIndex < 1 ) throw new OBJParseException ( "Int component 'normal index' is invalid! " + texCoordIndex + " < 1 ", fileName, lineNo );
 
 				final float [] uvRef = textures.get ( texCoordIndex - 1 );
-				builder.createComponent ( TEXCOORD_COMPONENT, TEXCOORD_SIZE );
 				builder.addToComponent ( TEXCOORD_COMPONENT, uvRef );
 
 				if ( scanner.hasNext ( "/" ) ) {
@@ -273,7 +274,6 @@ public class OBJLoader {
 					if ( normalIndex < 1 ) throw new OBJParseException ( "Int component 'normal index' is invalid! " + normalIndex + " < 1 ", fileName, lineNo );
 
 					final float [] nRef = normals.get ( normalIndex - 1 );
-					builder.createComponent ( NORMAL_COMPONENT, NORMAL_SIZE );
 					builder.addToComponent ( NORMAL_COMPONENT, nRef );
 
 					if ( model == null ) {
@@ -307,7 +307,6 @@ public class OBJLoader {
 				if ( normalIndex < 1 ) throw new OBJParseException ( "Int component 'normal index' is invalid! " + normalIndex + " < 1 ", fileName, lineNo );
 
 				final float [] nRef = normals.get ( normalIndex - 1 );
-				builder.createComponent ( NORMAL_COMPONENT, NORMAL_SIZE );
 				builder.addToComponent ( NORMAL_COMPONENT, nRef );
 
 				if ( model == null ) {
@@ -343,6 +342,8 @@ public class OBJLoader {
 			throw new OBJParseException ( "Unexpected and inconsistent change in face format ( old: " + model + ", new: " + currentModel + " )", fileName, lineNo );
 
 		}
+
+		builder.addIndex ( positionIndex );
 
 	}
 
