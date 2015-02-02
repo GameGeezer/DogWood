@@ -29,6 +29,6 @@ public final class RangeUtil {
      */
     public static final boolean isWithinRange(float value, float min, float max) {
 
-        return value <= max ? value >= min ? true : false : false;
+        return value <= max && (value >= min);
     }
 }

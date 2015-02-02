@@ -3,7 +3,10 @@ package game;
 import framework.IScreen;
 import framework.graphics.DeferredRenderer;
 import framework.graphics.Mesh;
+import framework.scene.components.collision.BoxFixtureComponent;
+import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.graphics.MeshComponent;
+import framework.scene.components.graphics.TexturedMeshComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
 import framework.graphics.Image;
@@ -12,6 +15,8 @@ import framework.scene.Entity;
 import framework.util.fileIO.OBJLoader;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
+import framework.util.fileIO.WavefrontLoader;
+import org.jbox2d.dynamics.BodyType;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +42,7 @@ public class GameScreen implements IScreen {
         ShaderProgram shader2 = null;
         Image spriteSheet = null;
         Mesh treeMesh = null;
+        Mesh lowPolyTree;
 
         try {
             Map<Integer, String> attributes = new HashMap<Integer, String>();
@@ -45,25 +51,18 @@ public class GameScreen implements IScreen {
 
             treeShader = new ShaderProgram(FileUtil.readText("res/shaders/DeferredMeshShader.vert"), FileUtil.readText("res/shaders/DeferredMeshShader.frag"), attributes);
             shader2 = new ShaderProgram(FileUtil.readText("res/shaders/SpriteShader.vert"), FileUtil.readText("res/shaders/SpriteShader.frag"), attributes);
-            spriteSheet = Image.loadPNG(new File("res/textures/ShipImage.png"), Image.ImageFormat.RGBA);
-
-//            WavefrontLoader wvLoader = new WavefrontLoader();
-//            treeMesh = wvLoader.load(new File("res/models/UtahTeapot.obj"));
+            spriteSheet = Image.loadPNG(new File("res/textures/walls128.png"), Image.ImageFormat.RGBA);
 
 	        /// TODO ( ERIK, WILL ): Delete until models are needed
-	        try {
-		        treeMesh = OBJLoader.LOADER.loadModel ( "res/models/UtahTeapot.obj" );
-		        final Mesh cube = OBJLoader.LOADER.loadModel ( "res/models/cube.obj" );
-		        final Mesh fern = OBJLoader.LOADER.loadModel ( "res/models/fern.obj" );
-		        final Mesh lowPolyTree = OBJLoader.LOADER.loadModel ( "res/models/lowPolyTree.obj" );
-		        final Mesh tree = OBJLoader.LOADER.loadModel ( "res/models/tree.obj" );
-		        if ( cube != null && fern != null && lowPolyTree != null && tree != null ) {
-			        System.out.println ( "I'd say the loader works satisfactorily, wouldn't you?" );
-		        }
-	        } catch ( final ParseException e ) {
-		        e.printStackTrace ();
-	        }
-
+		        treeMesh = WavefrontLoader.LOADER.load(new File("res/models/lowPolyTree.obj"));
+		        //final Mesh cube = OBJLoader.LOADER.loadModel ( "res/models/cube.obj" );
+		       // final Mesh fern = OBJLoader.LOADER.loadModel ( "res/models/fern.obj" );
+		       // lowPolyTree = OBJLoader.LOADER.loadModel ( "res/models/lowPolyTree.obj" );
+		       // final Mesh tree = OBJLoader.LOADER.loadModel ( "res/models/tree.obj" );
+		      //  if ( cube != null && fern != null && lowPolyTree != null && tree != null ) {
+			   //     System.out.println ( "I'd say the loader works satisfactorily, wouldn't you?" );
+               //     System.out.println ( "Looks totally topsbloobie man" );
+		      ///  }
 	        renderer = new DeferredRenderer(800, 600);
         } catch (DogWoodException e) {
             e.printStackTrace();
@@ -75,7 +74,7 @@ public class GameScreen implements IScreen {
 
         ctTransform = new TransformComponent();
         ctTransform.setTranslation(-1, 0f, -3f);
-        ctTransform.setScale(0.4f, 0.4f, 0.4f);
+        ctTransform.setScale(0.1f, 0.1f, 0.1f);
 
         //create sprite
         Entity spriteEntity = new Entity();
@@ -86,10 +85,14 @@ public class GameScreen implements IScreen {
 
         try {
 
-            MeshComponent ctsprite = new MeshComponent(treeMesh, treeShader);
+            TexturedMeshComponent ctsprite = new TexturedMeshComponent(treeMesh, spriteSheet, treeShader);
             collisionTestEntity.addComponent(ctsprite);
             collisionTestEntity.addComponent(ctTransform);
             collisionTestEntity.addComponent(new CameraReferenceComponent(Scene.getCamera()));
+            PhysicsBodyComponent body = new PhysicsBodyComponent(BodyType.DYNAMIC);
+            body.move(0f, 0f);
+            collisionTestEntity.addComponent(body);
+            collisionTestEntity.addComponent(new BoxFixtureComponent(1, 1, 0, 0, 0));
 
             Scene.addEntity(collisionTestEntity);
 

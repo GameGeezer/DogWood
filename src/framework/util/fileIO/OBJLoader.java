@@ -6,9 +6,7 @@ import framework.util.MeshBuilder;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class OBJLoader {
 
@@ -28,6 +26,8 @@ public class OBJLoader {
 	private static final int POSITION_SIZE = 3;
 	private static final int TEXCOORD_SIZE = 2;
 	private static final int NORMAL_SIZE = 3;
+
+	private OBJVertexSet knownVertices = new OBJVertexSet();
 
 	private static class OBJParseException extends ParseException {
 
@@ -102,7 +102,9 @@ public class OBJLoader {
 	public Mesh loadModel ( final String filePath ) throws ParseException, FileNotFoundException {
 
 		final File file = new File ( filePath );
+
 		if ( !file.exists () ) {
+
 			throw new FileNotFoundException ( "File " + filePath + " does not exist!" );
 		}
 
@@ -113,13 +115,16 @@ public class OBJLoader {
 		final StringBuilder sourceBuilder = new StringBuilder ();
 
 		try ( final Scanner pre = new Scanner ( file ) ) {
+
 			while ( pre.hasNextLine () ) {
+
 				final String line = pre.nextLine ().trim ();
 				final String processedLine = line.replaceAll ( "/", " / " );
 				sourceBuilder.append ( processedLine );
 				sourceBuilder.append ( "\n" );
 			}
 		} catch ( final Exception e ) {
+
 			throw new OBJParseException ( "Unknown parsing error. No further information.", fileName, -1 );
 		}
 
@@ -179,9 +184,9 @@ public class OBJLoader {
 		if ( !scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'z'", fileName, lineNo, scanner.nextLine () );
 		final float z = scanner.nextFloat ();
 
-		final float w = scanner.hasNextFloat () ? scanner.nextFloat () : 1.0f;
+		 final float w = scanner.hasNextFloat () ? scanner.nextFloat () : 1.0f;
 
-		vertices.add ( new float [] { x, y, z, w } );
+		vertices.add ( new float [] { x, y, z } );
 
 	}
 
@@ -209,7 +214,7 @@ public class OBJLoader {
 			w = 0.0f;
 		}
 
-		textures.add ( new float [] { u, v, w } );
+		textures.add ( new float [] { u, v } );
 
 	}
 
@@ -236,13 +241,13 @@ public class OBJLoader {
 
 		for ( int i = 0; i < 3; ++i ) {
 
-			parseFI ( scanner );
+			parseFaceVertex(scanner);
 
 		}
 
 	}
 
-	private void parseFI ( final Scanner scanner ) throws ParseException {
+	private void parseFaceVertex ( final Scanner scanner ) throws ParseException {
 
 		if ( ! scanner.hasNextInt () ) throw new OBJParseException ( "Expected int component 'position index'", fileName, lineNo, scanner.nextLine () );
 		final int positionIndex = scanner.nextInt ();
@@ -275,6 +280,7 @@ public class OBJLoader {
 
 					final float [] nRef = normals.get ( normalIndex - 1 );
 					builder.addToComponent ( NORMAL_COMPONENT, nRef );
+					// knownVertices.addIndex(pRef, uvRef, normalIndex);
 
 					if ( model == null ) {
 
@@ -345,6 +351,27 @@ public class OBJLoader {
 
 		builder.addIndex ( positionIndex );
 
+	}
+
+	private static class OBJVertexSet {
+
+		private final Map<Integer, Integer> idToVertexMap = new HashMap<>();
+
+		public void addIndex(final int p, final int t, final int n) {
+
+			final int hash = hash(p, t, n);
+		}
+
+		public int getIndex(final int p, final int t, final int n) {
+
+			final int hash = hash(p ,t, n);
+			return idToVertexMap.get(hash);
+		}
+	}
+
+	private static int hash(final int p, final int t, final int n) {
+
+		return 31 * (31 * p * t) + n;
 	}
 
 }
