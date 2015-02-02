@@ -23,7 +23,7 @@ public class Scene {
 
     public static void update(int delta) {
 
-        PhysicsWorld.WORLD.step(delta / 1000f, 8 , 3);
+        PhysicsWorld.WORLD.step(1f / (float) 1000, 8 , 3);
 
         for (Entity entity : entities) {
 

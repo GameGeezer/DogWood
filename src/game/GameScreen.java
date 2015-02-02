@@ -54,7 +54,7 @@ public class GameScreen implements IScreen {
             spriteSheet = Image.loadPNG(new File("res/textures/walls128.png"), Image.ImageFormat.RGBA);
 
 	        /// TODO ( ERIK, WILL ): Delete until models are needed
-		        treeMesh = WavefrontLoader.LOADER.load(new File("res/models/lowPolyTree.obj"));
+		        treeMesh = WavefrontLoader.LOADER.load(new File("res/models/plane.obj"));
 		        //final Mesh cube = OBJLoader.LOADER.loadModel ( "res/models/cube.obj" );
 		       // final Mesh fern = OBJLoader.LOADER.loadModel ( "res/models/fern.obj" );
 		       // lowPolyTree = OBJLoader.LOADER.loadModel ( "res/models/lowPolyTree.obj" );
@@ -74,7 +74,7 @@ public class GameScreen implements IScreen {
 
         ctTransform = new TransformComponent();
         ctTransform.setTranslation(-1, 0f, -3f);
-        ctTransform.setScale(0.1f, 0.1f, 0.1f);
+        ctTransform.setScale(1, 1, 1);
 
         //create sprite
         Entity spriteEntity = new Entity();
@@ -89,10 +89,9 @@ public class GameScreen implements IScreen {
             collisionTestEntity.addComponent(ctsprite);
             collisionTestEntity.addComponent(ctTransform);
             collisionTestEntity.addComponent(new CameraReferenceComponent(Scene.getCamera()));
-            PhysicsBodyComponent body = new PhysicsBodyComponent(BodyType.DYNAMIC);
-            body.move(0f, 0f);
+            PhysicsBodyComponent body = new PhysicsBodyComponent(BodyType.DYNAMIC, 1, 1);
             collisionTestEntity.addComponent(body);
-            collisionTestEntity.addComponent(new BoxFixtureComponent(1, 1, 0, 0, 0));
+            collisionTestEntity.addComponent(new BoxFixtureComponent(0.1f,0.1f, 0, 0, 0));
 
             Scene.addEntity(collisionTestEntity);
 

@@ -61,8 +61,8 @@ public class Player extends Entity {
             addComponent(new CameraReferenceComponent(Scene.getCamera()));
             addComponent(new PlayerControllerComponent());
             addComponent(new PlayerUpdateComponent());
-            addComponent(new PhysicsBodyComponent(BodyType.DYNAMIC));
-            addComponent(new BoxFixtureComponent(1, 1, 0, 0, 0));
+            addComponent(new PhysicsBodyComponent(BodyType.DYNAMIC, 0, 0));
+            addComponent(new BoxFixtureComponent(0.1f, 0.1f, 0, 0, 0));
 
         } catch (DogWoodException e) {
 

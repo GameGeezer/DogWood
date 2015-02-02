@@ -49,22 +49,22 @@ public class PlayerUpdateComponent extends UpdateComponent {
         PlayerControllerComponent controllerComponent = controllerComponents.get(0);
 
         if (controllerComponent.isMoveLeft()) {
-            bodyComponent.move(-1/30f, 0);
+            bodyComponent.setLinearVelocity(-10, 0);
         }
 
         if (controllerComponent.isMoveRight()) {
 
-            bodyComponent.move(1 / 30f, 0);
+            bodyComponent.setLinearVelocity(10, 0);
         }
 
         if (controllerComponent.isMoveUp()) {
 
-            bodyComponent.move(0, 1 / 30f);
+            bodyComponent.setLinearVelocity(0, 10);
         }
 
         if (controllerComponent.isMoveDown()) {
 
-            bodyComponent.move(0, -1 / 30f);
+            bodyComponent.setLinearVelocity(0, -10);
         }
 
         /*

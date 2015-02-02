@@ -23,10 +23,12 @@ public class PhysicsBodyComponent extends UpdateComponent {
 
     private List<TransformComponent> transformComponents;
 
-    public PhysicsBodyComponent(BodyType type) {
+    private Vec2 tempVec = new Vec2();
+
+    public PhysicsBodyComponent(BodyType type, float x, float y) {
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.setPosition(new Vec2(-1, -1f));
+        bodyDef.setPosition(new Vec2(x, y));
         bodyDef.type = type;
 
         body = PhysicsWorld.WORLD.createBody(bodyDef);
@@ -43,6 +45,11 @@ public class PhysicsBodyComponent extends UpdateComponent {
     public void move(float x, float y) {
 
         body.getTransform().p.addLocal(x, y);
+    }
+
+    public void setLinearVelocity(float x, float y) {
+
+        body.setLinearVelocity(tempVec.set(x, y));
     }
 
     public float getLinearVelocityX(){
