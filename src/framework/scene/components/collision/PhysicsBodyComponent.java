@@ -30,7 +30,6 @@ public class PhysicsBodyComponent extends UpdateComponent {
         BodyDef bodyDef = new BodyDef();
         bodyDef.setPosition(new Vec2(x, y));
         bodyDef.type = type;
-
         body = PhysicsWorld.WORLD.createBody(bodyDef);
     }
 
@@ -52,6 +51,11 @@ public class PhysicsBodyComponent extends UpdateComponent {
         body.setLinearVelocity(tempVec.set(x, y));
     }
 
+    public void applyForceToCenter(float x, float y) {
+
+        body.applyForceToCenter(tempVec.set(x, y));
+    }
+
     public float getLinearVelocityX(){
 
         return body.getLinearVelocity().x;
@@ -62,8 +66,9 @@ public class PhysicsBodyComponent extends UpdateComponent {
         return body.getLinearVelocity().y;
     }
 
-    public void applyFor() {
-        //body.a();
+    public void setLinearDampening(float ammount) {
+
+        body.setLinearDamping(ammount);
     }
 
     @Override

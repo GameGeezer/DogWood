@@ -3,7 +3,11 @@ package game.components.player;
 import framework.scene.Entity;
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.util.UpdateComponent;
-import framework.scene.components.util.TransformComponent;
+import framework.util.RangeUtil;
+import game.components.player.states.DecelerateMovementState;
+import game.components.player.states.MovementState;
+import game.components.player.states.StateStack;
+import game.components.player.states.WalkMovementState;
 
 import java.util.List;
 
@@ -13,88 +17,79 @@ import java.util.List;
 public class PlayerUpdateComponent extends UpdateComponent {
 
     private List<PlayerControllerComponent> controllerComponents;
-    private List<PhysicsBodyComponent> bodyComponents;
-    private float rotationAlongArc = (float) Math.PI / 5f / 2f;
-    private float depth = -5;
+    private PhysicsBodyComponent bodyComponent;
+
+    private MovementState decelerationState;
+    private MovementState walkState;
+    private StateStack<MovementState> movementStack = new StateStack<>();
+
+    private float force = 5000f;
+
+    private float maxVelocity = 20f;
 
     @Override
     protected void onAttach() {
 
         controllerComponents = (List<PlayerControllerComponent>) (List<?>) getParent().getComponentsOfType(PlayerControllerComponent.class);
 
-        bodyComponents = (List<PhysicsBodyComponent>) (List<?>) getParent().getComponentsOfType(PhysicsBodyComponent.class);
+        if(getParent().hasComponentOfType(PhysicsBodyComponent.class)) {
+            PhysicsBodyComponent bodyComponent = ((List<PhysicsBodyComponent>) (List<?>) getParent().getComponentsOfType(PhysicsBodyComponent.class)).get(0);
+
+            setBody(bodyComponent);
+        }
     }
 
     @Override
     protected void onDetach() {
 
+        removeBody();
     }
 
     @Override
     protected void onComponentAttachedToParent(Entity.EntityComponent component) {
 
+        if(component instanceof PhysicsBodyComponent && bodyComponent == null) {
+
+            setBody((PhysicsBodyComponent) component);
+        }
     }
 
     @Override
     protected void onComponentDetachedFromParent(Entity.EntityComponent component) {
 
+        if(bodyComponent != null && component.equals(bodyComponent)) {
+
+            removeBody();
+        }
     }
 
     @Override
     public void update(int delta) {
 
-
-        PhysicsBodyComponent bodyComponent = bodyComponents.get(0);
-
         PlayerControllerComponent controllerComponent = controllerComponents.get(0);
 
-        if (controllerComponent.isMoveLeft()) {
-            bodyComponent.setLinearVelocity(-10, 0);
+        if((Math.abs(controllerComponent.getHorizontalMovement()) > 0 || Math.abs(controllerComponent.getVerticalMovement()) > 0) && movementStack.peek().equals(decelerationState)) {
+
+            movementStack.push(walkState);
+        } else if ((controllerComponent.getHorizontalMovement() == 0 && controllerComponent.getVerticalMovement() == 0) && movementStack.peek().equals(walkState)) {
+
+            movementStack.pop();
         }
 
-        if (controllerComponent.isMoveRight()) {
+        movementStack.peek().move(bodyComponent, controllerComponent.getHorizontalMovement(), controllerComponent.getVerticalMovement());
+    }
 
-            bodyComponent.setLinearVelocity(10, 0);
-        }
+    private void setBody(PhysicsBodyComponent body) {
+        bodyComponent = body;
+        decelerationState = new DecelerateMovementState(body, 200f);
+        walkState = new WalkMovementState(2000f, 18f);
+        movementStack.push(decelerationState);
+    }
 
-        if (controllerComponent.isMoveUp()) {
-
-            bodyComponent.setLinearVelocity(0, 10);
-        }
-
-        if (controllerComponent.isMoveDown()) {
-
-            bodyComponent.setLinearVelocity(0, -10);
-        }
-
-        /*
-        if(!controllerComponent.isMoveLeft() && !controllerComponent.isMoveRight() || controllerComponent.isMoveLeft() && controllerComponent.isMoveRight()) {
-
-            if(dynamicComponent.getVelocityX() > 0.05f) {
-
-                dynamicComponent.setAccelerationX(-1f);
-            } else if(dynamicComponent.getVelocityX() < -0.05f)
-
-                dynamicComponent.setAccelerationX(1f);
-            else {
-                dynamicComponent.setVelocityX(0);
-                dynamicComponent.setAccelerationX(0);
-            }
-        }
-
-        if(!controllerComponent.isMoveUp() && !controllerComponent.isMoveDown() || controllerComponent.isMoveUp() && controllerComponent.isMoveDown()) {
-
-            if(dynamicComponent.getVelocityY() > 0.05f) {
-
-                dynamicComponent.setAccelerationY(-1f);
-            } else if(dynamicComponent.getVelocityY() < -0.05f)
-
-                dynamicComponent.setAccelerationY(1f);
-            else {
-                dynamicComponent.setVelocityY(0);
-                dynamicComponent.setAccelerationY(0);
-            }
-        }
-        */
+    private void removeBody() {
+        bodyComponent = null;
+        decelerationState = null;
+        walkState = null;
+        movementStack.clear();
     }
 }
