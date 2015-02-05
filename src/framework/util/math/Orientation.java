@@ -66,13 +66,13 @@ public class Orientation extends Quaternion {
 
         temp1 = x * z;
         temp2 = y * w;
-        matrix.data[Matrix4.M20] = 2 * (temp1 + temp2) / inverseSquare;
-        matrix.data[Matrix4.M02] = 2 * (temp1 - temp2) / inverseSquare;
+        matrix.data[Matrix4.M20] = 2 * (temp1 - temp2) / inverseSquare;
+        matrix.data[Matrix4.M02] = 2 * (temp1 + temp2) / inverseSquare;
 
         temp1 = y * z;
         temp2 = x * w;
-        matrix.data[Matrix4.M30] = 2 * (temp1 + temp2) / inverseSquare;
-        matrix.data[Matrix4.M03] = 2 * (temp1 - temp2) / inverseSquare;
+        matrix.data[Matrix4.M21] = 2 * (temp1 + temp2) / inverseSquare;
+        matrix.data[Matrix4.M12] = 2 * (temp1 - temp2) / inverseSquare;
 
         return matrix;
     }
@@ -94,7 +94,7 @@ public class Orientation extends Quaternion {
 
     private void createFromEuler(float roll, float pitch, float yaw) {
 
-        float cr, cp, cy, sr, sp, sy, cpcy, spsy;
+        float cr, cp, cy, sr, sp, sy;
 
         cr = (float) Math.cos(roll / 2);
         cp = (float) Math.cos(pitch / 2);
@@ -103,13 +103,10 @@ public class Orientation extends Quaternion {
         sp = (float) Math.sin(pitch / 2);
         sy = (float) Math.sin(yaw / 2);
 
-        cpcy = cp * cy;
-        spsy = sp * sy;
-
-        w = cr * cpcy + sr * spsy;
-        x = sr * cpcy - cr * spsy;
-        y = cr * sp * cy + sr * cp * sy;
-        z = cr * cp * sy - sr * sp * cy;
+        w = cr * cp * cy - sr * sp * sy;
+        x = sy * sp * cr + cy * cp * sr;
+        y = sy * cp * cr + cy * sp * sr;
+        z = cy * sp * cr - sy * cp * sr;
     }
 
 }
