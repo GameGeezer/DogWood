@@ -22,7 +22,7 @@ public class Scene {
     private static Camera camera = new Camera(800, 600, 0.1f, 100, 60);
 
     static {
-        camera.rotate((float)Math.PI/ 7f, 0f, 0f);
+        camera.rotate((float)Math.PI/ 5f, 0f, 0f);
     }
     public static void update(int delta) {
 

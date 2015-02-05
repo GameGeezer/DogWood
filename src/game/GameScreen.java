@@ -73,7 +73,7 @@ public class GameScreen implements IScreen {
         Entity collisionTestEntity = new Entity();
 
         ctTransform = new TransformComponent();
-        ctTransform.setTranslation(0f, 1f, -2f);
+        ctTransform.setTranslation(0f, 1f, -1.7f);
         ctTransform.setScale(3, 3, 3);
 
         //create sprite
