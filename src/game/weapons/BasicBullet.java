@@ -3,12 +3,15 @@ package game.weapons;
 import framework.graphics.Image;
 import framework.graphics.opengl.ShaderProgram;
 import framework.scene.Entity;
+import framework.scene.components.collision.BoxFixtureComponent;
+import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.util.CameraReferenceComponent;
 import framework.scene.components.util.TransformComponent;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import game.Scene;
 import game.components.SpriteComponent;
+import org.jbox2d.dynamics.BodyType;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +30,7 @@ public class BasicBullet extends Entity {
 
         try {
 
-            bulletImage = Image.loadPNG(new File("res/textures/BulletImage.png"), Image.ImageFormat.RGBA);
+            bulletImage = Image.loadPNG(new File("res/textures/poulpi.png"), Image.ImageFormat.RGBA);
             bulletVertexShader = FileUtil.readText("res/shaders/DeferredMeshShader.vert");
             bulletFragmentShader = FileUtil.readText("res/shaders/DeferredMeshShader.frag");
 
@@ -41,7 +44,7 @@ public class BasicBullet extends Entity {
 
     private TransformComponent bulletTransform;
 
-    public BasicBullet(TransformComponent transform) {
+    public BasicBullet(float x, float y, float z) {
 
         ShaderProgram bulletShader = null;
 
@@ -59,7 +62,7 @@ public class BasicBullet extends Entity {
         }
 
         bulletTransform = new TransformComponent();
-        bulletTransform.setTranslation(transform.getX(), transform.getY(), transform.getZ());
+        bulletTransform.setTranslation(x, y, z);
         bulletTransform.setScale(0.1f, 0.1f, 0);
 
         try {
@@ -68,6 +71,11 @@ public class BasicBullet extends Entity {
             addComponent(sprite);
             addComponent(bulletTransform);
             addComponent(new CameraReferenceComponent(Scene.getCamera()));
+            PhysicsBodyComponent body = new PhysicsBodyComponent(BodyType.DYNAMIC, x, y);
+           // body.move(x, y);
+            body.setLinearVelocity(-10f, 0f);
+            addComponent(body);
+            addComponent(new BoxFixtureComponent(0.1f, 0.1f, 0, 0, 0));
 
         } catch (DogWoodException e) {
             e.printStackTrace();

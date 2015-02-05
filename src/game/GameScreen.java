@@ -54,7 +54,7 @@ public class GameScreen implements IScreen {
             spriteSheet = Image.loadPNG(new File("res/textures/walls128.png"), Image.ImageFormat.RGBA);
 
 	        /// TODO ( ERIK, WILL ): Delete until models are needed
-		        treeMesh = WavefrontLoader.LOADER.load(new File("res/models/UtahTeapot.obj"));
+		        treeMesh = WavefrontLoader.LOADER.load(new File("res/models/Plane.obj"));
 		        //final Mesh cube = OBJLoader.LOADER.loadModel ( "res/models/cube.obj" );
 		       // final Mesh fern = OBJLoader.LOADER.loadModel ( "res/models/fern.obj" );
 		       // lowPolyTree = OBJLoader.LOADER.loadModel ( "res/models/lowPolyTree.obj" );
@@ -73,8 +73,8 @@ public class GameScreen implements IScreen {
         Entity collisionTestEntity = new Entity();
 
         ctTransform = new TransformComponent();
-        ctTransform.setTranslation(-1, 0f, -3f);
-        ctTransform.setScale(1, 1, 1);
+        ctTransform.setTranslation(0f, 1f, -2f);
+        ctTransform.setScale(3, 3, 3);
 
         //create sprite
         Entity spriteEntity = new Entity();
@@ -108,7 +108,7 @@ public class GameScreen implements IScreen {
 
     public void update(int delta) {
 
-        ctTransform.rotateEuler((float)Math.PI / 1000f, 0f, 0f);
+     //   ctTransform.rotateEuler((float)Math.PI / 1000f, 0f, 0f);
         Scene.update(delta);
         renderer.beginDrawing();
         Scene.render(delta);

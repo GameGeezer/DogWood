@@ -45,8 +45,9 @@ public class Player extends Entity {
     public Player() {
 
         TransformComponent transform = new TransformComponent();
-        transform.setTranslation(-1, -1f, -3f);
-        transform.setScale(0.3f, 0.3f, 0);
+        transform.setTranslation(-1, -1f, -1.5f);
+        transform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
+        transform.setScale(0.5f, 0.5f, 0);
 
         try {
 

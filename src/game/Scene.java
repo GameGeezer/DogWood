@@ -21,6 +21,9 @@ public class Scene {
     private static List<Entity> entities = new ArrayList<Entity>();
     private static Camera camera = new Camera(800, 600, 0.1f, 100, 60);
 
+    static {
+        camera.rotate((float)Math.PI/ 7f, 0f, 0f);
+    }
     public static void update(int delta) {
 
         PhysicsWorld.WORLD.step(1f / (float) 1000, 8 , 3);
