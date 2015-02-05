@@ -30,7 +30,7 @@ public class BasicBullet extends Entity {
 
         try {
 
-            bulletImage = Image.loadPNG(new File("res/textures/poulpi.png"), Image.ImageFormat.RGBA);
+            bulletImage = Image.loadPNG(new File("res/textures/BulletImage.png"), Image.ImageFormat.RGBA);
             bulletVertexShader = FileUtil.readText("res/shaders/DeferredMeshShader.vert");
             bulletFragmentShader = FileUtil.readText("res/shaders/DeferredMeshShader.frag");
 

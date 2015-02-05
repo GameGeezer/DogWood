@@ -118,6 +118,6 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
     private void fireBullet() {
 
         TransformComponent tc =transformComponents.get(0);
-        Scene.addEntity(new BasicBullet(tc.getX(), tc.getY(), tc.getZ()));
+        Scene.addEntity(new BasicBullet(tc.getX() - 0.3f, tc.getY(), tc.getZ()));
     }
 }
