@@ -23,9 +23,9 @@
  ******************************************************************************/
 package org.jbox2d.collision;
 
-import org.jbox2d.common.MathUtils;
-import org.jbox2d.common.Settings;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.MathUtils;
+import org.jbox2d.dynamics.contacts.common.Settings;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.pooling.IWorldPool;
 import org.jbox2d.pooling.normal.DefaultWorldPool;
 

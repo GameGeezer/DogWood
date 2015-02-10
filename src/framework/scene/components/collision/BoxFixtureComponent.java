@@ -1,7 +1,7 @@
 package framework.scene.components.collision;
 
 import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * Created by Will on 1/27/2015.

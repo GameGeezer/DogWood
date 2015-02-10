@@ -46,7 +46,7 @@
 
 package org.jbox2d.collision.shapes;
 
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 // Updated to rev 100
 

@@ -27,11 +27,11 @@ import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.Collision;
 import org.jbox2d.collision.Distance;
 import org.jbox2d.collision.TimeOfImpact;
-import org.jbox2d.common.Mat22;
-import org.jbox2d.common.Mat33;
-import org.jbox2d.common.Rot;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.common.Vec3;
+import org.jbox2d.dynamics.contacts.common.Mat22;
+import org.jbox2d.dynamics.contacts.common.Mat33;
+import org.jbox2d.dynamics.contacts.common.Rot;
+import org.jbox2d.dynamics.contacts.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec3;
 import org.jbox2d.dynamics.contacts.Contact;
 
 /**

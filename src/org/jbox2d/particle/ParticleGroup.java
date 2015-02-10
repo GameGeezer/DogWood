@@ -1,7 +1,7 @@
 package org.jbox2d.particle;
 
-import org.jbox2d.common.Transform;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Transform;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 public class ParticleGroup {
 

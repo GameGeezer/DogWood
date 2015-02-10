@@ -1,6 +1,6 @@
 package framework.scene;
 
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.World;
 
 /**

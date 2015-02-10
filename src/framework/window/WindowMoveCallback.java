@@ -14,17 +14,28 @@ import java.util.HashSet;
  */
 public final class WindowMoveCallback extends GLFWWindowPosCallback {
 
-	public final Collection < WindowMoveListener > listeners;
-
-	public WindowMoveCallback () {
-		listeners = new HashSet < WindowMoveListener > ();
-	}
+	private final Collection < WindowMoveListener > listeners = new HashSet < > ();
 
 	@Override
 	public void invoke ( final long window, final int xpos, final int ypos ) {
+
 		for ( final WindowMoveListener listener : listeners ) {
 			listener.onWindowMove ( xpos, ypos );
 		}
 	}
 
+    public void addListener(WindowMoveListener listener) {
+
+        listeners.add(listener);
+    }
+
+    public void removeListener(WindowMoveListener listener) {
+
+        listeners.remove(listener);
+    }
+
+    public void clearListeners() {
+
+        listeners.clear();
+    }
 }

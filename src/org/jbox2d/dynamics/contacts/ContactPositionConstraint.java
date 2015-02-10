@@ -24,8 +24,8 @@
 package org.jbox2d.dynamics.contacts;
 
 import org.jbox2d.collision.Manifold.ManifoldType;
-import org.jbox2d.common.Settings;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Settings;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 public class ContactPositionConstraint {
   Vec2[] localPoints = new Vec2[Settings.maxManifoldPoints];

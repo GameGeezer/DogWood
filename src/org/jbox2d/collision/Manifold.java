@@ -23,8 +23,8 @@
  ******************************************************************************/
 package org.jbox2d.collision;
 
-import org.jbox2d.common.Settings;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Settings;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * A manifold for two touching convex shapes. Box2D supports multiple types of contact:

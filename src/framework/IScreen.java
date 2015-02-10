@@ -13,5 +13,7 @@ public interface IScreen {
 
     public abstract void onResize(int width, int height);
 
+    public abstract void onDestroy();
+
     public abstract void update(int delta);
 }

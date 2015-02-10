@@ -26,11 +26,11 @@ package org.jbox2d.collision.shapes;
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.RayCastInput;
 import org.jbox2d.collision.RayCastOutput;
-import org.jbox2d.common.MathUtils;
-import org.jbox2d.common.Rot;
-import org.jbox2d.common.Settings;
-import org.jbox2d.common.Transform;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.MathUtils;
+import org.jbox2d.dynamics.contacts.common.Rot;
+import org.jbox2d.dynamics.contacts.common.Settings;
+import org.jbox2d.dynamics.contacts.common.Transform;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * A line segment (edge) shape. These can be connected in chains or loops to other edge shapes. The

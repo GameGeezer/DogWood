@@ -44,7 +44,7 @@
  * 3. This notice may not be removed or altered from any source distribution.
  */
 
-package org.jbox2d.common;
+package org.jbox2d.dynamics.contacts.common;
 
 // updated to rev 100
 /**

@@ -1,4 +1,4 @@
-package org.jbox2d.common;
+package org.jbox2d.dynamics.contacts.common;
 
 import java.lang.reflect.Array;
 

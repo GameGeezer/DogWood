@@ -25,7 +25,7 @@ package org.jbox2d.pooling.arrays;
 
 import java.util.HashMap;
 
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * not thread safe Vec2[] pool

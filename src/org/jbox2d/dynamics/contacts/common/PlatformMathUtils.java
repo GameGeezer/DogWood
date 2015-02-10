@@ -21,17 +21,25 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-package org.jbox2d.common;
+package org.jbox2d.dynamics.contacts.common;
 
-// updated to rev 100
+/**
+ * Contains methods from MathUtils that rely on JVM features. These are separated out from
+ * MathUtils so that they can be overridden when compiling for GWT.
+ */
+class PlatformMathUtils {
 
-public class RaycastResult {
-	public float lambda = 0.0f;
-	public final Vec2 normal = new Vec2();
-	
-	public RaycastResult set(RaycastResult argOther){
-		lambda = argOther.lambda;
-		normal.set( argOther.normal);
-		return this;
-	}
+  private static final float SHIFT23 = 1 << 23;
+  private static final float INV_SHIFT23 = 1.0f / SHIFT23;
+
+  public static final float fastPow(float a, float b) {
+    float x = Float.floatToRawIntBits(a);
+    x *= INV_SHIFT23;
+    x -= 127;
+    float y = x - (x >= 0 ? (int) x : (int) x - 1);
+    b *= x + (y - y * y) * 0.346607f;
+    y = b - (b >= 0 ? (int) b : (int) b - 1);
+    y = (y - y * y) * 0.33971f;
+    return Float.intBitsToFloat((int) ((b + 127 - y) * SHIFT23));
+  }
 }

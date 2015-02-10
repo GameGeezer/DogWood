@@ -26,8 +26,8 @@ package org.jbox2d.collision.shapes;
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.RayCastInput;
 import org.jbox2d.collision.RayCastOutput;
-import org.jbox2d.common.Transform;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Transform;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * A shape is used for collision detection. You can create a shape however you like. Shapes used for

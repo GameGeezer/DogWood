@@ -1,7 +1,7 @@
 package org.jbox2d.particle;
 
 import org.jbox2d.collision.shapes.Shape;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * A particle group definition holds all the data needed to construct a particle group. You can

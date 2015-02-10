@@ -23,7 +23,7 @@
  ******************************************************************************/
 package org.jbox2d.dynamics;
 
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * A body definition holds all the data needed to construct a rigid body. You can safely re-use body

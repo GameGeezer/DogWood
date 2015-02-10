@@ -17,11 +17,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  */
 public final class WindowIconifyCallback extends GLFWWindowIconifyCallback {
 
-	public final Collection < WindowIconifyListener > listeners;
-
-	public WindowIconifyCallback () {
-		listeners = new HashSet < WindowIconifyListener > ();
-	}
+	private final Collection < WindowIconifyListener > listeners = new HashSet < WindowIconifyListener > ();
 
 	@Override
 	public void invoke ( final long window, final int iconified ) {
@@ -48,7 +44,20 @@ public final class WindowIconifyCallback extends GLFWWindowIconifyCallback {
 			}
 
 		}
-
 	}
 
+    public void addListener(WindowIconifyListener listener) {
+
+        listeners.add(listener);
+    }
+
+    public void removeListener(WindowIconifyListener listener) {
+
+        listeners.remove(listener);
+    }
+
+    public void clearListeners() {
+
+        listeners.clear();
+    }
 }

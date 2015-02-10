@@ -1,6 +1,6 @@
 package org.jbox2d.particle;
 
-import org.jbox2d.common.Color3f;
+import org.jbox2d.dynamics.contacts.common.Color3f;
 
 /**
  * Small color object for each particle

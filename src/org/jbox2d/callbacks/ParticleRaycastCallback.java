@@ -1,11 +1,11 @@
 package org.jbox2d.callbacks;
 
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 public interface ParticleRaycastCallback {
   /**
    * Called for each particle found in the query. See
-   * {@link org.jbox2d.callbacks.RayCastCallback#reportFixture(org.jbox2d.dynamics.Fixture, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, float)} for
+   * {@link org.jbox2d.callbacks.RayCastCallback#reportFixture(org.jbox2d.dynamics.Fixture, org.jbox2d.dynamics.contacts.common.Vec2, org.jbox2d.dynamics.contacts.common.Vec2, float)} for
    * argument info.
    * 
    * @param index

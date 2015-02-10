@@ -26,13 +26,12 @@
  */
 package org.jbox2d.callbacks;
 
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.Fixture;
-import org.jbox2d.dynamics.World;
 
 /**
  * Callback class for ray casts.
- * See {@link org.jbox2d.dynamics.World#raycast(org.jbox2d.callbacks.RayCastCallback, org.jbox2d.common.Vec2, org.jbox2d.common.Vec2)}
+ * See {@link org.jbox2d.dynamics.World#raycast(org.jbox2d.callbacks.RayCastCallback, org.jbox2d.dynamics.contacts.common.Vec2, org.jbox2d.dynamics.contacts.common.Vec2)}
  * @author Daniel Murphy
  */
 public interface RayCastCallback {

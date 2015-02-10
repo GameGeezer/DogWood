@@ -3,6 +3,7 @@ package game.components.player;
 import framework.input.KeyboardListener;
 import framework.scene.Entity;
 import framework.scene.components.util.TransformComponent;
+import framework.util.math.Vector2;
 import game.Scene;
 import game.SpriteAnimation;
 import game.weapons.BasicBullet;
@@ -29,6 +30,8 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
     private SpriteAnimation walkRightAnimation = new SpriteAnimation(750, 6, 7, 8);
     private SpriteAnimation walkUpAnimation = new SpriteAnimation(750, 9, 10, 11);
     private SpriteAnimation walkDownAnimation = new SpriteAnimation(750, 0, 1, 2);
+
+    private Vector2 faceDirection = Vector2.DOWN;
 
     private SpriteAnimation currentAnimation;
     private int animationStartTime = 0;
@@ -96,24 +99,28 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 			case GLFW_KEY_A:
 				horizontalMovement -= 1f;
                 currentAnimation = walkLeftAnimation;
+                faceDirection = Vector2.LEFT;
                 animationStartTime = (int) System.currentTimeMillis();
 				break;
 
 			case GLFW_KEY_D:
 				horizontalMovement += 1f;
                 currentAnimation = walkRightAnimation;
+                faceDirection = Vector2.RIGHT;
                 animationStartTime = (int) System.currentTimeMillis();
 				break;
 
 			case GLFW_KEY_W:
 				verticalMovement += 1f;
                 currentAnimation = walkUpAnimation;
+                faceDirection = Vector2.UP;
                 animationStartTime = (int) System.currentTimeMillis();
 				break;
 
 			case GLFW_KEY_S:
 				verticalMovement -= 1f;
                 currentAnimation = walkDownAnimation;
+                faceDirection = Vector2.DOWN;
                 animationStartTime = (int) System.currentTimeMillis();
 				break;
 
@@ -122,7 +129,6 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 				break;
 
 		}
-
 	}
 
     public int getAnimationFrame() {
@@ -132,6 +138,7 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 
 	@Override
 	public void onKeyRepeat ( final int keyCode ) {
+
 	}
 
 	public float getHorizontalMovement() {
@@ -145,6 +152,6 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
     private void fireBullet() {
 
         TransformComponent tc =transformComponents.get(0);
-        Scene.addEntity(new BasicBullet(tc.getX() - 0.3f, tc.getY(), tc.getZ()));
+        Scene.addEntity(new BasicBullet(tc.getX() + (0.3f * faceDirection.getX()), tc.getY() + (0.3f * faceDirection.getY()), tc.getZ(), faceDirection));
     }
 }

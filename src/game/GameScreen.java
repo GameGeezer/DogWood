@@ -98,14 +98,17 @@ public class GameScreen implements IScreen {
 
     }
 
+    @Override
     public void onLeave() {
 
     }
 
+    @Override
     public void onResize(int width, int height) {
 
     }
 
+    @Override
     public void update(int delta) {
 
      //   ctTransform.rotateEuler((float)Math.PI / 1000f, 0f, 0f);
@@ -113,5 +116,10 @@ public class GameScreen implements IScreen {
         renderer.beginDrawing();
         Scene.render(delta);
         renderer.endDrawing();
+    }
+
+    @Override
+    public void onDestroy() {
+
     }
 }

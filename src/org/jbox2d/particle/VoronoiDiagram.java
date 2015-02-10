@@ -1,7 +1,7 @@
 package org.jbox2d.particle;
 
-import org.jbox2d.common.MathUtils;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.MathUtils;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.pooling.normal.MutableStack;
 
 public class VoronoiDiagram {

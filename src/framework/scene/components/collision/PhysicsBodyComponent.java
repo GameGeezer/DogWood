@@ -5,7 +5,7 @@ import framework.scene.PhysicsWorld;
 import framework.scene.components.util.TransformComponent;
 import framework.scene.components.util.UpdateComponent;
 import framework.util.exceptions.EntityException;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.*;
 
 import java.util.HashMap;

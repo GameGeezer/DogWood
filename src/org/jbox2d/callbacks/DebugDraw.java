@@ -26,10 +26,10 @@
  */
 package org.jbox2d.callbacks;
 
-import org.jbox2d.common.Color3f;
-import org.jbox2d.common.IViewportTransform;
-import org.jbox2d.common.Transform;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Color3f;
+import org.jbox2d.dynamics.contacts.common.IViewportTransform;
+import org.jbox2d.dynamics.contacts.common.Transform;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.particle.ParticleColor;
 
 /**
@@ -90,7 +90,7 @@ public abstract class DebugDraw {
 
   /**
    * Draw a closed polygon provided in CCW order. This implementation uses
-   * {@link #drawSegment(org.jbox2d.common.Vec2, org.jbox2d.common.Vec2, org.jbox2d.common.Color3f)} to draw each side of the polygon.
+   * {@link #drawSegment(org.jbox2d.dynamics.contacts.common.Vec2, org.jbox2d.dynamics.contacts.common.Vec2, org.jbox2d.dynamics.contacts.common.Color3f)} to draw each side of the polygon.
    * 
    * @param vertices
    * @param vertexCount

@@ -26,7 +26,7 @@
  */
 package org.jbox2d.callbacks;
 
-import org.jbox2d.common.Settings;
+import org.jbox2d.dynamics.contacts.common.Settings;
 
 /**
  * Contact impulses for reporting. Impulses are used instead of forces because sub-step forces may

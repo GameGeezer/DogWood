@@ -29,28 +29,28 @@ public class SpriteComponent extends RenderComponent {
 
     private FloatVectorUniform texCoordOffset = new FloatVectorUniform("u_textureCoordinateOffset", VectorUniform.VectorUniformType.VECTOR2);
 
-    private float texcoordX;
-    private float texcoordY;
+    private float texcoordX, texcoordY, cellsWide, cellsHigh;
 
-    public SpriteComponent(Image image, ShaderProgram shader, int cellsWide, int cellsHigh) {
+    public SpriteComponent(final Image image, ShaderProgram shader, int cellsWide, int cellsHigh) {
 
         super(shader);
 
         texcoordX = (1.0f / (float) cellsWide);
         texcoordY = (1.0f / (float) cellsHigh);
+        this.cellsWide = cellsWide;
+        this.cellsHigh = cellsHigh;
 
         texture = new Texture(image, 0);
 
-        mesh = createMesh(texture.getWidth(), texture.getHeight(), cellsWide, cellsHigh);
+        mesh = createMesh(texture.getWidth(), texture.getHeight());
 
         texCoordOffset.addListener(shader);
 
-
-
-        setFrame(0, 1);
+        setFrame(0, 0);
     }
 
     public void setFrame(int frameX, int frameY) {
+
         float fx = texcoordX * (float)frameX;
         float fy = texcoordY * (float)frameY;
         texCoordOffset.setUniformData(fx, fy);
@@ -66,7 +66,7 @@ public class SpriteComponent extends RenderComponent {
         getShader().unbind();
     }
 
-    private Mesh createMesh(int width, int height, int cellsWide, int cellsHigh) {
+    private Mesh createMesh(int width, int height) {
 
         float widthHeightRatio = (float) width / (float) height;
         float xRatio = widthHeightRatio / 2f;

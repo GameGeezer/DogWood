@@ -23,7 +23,7 @@
  ******************************************************************************/
 package org.jbox2d.collision;
 
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 // updated to rev 100
 /**

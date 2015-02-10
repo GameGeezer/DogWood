@@ -21,7 +21,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-package org.jbox2d.common;
+package org.jbox2d.dynamics.contacts.common;
 
 /**
  * Global tuning constants based on MKS units and various integer maximums (vertices per shape,

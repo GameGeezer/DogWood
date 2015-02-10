@@ -23,9 +23,9 @@
  ******************************************************************************/
 package org.jbox2d.dynamics.contacts;
 
-import org.jbox2d.common.Mat22;
-import org.jbox2d.common.Settings;
-import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.Mat22;
+import org.jbox2d.dynamics.contacts.common.Settings;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 public class ContactVelocityConstraint {
   public VelocityConstraintPoint[] points = new VelocityConstraintPoint[Settings.maxManifoldPoints];

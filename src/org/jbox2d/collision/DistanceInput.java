@@ -24,7 +24,7 @@
 package org.jbox2d.collision;
 
 import org.jbox2d.collision.Distance.DistanceProxy;
-import org.jbox2d.common.Transform;
+import org.jbox2d.dynamics.contacts.common.Transform;
 
 /**
  * Input for Distance.
