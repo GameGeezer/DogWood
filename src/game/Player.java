@@ -31,9 +31,9 @@ public class Player extends Entity {
 
         try {
 
-            image = Image.loadPNG(new File("res/textures/poulpi.png"), Image.ImageFormat.RGBA);
-            vertexShader = FileUtil.readText("res/shaders/DeferredMeshShader.vert");
-            fragmentShader = FileUtil.readText("res/shaders/DeferredMeshShader.frag");
+            image = Image.loadPNG(new File("res/textures/walkingSprite1.png"), Image.ImageFormat.RGBA);
+            vertexShader = FileUtil.readText("res/shaders/DeferredSpriteShader.vert");
+            fragmentShader = FileUtil.readText("res/shaders/DeferredSpriteShader.frag");
 
         } catch(DogWoodException e) {
 
@@ -47,7 +47,7 @@ public class Player extends Entity {
         TransformComponent transform = new TransformComponent();
         transform.setTranslation(-1, -1f, -1.2f);
         transform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
-        transform.setScale(0.5f, 0.5f, 0);
+        transform.setScale(0.25f, 0.25f, 0);
 
         try {
 
@@ -56,14 +56,14 @@ public class Player extends Entity {
             attributes.put(1, "in_Normal");
             attributes.put(2, "in_TextureCoord");
 
-            SpriteComponent sprite = new SpriteComponent(image, new ShaderProgram(vertexShader, fragmentShader, attributes), 1, 1);
+            SpriteComponent sprite = new SpriteComponent(image, new ShaderProgram(vertexShader, fragmentShader, attributes), 3, 4);
             addComponent(sprite);
             addComponent(transform);
             addComponent(new CameraReferenceComponent(Scene.getCamera()));
             addComponent(new PlayerControllerComponent());
             addComponent(new PlayerUpdateComponent());
             addComponent(new PhysicsBodyComponent(BodyType.DYNAMIC, 0, 1.5f));
-            addComponent(new BoxFixtureComponent(0.1f, 0.1f, 0, 0, 0));
+            addComponent(new BoxFixtureComponent(0.1f, 0.02f, 0, 0, 0));
 
         } catch (DogWoodException e) {
 

@@ -2,12 +2,9 @@ package game.components.player;
 
 import framework.input.KeyboardListener;
 import framework.scene.Entity;
-import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.util.TransformComponent;
 import game.Scene;
-import game.components.player.states.DecelerateMovementState;
-import game.components.player.states.MovementState;
-import game.components.player.states.StateStack;
+import game.SpriteAnimation;
 import game.weapons.BasicBullet;
 
 import java.util.List;
@@ -28,6 +25,19 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 	private float horizontalMovement = 0f;
 	private float verticalMovement = 0f;
 
+    private SpriteAnimation walkLeftAnimation = new SpriteAnimation(750, 3, 4, 5);
+    private SpriteAnimation walkRightAnimation = new SpriteAnimation(750, 6, 7, 8);
+    private SpriteAnimation walkUpAnimation = new SpriteAnimation(750, 9, 10, 11);
+    private SpriteAnimation walkDownAnimation = new SpriteAnimation(750, 0, 1, 2);
+
+    private SpriteAnimation currentAnimation;
+    private int animationStartTime = 0;
+
+
+    public PlayerControllerComponent() {
+
+        currentAnimation = walkDownAnimation;
+    }
 	@Override
 	protected void onAttach () {
 
@@ -56,18 +66,22 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 
 			case GLFW_KEY_A:
 				horizontalMovement += 1f;
+
 				break;
 
 			case GLFW_KEY_D:
 				horizontalMovement -= 1f;
+
 				break;
 
 			case GLFW_KEY_W:
 				verticalMovement -= 1f;
+
 				break;
 
 			case GLFW_KEY_S:
 				verticalMovement += 1f;
+
 				break;
 
 		}
@@ -81,18 +95,26 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 
 			case GLFW_KEY_A:
 				horizontalMovement -= 1f;
+                currentAnimation = walkLeftAnimation;
+                animationStartTime = (int) System.currentTimeMillis();
 				break;
 
 			case GLFW_KEY_D:
 				horizontalMovement += 1f;
+                currentAnimation = walkRightAnimation;
+                animationStartTime = (int) System.currentTimeMillis();
 				break;
 
 			case GLFW_KEY_W:
 				verticalMovement += 1f;
+                currentAnimation = walkUpAnimation;
+                animationStartTime = (int) System.currentTimeMillis();
 				break;
 
 			case GLFW_KEY_S:
 				verticalMovement -= 1f;
+                currentAnimation = walkDownAnimation;
+                animationStartTime = (int) System.currentTimeMillis();
 				break;
 
 			case GLFW_KEY_SPACE:
@@ -102,6 +124,11 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 		}
 
 	}
+
+    public int getAnimationFrame() {
+
+        return currentAnimation.getFrameIndex(animationStartTime);
+    }
 
 	@Override
 	public void onKeyRepeat ( final int keyCode ) {

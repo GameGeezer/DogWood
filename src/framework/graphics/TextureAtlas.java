@@ -14,6 +14,7 @@ public class TextureAtlas {
     private float textureCoordinateWidth, textureCoordinateHeight;
 
     public TextureAtlas(Texture texture, int cellWidth, int cellHeight) {
+
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
         cellsWide = (int) Math.floor(texture.getWidth() / cellWidth);

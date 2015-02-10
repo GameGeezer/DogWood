@@ -4,15 +4,20 @@ import framework.graphics.Image;
 import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
+import framework.graphics.opengl.uniform.FloatVectorUniform;
 import framework.graphics.opengl.uniform.MatrixUniform;
+import framework.graphics.opengl.uniform.VectorUniform;
 import framework.graphics.vertices.VertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
 import framework.scene.components.graphics.RenderComponent;
 import framework.util.math.Matrix4;
+import javafx.animation.Animation;
 import org.lwjgl.opengl.GL13;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Will on 12/24/2014.
@@ -22,38 +27,43 @@ public class SpriteComponent extends RenderComponent {
     private Texture texture;
     private Mesh mesh;
 
-    private Matrix4 textureMatrix = new Matrix4();
-    private MatrixUniform textureMatrixUniform = new MatrixUniform("u_textureMatrix", MatrixUniform.MatrixUniformType.MATRIX4);
+    private FloatVectorUniform texCoordOffset = new FloatVectorUniform("u_textureCoordinateOffset", VectorUniform.VectorUniformType.VECTOR2);
+
+    float texcoordX;
+    float texcoordY;
 
     public SpriteComponent(Image image, ShaderProgram shader, int cellsWide, int cellsHigh) {
 
         super(shader);
 
+        texcoordX = (1.0f / (float) cellsWide);
+        texcoordY = (1.0f / (float) cellsHigh);
+
         texture = new Texture(image, 0);
 
         mesh = createMesh(texture.getWidth(), texture.getHeight(), cellsWide, cellsHigh);
 
-        textureMatrixUniform.addListener(shader);
+        texCoordOffset.addListener(shader);
 
-        textureMatrix.data[Matrix4.M03] = 0f;
-        textureMatrix.data[Matrix4.M13] = 0f;
 
-        updateTextureMatrix();
+
+        setFrame(0, 1);
+    }
+
+    public void setFrame(int frameX, int frameY) {
+        float fx = texcoordX * (float)frameX;
+        float fy = texcoordY * (float)frameY;
+        texCoordOffset.setUniformData(fx, fy);
     }
 
     @Override
     public void render(int delta) {
+
         getShader().bind();
         texture.bind();
         mesh.draw();
         texture.unbind();
         getShader().unbind();
-    }
-
-
-    private void updateTextureMatrix() {
-
-        textureMatrixUniform.setUniformData(textureMatrix.data);
     }
 
     private Mesh createMesh(int width, int height, int cellsWide, int cellsHigh) {
@@ -76,8 +86,7 @@ public class SpriteComponent extends RenderComponent {
                 0f, 0f, 1f,
         };
 
-        float texcoordX = (1.0f / (float) cellsWide);
-        float texcoordY = (1.0f / (float) cellsHigh);
+
 
         float[] texCoords = {
                 0f, 0f,

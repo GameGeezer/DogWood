@@ -18,6 +18,4 @@ void main(void) {
 	gl_Position = mvp * in_Position;
 
 	pass_TextureCoord = (u_textureMatrix * vec4(in_TextureCoord, 0.0f, 1.0f)).xy;
-
-
 }

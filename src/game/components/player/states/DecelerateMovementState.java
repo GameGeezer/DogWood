@@ -1,5 +1,6 @@
 package game.components.player.states;
 
+import framework.scene.Entity;
 import framework.scene.components.collision.PhysicsBodyComponent;
 
 /**
@@ -27,7 +28,7 @@ public class DecelerateMovementState extends MovementState {
     }
 
     @Override
-    public void move(PhysicsBodyComponent body, float x, float y) {
+    public void move(Entity entity, float x, float y) {
 
     }
 }

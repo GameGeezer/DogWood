@@ -75,7 +75,7 @@ public class BasicBullet extends Entity {
            // body.move(x, y);
             body.setLinearVelocity(-10f, 0f);
             addComponent(body);
-            addComponent(new BoxFixtureComponent(0.1f, 0.1f, 0, 0, 0));
+            addComponent(new BoxFixtureComponent(0.05f, 0.05f, 0, 0, 0));
 
         } catch (DogWoodException e) {
             e.printStackTrace();

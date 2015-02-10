@@ -76,7 +76,7 @@ public class PlayerUpdateComponent extends UpdateComponent {
             movementStack.pop();
         }
 
-        movementStack.peek().move(bodyComponent, controllerComponent.getHorizontalMovement(), controllerComponent.getVerticalMovement());
+        movementStack.peek().move(getParent(), controllerComponent.getHorizontalMovement(), controllerComponent.getVerticalMovement());
     }
 
     private void setBody(PhysicsBodyComponent body) {

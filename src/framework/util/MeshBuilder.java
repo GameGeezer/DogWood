@@ -1,6 +1,5 @@
 package framework.util;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import framework.graphics.Mesh;
 import framework.graphics.vertices.DynamicVertexAttribute;
 import framework.graphics.vertices.VertexAttribute;
@@ -16,22 +15,19 @@ public class MeshBuilder {
 	private final Map < String, DynamicVertexAttribute > components = new HashMap < String, DynamicVertexAttribute > ();
 	private final IntArrayList indices = new IntArrayList ();
 
-	public MeshBuilder () {
-
-	}
-
 	public void addToComponent ( final String name, final float... data ) {
-		components.get ( name ).addData ( data );
 
-		System.out.println("Name:" + name + "Data: " + Arrays.toString(data));
+		components.get ( name ).addData ( data );
 	}
 
 	public void createComponent ( final String name, final int size ) {
+
 		components.put ( name, new DynamicVertexAttribute ( size ) );
 
 	}
 
 	public void addIndex ( final int index ) {
+
 		indices.add ( index );
 	}
 
