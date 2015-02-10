@@ -1,4 +1,4 @@
-package game.components.player.states;
+package framework.scene;
 
 import java.util.LinkedList;
 

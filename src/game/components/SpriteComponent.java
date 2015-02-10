@@ -29,8 +29,8 @@ public class SpriteComponent extends RenderComponent {
 
     private FloatVectorUniform texCoordOffset = new FloatVectorUniform("u_textureCoordinateOffset", VectorUniform.VectorUniformType.VECTOR2);
 
-    float texcoordX;
-    float texcoordY;
+    private float texcoordX;
+    private float texcoordY;
 
     public SpriteComponent(Image image, ShaderProgram shader, int cellsWide, int cellsHigh) {
 

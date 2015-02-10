@@ -1,6 +1,7 @@
 package game.components.player.states;
 
 import framework.scene.Entity;
+import framework.scene.StateStack;
 
 /**
  * Created by Will on 2/2/2015.

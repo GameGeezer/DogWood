@@ -14,9 +14,9 @@ import java.util.HashSet;
  */
 public final class MouseMoveCallback extends GLFWCursorPosCallback {
 
-	private final Collection < MouseMoveListener > listeners = new HashSet < > ();;
+	private final Collection < MouseMoveListener > listeners = new HashSet < > ();
 
-	@Override
+    @Override
 	public void invoke ( final long window, final double xpos, final double ypos ) {
 
 		for ( final MouseMoveListener listener : listeners ) {

@@ -3,10 +3,9 @@ package game.components.player;
 import framework.scene.Entity;
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.util.UpdateComponent;
-import framework.util.RangeUtil;
 import game.components.player.states.DecelerateMovementState;
 import game.components.player.states.MovementState;
-import game.components.player.states.StateStack;
+import framework.scene.StateStack;
 import game.components.player.states.WalkMovementState;
 
 import java.util.List;

@@ -27,6 +27,11 @@ public class TransformComponent extends UniformComponent implements IUniformWrap
         updateModelUniform();
     }
 
+    public TransformComponent(Transform other) {
+
+        set(other);
+    }
+
     @Override
     protected void onAttach() throws EntityException {
 
@@ -51,6 +56,16 @@ public class TransformComponent extends UniformComponent implements IUniformWrap
     @Override
     protected void onComponentDetachedFromParent(EntityComponent component) {
 
+    }
+
+    public TransformComponent set(Transform other) {
+
+        transform.setTranslation(other.getX(), other.getY(), other.getZ());
+        transform.setScale(other.getScaleX(), other.getScaleY(), other.getScaleZ());
+        transform.setOrientationEuler(other.getRoll(), other.getPitch(), other.getYaw());
+
+        updateModelUniform();
+        return this;
     }
 
     public TransformComponent translate(float x, float y, float z) {

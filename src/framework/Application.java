@@ -3,6 +3,7 @@ package framework;
 import framework.input.KeyboardCallback;
 import framework.input.KeyboardListener;
 import framework.util.Timer;
+import groovy.lang.GroovyShell;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
@@ -45,6 +46,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class Application implements Runnable {
 
 	public static final KeyboardCallback KEYBOARD = new KeyboardCallback ();
+    public static final GroovyShell GROOVY_SHELL = new GroovyShell();
 
 	private final Game game;
 	private final String title;
