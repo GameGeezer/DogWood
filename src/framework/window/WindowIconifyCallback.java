@@ -17,7 +17,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  */
 public final class WindowIconifyCallback extends GLFWWindowIconifyCallback {
 
-	private final Collection < WindowIconifyListener > listeners = new HashSet < WindowIconifyListener > ();
+	private final Collection < WindowIconifyListener > listeners = new HashSet < > ();
 
 	@Override
 	public void invoke ( final long window, final int iconified ) {
@@ -25,16 +25,12 @@ public final class WindowIconifyCallback extends GLFWWindowIconifyCallback {
 		switch ( iconified ) {
 
 			case GL_TRUE: {
-				for ( final WindowIconifyListener listener : listeners ) {
-					listener.onWindowIconify ();
-				}
+                listeners.forEach(framework.window.WindowIconifyListener::onWindowIconify);
 			}
 			break;
 
 			case GL_FALSE: {
-				for ( final WindowIconifyListener listener : listeners ) {
-					listener.onWindowRestore ();
-				}
+                listeners.forEach(framework.window.WindowIconifyListener::onWindowRestore);
 			}
 			break;
 

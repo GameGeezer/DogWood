@@ -19,9 +19,7 @@ public final class WindowRefreshCallback extends GLFWWindowRefreshCallback {
 	@Override
 	public void invoke ( final long window ) {
 
-		for ( final WindowRefreshListener listener : listeners ) {
-			listener.onWindowRefresh ();
-		}
+        listeners.forEach(framework.window.WindowRefreshListener::onWindowRefresh);
 	}
 
     public void addListener(WindowRefreshListener listener) {

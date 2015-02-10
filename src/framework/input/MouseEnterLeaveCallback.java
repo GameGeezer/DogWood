@@ -25,17 +25,11 @@ public final class MouseEnterLeaveCallback extends GLFWCursorEnterCallback {
 		switch ( entered ) {
 
 			case GL_TRUE:
-				for ( final MouseEnterLeaveListener listener : listeners ) {
-
-					listener.onMouseEnter ();
-				}
+                listeners.forEach(framework.input.MouseEnterLeaveListener::onMouseEnter);
 			break;
 
 			case GL_FALSE:
-				for ( final MouseEnterLeaveListener listener : listeners ) {
-
-                    listener.onMouseLeave();
-                }
+                listeners.forEach(framework.input.MouseEnterLeaveListener::onMouseLeave);
 			break;
 
 			default:

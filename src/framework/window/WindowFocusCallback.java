@@ -25,15 +25,11 @@ public final class WindowFocusCallback extends GLFWWindowFocusCallback {
 		switch ( focused ) {
 
 			case GL_TRUE:
-				for ( final WindowFocusListener listener : listeners ) {
-					listener.onWindowGainedFocus ();
-				}
+                listeners.forEach(framework.window.WindowFocusListener::onWindowGainedFocus);
 			break;
 
 			case GL_FALSE:
-				for ( final WindowFocusListener listener : listeners ) {
-					listener.onWindowLostFocus ();
-				}
+                listeners.forEach(framework.window.WindowFocusListener::onWindowLostFocus);
 			break;
 
 			default:

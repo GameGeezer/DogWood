@@ -19,9 +19,7 @@ public final class WindowCloseCallback extends GLFWWindowCloseCallback {
 	@Override
 	public void invoke ( final long window ) {
 
-		for ( final WindowCloseListener listener : listeners ) {
-			listener.onWindowClosing ();
-		}
+        listeners.forEach(framework.window.WindowCloseListener::onWindowClosing);
 	}
 
     public void addListener(WindowCloseListener listener) {

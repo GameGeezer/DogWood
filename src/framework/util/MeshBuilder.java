@@ -6,13 +6,14 @@ import framework.graphics.vertices.VertexAttribute;
 import framework.util.dataTypes.IntArrayList;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Will on 12/7/2014.
  */
 public class MeshBuilder {
 
-	private final Map < String, DynamicVertexAttribute > components = new HashMap < String, DynamicVertexAttribute > ();
+	private final Map < String, DynamicVertexAttribute > components = new HashMap < > ();
 	private final IntArrayList indices = new IntArrayList ();
 
 	public void addToComponent ( final String name, final float... data ) {
@@ -33,11 +34,8 @@ public class MeshBuilder {
 
 	public Mesh build () {
 
-		final List < VertexAttribute > attributes = new ArrayList<> ();
+		final List < VertexAttribute > attributes = components.entrySet().stream().map(pairs -> pairs.getValue()).collect(Collectors.toList());
 
-		for ( final Map.Entry pairs : components.entrySet () ) {
-			attributes.add ( ( DynamicVertexAttribute ) pairs.getValue () );
-		}
-		return new Mesh ( indices.toArray (), attributes );
+        return new Mesh ( indices.toArray (), attributes );
 	}
 }

@@ -5,7 +5,6 @@ import framework.util.MeshBuilder;
 import framework.util.dataTypes.DatatypeUtil;
 import framework.util.math.Vector2;
 import framework.util.math.Vector3;
-import org.jbox2d.dynamics.World;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,11 +37,11 @@ public class WavefrontLoader {
 
     private VertexType expectedVertexType;
 
-    private List<Vector3> positions = new ArrayList<Vector3>();
-    private List<Vector2> textureCoordinates = new ArrayList<Vector2>();
-    private List<Vector3> normals = new ArrayList<Vector3>();
+    private List<Vector3> positions = new ArrayList< >();
+    private List<Vector2> textureCoordinates = new ArrayList< >();
+    private List<Vector3> normals = new ArrayList< >();
 
-    private Map<String, Integer> knownVertices = new HashMap<String, Integer>();
+    private Map<String, Integer> knownVertices = new HashMap< >();
     private int vertexCount = 0;
 
     public Mesh load(File file) throws IOException {

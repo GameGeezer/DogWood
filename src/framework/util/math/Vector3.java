@@ -88,7 +88,7 @@ public class Vector3 implements Cloneable {
     }
 
     public final float length2() {
-        return (float) (x * x + y * y + z * z);
+        return x * x + y * y + z * z;
     }
 
     public final Vector3 invert() {

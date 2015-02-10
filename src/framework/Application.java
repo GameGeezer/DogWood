@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 /**
- * THIS IS A MESS AND IS MOSTLY TUTORIAL CODE FROM LWJWL'S WEBSITE. MAKE ME PRETTY
+ * THIS IS A MESS AND IS MOSTLY TUTORIAL CODE FROM LWJGL'S WEBSITE. MAKE ME PRETTY
  *
  * @author William Gervasio
  */
