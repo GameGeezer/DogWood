@@ -1,4 +1,4 @@
-package framework;
+package framework.window;
 
 /**
  * @author William Gervasio

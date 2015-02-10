@@ -46,10 +46,10 @@ public class Orientation extends Quaternion {
 
     public Matrix4 computeMatrix() {
 
-        float sqx = x * x;
-        float sqy = y * y;
-        float sqz = z * z;
-        float sqw = w * w;
+        float sqx = getX() * getX();
+        float sqy = getY() * getY();
+        float sqz = getZ() * getZ();
+        float sqw = getW() * getW();
 
         float inverseSquare = 1 / length2();
 
@@ -59,18 +59,18 @@ public class Orientation extends Quaternion {
         matrix.data[Matrix4.M11] = (-sqx + sqy - sqz + sqw) * inverseSquare;
         matrix.data[Matrix4.M22] = (-sqx - sqy + sqz + sqw) * inverseSquare;
 
-        float temp1 = x * y;
-        float temp2 = z * w;
+        float temp1 = getX() * getY();
+        float temp2 = getZ() * getW();
         matrix.data[Matrix4.M10] = 2 * (temp1 + temp2) / inverseSquare;
         matrix.data[Matrix4.M01] = 2 * (temp1 - temp2) / inverseSquare;
 
-        temp1 = x * z;
-        temp2 = y * w;
+        temp1 = getX() * getZ();
+        temp2 = getY() * getW();
         matrix.data[Matrix4.M20] = 2 * (temp1 - temp2) / inverseSquare;
         matrix.data[Matrix4.M02] = 2 * (temp1 + temp2) / inverseSquare;
 
-        temp1 = y * z;
-        temp2 = x * w;
+        temp1 = getY() * getZ();
+        temp2 = getX() * getW();
         matrix.data[Matrix4.M21] = 2 * (temp1 + temp2) / inverseSquare;
         matrix.data[Matrix4.M12] = 2 * (temp1 - temp2) / inverseSquare;
 
@@ -103,10 +103,10 @@ public class Orientation extends Quaternion {
         sp = (float) Math.sin(pitch / 2);
         sy = (float) Math.sin(yaw / 2);
 
-        w = cr * cp * cy - sr * sp * sy;
-        x = sy * sp * cr + cy * cp * sr;
-        y = sy * cp * cr + cy * sp * sr;
-        z = cy * sp * cr - sy * cp * sr;
+        setX(sy * sp * cr + cy * cp * sr);
+        setY(sy * cp * cr + cy * sp * sr);
+        setZ(cy * sp * cr - sy * cp * sr);
+        setW(cr * cp * cy - sr * sp * sy);
     }
 
 }

@@ -1,4 +1,4 @@
-package framework.window;
+package framework.window.windowcallbacks;
 
 import org.lwjgl.glfw.GLFWWindowRefreshCallback;
 
@@ -10,7 +10,7 @@ import java.util.HashSet;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWWindowRefreshCallback
- * @see framework.window.WindowRefreshListener
+ * @see WindowRefreshListener
  */
 public final class WindowRefreshCallback extends GLFWWindowRefreshCallback {
 
@@ -19,7 +19,7 @@ public final class WindowRefreshCallback extends GLFWWindowRefreshCallback {
 	@Override
 	public void invoke ( final long window ) {
 
-        listeners.forEach(framework.window.WindowRefreshListener::onWindowRefresh);
+        listeners.forEach(WindowRefreshListener::onWindowRefresh);
 	}
 
     public void addListener(WindowRefreshListener listener) {

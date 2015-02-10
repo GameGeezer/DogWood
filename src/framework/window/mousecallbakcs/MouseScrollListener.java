@@ -1,4 +1,4 @@
-package framework.input;
+package framework.window.mousecallbakcs;
 
 /**
  * An interface for Objects that want to subscribe to mouse scrolling events.

@@ -1,4 +1,4 @@
-package framework.scene.components.util;
+package framework.scene.components;
 
 import framework.scene.Entity.EntityComponent;
 

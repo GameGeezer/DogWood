@@ -1,4 +1,4 @@
-package framework.input;
+package framework.window.mousecallbakcs;
 
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 
@@ -10,7 +10,7 @@ import java.util.HashSet;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWCursorPosCallback
- * @see framework.input.MouseMoveListener
+ * @see MouseMoveListener
  */
 public final class MouseMoveCallback extends GLFWCursorPosCallback {
 

@@ -1,30 +1,24 @@
 package game;
 
-import framework.Application;
-import framework.IScreen;
+import framework.window.Application;
+import framework.window.IScreen;
 import framework.graphics.DeferredRenderer;
 import framework.graphics.Mesh;
-import framework.scene.components.collision.BoxFixtureComponent;
-import framework.scene.components.collision.PhysicsBodyComponent;
-import framework.scene.components.graphics.MeshComponent;
 import framework.scene.components.graphics.TexturedMeshComponent;
-import framework.scene.components.util.CameraReferenceComponent;
-import framework.scene.components.util.TransformComponent;
+import framework.scene.components.general.CameraReferenceComponent;
+import framework.scene.components.TransformComponent;
 import framework.graphics.Image;
 import framework.graphics.opengl.*;
 import framework.scene.Entity;
 import framework.util.Timer;
-import framework.util.fileIO.OBJLoader;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import framework.util.fileIO.WavefrontLoader;
 import framework.util.math.Transform;
 import groovy.lang.Script;
-import org.jbox2d.dynamics.BodyType;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 

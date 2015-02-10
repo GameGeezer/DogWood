@@ -10,7 +10,6 @@ public class Transform {
     private Matrix4 position = new Matrix4(), scale = new Matrix4();
     private Orientation orientation = new Orientation();
 
-
     public Transform() {
 
     }

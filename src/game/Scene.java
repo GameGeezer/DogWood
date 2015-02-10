@@ -7,8 +7,9 @@ package game;
 import framework.scene.Entity;
 import framework.scene.PhysicsWorld;
 import framework.scene.components.graphics.RenderComponent;
-import framework.scene.components.util.UpdateComponent;
+import framework.scene.components.UpdateComponent;
 import framework.scene.Camera;
+import framework.window.Application;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Scene {
     }
     public static void update(int delta) {
 
-        PhysicsWorld.WORLD.step(1f / (float) 1000, 8 , 3);
+        Application.PHYSICS_WORLD.step(1f / (float) 1000, 8 , 3);
 
         for (Entity entity : entities) {
 

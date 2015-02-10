@@ -1,4 +1,4 @@
-package framework.window;
+package framework.window.windowcallbacks;
 
 import org.lwjgl.glfw.GLFWWindowCloseCallback;
 
@@ -10,7 +10,7 @@ import java.util.HashSet;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWWindowCloseCallback
- * @see framework.window.WindowCloseListener
+ * @see WindowCloseListener
  */
 public final class WindowCloseCallback extends GLFWWindowCloseCallback {
 
@@ -19,7 +19,7 @@ public final class WindowCloseCallback extends GLFWWindowCloseCallback {
 	@Override
 	public void invoke ( final long window ) {
 
-        listeners.forEach(framework.window.WindowCloseListener::onWindowClosing);
+        listeners.forEach(WindowCloseListener::onWindowClosing);
 	}
 
     public void addListener(WindowCloseListener listener) {

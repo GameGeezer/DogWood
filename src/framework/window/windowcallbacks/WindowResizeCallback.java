@@ -1,4 +1,4 @@
-package framework.window;
+package framework.window.windowcallbacks;
 
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 
@@ -10,7 +10,7 @@ import java.util.HashSet;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWWindowSizeCallback
- * @see framework.window.WindowResizeListener
+ * @see WindowResizeListener
  */
 public final class WindowResizeCallback extends GLFWWindowSizeCallback {
 

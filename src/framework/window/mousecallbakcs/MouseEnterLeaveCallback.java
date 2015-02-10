@@ -1,4 +1,4 @@
-package framework.input;
+package framework.window.mousecallbakcs;
 
 import org.lwjgl.glfw.GLFWCursorEnterCallback;
 
@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWCursorEnterCallback
- * @see framework.input.MouseEnterLeaveListener
+ * @see MouseEnterLeaveListener
  */
 public final class MouseEnterLeaveCallback extends GLFWCursorEnterCallback {
 
@@ -25,11 +25,11 @@ public final class MouseEnterLeaveCallback extends GLFWCursorEnterCallback {
 		switch ( entered ) {
 
 			case GL_TRUE:
-                listeners.forEach(framework.input.MouseEnterLeaveListener::onMouseEnter);
+                listeners.forEach(MouseEnterLeaveListener::onMouseEnter);
 			break;
 
 			case GL_FALSE:
-                listeners.forEach(framework.input.MouseEnterLeaveListener::onMouseLeave);
+                listeners.forEach(MouseEnterLeaveListener::onMouseLeave);
 			break;
 
 			default:

@@ -1,8 +1,9 @@
 package game.components.player;
 
-import framework.input.KeyboardListener;
+import framework.window.Application;
+import framework.window.keyboardcallbakcs.KeyboardListener;
 import framework.scene.Entity;
-import framework.scene.components.util.TransformComponent;
+import framework.scene.components.TransformComponent;
 import framework.util.math.Vector2;
 import game.Scene;
 import game.SpriteAnimation;
@@ -10,7 +11,6 @@ import game.weapons.BasicBullet;
 
 import java.util.List;
 
-import static framework.Application.KEYBOARD;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_A;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
@@ -45,13 +45,13 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 	protected void onAttach () {
 
         transformComponents = (List<TransformComponent>) (List<?>) getParent().getComponentsOfType(TransformComponent.class);
-		KEYBOARD.addListener(this);
+		Application.KEYBOARD.addListener(this);
 	}
 
 	@Override
 	protected void onDetach () {
 
-		KEYBOARD.removeListener ( this );
+        Application.KEYBOARD.removeListener ( this );
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package framework.input;
+package framework.window.mousecallbakcs;
 
 import org.lwjgl.glfw.GLFWScrollCallback;
 
@@ -10,7 +10,7 @@ import java.util.HashSet;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWScrollCallback
- * @see framework.input.MouseScrollListener
+ * @see MouseScrollListener
  */
 public final class MouseScrollCallback extends GLFWScrollCallback {
 

@@ -6,25 +6,39 @@ package framework.util.math;
  */
 public class Quaternion {
 
-    protected float x = 0f, y = 0f, z = 0f, w = 1f;
+    private float x, y, z, w;
 
     public Quaternion() {
+        this(0.0f, 0.0f, 0.0f, 1.0f);
+    }
 
+    public Quaternion(final float x, final float y, final float z, final float w) {
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.w = w;
     }
 
     public static void multiply(Quaternion left, Quaternion right, Quaternion targer) {
 
-        targer.x = left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z;
-        targer.y = left.w * right.x + left.x * right.w + left.y * right.z - left.z * right.y;
-        targer.z = left.w * right.y - left.x * right.z + left.y * right.w + left.z * right.x;
-        targer.w = left.w * right.z + left.x * right.y - left.y * right.x + left.z * right.w;
+        float x = left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z;
+        float y = left.w * right.x + left.x * right.w + left.y * right.z - left.z * right.y;
+        float z = left.w * right.y - left.x * right.z + left.y * right.w + left.z * right.x;
+        float w = left.w * right.z + left.x * right.y - left.y * right.x + left.z * right.w;
+        targer.x = x;
+        targer.y = y;
+        targer.z = z;
+        targer.w = w;
     }
 
     public float length2() {
+
         return x * x + y * y + z * z + w * w;
     }
 
     public float length() {
+
         return (float) Math.sqrt(length2());
     }
 

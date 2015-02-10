@@ -1,4 +1,4 @@
-package framework.window;
+package framework.window.windowcallbacks;
 
 import org.lwjgl.glfw.GLFWWindowPosCallback;
 
@@ -10,7 +10,7 @@ import java.util.HashSet;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWWindowPosCallback
- * @see framework.window.WindowMoveListener
+ * @see WindowMoveListener
  */
 public final class WindowMoveCallback extends GLFWWindowPosCallback {
 

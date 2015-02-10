@@ -1,4 +1,4 @@
-package framework.input;
+package framework.window.keyboardcallbakcs;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 
@@ -14,7 +14,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_REPEAT;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWKeyCallback
- * @see framework.input.KeyboardListener
+ * @see KeyboardListener
  */
 public final class KeyboardCallback extends GLFWKeyCallback {
 

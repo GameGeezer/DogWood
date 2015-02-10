@@ -1,7 +1,7 @@
 package game;
 
-import framework.Application;
-import framework.Game;
+import framework.window.Application;
+import framework.window.Game;
 
 /**
  * Created by Will on 4/29/14.
@@ -16,7 +16,7 @@ public class Main {
 		final int WIDTH = 800;
 		final int HEIGHT = 600;
 
-		final Runnable application = new Application ( game, TITLE, WIDTH, HEIGHT );
+		final Runnable application = new Application( game, TITLE, WIDTH, HEIGHT );
 
 		final Thread applicationThread = new Thread ( application, "Application Thread" );
 		applicationThread.start ();

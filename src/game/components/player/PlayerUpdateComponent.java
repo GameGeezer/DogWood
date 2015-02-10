@@ -2,7 +2,7 @@ package game.components.player;
 
 import framework.scene.Entity;
 import framework.scene.components.collision.PhysicsBodyComponent;
-import framework.scene.components.util.UpdateComponent;
+import framework.scene.components.UpdateComponent;
 import game.components.player.states.DecelerateMovementState;
 import game.components.player.states.MovementState;
 import framework.scene.StateStack;

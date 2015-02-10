@@ -1,4 +1,4 @@
-package framework.window;
+package framework.window.windowcallbacks;
 
 import org.lwjgl.glfw.GLFWWindowFocusCallback;
 
@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWWindowFocusCallback
- * @see framework.window.WindowFocusListener
+ * @see WindowFocusListener
  */
 public final class WindowFocusCallback extends GLFWWindowFocusCallback {
 
@@ -25,11 +25,11 @@ public final class WindowFocusCallback extends GLFWWindowFocusCallback {
 		switch ( focused ) {
 
 			case GL_TRUE:
-                listeners.forEach(framework.window.WindowFocusListener::onWindowGainedFocus);
+                listeners.forEach(WindowFocusListener::onWindowGainedFocus);
 			break;
 
 			case GL_FALSE:
-                listeners.forEach(framework.window.WindowFocusListener::onWindowLostFocus);
+                listeners.forEach(WindowFocusListener::onWindowLostFocus);
 			break;
 
 			default:

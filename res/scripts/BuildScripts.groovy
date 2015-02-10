@@ -4,8 +4,8 @@ import framework.scene.Camera
 import framework.scene.Entity
 import framework.scene.components.collision.BoxFixtureComponent
 import framework.scene.components.collision.PhysicsBodyComponent
-import framework.scene.components.util.CameraReferenceComponent
-import framework.scene.components.util.TransformComponent
+import framework.scene.components.general.CameraReferenceComponent
+import framework.scene.components.TransformComponent
 import framework.util.fileIO.FileUtil
 import framework.util.math.Transform
 import game.Scene

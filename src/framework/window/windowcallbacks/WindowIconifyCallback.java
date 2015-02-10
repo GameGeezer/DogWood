@@ -1,4 +1,4 @@
-package framework.window;
+package framework.window.windowcallbacks;
 
 import org.lwjgl.glfw.GLFWWindowIconifyCallback;
 
@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  *
  * @author Erik Ginter
  * @see org.lwjgl.glfw.GLFWWindowIconifyCallback
- * @see framework.window.WindowIconifyListener
+ * @see WindowIconifyListener
  */
 public final class WindowIconifyCallback extends GLFWWindowIconifyCallback {
 
@@ -25,12 +25,12 @@ public final class WindowIconifyCallback extends GLFWWindowIconifyCallback {
 		switch ( iconified ) {
 
 			case GL_TRUE: {
-                listeners.forEach(framework.window.WindowIconifyListener::onWindowIconify);
+                listeners.forEach(WindowIconifyListener::onWindowIconify);
 			}
 			break;
 
 			case GL_FALSE: {
-                listeners.forEach(framework.window.WindowIconifyListener::onWindowRestore);
+                listeners.forEach(WindowIconifyListener::onWindowRestore);
 			}
 			break;
 

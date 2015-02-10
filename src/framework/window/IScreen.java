@@ -1,4 +1,4 @@
-package framework;
+package framework.window;
 
 /**
  * Created by Will on 12/6/2014.

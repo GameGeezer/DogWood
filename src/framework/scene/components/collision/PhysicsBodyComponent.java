@@ -2,9 +2,10 @@ package framework.scene.components.collision;
 
 import framework.scene.Entity;
 import framework.scene.PhysicsWorld;
-import framework.scene.components.util.TransformComponent;
-import framework.scene.components.util.UpdateComponent;
+import framework.scene.components.TransformComponent;
+import framework.scene.components.UpdateComponent;
 import framework.util.exceptions.EntityException;
+import framework.window.Application;
 import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.*;
 
@@ -30,7 +31,7 @@ public class PhysicsBodyComponent extends UpdateComponent {
         BodyDef bodyDef = new BodyDef();
         bodyDef.setPosition(new Vec2(x, y));
         bodyDef.type = type;
-        body = PhysicsWorld.WORLD.createBody(bodyDef);
+        body = Application.PHYSICS_WORLD.createBody(bodyDef);
     }
 
     public void update(int delta) {

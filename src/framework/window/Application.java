@@ -1,10 +1,12 @@
-package framework;
+package framework.window;
 
-import framework.input.KeyboardCallback;
-import framework.input.KeyboardListener;
+import framework.window.keyboardcallbakcs.KeyboardCallback;
+import framework.window.keyboardcallbakcs.KeyboardListener;
 import framework.util.Timer;
-import framework.window.*;
+import framework.window.windowcallbacks.*;
 import groovy.lang.GroovyShell;
+import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
@@ -34,6 +36,7 @@ public class Application implements Runnable {
     public static final WindowRefreshCallback WINDOW_REFRESH_CALLBACK = new WindowRefreshCallback();
     public static final WindowResizeCallback WINDOW_RESIZE_CALLBACK = new WindowResizeCallback();
     public static final GroovyShell GROOVY_SHELL = new GroovyShell();
+    public static final World PHYSICS_WORLD = new World(new Vec2(0f,0f));
 
 	private final Game game;
 	private final String title;

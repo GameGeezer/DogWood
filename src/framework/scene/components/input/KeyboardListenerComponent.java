@@ -1,9 +1,8 @@
-package framework.scene.components.util;
+package framework.scene.components.input;
 
-import framework.input.KeyboardListener;
+import framework.window.Application;
+import framework.window.keyboardcallbakcs.KeyboardListener;
 import framework.scene.Entity;
-
-import static framework.Application.KEYBOARD;
 
 /**
  * @author William Gervasio
@@ -13,13 +12,13 @@ public abstract class KeyboardListenerComponent extends Entity.EntityComponent i
     @Override
     protected void onAttach () {
 
-        KEYBOARD.addListener(this);
+        Application.KEYBOARD.addListener(this);
     }
 
     @Override
     protected void onDetach () {
 
-        KEYBOARD.removeListener ( this );
+        Application.KEYBOARD.removeListener ( this );
     }
 
     @Override

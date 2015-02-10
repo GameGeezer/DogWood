@@ -1,4 +1,4 @@
-package framework.window;
+package framework.window.windowcallbacks;
 
 /**
  * An interface for Objects that want to subscribe to window iconify events.

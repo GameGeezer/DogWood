@@ -1,4 +1,4 @@
-package framework.scene.components.util;
+package framework.scene.components.general;
 
 import framework.scene.Entity;
 import framework.scene.Camera;
