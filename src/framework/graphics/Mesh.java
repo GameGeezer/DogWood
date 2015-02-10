@@ -14,21 +14,21 @@ import java.nio.IntBuffer;
 import java.util.List;
 
 /**
- * Given an array if indices and and a List of IVertexAttribues a Mesh generates a VAO.
+ * Given an array if indices and and a List of IVertexAttributes a Mesh generates a VAO.
  *
  * @author william gervasio
  */
 
+@SuppressWarnings("UnusedDeclaration")
 public class Mesh {
 
-    protected final VAO vao;
+    private final VAO vao;
 
     private final List<VertexAttribute> vertexElements;
 
-
     /**
-     * @param indices
-     * @param vertexElements
+     * @param indices The triangles indices of the mesh
+     * @param vertexElements A list of all the vertex attributes that will be added to the vbo
      */
     public Mesh(int[] indices, List<VertexAttribute> vertexElements) {
 

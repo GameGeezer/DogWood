@@ -8,10 +8,9 @@ import org.jbox2d.common.Vec2;
  */
 public class BoxFixtureComponent extends FixtureComponent {
 
-    private final PolygonShape shape = new PolygonShape();
-
     public BoxFixtureComponent(float width, float height, float relativeX, float relativeY, float angle) {
 
+        PolygonShape shape = new PolygonShape();
         shape.setAsBox(width, height, new Vec2(relativeX, relativeY), angle);
         fixtureDef.setShape(shape);
     }

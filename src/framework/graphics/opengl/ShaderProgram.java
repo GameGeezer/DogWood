@@ -6,8 +6,6 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL31;
 import org.lwjgl.opengl.GL32;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Map;
 
 /**
@@ -15,6 +13,7 @@ import java.util.Map;
  *
  * @author William Gervasio
  */
+@SuppressWarnings("UnusedDeclaration")
 public final class ShaderProgram {
 
     private final int handle;
@@ -25,7 +24,7 @@ public final class ShaderProgram {
      *
      * @param vertexShader   The vertex shader source
      * @param fragmentShader The fragment shader source
-     * @param attributes
+     * @param attributes A mapping between vertex attribute names and ids
      * @throws GraphicsException
      */
     public ShaderProgram(final String vertexShader, final String fragmentShader, final Map<Integer, String> attributes) throws GraphicsException {
@@ -51,7 +50,7 @@ public final class ShaderProgram {
         GL20.glLinkProgram(handle);
 
         // Check if there was any errors while linking
-        if (checkForLinkError(handle)) {
+        if (checkProgramForLinkError(handle)) {
 
             throw new GraphicsException("Failed to link shader");
         }
@@ -70,7 +69,7 @@ public final class ShaderProgram {
      * @param vertexShader   The vertex shader source
      * @param fragmentShader The fragment shader source
      * @param geometryShader The geometry shader source
-     * @param attributes
+     * @param attributes A mapping between vertex attribute ids and names
      * @throws GraphicsException
      */
     public ShaderProgram(final String vertexShader, final String fragmentShader, final String geometryShader, final Map<Integer, String> attributes) throws GraphicsException {
@@ -97,7 +96,7 @@ public final class ShaderProgram {
         GL20.glLinkProgram(handle);
 
         // Check if there was any errors while linking
-        if (checkForLinkError(handle)) {
+        if (checkProgramForLinkError(handle)) {
 
             throw new GraphicsException("Failed to link shader");
         }
@@ -138,8 +137,8 @@ public final class ShaderProgram {
     /**
      * Finds the location of a uniform
      *
-     * @param uniform
-     * @return
+     * @param uniform The name of the uniform being located
+     * @return The handle to the uniforms location
      */
     public final int getUniformLocation(final String uniform) {
 
@@ -154,8 +153,8 @@ public final class ShaderProgram {
     /**
      * Compiles a vertex, fragment, or geometry shader
      *
-     * @param shader
-     * @param type
+     * @param shader The shader script being compiled
+     * @param type The type of shader being compiled. i.e. vertex, fragment, or geometry
      * @return A handle to the compiled shader
      * @throws GraphicsException
      */
@@ -194,10 +193,10 @@ public final class ShaderProgram {
     /**
      * Check to see if the shader was linked properly
      *
-     * @param handle
+     * @param handle the handle of the program being checked
      * @return True if properly linked
      */
-    private final boolean checkForLinkError(final int handle) {
+    private final boolean checkProgramForLinkError(final int handle) {
 
         return GL20.glGetProgrami(handle, GL20.GL_LINK_STATUS) == GL11.GL_FALSE;
     }

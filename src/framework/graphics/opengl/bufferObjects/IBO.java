@@ -9,6 +9,7 @@ import java.nio.IntBuffer;
  *
  * @author William Gervasio
  */
+@SuppressWarnings("SameParameterValue")
 public final class IBO {
 
     private final int handle;

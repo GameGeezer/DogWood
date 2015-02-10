@@ -7,13 +7,9 @@ import java.util.*;
 /**
  * @author William Gervasio
  */
-public class Entity implements Cloneable {
+public class Entity {
 
-    private Map<Class, List<EntityComponent>> components = new HashMap<>();
-
-    public Entity() {
-
-    }
+    private final Map<Class, List<EntityComponent>> components = new HashMap<>();
 
     public void addComponent(EntityComponent component) throws EntityException {
 
@@ -28,13 +24,7 @@ public class Entity implements Cloneable {
             components.put(component.getClass(), new ArrayList<>());
         }
         // Notify every component that a new one has been added in case they're interested
-        components.entrySet().forEach((mapEntry) -> {
-
-            mapEntry.getValue().forEach((componentEntry)-> {
-
-                componentEntry.onComponentAttachedToParent(component);
-            });
-        });
+        components.entrySet().forEach((mapEntry) -> mapEntry.getValue().forEach((componentEntry)-> componentEntry.onComponentAttachedToParent(component)));
 
         // Add the component to the map
         components.get(component.getClass()).add(component);
@@ -66,10 +56,7 @@ public class Entity implements Cloneable {
 
             mapEntry.getValue().remove(component);
 
-            mapEntry.getValue().forEach((componentEntry)-> {
-
-                componentEntry.onComponentDetachedFromParent(component);
-            });
+            mapEntry.getValue().forEach((componentEntry)-> componentEntry.onComponentDetachedFromParent(component));
         });
         // Call the Component specific "onDetach" method
         component.onDetach();
@@ -118,10 +105,6 @@ public class Entity implements Cloneable {
     public static abstract class EntityComponent implements Cloneable {
 
         private Entity parentEntity;
-
-        public EntityComponent() {
-
-        }
 
         public List<EntityComponent> getComponentsOfType(Class type) {
 

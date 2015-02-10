@@ -17,35 +17,46 @@ import static org.lwjgl.opengl.GL11.GL_TRUE;
  */
 public final class MouseEnterLeaveCallback extends GLFWCursorEnterCallback {
 
-	public final Collection < MouseEnterLeaveListener > listeners;
-
-	public MouseEnterLeaveCallback () {
-		listeners = new HashSet < MouseEnterLeaveListener > ();
-	}
+	private final Collection < MouseEnterLeaveListener > listeners = new HashSet < > ();
 
 	@Override
 	public void invoke ( final long window, final int entered ) {
 
 		switch ( entered ) {
 
-			case GL_TRUE: {
+			case GL_TRUE:
 				for ( final MouseEnterLeaveListener listener : listeners ) {
+
 					listener.onMouseEnter ();
 				}
-			}
 			break;
 
-			case GL_FALSE: {
-				for ( final MouseEnterLeaveListener listener : listeners ) listener.onMouseLeave ();
-			}
+			case GL_FALSE:
+				for ( final MouseEnterLeaveListener listener : listeners ) {
+
+                    listener.onMouseLeave();
+                }
 			break;
 
-			default: {
+			default:
 				// This should never happen
 				throw new IllegalStateException ( "Illegal GLFWCursorEnterCallback 'entered' state" );
-			}
 
 		}
-
 	}
+
+    public void addListener(MouseEnterLeaveListener listener) {
+
+        listeners.add(listener);
+    }
+
+    public void removeListener(MouseEnterLeaveListener listener) {
+
+        listeners.remove(listener);
+    }
+
+    public void clearListeners() {
+
+        listeners.clear();
+    }
 }

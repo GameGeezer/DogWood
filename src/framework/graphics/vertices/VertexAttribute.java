@@ -8,16 +8,16 @@ package framework.graphics.vertices;
 public interface VertexAttribute {
 
     /**
-     * The data as a float array
+     * Get the vertex attribute data
      *
-     * @return
+     * @return The vertex data as a float array
      */
     public abstract float[] getData();
 
     /**
      * How many indexes in the data make up one vertex
      *
-     * @return
+     * @return The number of elements in the array that describe one vertex
      */
     public abstract int getElementsPerVertex();
 }

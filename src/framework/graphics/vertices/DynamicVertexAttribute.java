@@ -28,8 +28,9 @@ public class DynamicVertexAttribute implements VertexAttribute {
 	}
 
 	public void addData ( final float... data ) {
-		for ( int i = 0; i < data.length; ++i ) {
-			vertexData.add ( data [ i ] );
-		}
+        for (float aData : data) {
+
+            vertexData.add(aData);
+        }
 	}
 }

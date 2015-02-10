@@ -42,13 +42,13 @@ public class PlayerControllerComponent extends Entity.EntityComponent implements
 	protected void onAttach () {
 
         transformComponents = (List<TransformComponent>) (List<?>) getParent().getComponentsOfType(TransformComponent.class);
-		KEYBOARD.listeners.add(this);
+		KEYBOARD.addListener(this);
 	}
 
 	@Override
 	protected void onDetach () {
 
-		KEYBOARD.listeners.remove ( this );
+		KEYBOARD.removeListener ( this );
 	}
 
 	@Override

@@ -5,8 +5,9 @@ import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL30;
 
 /**
- * Created by Will on 1/23/2015.
+ * @author William Gervasio
  */
+@SuppressWarnings("UnusedDeclaration")
 public enum OGLColorType {
 
     RGB(GL11.GL_RGB),

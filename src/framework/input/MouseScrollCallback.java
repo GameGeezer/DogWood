@@ -14,11 +14,7 @@ import java.util.HashSet;
  */
 public final class MouseScrollCallback extends GLFWScrollCallback {
 
-	public final Collection < MouseScrollListener > listeners;
-
-	public MouseScrollCallback () {
-		listeners = new HashSet < MouseScrollListener> ();
-	}
+	private final Collection < MouseScrollListener > listeners = new HashSet < > ();
 
 	@Override
 	public void invoke ( final long window, final double xoffset, final double yoffset ) {
@@ -26,7 +22,20 @@ public final class MouseScrollCallback extends GLFWScrollCallback {
 		for ( final MouseScrollListener listener : listeners ) {
 			listener.onMouseScroll ( xoffset, yoffset );
 		}
-
 	}
 
+    public void addListener(MouseScrollListener listener) {
+
+        listeners.add(listener);
+    }
+
+    public void removeListener(MouseScrollListener listener) {
+
+        listeners.remove(listener);
+    }
+
+    public void clearListeners() {
+
+        listeners.clear();
+    }
 }

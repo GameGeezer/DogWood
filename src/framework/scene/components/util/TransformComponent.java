@@ -119,14 +119,17 @@ public class TransformComponent extends UniformComponent implements IUniformWrap
     }
 
     public float getX() {
+
         return transform.getX();
     }
 
     public float getY() {
+
         return transform.getY();
     }
 
     public float getZ() {
+
         return transform.getZ();
     }
 
@@ -150,6 +153,7 @@ public class TransformComponent extends UniformComponent implements IUniformWrap
 
 
     public float getScaleX() {
+
         return transform.getScaleX();
     }
 
@@ -158,16 +162,19 @@ public class TransformComponent extends UniformComponent implements IUniformWrap
     }
 
     public float getScaleZ() {
+
         return transform.getScaleZ();
     }
 
     @Override
     public void addListener(ShaderProgram shader) {
+
         modelUniform.addListener(shader);
     }
 
     @Override
     public void removeListener(ShaderProgram shader) {
+
         modelUniform.removeListener(shader);
     }
 

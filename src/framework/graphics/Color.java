@@ -8,10 +8,11 @@ import framework.util.RangeUtil;
  *
  * @author William Gervasio
  */
+@SuppressWarnings({"WeakerAccess", "UnusedReturnValue", "UnusedDeclaration"})
 public final class Color implements Cloneable {
 
-    public static final float MINIMUM_CHANNEL_VALUE = 0.0f;
-    public static final float MAXIMUM_CHANNEL_VALUE = 1.0f;
+    private static final float MINIMUM_CHANNEL_VALUE = 0.0f;
+    private static final float MAXIMUM_CHANNEL_VALUE = 1.0f;
 
     private float r, g, b, a;
 
@@ -26,10 +27,10 @@ public final class Color implements Cloneable {
     }
 
     /**
-     * Increase r, g, b by a percentage. The percentage must be in decimal form on the interval of [0, 1]
+     * Increase r, g, b by a percentage.
      *
-     * @param percentage
-     * @return
+     * @param percentage The percentage must be in decimal form on the interval of [0, 1]
+     * @return This object
      */
     public final Color brighten(float percentage) {
 
@@ -45,8 +46,8 @@ public final class Color implements Cloneable {
     /**
      * Decrease r, g, b by a percentage. The percentage must be in decimal form on the interval of [0, 1]
      *
-     * @param percentage
-     * @return
+     * @param percentage The percentage must be in decimal form on the interval of [0, 1]
+     * @return This object
      */
     public final Color darken(float percentage) {
 
@@ -62,11 +63,11 @@ public final class Color implements Cloneable {
     /**
      * Set r, g, b, a values to the passed values
      *
-     * @param r
-     * @param g
-     * @param b
-     * @param a
-     * @return
+     * @param r The red channel value on the interval of [0, 1]
+     * @param g The green channel value on the interval of [0, 1]
+     * @param b The blue channel value on the interval of [0, 1]
+     * @param a The alpha channel value on the interval of [0, 1]
+     * @return This object
      */
     public final Color set(final float r, final float g, final float b, final float a) {
 
@@ -129,7 +130,7 @@ public final class Color implements Cloneable {
     /**
      * Creates a float[] of r, g, b, a
      *
-     * @return
+     * @return The r,g, b, a values as a float array
      */
     public final float[] getElements() {
 
@@ -139,7 +140,7 @@ public final class Color implements Cloneable {
     /**
      * Forces r, g, b, a float values within the desired range of [0, 1]
      *
-     * @return
+     * @return This object
      */
     private final Color clamp() {
 

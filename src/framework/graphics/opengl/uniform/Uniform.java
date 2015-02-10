@@ -12,15 +12,16 @@ import java.util.List;
  *
  * @author William Gervasio
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class Uniform {
 
-    private final List<ShaderProgram> listeners = new ArrayList<ShaderProgram>();
+    private final List<ShaderProgram> listeners = new ArrayList<>();
     private final String uniformName;
 
     /**
      * Create a Uniform object associated with a uniform of passed "uniformName"
      *
-     * @param uniformName
+     * @param uniformName The name of the uniform in the shader
      */
     public Uniform(String uniformName) {
 
@@ -30,7 +31,7 @@ public abstract class Uniform {
     /**
      * Subscribe to the uniform. If the uniform is changed all listeners will be updated
      *
-     * @param listener
+     * @param listener The shader that wishes to subscribe to the uniform
      */
     public void addListener(ShaderProgram listener) {
 
@@ -43,7 +44,7 @@ public abstract class Uniform {
     /**
      * Remove the shader from the list of ShaderPrograms to be updated when the uniform is changed
      *
-     * @param listener
+     * @param listener The shader that wishes to be removed from the uniform
      */
     public void removeListener(ShaderProgram listener) {
 
@@ -52,14 +53,14 @@ public abstract class Uniform {
 
     protected void updateListeningShaders() {
 
-        listeners.forEach((shader) -> passUniformToShader(shader));
+        listeners.forEach(this::passUniformToShader);
     }
 
     /**
      * Update the uniform for the program. This is specific for each type of uniform data. The shader that
      * needs an update must be bound before this is called.
      *
-     * @param uniformHandle
+     * @param uniformHandle The handle to this uniform in the shader program
      */
     protected abstract void updateProgram(int uniformHandle);
 

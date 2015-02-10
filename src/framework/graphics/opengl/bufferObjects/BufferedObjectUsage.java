@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL15;
  *
  * @author william gervasio
  */
+@SuppressWarnings("UnusedDeclaration")
 public enum BufferedObjectUsage {
 
     STATIC_DRAW(GL15.GL_STATIC_DRAW),

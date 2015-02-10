@@ -11,15 +11,12 @@ import java.nio.ByteBuffer;
 /**
  * @author William Gervasio
  */
+@SuppressWarnings("UnusedDeclaration")
 public class Texture {
 
     private final int handle, textureUnit, width, height;
-    private OGLColorType colorType;
+    private final OGLColorType colorType;
 
-    /**
-     * @param buffer
-     * @param textureUnit i.e GL13.GL_TEXTURE0
-     */
     public Texture(final int width, final int height, final int textureUnit, final OGLColorType colorType, final ByteBuffer buffer) {
 
         this.handle = GL11.glGenTextures();
@@ -35,7 +32,7 @@ public class Texture {
         GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
 
         // Upload the texture data and generate mip maps (for scaling)
-        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, colorType.ID, width, height, 0, colorType.RGBA.ID, GL11.GL_UNSIGNED_BYTE, buffer);
+        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, colorType.ID, width, height, 0, colorType.ID, GL11.GL_UNSIGNED_BYTE, buffer);
         GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
     }
 
@@ -46,7 +43,7 @@ public class Texture {
 
     public Texture(final Image image, final int textureUnit) {
 
-        this(image.getWidth(), image.getHeight(), textureUnit, OGLColorType.RGBA8, image.getBuffer());
+        this(image.getWidth(), image.getHeight(), textureUnit, OGLColorType.RGBA, image.getBuffer());
     }
 
     public final void attachToFBO(final AttachmentType attachment) {
@@ -85,5 +82,10 @@ public class Texture {
     public int getUnit() {
 
         return textureUnit;
+    }
+
+    public OGLColorType getColorType() {
+
+        return colorType;
     }
 }

@@ -3,8 +3,9 @@ package framework.graphics.opengl.bufferObjects;
 import org.lwjgl.opengl.GL30;
 
 /**
- * Created by Will on 1/25/2015.
+ * @author William Gervasio
  */
+@SuppressWarnings("UnusedDeclaration")
 public enum AttachmentType {
 
     DEPTH_ATTACHMENT(GL30.GL_DEPTH_ATTACHMENT),

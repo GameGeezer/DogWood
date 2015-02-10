@@ -4,6 +4,7 @@ import framework.graphics.opengl.Texture;
 import framework.util.math.Matrix4;
 
 /**
+ * TODO
  * Created by Will on 12/27/2014.
  */
 public class TextureAtlas {
@@ -21,10 +22,6 @@ public class TextureAtlas {
         cellsHigh = (int) Math.floor(texture.getHeight() / cellHeight);
         textureCoordinateWidth = (1.0f / (float) cellsWide);
         textureCoordinateHeight = (1.0f / (float) cellsHigh);
-    }
-
-    public void selectCell(int cell) {
-
     }
 
     public void bindTexture() {

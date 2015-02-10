@@ -72,7 +72,7 @@ public class Application implements Runnable {
 			loop ();
 
 			glfwDestroyWindow ( window );
-			KEYBOARD.listeners.clear ();
+			KEYBOARD.clearListeners ();
 			KEYBOARD.release ();
 		} finally {
 			glfwTerminate ();
@@ -99,7 +99,7 @@ public class Application implements Runnable {
 
 		glfwSetKeyCallback ( window, KEYBOARD );
 
-		KEYBOARD.listeners.add ( new KeyboardListener () {
+		KEYBOARD.addListener ( new KeyboardListener () {
 			@Override
 			public void onKeyDown ( final int keyCode ) {
 				if ( keyCode == GLFW_KEY_ESCAPE ) {

@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public final class VAO {
 
-    private final Map<Integer, Descriptor> descriptors = new HashMap<Integer, Descriptor>();
+    private final Map<Integer, Descriptor> descriptors = new HashMap<>();
 
     private final VBO vbo;
     private final IBO ibo;

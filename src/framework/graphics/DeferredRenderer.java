@@ -1,38 +1,33 @@
 package framework.graphics;
 
-import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.bufferObjects.AttachmentType;
 import framework.graphics.opengl.OGLColorType;
 import framework.graphics.opengl.Texture;
 import framework.graphics.opengl.bufferObjects.FBO;
 import framework.graphics.opengl.bufferObjects.RBO;
 import framework.util.exceptions.GraphicsException;
-import framework.util.fileIO.FileUtil;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
-import java.io.IOException;
 import java.nio.IntBuffer;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 /**
+ * TODO STILL A WIP
  * Created by Will on 1/23/2015.
  */
 public class DeferredRenderer {
 
-    public static final int POSITION_BUFFER_BINDING = 0;
-    public static final int NORMAL_BUFFER_BINDING = 1;
-    public static final int DIFFUSE_BUFFER_BINDING = 2;
-    public static final int SCREEN_BUFFER_BINDING = 3;
+    private static final int POSITION_BUFFER_BINDING = 0;
+    private static final int NORMAL_BUFFER_BINDING = 1;
+    private static final int DIFFUSE_BUFFER_BINDING = 2;
+    private static final int SCREEN_BUFFER_BINDING = 3;
 
     private final Texture positionBuffer;
     private final Texture normalBuffer;
     private final Texture diffuseBuffer;
 
-    private final Texture screenTexture;
+//    private final Texture screenTexture;
 
     private final FBO fbo;
     private final RBO fboDepthBuffer;
@@ -45,11 +40,11 @@ public class DeferredRenderer {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-        positionBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT0.ID, OGLColorType.RGBA16F);
-        normalBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT1.ID, OGLColorType.RGBA16F);
-        diffuseBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT2.ID, OGLColorType.RGBA16F);
+        positionBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT0.ID, OGLColorType.RGBA);
+        normalBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT1.ID, OGLColorType.RGBA);
+        diffuseBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT2.ID, OGLColorType.RGBA);
 
-        screenTexture = new Texture(width, height, SCREEN_BUFFER_BINDING, OGLColorType.RGBA8);
+//        screenTexture = new Texture(width, height, SCREEN_BUFFER_BINDING, OGLColorType.RGBA);
 
         fbo = new FBO();
         fboDepthBuffer = new RBO(width, height, AttachmentType.DEPTH_ATTACHMENT);

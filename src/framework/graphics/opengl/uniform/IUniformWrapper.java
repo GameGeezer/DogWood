@@ -3,7 +3,7 @@ package framework.graphics.opengl.uniform;
 import framework.graphics.opengl.ShaderProgram;
 
 /**
- * Created by Will on 1/4/2015.
+ * @author William Gervasio
  */
 public interface IUniformWrapper {
 

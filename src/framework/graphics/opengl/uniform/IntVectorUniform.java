@@ -8,6 +8,7 @@ import java.nio.IntBuffer;
 /**
  * @author William Gervasio
  */
+@SuppressWarnings("UnusedDeclaration")
 public final class IntVectorUniform extends VectorUniform {
 
     private final IntBuffer uniformData;

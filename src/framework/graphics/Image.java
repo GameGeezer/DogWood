@@ -12,8 +12,10 @@ import framework.util.exceptions.DogWoodException;
 import java.io.*;
 import java.nio.ByteBuffer;
 
-public class Image {
+@SuppressWarnings("WeakerAccess")
+public final class Image {
 
+    @SuppressWarnings("UnusedDeclaration")
     public enum ImageFormat {
 
         RGB(3, PNGDecoder.Format.RGB), RGBA(4, PNGDecoder.Format.RGBA);
@@ -29,17 +31,17 @@ public class Image {
         }
     }
 
-    private int width, height;
-    private ByteBuffer buffer;
+    private final int width, height;
+    private final ByteBuffer buffer;
 
-    public Image(int width, int height, ByteBuffer buffer) {
+    public Image(final int width, final int height, final ByteBuffer buffer) {
 
         this.width = width;
         this.height = height;
         this.buffer = buffer;
     }
 
-    public static Image loadPNG(File file, ImageFormat format) throws DogWoodException {
+    public final static Image loadPNG(final File file, final ImageFormat format) throws DogWoodException {
 
         ByteBuffer buffer;
         int width, height;
@@ -69,17 +71,17 @@ public class Image {
         return new Image(width, height, buffer);
     }
 
-    public int getWidth() {
+    public final int getWidth() {
 
         return width;
     }
 
-    public int getHeight() {
+    public final int getHeight() {
 
         return height;
     }
 
-    public ByteBuffer getBuffer() {
+    public final ByteBuffer getBuffer() {
 
         return buffer;
     }

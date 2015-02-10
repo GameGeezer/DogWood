@@ -3,8 +3,9 @@ package framework.graphics.opengl.bufferObjects;
 import org.lwjgl.opengl.GL30;
 
 /**
- * Created by Will on 1/24/2015.
+ * @author William Gervasio
  */
+@SuppressWarnings("UnusedDeclaration")
 public final class FBO {
 
     private final int handle;

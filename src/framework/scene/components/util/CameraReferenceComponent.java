@@ -4,6 +4,7 @@ import framework.scene.Entity;
 import framework.scene.Camera;
 import framework.graphics.opengl.ShaderProgram;
 import framework.scene.components.graphics.UniformComponent;
+import framework.util.exceptions.EntityException;
 
 /**
  * Created by Will on 1/4/2015.
@@ -18,8 +19,14 @@ public class CameraReferenceComponent extends UniformComponent {
     }
 
     @Override
-    protected void onAttach() {
+    protected void onAttach() throws EntityException {
 
+        if(getParent().getComponentsOfType(CameraReferenceComponent.class).size() > 1) {
+
+            removeSelfFromParent();
+
+            throw new EntityException("Only one CameraReferenceComponent may be attached to an entity");
+        }
     }
 
     @Override

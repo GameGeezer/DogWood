@@ -9,19 +9,14 @@ import org.lwjgl.opengl.GL30;
  *
  * @author William Gervasio
  */
+@SuppressWarnings("SameParameterValue")
 public final class RBO {
 
-    enum RenderBufferStorage {
-
-    }
-
-    private final int handle, width, height;
+    private final int handle;
     private final AttachmentType frameBufferAttachmentType;
 
     public RBO(final int width, final int height, AttachmentType frameBufferAttachmentType) {
 
-        this.width = width;
-        this.height = height;
         this.frameBufferAttachmentType = frameBufferAttachmentType;
 
         handle = GL30.glGenRenderbuffers();

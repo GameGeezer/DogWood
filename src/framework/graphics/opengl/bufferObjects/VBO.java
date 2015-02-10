@@ -9,6 +9,7 @@ import java.nio.FloatBuffer;
  *
  * @author William Gervasio
  */
+@SuppressWarnings("SameParameterValue")
 public final class VBO {
 
     private final int handle;

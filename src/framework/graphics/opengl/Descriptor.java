@@ -5,6 +5,7 @@ package framework.graphics.opengl;
  *
  * @author William Gervasio
  */
+@SuppressWarnings("SameParameterValue")
 public final class Descriptor {
 
     private final int size;
@@ -17,11 +18,10 @@ public final class Descriptor {
      * @param size       The number of elements per vertex
      * @param type       The data type. "GL_FLOAT" for example
      * @param normalized Whether the data should be normalized or not
-     * @param stride
-     * @param pointer
+     * @param stride     The size in bytes needed to store all the vertices
+     * @param pointer    The offset in bytes of the first index
      */
-    public Descriptor(final int size, final int type, final boolean normalized,
-                      final int stride, final int pointer) {
+    public Descriptor(final int size, final int type, final boolean normalized, final int stride, final int pointer) {
 
         this.size = size;
         this.type = type;
@@ -31,47 +31,52 @@ public final class Descriptor {
     }
 
     /**
-     * The element count per vertex. e.g. 3(x, y, z) for position
+     * Get the element count per vertex. e.g. 3(x, y, z) for position
      *
-     * @return
+     * @return  the size
      */
     public final int getSize() {
+
         return size;
     }
 
     /**
-     * The data type. e.g. GL_FLOAT
+     * Get the data type. e.g. GL_FLOAT
      *
-     * @return
+     * @return The type
      */
     public final int getType() {
+
         return type;
     }
 
     /**
-     * Whether to normalize the data or not
+     * Get whether to normalize the data or not
      *
-     * @return
+     * @return whether to normalize or not
      */
     public final boolean isNormalized() {
+
         return normalized;
     }
 
     /**
-     * How many bytes total to store all the vertices
+     * Get how many bytes in total are required to store all the vertices
      *
-     * @return
+     * @return The stride
      */
     public final int getStride() {
+
         return stride;
     }
 
     /**
      * The offset in bytes of the first index
      *
-     * @return
+     * @return The pointer to the first index
      */
     public final int getPointer() {
+
         return pointer;
     }
 }
