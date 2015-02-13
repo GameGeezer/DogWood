@@ -1,0 +1,40 @@
+{ "height":7,
+ "layers":[
+        {
+         "data":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 1, 1, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 1, 1, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 1, 1, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 1, 1, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+         "height":7,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":13,
+         "x":0,
+         "y":0
+        }],
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "renderorder":"right-down",
+ "tileheight":128,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"..\/Desktop\/walls128.png",
+         "imageheight":1024,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"walls128",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":128,
+         "tilewidth":128
+        }],
+ "tilewidth":128,
+ "version":1,
+ "width":13
+}
