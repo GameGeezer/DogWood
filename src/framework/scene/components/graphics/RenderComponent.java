@@ -1,6 +1,7 @@
 package framework.scene.components.graphics;
 
 import framework.graphics.opengl.ShaderProgram;
+import framework.graphics.opengl.uniform.IUniformWrapper;
 import framework.scene.Entity.EntityComponent;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public abstract class RenderComponent extends EntityComponent {
     @Override
     protected void onAttach() {
 
-        List<UniformComponent> uniformComponents = (List<UniformComponent>) (List<?>) getParent().getComponentsOfType(UniformComponent.class);
+        List<IUniformWrapper> uniformComponents = (List<IUniformWrapper>) (List<?>) getParent().getComponentsOfType(IUniformWrapper.class);
 
         uniformComponents.forEach((component) -> component.addListener(getShader()));
     }
@@ -32,7 +33,7 @@ public abstract class RenderComponent extends EntityComponent {
     @Override
     protected void onDetach() {
 
-        List<UniformComponent> uniformComponents = (List<UniformComponent>) (List<?>) getParent().getComponentsOfType(UniformComponent.class);
+        List<IUniformWrapper> uniformComponents = (List<IUniformWrapper>) (List<?>) getParent().getComponentsOfType(IUniformWrapper.class);
 
         uniformComponents.forEach((component) -> component.removeListener(getShader()));
     }
@@ -40,18 +41,18 @@ public abstract class RenderComponent extends EntityComponent {
     @Override
     protected void onComponentAttachedToParent(EntityComponent component) {
 
-        if(component instanceof UniformComponent) {
+        if(component instanceof IUniformWrapper) {
 
-            ((UniformComponent) component).addListener(getShader());
+            ((IUniformWrapper) component).addListener(getShader());
         }
     }
 
     @Override
     protected void onComponentDetachedFromParent(EntityComponent component) {
 
-        if(component instanceof UniformComponent) {
+        if(component instanceof IUniformWrapper) {
 
-            ((UniformComponent) component).removeListener(getShader());
+            ((IUniformWrapper) component).removeListener(getShader());
         }
     }
 

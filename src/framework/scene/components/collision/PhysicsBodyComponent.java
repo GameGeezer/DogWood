@@ -1,7 +1,6 @@
 package framework.scene.components.collision;
 
 import framework.scene.Entity;
-import framework.scene.PhysicsWorld;
 import framework.scene.components.TransformComponent;
 import framework.scene.components.UpdateComponent;
 import framework.util.exceptions.EntityException;

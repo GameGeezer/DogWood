@@ -4,7 +4,6 @@ import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.uniform.IUniformWrapper;
 import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.scene.Entity.EntityComponent;
-import framework.scene.components.graphics.UniformComponent;
 import framework.util.exceptions.EntityException;
 import framework.util.math.Transform;
 import framework.util.math.Matrix4;
@@ -13,7 +12,7 @@ import framework.util.math.Vector3;
 /**
  * Created by Will on 11/25/2014.
  */
-public class TransformComponent extends UniformComponent implements IUniformWrapper {
+public class TransformComponent extends EntityComponent implements IUniformWrapper {
 
     public static final String MODEL_UNIFORM = "u_modelMatrix";
 

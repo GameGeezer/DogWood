@@ -5,7 +5,6 @@ package game;
  */
 
 import framework.scene.Entity;
-import framework.scene.PhysicsWorld;
 import framework.scene.components.graphics.RenderComponent;
 import framework.scene.components.UpdateComponent;
 import framework.scene.Camera;

@@ -1,15 +1,15 @@
 package framework.scene.components.general;
 
+import framework.graphics.opengl.uniform.IUniformWrapper;
 import framework.scene.Entity;
 import framework.scene.Camera;
 import framework.graphics.opengl.ShaderProgram;
-import framework.scene.components.graphics.UniformComponent;
 import framework.util.exceptions.EntityException;
 
 /**
  * Created by Will on 1/4/2015.
  */
-public class CameraReferenceComponent extends UniformComponent {
+public class CameraReferenceComponent extends Entity.EntityComponent implements IUniformWrapper {
 
     private Camera camera;
 
