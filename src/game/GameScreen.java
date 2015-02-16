@@ -52,13 +52,9 @@ public class GameScreen implements IScreen {
             playerTransform.setTranslation(0, 0, -1.2f);
             playerTransform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
             playerTransform.setScale(0.25f, 0.25f, 0);
-            Timer timer = new Timer();
             Script s = Application.GROOVY_SHELL.parse( new File( "res/scripts/BuildScripts.groovy" ) );
-            timer.start();
 
             player = (Entity) s.invokeMethod("buildPlayer", playerTransform ) ;
-            timer.pause();
-            System.out.println(timer.getElapsedTimeMS());
             Scene.addEntity(player);
             treeMesh = WavefrontLoader.LOADER.load(new File("res/models/Plane.obj"));
 	        renderer = new DeferredRenderer(800, 600);

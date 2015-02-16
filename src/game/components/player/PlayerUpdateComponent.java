@@ -22,10 +22,6 @@ public class PlayerUpdateComponent extends UpdateComponent {
     private MovementState walkState;
     private StateStack<MovementState> movementStack = new StateStack<>();
 
-    private float force = 5000f;
-
-    private float maxVelocity = 20f;
-
     @Override
     protected void onAttach() {
 

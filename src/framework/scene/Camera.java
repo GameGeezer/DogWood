@@ -161,9 +161,9 @@ public class Camera implements IUniformWrapper {
     private void updateView() {
 
         view.set(transform.getScale());
-
-        Matrix4.multiply(view, transform.getOrientation().computeMatrix(), view);
         Matrix4.multiply(view, transform.getPosition(), view);
+        Matrix4.multiply(view, transform.getOrientation().computeMatrix(), view);
+
 
         viewUniform.setUniformData(view.data);
     }
