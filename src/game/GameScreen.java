@@ -106,6 +106,8 @@ public class GameScreen implements IScreen {
     public void update(int delta) {
 
      //   ctTransform.rotateEuler((float)Math.PI / 1000f, 0f, 0f);
+        TransformComponent playerTransform = (TransformComponent) player.getComponentsOfType(TransformComponent.class).get(0);
+        Scene.getCamera().setTranslation(-playerTransform.getX(), -playerTransform.getY() + 1f, -playerTransform.getZ() - 1);
         Scene.update(delta);
         renderer.beginDrawing();
         Scene.render(delta);

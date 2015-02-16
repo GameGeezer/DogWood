@@ -42,6 +42,12 @@ public class Camera implements IUniformWrapper {
         updateView();
     }
 
+    public void setTranslation(float x, float y, float z) {
+
+        transform.setTranslation(x, y, z);
+        updateView();
+    }
+
     public void rotate(float roll, float pitch, float yaw) {
 
         transform.rotateEuler(-roll, -pitch, -yaw);
@@ -160,5 +166,18 @@ public class Camera implements IUniformWrapper {
         Matrix4.multiply(view, transform.getPosition(), view);
 
         viewUniform.setUniformData(view.data);
+    }
+
+    public float getX() {
+
+        return transform.getX();
+    }
+    public float getY() {
+
+        return transform.getY();
+    }
+    public float getZ() {
+
+        return transform.getZ();
     }
 }
