@@ -14,28 +14,24 @@ import java.util.HashSet;
  */
 public final class WindowResizeCallback extends GLFWWindowSizeCallback {
 
-	public final Collection < WindowResizeListener > listeners = new HashSet < > ();
+	public final Collection < WindowResizeListener > listeners = new HashSet <> ();
 
 	@Override
 	public void invoke ( final long window, final int width, final int height ) {
-
 		for ( final WindowResizeListener listener : listeners ) {
 			listener.onWindowResize ( width, height );
 		}
 	}
 
-    public void addListener(WindowResizeListener listener) {
-
-        listeners.add(listener);
+    public void addListener ( final WindowResizeListener listener ) {
+        listeners.add ( listener );
     }
 
-    public void removeListener(WindowResizeListener listener) {
-
-        listeners.remove(listener);
+    public void removeListener ( final WindowResizeListener listener ) {
+        listeners.remove ( listener );
     }
 
-    public void clearListeners() {
-
-        listeners.clear();
+    public void clearListeners () {
+        listeners.clear ();
     }
 }

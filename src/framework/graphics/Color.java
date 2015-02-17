@@ -14,7 +14,7 @@ public final class Color implements Cloneable {
     private static final float MINIMUM_CHANNEL_VALUE = 0.0f;
     private static final float MAXIMUM_CHANNEL_VALUE = 1.0f;
 
-    private float r, g, b, a;
+    public float r, g, b, a;
 
     public Color() {
 
@@ -26,6 +26,10 @@ public final class Color implements Cloneable {
         set(r, g, b, a);
     }
 
+	public Color ( final Color color ) {
+		this ( color.r, color.g, color.b, color.a );
+	}
+
     /**
      * Increase r, g, b by a percentage.
      *
@@ -33,14 +37,11 @@ public final class Color implements Cloneable {
      * @return This object
      */
     public final Color brighten(float percentage) {
-
-        percentage += 1;
-
-        r *= percentage;
-        g *= percentage;
-        b *= percentage;
-
-        return clamp();
+	    final float brightenPercentage = 1.0f + percentage;
+	    setRed ( r * brightenPercentage );
+	    setGreen ( g * brightenPercentage );
+	    setBlue ( b * brightenPercentage );
+	    return this;
     }
 
     /**
@@ -49,15 +50,12 @@ public final class Color implements Cloneable {
      * @param percentage The percentage must be in decimal form on the interval of [0, 1]
      * @return This object
      */
-    public final Color darken(float percentage) {
-
-        percentage = 1 - percentage;
-
-        r *= percentage;
-        g *= percentage;
-        b *= percentage;
-
-        return clamp();
+    public final Color darken ( final float percentage ) {
+	    final float darkenPercentage = 1.0f - percentage;
+	    setRed ( r * darkenPercentage );
+	    setGreen ( g * darkenPercentage );
+	    setBlue ( b * darkenPercentage );
+	    return this;
     }
 
     /**
@@ -70,62 +68,33 @@ public final class Color implements Cloneable {
      * @return This object
      */
     public final Color set(final float r, final float g, final float b, final float a) {
-
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
-
-        return clamp();
+	    setRed ( r );
+	    setGreen ( g );
+	    setBlue ( b );
+	    setAlpha ( a );
+	    return this;
     }
 
-    public final Color setRed(float r) {
-
+    public final Color setRed(final float r) {
         this.r = RangeUtil.forceIntoRange(r, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
-
         return this;
     }
 
-    public final float getRed() {
-
-        return r;
-    }
-
-    public final Color setGreen(float g) {
-
+    public final Color setGreen(final float g) {
         this.g = RangeUtil.forceIntoRange(g, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
-
         return this;
-    }
-
-    public final float getGreen() {
-
-        return g;
     }
 
     public final Color setBlue(float b) {
-
         this.b = RangeUtil.forceIntoRange(b, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
-
         return this;
-    }
-
-    public final float getBlue() {
-
-        return b;
     }
 
     public final Color setAlpha(float a) {
-
         this.a = RangeUtil.forceIntoRange(a, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
-
         return this;
     }
 
-    public final float getAlpha() {
-
-        return a;
-    }
 
     /**
      * Creates a float[] of r, g, b, a
@@ -133,27 +102,7 @@ public final class Color implements Cloneable {
      * @return The r,g, b, a values as a float array
      */
     public final float[] getElements() {
-
         return new float[]{r, g, b, a};
     }
 
-    /**
-     * Forces r, g, b, a float values within the desired range of [0, 1]
-     *
-     * @return This object
-     */
-    private final Color clamp() {
-
-        r = RangeUtil.forceIntoRange(r, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
-        g = RangeUtil.forceIntoRange(g, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
-        b = RangeUtil.forceIntoRange(b, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
-        a = RangeUtil.forceIntoRange(a, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
-
-        return this;
-    }
-
-    public final Color clone() {
-
-        return new Color(r, g, b, a);
-    }
 }

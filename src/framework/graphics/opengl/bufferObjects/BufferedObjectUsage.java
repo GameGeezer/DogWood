@@ -22,7 +22,7 @@ public enum BufferedObjectUsage {
 
     public final int ID;
 
-    private BufferedObjectUsage(int id) {
+    private BufferedObjectUsage(final int id) {
 
         ID = id;
     }

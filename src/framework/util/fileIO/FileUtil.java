@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * @author William Gervasio
  */
-public class FileUtil {
+public final class FileUtil {
 
     /**
      * Parses a file for the text
@@ -13,25 +13,30 @@ public class FileUtil {
      * @param fileLocation
      * @return The text as a String
      */
-    public static String readText(String fileLocation) throws IOException {
+    public static String readText(final String fileLocation) throws IOException {
 
-        StringBuilder shaderString = new StringBuilder();
+        final StringBuilder shaderString = new StringBuilder();
 
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader(fileLocation));
-            String line;
+            final BufferedReader reader = new BufferedReader(new FileReader(fileLocation));
+//            String line;
+//
+//            while ((line = reader.readLine()) != null) {
+//
+//                shaderString.append(line).append("\n");
+//            }
 
-            while ((line = reader.readLine()) != null) {
-
-                shaderString.append(line).append("\n");
-            }
+	        for ( String line = reader.readLine (); line != null; ) {
+		        shaderString.append ( line ).append ( "\n" );
+		        line = reader.readLine ();
+	        }
 
             reader.close();
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
 
             throw new IOException("File: " + fileLocation + " was not found");
-        } catch (IOException e) {
+        } catch (final IOException e) {
 
             throw new IOException("File: " + fileLocation + " could not be read");
         }

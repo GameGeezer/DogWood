@@ -158,7 +158,7 @@ public final class ShaderProgram {
      * @return A handle to the compiled shader
      * @throws GraphicsException
      */
-    private final int compileShader(final String shader, final int type) throws GraphicsException {
+    public static int compileShader(final String shader, final int type) throws GraphicsException {
 
         final int handle = GL20.glCreateShader(type);
 
@@ -196,8 +196,7 @@ public final class ShaderProgram {
      * @param handle the handle of the program being checked
      * @return True if properly linked
      */
-    private final boolean checkProgramForLinkError(final int handle) {
-
+    public static boolean checkProgramForLinkError(final int handle) {
         return GL20.glGetProgrami(handle, GL20.GL_LINK_STATUS) == GL11.GL_FALSE;
     }
 }

@@ -31,7 +31,7 @@ public enum OGLColorType {
 
     public final int ID;
 
-    private OGLColorType(int id) {
+    private OGLColorType(final int id) {
 
         ID = id;
     }

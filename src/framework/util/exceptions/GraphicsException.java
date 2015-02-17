@@ -6,11 +6,9 @@ package framework.util.exceptions;
 
 public class GraphicsException extends DogWoodException {
 
-    public GraphicsException() {
+    public GraphicsException() {}
 
-    }
-
-    public GraphicsException(String message) {
+    public GraphicsException(final String message) {
         super(message);
     }
 }

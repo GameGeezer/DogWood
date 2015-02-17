@@ -14,26 +14,22 @@ import java.util.HashSet;
  */
 public final class WindowRefreshCallback extends GLFWWindowRefreshCallback {
 
-	public final Collection < WindowRefreshListener > listeners = new HashSet < > ();
+	public final Collection < WindowRefreshListener > listeners = new HashSet <> ();
 
 	@Override
 	public void invoke ( final long window ) {
-
-        listeners.forEach(WindowRefreshListener::onWindowRefresh);
+        listeners.forEach( WindowRefreshListener :: onWindowRefresh );
 	}
 
-    public void addListener(WindowRefreshListener listener) {
-
-        listeners.add(listener);
+    public void addListener ( WindowRefreshListener listener ) {
+        listeners.add ( listener );
     }
 
-    public void removeListener(WindowRefreshListener listener) {
-
-        listeners.remove(listener);
+    public void removeListener ( final WindowRefreshListener listener ) {
+        listeners.remove ( listener );
     }
 
-    public void clearListeners() {
-
-        listeners.clear();
+    public void clearListeners () {
+        listeners.clear ();
     }
 }

@@ -14,26 +14,22 @@ import java.util.HashSet;
  */
 public final class WindowCloseCallback extends GLFWWindowCloseCallback {
 
-	private final Collection < WindowCloseListener > listeners = new HashSet < > ();
+	private final Collection < WindowCloseListener > listeners = new HashSet <> ();
 
 	@Override
 	public void invoke ( final long window ) {
-
-        listeners.forEach(WindowCloseListener::onWindowClosing);
+        listeners.forEach ( WindowCloseListener :: onWindowClosing );
 	}
 
-    public void addListener(WindowCloseListener listener) {
-
-        listeners.add(listener);
+    public void addListener ( final WindowCloseListener listener ) {
+        listeners.add ( listener );
     }
 
-    public void removeListener(WindowCloseListener listener) {
-
-        listeners.remove(listener);
+    public void removeListener ( final WindowCloseListener listener ) {
+        listeners.remove ( listener );
     }
 
-    public void clearListeners() {
-
-        listeners.clear();
+    public void clearListeners () {
+        listeners.clear ();
     }
 }

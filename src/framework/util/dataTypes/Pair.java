@@ -3,34 +3,18 @@ package framework.util.dataTypes;
 /**
  * @author William Gervasio
  */
-public class Pair<K, V> {
+public class Pair < K, V > {
 
-    private K key;
-    private V value;
+    public K key;
+    public V value;
 
-    public Pair(K key, V value) {
-
+    public Pair ( final K key, final V value ) {
         this.key = key;
         this.value = value;
     }
 
-    public K getKey() {
+	public Pair ( final Pair < K, V > pair ) {
+		this ( pair.key, pair.value );
+	}
 
-        return key;
-    }
-
-    public V getValue() {
-
-        return value;
-    }
-
-    public void setKey(K key) {
-
-        this.key = key;
-    }
-
-    public void setValue(V value) {
-
-        this.value = value;
-    }
 }
