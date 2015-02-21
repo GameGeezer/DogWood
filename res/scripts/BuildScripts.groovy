@@ -1,6 +1,5 @@
 import framework.graphics.Image
 import framework.graphics.opengl.ShaderProgram
-import framework.scene.Camera
 import framework.scene.Entity
 import framework.scene.components.collision.BoxFixtureComponent
 import framework.scene.components.collision.PhysicsBodyComponent
@@ -10,8 +9,8 @@ import framework.util.fileIO.FileUtil
 import framework.util.math.Transform
 import game.Scene
 import game.components.SpriteComponent
-import game.components.player.PlayerControllerComponent
 import game.components.player.PlayerUpdateComponent
+import groovy.json.JsonSlurper
 import org.jbox2d.dynamics.BodyType
 
 /**
@@ -48,7 +47,6 @@ public Entity buildPlayer(Transform transform) {
     entity.addComponent(spriteComponent);
     entity.addComponent(transformComponent);
     entity.addComponent(new CameraReferenceComponent(Scene.getCamera()));
-    entity.addComponent(new PlayerControllerComponent());
     entity.addComponent(new PlayerUpdateComponent());
     entity.addComponent(bodyComponent);
     entity.addComponent(fixtureComponent);
@@ -56,7 +54,8 @@ public Entity buildPlayer(Transform transform) {
     return entity;
 }
 
-public Camera buildCamera() {
-
-    Entity entity = new Entity();
+public void buildTileMap() {
+    JsonSlurper slurper = new JsonSlurper()
+    def json = slurper.parse(file)
+    json.height
 }

@@ -29,7 +29,8 @@ public class SpriteComponent extends RenderComponent {
 
     private FloatVectorUniform texCoordOffset = new FloatVectorUniform("u_textureCoordinateOffset", VectorUniform.VectorUniformType.VECTOR2);
 
-    private float texcoordX, texcoordY, cellsWide, cellsHigh;
+    private final int cellsWide, cellsHigh;
+    private float texcoordX, texcoordY;
 
     public SpriteComponent(final Image image, ShaderProgram shader, int cellsWide, int cellsHigh) {
 
@@ -103,5 +104,15 @@ public class SpriteComponent extends RenderComponent {
         attributes.add(new StaticVertexAttribute(texCoords, 2));
 
         return new Mesh(indices, attributes);
+    }
+
+    public int getCellsWide() {
+
+        return  cellsWide;
+    }
+
+    public int getCellsHigh() {
+
+        return cellsHigh;
     }
 }

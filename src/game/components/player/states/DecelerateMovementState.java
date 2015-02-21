@@ -1,6 +1,5 @@
 package game.components.player.states;
 
-import framework.scene.Entity;
 import framework.scene.components.collision.PhysicsBodyComponent;
 
 /**
@@ -8,27 +7,26 @@ import framework.scene.components.collision.PhysicsBodyComponent;
  */
 public class DecelerateMovementState extends MovementState {
 
-    private final PhysicsBodyComponent body;
     private final float dampening;
 
-    public DecelerateMovementState(PhysicsBodyComponent body, float dampening) {
+    public DecelerateMovementState(PhysicsBodyComponent bodyComponent, float dampening) {
+        super(bodyComponent);
 
-        this.body = body;
         this.dampening = dampening;
     }
 
     protected void onLeaveTop() {
 
-        body.setLinearDampening(0f);
+        getBodyComponent().setLinearDampening(0f);
     }
 
     protected void onBecomeTop() {
 
-        body.setLinearDampening(dampening);
+        getBodyComponent().setLinearDampening(dampening);
     }
 
     @Override
-    public void move(Entity entity, float x, float y) {
+    public void move() {
 
     }
 }

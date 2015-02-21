@@ -12,6 +12,7 @@ public class StateStack<E extends StateStack.State> {
     public E  pop() {
 
         E poppedState = states.pop();
+        poppedState.setParentStack(null);
         poppedState.onLeaveTop();
         states.peek().onBecomeTop();
 
@@ -28,6 +29,7 @@ public class StateStack<E extends StateStack.State> {
         if(states.peek()!= null)
             states.peek().onLeaveTop();
 
+        state.setParentStack(this);
         states.push(state);
         states.peek().onBecomeTop();
     }
@@ -39,8 +41,20 @@ public class StateStack<E extends StateStack.State> {
 
     public abstract static class State {
 
+        private StateStack parentStack;
+
+        protected void popStack() {
+
+            parentStack.pop();
+        }
+
         protected abstract void onLeaveTop();
 
         protected abstract void onBecomeTop();
+
+        protected void setParentStack(StateStack parentStack) {
+
+            this.parentStack = parentStack;
+        }
     }
 }

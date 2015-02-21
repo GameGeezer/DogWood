@@ -5,7 +5,8 @@ package framework.util.exceptions;
  */
 public class EntityException extends DogWoodException {
 
-    public EntityException() {}
+    public EntityException() {
+    }
 
     public EntityException(final String message) {
         super(message);

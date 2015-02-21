@@ -1,44 +1,47 @@
 package game.components.player.states;
 
-import framework.scene.Entity;
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.util.RangeUtil;
-import game.components.player.PlayerUpdateComponent;
+import framework.util.Timer;
 
 /**
- * Created by Will on 2/2/2015.
+ * Created by Will on 2/20/2015.
  */
-public class WalkMovementState extends MovementState {
-
-
+public class RollMovementState extends MovementState {
 
     private float force;
     private float maxVelocity;
+    private float rollTime;
 
-    private int animationStartTime = 0;
+    private Timer rollTimer = new Timer();
 
-    public WalkMovementState(PhysicsBodyComponent bodyComponent, float force, float maxVelocity) {
+    public RollMovementState(PhysicsBodyComponent bodyComponent, float force, float maxVelocity, float rollTime) {
         super(bodyComponent);
 
         this.force = force;
         this.maxVelocity = maxVelocity;
+        this.rollTime = rollTime;
     }
 
-    @Override
     protected void onLeaveTop() {
-        getBodyComponent().setLinearDampening(0f);
 
     }
 
-    @Override
     protected void onBecomeTop() {
-        getBodyComponent().setLinearDampening(100f);
+        rollTimer.reset();
+        rollTimer.start();
     }
 
     @Override
     public void move() {
 
-        getBodyComponent().applyForceToCenter(getRollDirection().getX() * force, getRollDirection().getY() * force);
+        if(rollTimer.getElapsedTimeMS() >= rollTime) {
+            popStack();
+            return;
+        }
+
+        getBodyComponent().setLinearDampening(100f);
+        getBodyComponent().applyForceToCenter(getRollDirection().getX() * force, getRollDirection().getY()  * force);
 
         float velX = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityX(), -maxVelocity, maxVelocity);
         float velY = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityY(), -maxVelocity, maxVelocity);
