@@ -202,6 +202,7 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
                 break;
 
             case GLFW_KEY_S:
+                faceDirection = Vector2.DOWN;
                 verticalMovement -= 1f;
                 animationStartTime = (int) System.currentTimeMillis();
                 break;

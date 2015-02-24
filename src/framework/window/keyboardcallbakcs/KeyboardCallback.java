@@ -33,7 +33,7 @@ public final class KeyboardCallback extends GLFWKeyCallback {
                 for ( final KeyboardListener listener : listeners ) listener.onKeyDown ( key );
 
                 final int currentTime = (int)System.currentTimeMillis();
-                
+
                 if(pressedLastMap.get(key) != null && currentTime - pressedLastMap.get(key) <= pressedTwiceTime)  {
                     for ( final KeyboardListener listener : listeners ) listener.onKeyDoublePressed(key);
                 }
