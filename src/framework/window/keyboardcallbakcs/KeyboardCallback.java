@@ -31,13 +31,11 @@ public final class KeyboardCallback extends GLFWKeyCallback {
 			case GLFW_PRESS:
 
                 final int currentTime = (int)System.currentTimeMillis();
-                if(pressedLastMap.get(key) != null )
-                    System.out.println(currentTime - pressedLastMap.get(key));
                 if(pressedLastMap.get(key) != null && currentTime - pressedLastMap.get(key) <= pressedTwiceTime)  {
-                    for ( final KeyboardListener listener : listeners ) listener.onKeyDoublePressed ( key );
-                } else {
-                    for ( final KeyboardListener listener : listeners ) listener.onKeyDown ( key );
+                    for ( final KeyboardListener listener : listeners ) listener.onKeyDoublePressed(key);
                 }
+
+                for ( final KeyboardListener listener : listeners ) listener.onKeyDown ( key );
                 pressedLastMap.put(key, currentTime);
                 break;
 			case GLFW_RELEASE: for ( final KeyboardListener listener : listeners ) listener.onKeyUp ( key );     break;

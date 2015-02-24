@@ -222,19 +222,15 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         switch (keyCode) {
 
             case GLFW_KEY_A:
-                horizontalMovement -= 1f;
                 rollInDirection(-1f, 0f);
                 break;
             case GLFW_KEY_D:
-                horizontalMovement += 1f;
                 rollInDirection(1f, 0f);
                 break;
             case GLFW_KEY_W:
-                verticalMovement += 1f;
                 rollInDirection(0f, 1f);
                 break;
             case GLFW_KEY_S:
-                verticalMovement -= 1f;
                 rollInDirection(0f, -1f);
                 break;
         }
@@ -287,13 +283,8 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
     private void rollInDirection(float x, float y) {
 
-        if(movementStack.peek().equals(decelerationState)) {
+        if(movementStack.peek().equals(decelerationState) || movementStack.peek().equals(walkState)) {
 
-            rollState.setDirection(x, y);
-            movementStack.push(rollState);
-        } else if (movementStack.peek().equals(walkState) ) {
-
-            movementStack.pop();
             rollState.setDirection(x, y);
             movementStack.push(rollState);
         }
