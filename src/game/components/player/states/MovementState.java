@@ -10,7 +10,7 @@ import framework.util.math.Vector2;
 public abstract class MovementState extends StateStack.State{
 
     private PhysicsBodyComponent bodyComponent;
-    private Vector2 rollDirection = new Vector2();
+    private Vector2 moveDirection = new Vector2();
 
     public MovementState(PhysicsBodyComponent bodyComponent) {
 
@@ -26,12 +26,12 @@ public abstract class MovementState extends StateStack.State{
 
     public void setDirection(float x, float y) {
 
-        rollDirection.set(x, y);
-        rollDirection.normalize();
+        moveDirection.set(x, y);
+        moveDirection.normalize();
     }
 
-    public Vector2 getRollDirection() {
+    public Vector2 getMoveDirection() {
 
-        return rollDirection;
+        return moveDirection;
     }
 }

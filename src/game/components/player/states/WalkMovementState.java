@@ -25,20 +25,21 @@ public class WalkMovementState extends MovementState {
     }
 
     @Override
+    protected void onBecomeTop() {
+
+        getBodyComponent().setLinearDampening(100f);
+    }
+
+    @Override
     protected void onLeaveTop() {
         getBodyComponent().setLinearDampening(0f);
 
     }
 
     @Override
-    protected void onBecomeTop() {
-        getBodyComponent().setLinearDampening(100f);
-    }
-
-    @Override
     public void move() {
 
-        getBodyComponent().applyForceToCenter(getRollDirection().getX() * force, getRollDirection().getY() * force);
+        getBodyComponent().applyForceToCenter(getMoveDirection().getX() * force, getMoveDirection().getY() * force);
 
         float velX = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityX(), -maxVelocity, maxVelocity);
         float velY = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityY(), -maxVelocity, maxVelocity);

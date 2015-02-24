@@ -29,4 +29,11 @@ public interface KeyboardListener {
 	 */
 	public default void onKeyRepeat ( final int keyCode ) {}
 
+    /**
+     * Called when a key on the keyboard is pressed and held.
+     *
+     * @param keyCode which key was held
+     */
+    public default void onKeyDoublePressed ( final int keyCode ) {}
+
 }

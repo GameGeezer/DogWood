@@ -24,7 +24,7 @@ public class RollMovementState extends MovementState {
     }
 
     protected void onLeaveTop() {
-
+        getBodyComponent().setLinearDampening(100f);
     }
 
     protected void onBecomeTop() {
@@ -40,8 +40,8 @@ public class RollMovementState extends MovementState {
             return;
         }
 
-        getBodyComponent().setLinearDampening(100f);
-        getBodyComponent().applyForceToCenter(getRollDirection().getX() * force, getRollDirection().getY()  * force);
+
+        getBodyComponent().applyForceToCenter(getMoveDirection().getX() * force, getMoveDirection().getY()  * force);
 
         float velX = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityX(), -maxVelocity, maxVelocity);
         float velY = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityY(), -maxVelocity, maxVelocity);

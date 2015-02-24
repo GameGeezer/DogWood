@@ -46,6 +46,12 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
     private SpriteAnimation walkRightAnimation = new SpriteAnimation(750, 6, 7, 8);
     private SpriteAnimation walkUpAnimation = new SpriteAnimation(750, 9, 10, 11);
     private SpriteAnimation walkDownAnimation = new SpriteAnimation(750, 0, 1, 2);
+
+    private SpriteAnimation idleLeftAnimation = new SpriteAnimation(750, 3);
+    private SpriteAnimation idleRightAnimation = new SpriteAnimation(750, 6);
+    private SpriteAnimation idleUpAnimation = new SpriteAnimation(750, 9);
+    private SpriteAnimation idleDownAnimation = new SpriteAnimation(750, 0);
+
     private SpriteAnimation currentAnimation;
 
     private Vector2 faceDirection = Vector2.DOWN;
@@ -128,7 +134,7 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
         if((Math.abs(horizontalMovement) > 0 || Math.abs(verticalMovement) > 0) && movementStack.peek().equals(decelerationState)) {
 
-            movementStack.push(walkState);
+
         } else if ((horizontalMovement == 0 && verticalMovement == 0) && movementStack.peek().equals(walkState)) {
 
             movementStack.pop();
@@ -209,26 +215,29 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         setAnimation();
     }
 
+
     @Override
-    public void onKeyRepeat ( final int keyCode ) {
+    public void onKeyDoublePressed ( final int keyCode ) {
 
         switch (keyCode) {
 
             case GLFW_KEY_A:
+                horizontalMovement -= 1f;
                 rollInDirection(-1f, 0f);
                 break;
             case GLFW_KEY_D:
+                horizontalMovement += 1f;
                 rollInDirection(1f, 0f);
                 break;
             case GLFW_KEY_W:
+                verticalMovement += 1f;
                 rollInDirection(0f, 1f);
                 break;
             case GLFW_KEY_S:
+                verticalMovement -= 1f;
                 rollInDirection(0f, -1f);
                 break;
         }
-
-
     }
 
     private void fireBullet() {
@@ -260,7 +269,7 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         bodyComponent = body;
         decelerationState = new DecelerateMovementState(bodyComponent, 200f);
         walkState = new WalkMovementState(bodyComponent, 2000f, 18f);
-        rollState = new RollMovementState(bodyComponent, 2000f, 23f, 500f);
+        rollState = new RollMovementState(bodyComponent, 20000f, 23f, 350f);
         movementStack.push(decelerationState);
     }
 
@@ -278,10 +287,15 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
     private void rollInDirection(float x, float y) {
 
-        if(movementStack.peek().equals(walkState) || movementStack.peek().equals(decelerationState)) {
+        if(movementStack.peek().equals(decelerationState)) {
 
             rollState.setDirection(x, y);
-           // movementStack.push(rollState);
+            movementStack.push(rollState);
+        } else if (movementStack.peek().equals(walkState) ) {
+
+            movementStack.pop();
+            rollState.setDirection(x, y);
+            movementStack.push(rollState);
         }
     }
 

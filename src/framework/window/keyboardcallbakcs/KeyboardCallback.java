@@ -3,7 +3,9 @@ package framework.window.keyboardcallbakcs;
 import org.lwjgl.glfw.GLFWKeyCallback;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
@@ -18,13 +20,26 @@ import static org.lwjgl.glfw.GLFW.GLFW_REPEAT;
  */
 public final class KeyboardCallback extends GLFWKeyCallback {
 
+    private static final int pressedTwiceTime = 180;
 	private final Collection < KeyboardListener > listeners  = new HashSet <> ();
+    private final Map<Integer, Integer> pressedLastMap = new HashMap<>();
 
 	@Override
 	public void invoke ( final long window, final int key, final int scancode, final int action, final int mods ) {
 		switch ( action ) {
 			case GLFW_REPEAT:  for ( final KeyboardListener listener : listeners ) listener.onKeyRepeat ( key ); break;
-			case GLFW_PRESS:   for ( final KeyboardListener listener : listeners ) listener.onKeyDown ( key );   break;
+			case GLFW_PRESS:
+
+                final int currentTime = (int)System.currentTimeMillis();
+                if(pressedLastMap.get(key) != null )
+                    System.out.println(currentTime - pressedLastMap.get(key));
+                if(pressedLastMap.get(key) != null && currentTime - pressedLastMap.get(key) <= pressedTwiceTime)  {
+                    for ( final KeyboardListener listener : listeners ) listener.onKeyDoublePressed ( key );
+                } else {
+                    for ( final KeyboardListener listener : listeners ) listener.onKeyDown ( key );
+                }
+                pressedLastMap.put(key, currentTime);
+                break;
 			case GLFW_RELEASE: for ( final KeyboardListener listener : listeners ) listener.onKeyUp ( key );     break;
 			default:
 				// This should never actually happen
