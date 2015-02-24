@@ -1,9 +1,7 @@
 package game.components.player.states;
 
-import framework.scene.Entity;
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.util.RangeUtil;
-import game.components.player.PlayerUpdateComponent;
 
 /**
  * Created by Will on 2/2/2015.

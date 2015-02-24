@@ -40,7 +40,6 @@ public class RollMovementState extends MovementState {
             return;
         }
 
-
         getBodyComponent().applyForceToCenter(getMoveDirection().getX() * force, getMoveDirection().getY()  * force);
 
         float velX = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityX(), -maxVelocity, maxVelocity);

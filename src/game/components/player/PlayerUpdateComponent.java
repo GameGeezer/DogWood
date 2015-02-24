@@ -42,10 +42,10 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
     private float verticalMovement = 0f;
 
 
-    private SpriteAnimation walkLeftAnimation = new SpriteAnimation(750, 3, 4, 5);
-    private SpriteAnimation walkRightAnimation = new SpriteAnimation(750, 6, 7, 8);
-    private SpriteAnimation walkUpAnimation = new SpriteAnimation(750, 9, 10, 11);
-    private SpriteAnimation walkDownAnimation = new SpriteAnimation(750, 0, 1, 2);
+    private SpriteAnimation walkLeftAnimation = new SpriteAnimation(600, 3, 4, 5);
+    private SpriteAnimation walkRightAnimation = new SpriteAnimation(600, 6, 7, 8);
+    private SpriteAnimation walkUpAnimation = new SpriteAnimation(600, 9, 10, 11);
+    private SpriteAnimation walkDownAnimation = new SpriteAnimation(600, 0, 1, 2);
 
     private SpriteAnimation idleLeftAnimation = new SpriteAnimation(750, 3);
     private SpriteAnimation idleRightAnimation = new SpriteAnimation(750, 6);
@@ -140,6 +140,7 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
             movementStack.pop();
         }
 
+        setAnimation();
         movementStack.peek().move();
 
         int xIndex = currentAnimation.getFrameIndex(animationStartTime) % spriteComponent.getCellsWide();
@@ -185,26 +186,22 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
                 faceDirection = Vector2.LEFT;
                 horizontalMovement -= 1f;
-                animationStartTime = (int) System.currentTimeMillis();
                 break;
 
             case GLFW_KEY_D:
 
                 faceDirection = Vector2.RIGHT;
                 horizontalMovement += 1f;
-                animationStartTime = (int) System.currentTimeMillis();
                 break;
 
             case GLFW_KEY_W:
                 verticalMovement += 1f;
                 faceDirection = Vector2.UP;
-                animationStartTime = (int) System.currentTimeMillis();
                 break;
 
             case GLFW_KEY_S:
                 faceDirection = Vector2.DOWN;
                 verticalMovement -= 1f;
-                animationStartTime = (int) System.currentTimeMillis();
                 break;
 
             case GLFW_KEY_SPACE:
@@ -244,16 +241,28 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
     private void setAnimation() {
 
-        if (verticalMovement > 0) {
-            currentAnimation = walkUpAnimation;
-        } else if (verticalMovement < 0) {
-            currentAnimation = walkDownAnimation;
-        }
+        if(movementStack.peek().equals(decelerationState)) {
 
-        if (horizontalMovement > 0) {
-            currentAnimation = walkRightAnimation;
-        } else if (horizontalMovement < 0) {
-            currentAnimation = walkLeftAnimation;
+            if(faceDirection == Vector2.UP){
+                currentAnimation = idleUpAnimation;
+            } else if(faceDirection == Vector2.DOWN) {
+                currentAnimation = idleDownAnimation;
+            } else if (faceDirection == Vector2.LEFT) {
+                currentAnimation = idleLeftAnimation;
+            }else if (faceDirection == Vector2.RIGHT) {
+                currentAnimation = idleRightAnimation;
+            }
+        } else if (movementStack.peek().equals(walkState)) {
+
+            if(faceDirection == Vector2.UP){
+                currentAnimation = walkUpAnimation;
+            } else if(faceDirection == Vector2.DOWN) {
+                currentAnimation = walkDownAnimation;
+            } else if (faceDirection == Vector2.LEFT) {
+                currentAnimation = walkLeftAnimation;
+            }else if (faceDirection == Vector2.RIGHT) {
+                currentAnimation = walkRightAnimation;
+            }
         }
     }
 

@@ -27,6 +27,6 @@ public class DecelerateMovementState extends MovementState {
 
     @Override
     public void move() {
-     int x;
+
     }
 }
