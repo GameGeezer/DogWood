@@ -38,7 +38,6 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
     private MovementState walkState;
     private MovementState rollState;
 
-
     private float horizontalMovement = 0f;
     private float verticalMovement = 0f;
 
@@ -156,23 +155,27 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         switch ( keyCode ) {
 
             case GLFW_KEY_A:
-                removeFaceDirection(Vector2.LEFT);
                 horizontalMovement += 1f;
+                removeFaceDirection(Vector2.LEFT);
+
                 break;
 
             case GLFW_KEY_D:
-                removeFaceDirection(Vector2.RIGHT);
                 horizontalMovement -= 1f;
+                removeFaceDirection(Vector2.RIGHT);
+
                 break;
 
             case GLFW_KEY_W:
-                removeFaceDirection(Vector2.UP);
                 verticalMovement -= 1f;
+                removeFaceDirection(Vector2.UP);
+
                 break;
 
             case GLFW_KEY_S:
-                removeFaceDirection(Vector2.DOWN);
                 verticalMovement += 1f;
+                removeFaceDirection(Vector2.DOWN);
+
                 break;
 
         }
@@ -186,27 +189,27 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         switch (keyCode) {
 
             case GLFW_KEY_A:
-
-                setFaceDirection(Vector2.LEFT);
                 horizontalMovement -= 1f;
+                setFaceDirection(Vector2.LEFT);
+
                 break;
 
             case GLFW_KEY_D:
-
-                setFaceDirection(Vector2.RIGHT);
                 horizontalMovement += 1f;
+                setFaceDirection(Vector2.RIGHT);
+
                 break;
 
             case GLFW_KEY_W:
-
-                setFaceDirection(Vector2.UP);
                 verticalMovement += 1f;
+                setFaceDirection(Vector2.UP);
+
                 break;
 
             case GLFW_KEY_S:
-
-                setFaceDirection(Vector2.DOWN);
                 verticalMovement -= 1f;
+                setFaceDirection(Vector2.DOWN);
+
                 break;
 
             case GLFW_KEY_SPACE:
@@ -324,23 +327,33 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         faceDirectionList.remove(direction);
 
         if(faceDirectionList.size() > 0) {
-            faceDirection = faceDirectionList.peek();
-        }
-
-        if(horizontalMovement == 0 && direction.equals(Vector2.UP) || direction.equals(Vector2.DOWN)) {
-
-            faceDirection = direction;
+            if(!(horizontalMovement == 0 && (direction.equals(Vector2.UP) ||direction.equals(Vector2.DOWN) ))) {
+                faceDirection = faceDirectionList.peek();
+            }
         }
     }
 
     private void setFaceDirection(Vector2 direction) {
 
-        if(horizontalMovement == 0 ) {
-            faceDirectionList.push(direction);
-        } else {
-            faceDirectionList.addLast(direction);
+        faceDirectionList.addLast(direction);
+
+        if(horizontalMovement ==0) {
+
+            if(verticalMovement != 0) {
+                if(verticalMovement == 1) {
+                    faceDirectionList.remove(Vector2.UP);
+                    faceDirectionList.push(Vector2.UP);
+                } else {
+                    faceDirectionList.remove(Vector2.DOWN);
+                    faceDirectionList.push(Vector2.DOWN);
+                }
+            }
         }
+
+
         faceDirection = faceDirectionList.peek();
+
+
         setAnimation();
     }
 }
