@@ -20,7 +20,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_REPEAT;
  */
 public final class KeyboardCallback extends GLFWKeyCallback {
 
-    private static final int pressedTwiceTime = 180;
+    private static final int pressedTwiceTime = 200;
 	private final Collection < KeyboardListener > listeners  = new HashSet <> ();
     private final Map<Integer, Integer> pressedLastMap = new HashMap<>();
 
