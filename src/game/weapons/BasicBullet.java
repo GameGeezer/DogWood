@@ -11,7 +11,7 @@ import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import framework.util.math.Vector2;
 import game.Scene;
-import game.components.SpriteComponent;
+import framework.scene.components.graphics.SpriteComponent;
 import org.jbox2d.dynamics.BodyType;
 
 import java.io.File;

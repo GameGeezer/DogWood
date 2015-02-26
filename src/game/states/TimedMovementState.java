@@ -1,4 +1,4 @@
-package game.components.player.states;
+package game.states;
 
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.util.RangeUtil;
@@ -7,7 +7,7 @@ import framework.util.Timer;
 /**
  * Created by Will on 2/20/2015.
  */
-public class RollMovementState extends MovementState {
+public class TimedMovementState extends MovementState {
 
     private float force;
     private float maxVelocity;
@@ -15,7 +15,7 @@ public class RollMovementState extends MovementState {
 
     private Timer rollTimer = new Timer();
 
-    public RollMovementState(PhysicsBodyComponent bodyComponent, float force, float maxVelocity, float rollTime) {
+    public TimedMovementState(PhysicsBodyComponent bodyComponent, float force, float maxVelocity, float rollTime) {
         super(bodyComponent);
 
         this.force = force;

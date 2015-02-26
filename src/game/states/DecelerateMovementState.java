@@ -1,4 +1,4 @@
-package game.components.player.states;
+package game.states;
 
 import framework.scene.components.collision.PhysicsBodyComponent;
 

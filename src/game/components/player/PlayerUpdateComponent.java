@@ -9,12 +9,12 @@ import framework.window.Application;
 import framework.window.keyboardcallbakcs.KeyboardListener;
 import game.Scene;
 import game.SpriteAnimation;
-import game.components.SpriteComponent;
-import game.components.player.states.DecelerateMovementState;
-import game.components.player.states.MovementState;
+import framework.scene.components.graphics.SpriteComponent;
+import game.states.DecelerateMovementState;
+import game.states.MovementState;
 import framework.scene.StateStack;
-import game.components.player.states.RollMovementState;
-import game.components.player.states.WalkMovementState;
+import game.states.TimedMovementState;
+import game.states.WalkMovementState;
 import game.weapons.BasicBullet;
 
 import java.util.LinkedList;
@@ -286,7 +286,7 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         bodyComponent = body;
         decelerationState = new DecelerateMovementState(bodyComponent, 200f);
         walkState = new WalkMovementState(bodyComponent, 2000f, 18f);
-        rollState = new RollMovementState(bodyComponent, 20000f, 23f, 350f);
+        rollState = new TimedMovementState(bodyComponent, 20000f, 23f, 350f);
         movementStack.push(decelerationState);
     }
 

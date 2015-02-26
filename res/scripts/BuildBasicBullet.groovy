@@ -8,7 +8,7 @@ import framework.scene.components.TransformComponent
 import framework.util.fileIO.FileUtil
 import framework.util.math.Transform
 import game.Scene
-import game.components.SpriteComponent
+import framework.scene.components.graphics.SpriteComponent
 import game.components.player.PlayerControllerComponent
 import game.components.player.PlayerUpdateComponent
 import org.jbox2d.dynamics.BodyType

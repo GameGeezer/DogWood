@@ -1,4 +1,4 @@
-package game.components.player.states;
+package game.states;
 
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.util.RangeUtil;
@@ -8,12 +8,8 @@ import framework.util.RangeUtil;
  */
 public class WalkMovementState extends MovementState {
 
-
-
     private float force;
     private float maxVelocity;
-
-    private int animationStartTime = 0;
 
     public WalkMovementState(PhysicsBodyComponent bodyComponent, float force, float maxVelocity) {
         super(bodyComponent);

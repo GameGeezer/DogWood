@@ -1,4 +1,4 @@
-package game.components;
+package framework.scene.components.graphics;
 
 import framework.graphics.Image;
 import framework.graphics.Mesh;
@@ -11,6 +11,7 @@ import framework.graphics.vertices.VertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
 import framework.scene.components.graphics.RenderComponent;
 import framework.util.math.Matrix4;
+import game.SpriteAnimation;
 import javafx.animation.Animation;
 import org.lwjgl.opengl.GL13;
 
@@ -24,13 +25,12 @@ import java.util.Map;
  */
 public class SpriteComponent extends RenderComponent {
 
-    private Texture texture;
-    private Mesh mesh;
-
-    private FloatVectorUniform texCoordOffset = new FloatVectorUniform("u_textureCoordinateOffset", VectorUniform.VectorUniformType.VECTOR2);
-
+    private final Texture texture;
+    private final Mesh mesh;
     private final int cellsWide, cellsHigh;
-    private float texcoordX, texcoordY;
+    private final float texcoordX, texcoordY;
+
+    private final FloatVectorUniform texCoordOffset = new FloatVectorUniform("u_textureCoordinateOffset", VectorUniform.VectorUniformType.VECTOR2);
 
     public SpriteComponent(final Image image, ShaderProgram shader, int cellsWide, int cellsHigh) {
 
@@ -54,6 +54,7 @@ public class SpriteComponent extends RenderComponent {
 
         float fx = texcoordX * (float)frameX;
         float fy = texcoordY * (float)frameY;
+
         texCoordOffset.setUniformData(fx, fy);
     }
 
@@ -87,8 +88,6 @@ public class SpriteComponent extends RenderComponent {
                 0f, 0f, 1f,
         };
 
-
-
         float[] texCoords = {
                 0f, 0f,
                 0f, texcoordY,
@@ -115,4 +114,5 @@ public class SpriteComponent extends RenderComponent {
 
         return cellsHigh;
     }
+
 }
