@@ -52,8 +52,8 @@ public class SpriteComponent extends RenderComponent {
 
     public void setFrame(int frameX, int frameY) {
 
-        float fx = texcoordX * (float)frameX;
-        float fy = texcoordY * (float)frameY;
+        float fx = texcoordX * (float) frameX;
+        float fy = texcoordY * (float) frameY;
 
         texCoordOffset.setUniformData(fx, fy);
     }
@@ -107,7 +107,7 @@ public class SpriteComponent extends RenderComponent {
 
     public int getCellsWide() {
 
-        return  cellsWide;
+        return cellsWide;
     }
 
     public int getCellsHigh() {

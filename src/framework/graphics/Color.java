@@ -22,13 +22,14 @@ public final class Color implements Cloneable {
     }
 
     public Color(float r, float g, float b, float a) {
-        
+
         set(r, g, b, a);
     }
 
-	public Color ( final Color color ) {
-		this ( color.r, color.g, color.b, color.a );
-	}
+    public Color(final Color color) {
+
+        this(color.r, color.g, color.b, color.a);
+    }
 
     /**
      * Increase r, g, b by a percentage.
@@ -37,11 +38,12 @@ public final class Color implements Cloneable {
      * @return This object
      */
     public final Color brighten(float percentage) {
-	    final float brightenPercentage = 1.0f + percentage;
-	    setRed ( r * brightenPercentage );
-	    setGreen ( g * brightenPercentage );
-	    setBlue ( b * brightenPercentage );
-	    return this;
+
+        final float brightenPercentage = 1.0f + percentage;
+        setRed(r * brightenPercentage);
+        setGreen(g * brightenPercentage);
+        setBlue(b * brightenPercentage);
+        return this;
     }
 
     /**
@@ -50,12 +52,14 @@ public final class Color implements Cloneable {
      * @param percentage The percentage must be in decimal form on the interval of [0, 1]
      * @return This object
      */
-    public final Color darken ( final float percentage ) {
-	    final float darkenPercentage = 1.0f - percentage;
-	    setRed ( r * darkenPercentage );
-	    setGreen ( g * darkenPercentage );
-	    setBlue ( b * darkenPercentage );
-	    return this;
+    public final Color darken(final float percentage) {
+
+        final float darkenPercentage = 1.0f - percentage;
+        setRed(r * darkenPercentage);
+        setGreen(g * darkenPercentage);
+        setBlue(b * darkenPercentage);
+        
+        return this;
     }
 
     /**
@@ -68,30 +72,40 @@ public final class Color implements Cloneable {
      * @return This object
      */
     public final Color set(final float r, final float g, final float b, final float a) {
-	    setRed ( r );
-	    setGreen ( g );
-	    setBlue ( b );
-	    setAlpha ( a );
-	    return this;
+
+        setRed(r);
+        setGreen(g);
+        setBlue(b);
+        setAlpha(a);
+
+        return this;
     }
 
     public final Color setRed(final float r) {
+
         this.r = RangeUtil.forceIntoRange(r, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
+
         return this;
     }
 
     public final Color setGreen(final float g) {
+
         this.g = RangeUtil.forceIntoRange(g, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
+
         return this;
     }
 
     public final Color setBlue(float b) {
+
         this.b = RangeUtil.forceIntoRange(b, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
+
         return this;
     }
 
     public final Color setAlpha(float a) {
+
         this.a = RangeUtil.forceIntoRange(a, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
+
         return this;
     }
 
@@ -102,6 +116,7 @@ public final class Color implements Cloneable {
      * @return The r,g, b, a values as a float array
      */
     public final float[] getElements() {
+
         return new float[]{r, g, b, a};
     }
 

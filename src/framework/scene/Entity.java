@@ -24,7 +24,7 @@ public class Entity {
             componentMap.put(component.getClass(), new ArrayList<>());
         }
         // Notify every component that a new one has been added in case they're interested
-        componentMap.entrySet().forEach((mapEntry) -> mapEntry.getValue().forEach((componentEntry)-> componentEntry.onComponentAttachedToParent(component)));
+        componentMap.entrySet().forEach((mapEntry) -> mapEntry.getValue().forEach((componentEntry) -> componentEntry.onComponentAttachedToParent(component)));
 
         // Add the component to the map
         componentMap.get(component.getClass()).add(component);
@@ -55,7 +55,7 @@ public class Entity {
 
             mapEntry.getValue().remove(component);
 
-            mapEntry.getValue().forEach((componentEntry)-> componentEntry.onComponentDetachedFromParent(component));
+            mapEntry.getValue().forEach((componentEntry) -> componentEntry.onComponentDetachedFromParent(component));
         });
         // Call the Component specific "onDetach" method
         component.onDetach();

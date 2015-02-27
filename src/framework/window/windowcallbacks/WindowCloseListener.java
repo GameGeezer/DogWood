@@ -8,9 +8,9 @@ package framework.window.windowcallbacks;
  */
 public interface WindowCloseListener {
 
-	/**
-	 * Called when the user requests the window to close.
-	 */
-	public void onWindowClosing ();
+    /**
+     * Called when the user requests the window to close.
+     */
+    public void onWindowClosing();
 
 }

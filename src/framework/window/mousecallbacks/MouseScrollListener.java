@@ -8,12 +8,13 @@ package framework.window.mousecallbacks;
  */
 public interface MouseScrollListener {
 
-	/**
-	 * Called when the mouse ( input device ) is scrolled.
-	 *
-	 * @param dx the horizontal scroll distance
-	 * @param dy the vertical scroll distance
-	 */
-	public default void onMouseScroll ( final double dx, final double dy ) {}
+    /**
+     * Called when the mouse ( input device ) is scrolled.
+     *
+     * @param dx the horizontal scroll distance
+     * @param dy the vertical scroll distance
+     */
+    public default void onMouseScroll(final double dx, final double dy) {
+    }
 
 }

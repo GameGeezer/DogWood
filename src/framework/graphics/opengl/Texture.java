@@ -58,8 +58,7 @@ public class Texture {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, handle);
     }
 
-    public void unbind()
-    {
+    public void unbind() {
 
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
     }

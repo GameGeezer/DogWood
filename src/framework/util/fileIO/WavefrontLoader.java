@@ -37,11 +37,11 @@ public class WavefrontLoader {
 
     private VertexType expectedVertexType;
 
-    private List<Vector3f> positions = new ArrayList< >();
-    private List<Vector2f> textureCoordinates = new ArrayList< >();
-    private List<Vector3f> normals = new ArrayList< >();
+    private List<Vector3f> positions = new ArrayList<>();
+    private List<Vector2f> textureCoordinates = new ArrayList<>();
+    private List<Vector3f> normals = new ArrayList<>();
 
-    private Map<String, Integer> knownVertices = new HashMap< >();
+    private Map<String, Integer> knownVertices = new HashMap<>();
     private int vertexCount = 0;
 
     public Mesh load(File file) throws IOException {
@@ -86,21 +86,21 @@ public class WavefrontLoader {
                             buildVertex(data[i], builder);
                         }
                     }
-                    if ( data.length == 4 ) {
+                    if (data.length == 4) {
 
-                        builder.addIndex ( knownVertices.get ( data [ 1 ] ) );
-                        builder.addIndex ( knownVertices.get ( data [ 2 ] ) );
-                        builder.addIndex ( knownVertices.get ( data [ 3 ] ) );
+                        builder.addIndex(knownVertices.get(data[1]));
+                        builder.addIndex(knownVertices.get(data[2]));
+                        builder.addIndex(knownVertices.get(data[3]));
 
-                    } else if ( data.length == 5 ) {
+                    } else if (data.length == 5) {
 
-                        builder.addIndex ( knownVertices.get ( data [ 1 ] ) );
-                        builder.addIndex ( knownVertices.get ( data [ 2 ] ) );
-                        builder.addIndex ( knownVertices.get ( data [ 3 ] ) );
+                        builder.addIndex(knownVertices.get(data[1]));
+                        builder.addIndex(knownVertices.get(data[2]));
+                        builder.addIndex(knownVertices.get(data[3]));
 
-                        builder.addIndex ( knownVertices.get ( data [ 2 ] ) );
-                        builder.addIndex ( knownVertices.get ( data [ 3 ] ) );
-                        builder.addIndex ( knownVertices.get ( data [ 4 ] ) );
+                        builder.addIndex(knownVertices.get(data[2]));
+                        builder.addIndex(knownVertices.get(data[3]));
+                        builder.addIndex(knownVertices.get(data[4]));
                     }
             }
         }

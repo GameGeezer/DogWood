@@ -33,7 +33,7 @@ public final class Descriptor {
     /**
      * Get the element count per vertex. e.g. 3(x, y, z) for position
      *
-     * @return  the size
+     * @return the size
      */
     public final int getSize() {
 

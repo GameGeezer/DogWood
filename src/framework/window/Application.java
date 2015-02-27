@@ -28,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
  */
 public class Application implements Runnable {
 
-	public static final KeyboardCallback KEYBOARD = new KeyboardCallback ();
+    public static final KeyboardCallback KEYBOARD = new KeyboardCallback();
     public static final WindowCloseCallback WINDOW_CLOSE_CALLBACK = new WindowCloseCallback();
     public static final WindowFocusCallback WINDOW_FOCUS_CALLBACK = new WindowFocusCallback();
     public static final WindowIconifyCallback WINDOW_ICONIFY_CALLBACK = new WindowIconifyCallback();
@@ -36,58 +36,58 @@ public class Application implements Runnable {
     public static final WindowRefreshCallback WINDOW_REFRESH_CALLBACK = new WindowRefreshCallback();
     public static final WindowResizeCallback WINDOW_RESIZE_CALLBACK = new WindowResizeCallback();
     public static final GroovyShell GROOVY_SHELL = new GroovyShell();
-    public static final World PHYSICS_WORLD = new World(new Vec2(0f,0f));
+    public static final World PHYSICS_WORLD = new World(new Vec2(0f, 0f));
 
-	private final Game game;
-	private final String title;
-	private final int width;
-	private final int height;
+    private final Game game;
+    private final String title;
+    private final int width;
+    private final int height;
 
-	private final Timer timer = new Timer ();
+    private final Timer timer = new Timer();
 
-	private GLFWErrorCallback errorCallback;
+    private GLFWErrorCallback errorCallback;
 
-	private long window;
+    private long window;
 
-	public Application ( final Game game, final String title, final int width, final int height ) {
-		this.game = game;
-		this.title = title;
-		this.width = width;
-		this.height = height;
-	}
+    public Application(final Game game, final String title, final int width, final int height) {
+        this.game = game;
+        this.title = title;
+        this.width = width;
+        this.height = height;
+    }
 
-	@Override
-	public void run () {
+    @Override
+    public void run() {
 
-		try {
-			init();
-			loop();
+        try {
+            init();
+            loop();
 
-		} finally {
+        } finally {
             destroy();
-			glfwTerminate ();
-			errorCallback.release ();
-		}
-	}
+            glfwTerminate();
+            errorCallback.release();
+        }
+    }
 
-	private void init () {
+    private void init() {
 
-		glfwSetErrorCallback ( errorCallback = errorCallbackPrint ( System.err ) );
+        glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.err));
 
-		if ( glfwInit () != GL11.GL_TRUE ) {
-			throw new IllegalStateException ( "Unable to initialize GLFW" );
-		}
+        if (glfwInit() != GL11.GL_TRUE) {
+            throw new IllegalStateException("Unable to initialize GLFW");
+        }
 
-		glfwDefaultWindowHints (); // optional, the current window hints are already the default
-		glfwWindowHint ( GLFW_VISIBLE, GL_FALSE ); // the window will stay hidden after creation
-		glfwWindowHint ( GLFW_RESIZABLE, GL_TRUE ); // the window will be resizable
+        glfwDefaultWindowHints(); // optional, the current window hints are already the default
+        glfwWindowHint(GLFW_VISIBLE, GL_FALSE); // the window will stay hidden after creation
+        glfwWindowHint(GLFW_RESIZABLE, GL_TRUE); // the window will be resizable
 
-		window = glfwCreateWindow ( width, height, title, NULL, NULL );
-		if ( window == NULL ) {
-			throw new RuntimeException ( "Failed to create the GLFW window" );
-		}
+        window = glfwCreateWindow(width, height, title, NULL, NULL);
+        if (window == NULL) {
+            throw new RuntimeException("Failed to create the GLFW window");
+        }
 
-		glfwSetKeyCallback ( window, KEYBOARD );
+        glfwSetKeyCallback(window, KEYBOARD);
         glfwSetWindowCloseCallback(window, WINDOW_CLOSE_CALLBACK);
         glfwSetWindowFocusCallback(window, WINDOW_FOCUS_CALLBACK);
         glfwSetWindowIconifyCallback(window, WINDOW_ICONIFY_CALLBACK);
@@ -95,62 +95,62 @@ public class Application implements Runnable {
         glfwSetWindowRefreshCallback(window, WINDOW_REFRESH_CALLBACK);
         glfwSetWindowSizeCallback(window, WINDOW_RESIZE_CALLBACK);
 
-		KEYBOARD.addListener ( new KeyboardListener () {
+        KEYBOARD.addListener(new KeyboardListener() {
 
-			@Override
-			public void onKeyDown ( final int keyCode ) {
-				if ( keyCode == GLFW_KEY_ESCAPE ) {
-					glfwSetWindowShouldClose ( window, GL_TRUE );
-				}
-			}
-		} );
+            @Override
+            public void onKeyDown(final int keyCode) {
+                if (keyCode == GLFW_KEY_ESCAPE) {
+                    glfwSetWindowShouldClose(window, GL_TRUE);
+                }
+            }
+        });
 
-		final ByteBuffer vidMode = glfwGetVideoMode ( glfwGetPrimaryMonitor () );
+        final ByteBuffer vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
-		// Center the window on the screen
-		glfwSetWindowPos (
-				window,
-				( GLFWvidmode.width ( vidMode ) - width ) / 2,
-				( GLFWvidmode.height ( vidMode ) - height ) / 2
-		);
+        // Center the window on the screen
+        glfwSetWindowPos(
+                window,
+                (GLFWvidmode.width(vidMode) - width) / 2,
+                (GLFWvidmode.height(vidMode) - height) / 2
+        );
 
-		glfwMakeContextCurrent ( window );
+        glfwMakeContextCurrent(window);
 
-		// Enable VSYNC
-		glfwSwapInterval ( 1 );
+        // Enable VSYNC
+        glfwSwapInterval(1);
 
-		glfwShowWindow ( window );
-	}
+        glfwShowWindow(window);
+    }
 
-	private void loop () {
+    private void loop() {
 
-		GLContext.createFromCurrent ();
+        GLContext.createFromCurrent();
 
-		glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-		game.init ();
-		timer.start ();
+        game.init();
+        timer.start();
 
-		while ( glfwWindowShouldClose ( window ) == GL_FALSE ) {
+        while (glfwWindowShouldClose(window) == GL_FALSE) {
 
-			glfwSwapBuffers ( window ); // swap the color buffers
+            glfwSwapBuffers(window); // swap the color buffers
 
-			final int delta = ( int ) timer.getElapsedTimeMS ();
+            final int delta = (int) timer.getElapsedTimeMS();
 
-			timer.reset ();
+            timer.reset();
 
-			game.update ( delta );
+            game.update(delta);
 
-			glfwPollEvents ();
-		}
+            glfwPollEvents();
+        }
 
-	}
+    }
 
     private void destroy() {
 
-        glfwDestroyWindow ( window );
-        KEYBOARD.clearListeners ();
-        KEYBOARD.release ();
+        glfwDestroyWindow(window);
+        KEYBOARD.clearListeners();
+        KEYBOARD.release();
         WINDOW_CLOSE_CALLBACK.clearListeners();
         WINDOW_CLOSE_CALLBACK.release();
         WINDOW_FOCUS_CALLBACK.clearListeners();

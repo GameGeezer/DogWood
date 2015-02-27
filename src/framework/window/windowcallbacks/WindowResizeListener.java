@@ -8,13 +8,13 @@ package framework.window.windowcallbacks;
  */
 public interface WindowResizeListener {
 
-	/**
-	 * Called when the window is resized.
-	 *
-	 * @param width  the new width of the window
-	 * @param height the new height of the window
-	 */
-	public default void onWindowResize ( final int width, final int height ) {
-	}
+    /**
+     * Called when the window is resized.
+     *
+     * @param width  the new width of the window
+     * @param height the new height of the window
+     */
+    public default void onWindowResize(final int width, final int height) {
+    }
 
 }

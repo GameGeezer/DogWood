@@ -32,7 +32,7 @@ public class DeferredRenderer {
     private final FBO fbo;
     private final RBO fboDepthBuffer;
 
-    public DeferredRenderer(final int width, final int height) throws GraphicsException{
+    public DeferredRenderer(final int width, final int height) throws GraphicsException {
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDisable(GL11.GL_CULL_FACE);
@@ -65,7 +65,7 @@ public class DeferredRenderer {
         // Creates an array of buffers that the fragment shader will output to
         GL20.glDrawBuffers(buffer);
 
-        if(!fbo.checkForErrors()) {
+        if (!fbo.checkForErrors()) {
             throw new GraphicsException("Could not compile FBO");
         }
 

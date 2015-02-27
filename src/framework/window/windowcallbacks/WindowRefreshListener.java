@@ -8,9 +8,10 @@ package framework.window.windowcallbacks;
  */
 public interface WindowRefreshListener {
 
-	/**
-	 * Called when the window needs to refresh.
-	 */
-	public default void onWindowRefresh () {}
+    /**
+     * Called when the window needs to refresh.
+     */
+    public default void onWindowRefresh() {
+    }
 
 }

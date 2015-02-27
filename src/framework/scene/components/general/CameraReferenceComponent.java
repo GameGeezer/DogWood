@@ -21,7 +21,7 @@ public class CameraReferenceComponent extends Entity.EntityComponent implements 
     @Override
     protected void onAttach() throws EntityException {
 
-        if(getParent().getComponentsOfType(CameraReferenceComponent.class).size() > 1) {
+        if (getParent().getComponentsOfType(CameraReferenceComponent.class).size() > 1) {
 
             removeSelfFromParent();
 

@@ -13,29 +13,29 @@ import java.util.stream.Collectors;
  */
 public class MeshBuilder {
 
-	private final Map < String, DynamicVertexAttribute > components = new HashMap < > ();
-	private final IntArrayList indices = new IntArrayList ();
+    private final Map<String, DynamicVertexAttribute> components = new HashMap<>();
+    private final IntArrayList indices = new IntArrayList();
 
-	public void addToComponent ( final String name, final float... data ) {
+    public void addToComponent(final String name, final float... data) {
 
-		components.get ( name ).addData ( data );
-	}
+        components.get(name).addData(data);
+    }
 
-	public void createComponent ( final String name, final int size ) {
+    public void createComponent(final String name, final int size) {
 
-		components.put ( name, new DynamicVertexAttribute ( size ) );
+        components.put(name, new DynamicVertexAttribute(size));
 
-	}
+    }
 
-	public void addIndex ( final int index ) {
+    public void addIndex(final int index) {
 
-		indices.add ( index );
-	}
+        indices.add(index);
+    }
 
-	public Mesh build () {
+    public Mesh build() {
 
-		final List < VertexAttribute > attributes = components.entrySet().stream().map(pairs -> pairs.getValue()).collect(Collectors.toList());
+        final List<VertexAttribute> attributes = components.entrySet().stream().map(pairs -> pairs.getValue()).collect(Collectors.toList());
 
-        return new Mesh ( indices.toArray (), attributes );
-	}
+        return new Mesh(indices.toArray(), attributes);
+    }
 }

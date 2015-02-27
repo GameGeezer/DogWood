@@ -34,11 +34,11 @@ public class TransformComponent extends EntityComponent implements IUniformWrapp
     @Override
     protected void onAttach() throws EntityException {
 
-        if(getParent().getComponentsOfType(TransformComponent.class).size() > 1) {
+        if (getParent().getComponentsOfType(TransformComponent.class).size() > 1) {
 
             removeSelfFromParent();
 
-            throw  new EntityException("Only one TransformComponent may be attached to an entity");
+            throw new EntityException("Only one TransformComponent may be attached to an entity");
         }
     }
 

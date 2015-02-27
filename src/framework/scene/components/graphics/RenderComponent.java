@@ -41,7 +41,7 @@ public abstract class RenderComponent extends EntityComponent {
     @Override
     protected void onComponentAttachedToParent(EntityComponent component) {
 
-        if(component instanceof IUniformWrapper) {
+        if (component instanceof IUniformWrapper) {
 
             ((IUniformWrapper) component).addListener(getShader());
         }
@@ -50,7 +50,7 @@ public abstract class RenderComponent extends EntityComponent {
     @Override
     protected void onComponentDetachedFromParent(EntityComponent component) {
 
-        if(component instanceof IUniformWrapper) {
+        if (component instanceof IUniformWrapper) {
 
             ((IUniformWrapper) component).removeListener(getShader());
         }

@@ -8,9 +8,9 @@ public class Matrix4 implements Cloneable {
     public static int NUMBER_OF_CELLS = 16;
 
     public static final int M00 = 0, M10 = 1, M20 = 2, M30 = 3,
-                            M01 = 4, M11 = 5, M21 = 6, M31 = 7,
-                            M02 = 8, M12 = 9, M22 = 10, M32 = 11,
-                            M03 = 12, M13 = 13, M23 = 14, M33 = 15;
+            M01 = 4, M11 = 5, M21 = 6, M31 = 7,
+            M02 = 8, M12 = 9, M22 = 10, M32 = 11,
+            M03 = 12, M13 = 13, M23 = 14, M33 = 15;
 
     public float[] data = new float[16];
 

@@ -9,7 +9,7 @@ public class StateStack<E extends StateStack.State> {
 
     private LinkedList<E> states = new LinkedList<>();
 
-    public E  pop() {
+    public E pop() {
 
         E poppedState = states.pop();
         poppedState.setParentStack(null);
@@ -26,7 +26,7 @@ public class StateStack<E extends StateStack.State> {
 
     public void push(E state) {
 
-        if(states.peek()!= null)
+        if (states.peek() != null)
             states.peek().onLeaveTop();
 
         state.setParentStack(this);

@@ -164,7 +164,6 @@ public class Camera implements IUniformWrapper {
         Matrix4.multiply(view, transform.getPosition(), view);
         Matrix4.multiply(view, transform.getOrientation().computeMatrix(), view);
 
-
         viewUniform.setUniformData(view.data);
     }
 
@@ -172,10 +171,12 @@ public class Camera implements IUniformWrapper {
 
         return transform.getX();
     }
+
     public float getY() {
 
         return transform.getY();
     }
+
     public float getZ() {
 
         return transform.getZ();

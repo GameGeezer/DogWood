@@ -8,12 +8,13 @@ package framework.window.windowcallbacks;
  */
 public interface WindowMoveListener {
 
-	/**
-	 * Called when the window is moved to a new location.
-	 *
-	 * @param x the new screen-relative x coordinate of the window
-	 * @param y the new screen-relative y coordinate of the window
-	 */
-	public default void onWindowMove ( final int x, final int y ) {}
+    /**
+     * Called when the window is moved to a new location.
+     *
+     * @param x the new screen-relative x coordinate of the window
+     * @param y the new screen-relative y coordinate of the window
+     */
+    public default void onWindowMove(final int x, final int y) {
+    }
 
 }

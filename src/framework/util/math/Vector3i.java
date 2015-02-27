@@ -145,12 +145,10 @@ public class Vector3i implements Cloneable {
     }
 
     public Vector3i clone() {
-
         return new Vector3i(x, y, z);
     }
 
     public int[] getElements() {
-
         return new int[]{x, y, z};
     }
 }

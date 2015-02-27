@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL31;
 
 /**
  * TODO
+ *
  * @author William Gervasio
  */
 public class UBO {
@@ -13,7 +14,7 @@ public class UBO {
 
     public UBO() {
 
-        handle =  GL15.glGenBuffers();
+        handle = GL15.glGenBuffers();
     }
 
     public void bind() {

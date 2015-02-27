@@ -27,10 +27,10 @@ public final class FileUtil {
 //                shaderString.append(line).append("\n");
 //            }
 
-	        for ( String line = reader.readLine (); line != null; ) {
-		        shaderString.append ( line ).append ( "\n" );
-		        line = reader.readLine ();
-	        }
+            for (String line = reader.readLine(); line != null; ) {
+                shaderString.append(line).append("\n");
+                line = reader.readLine();
+            }
 
             reader.close();
         } catch (final FileNotFoundException e) {

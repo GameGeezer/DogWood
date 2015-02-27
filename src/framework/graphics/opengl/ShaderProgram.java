@@ -24,7 +24,7 @@ public final class ShaderProgram {
      *
      * @param vertexShader   The vertex shader source
      * @param fragmentShader The fragment shader source
-     * @param attributes A mapping between vertex attribute names and ids
+     * @param attributes     A mapping between vertex attribute names and ids
      * @throws GraphicsException
      */
     public ShaderProgram(final String vertexShader, final String fragmentShader, final Map<Integer, String> attributes) throws GraphicsException {
@@ -69,7 +69,7 @@ public final class ShaderProgram {
      * @param vertexShader   The vertex shader source
      * @param fragmentShader The fragment shader source
      * @param geometryShader The geometry shader source
-     * @param attributes A mapping between vertex attribute ids and names
+     * @param attributes     A mapping between vertex attribute ids and names
      * @throws GraphicsException
      */
     public ShaderProgram(final String vertexShader, final String fragmentShader, final String geometryShader, final Map<Integer, String> attributes) throws GraphicsException {
@@ -147,14 +147,14 @@ public final class ShaderProgram {
 
     public final int getUniformBlockLocation(final String uniformBlock) {
 
-        return GL31.glGetUniformBlockIndex(handle,uniformBlock);
+        return GL31.glGetUniformBlockIndex(handle, uniformBlock);
     }
 
     /**
      * Compiles a vertex, fragment, or geometry shader
      *
      * @param shader The shader script being compiled
-     * @param type The type of shader being compiled. i.e. vertex, fragment, or geometry
+     * @param type   The type of shader being compiled. i.e. vertex, fragment, or geometry
      * @return A handle to the compiled shader
      * @throws GraphicsException
      */

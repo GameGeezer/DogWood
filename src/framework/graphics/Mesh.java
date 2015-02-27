@@ -27,7 +27,7 @@ public class Mesh {
     private final List<VertexAttribute> vertexElements;
 
     /**
-     * @param indices The triangles indices of the mesh
+     * @param indices        The triangles indices of the mesh
      * @param vertexElements A list of all the vertex attributes that will be added to the vbo
      */
     public Mesh(int[] indices, List<VertexAttribute> vertexElements) {

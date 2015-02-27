@@ -8,12 +8,13 @@ package framework.window.mousecallbacks;
  */
 public interface MouseMoveListener {
 
-	/**
-	 * Called when the mouse cursor is moved.
-	 *
-	 * @param x the new screen-relative x coordinate of the mouse cursor
-	 * @param y the new screen-relative y coordinate of the mouse cursor
-	 */
-	public default void onMouseMove ( final double x, final double y ) {}
+    /**
+     * Called when the mouse cursor is moved.
+     *
+     * @param x the new screen-relative x coordinate of the mouse cursor
+     * @param y the new screen-relative y coordinate of the mouse cursor
+     */
+    public default void onMouseMove(final double x, final double y) {
+    }
 
 }

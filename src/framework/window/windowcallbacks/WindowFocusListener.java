@@ -8,14 +8,16 @@ package framework.window.windowcallbacks;
  */
 public interface WindowFocusListener {
 
-	/**
-	 * Called when the window loses focus.
-	 */
-	public default void onWindowLostFocus () {}
+    /**
+     * Called when the window loses focus.
+     */
+    public default void onWindowLostFocus() {
+    }
 
-	/**
-	 * Called when the window gains focus.
-	 */
-	public default void onWindowGainedFocus () {}
+    /**
+     * Called when the window gains focus.
+     */
+    public default void onWindowGainedFocus() {
+    }
 
 }

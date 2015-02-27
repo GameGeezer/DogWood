@@ -56,12 +56,12 @@ public class PhysicsBodyComponent extends UpdateComponent {
         body.applyForceToCenter(tempVec.set(x, y));
     }
 
-    public float getLinearVelocityX(){
+    public float getLinearVelocityX() {
 
         return body.getLinearVelocity().x;
     }
 
-    public float getLinearVelocityY(){
+    public float getLinearVelocityY() {
 
         return body.getLinearVelocity().y;
     }
@@ -74,16 +74,16 @@ public class PhysicsBodyComponent extends UpdateComponent {
     @Override
     protected void onAttach() throws EntityException {
 
-        if(getParent().getComponentsOfType(PhysicsBodyComponent.class).size() > 1) {
+        if (getParent().getComponentsOfType(PhysicsBodyComponent.class).size() > 1) {
 
             removeSelfFromParent();
 
-            throw  new EntityException("Only one PhysicsBodyComponent may be attached to an entity");
+            throw new EntityException("Only one PhysicsBodyComponent may be attached to an entity");
         }
 
         List<FixtureComponent> fixtures = (List<FixtureComponent>) (List<?>) getParent().getComponentsOfType(FixtureComponent.class);
 
-        for(FixtureComponent fixtureComponent : fixtures) {
+        for (FixtureComponent fixtureComponent : fixtures) {
 
             Fixture fixture = body.createFixture(fixtureComponent.getFixture());
 
@@ -98,7 +98,7 @@ public class PhysicsBodyComponent extends UpdateComponent {
 
         List<FixtureComponent> fixtures = (List<FixtureComponent>) (List<?>) getParent().getComponentsOfType(FixtureComponent.class);
 
-        for(FixtureComponent fixtureComponent : fixtures) {
+        for (FixtureComponent fixtureComponent : fixtures) {
 
             body.destroyFixture(componentToFixtureMap.get(fixtureComponent));
 
@@ -109,7 +109,7 @@ public class PhysicsBodyComponent extends UpdateComponent {
     @Override
     protected void onComponentAttachedToParent(Entity.EntityComponent component) {
 
-        if(component instanceof FixtureComponent) {
+        if (component instanceof FixtureComponent) {
 
             FixtureComponent fixtureComponent = (FixtureComponent) component;
 
@@ -122,7 +122,7 @@ public class PhysicsBodyComponent extends UpdateComponent {
     @Override
     protected void onComponentDetachedFromParent(Entity.EntityComponent component) {
 
-        if(component instanceof FixtureComponent) {
+        if (component instanceof FixtureComponent) {
 
             body.destroyFixture(componentToFixtureMap.get(component));
 

@@ -10,368 +10,389 @@ import java.util.*;
 
 public class OBJLoader {
 
-	private static final String COMMENT_LINE_PREFIX = "#";
-	private static final String OBJECT_NAME_PREFIX = "o";
-	private static final String SHADING_PREFIX = "s";
-	private static final String MATERIAL_USE_PREFIX = "usemtl";
-	private static final String VERTEX_POSITION_PREFIX = "v";
-	private static final String VERTEX_TEXTURE_PREFIX = "vt";
-	private static final String VERTEX_NORMAL_PREFIX = "vn";
-	private static final String FACE_PREFIX = "f";
+    private static final String COMMENT_LINE_PREFIX = "#";
+    private static final String OBJECT_NAME_PREFIX = "o";
+    private static final String SHADING_PREFIX = "s";
+    private static final String MATERIAL_USE_PREFIX = "usemtl";
+    private static final String VERTEX_POSITION_PREFIX = "v";
+    private static final String VERTEX_TEXTURE_PREFIX = "vt";
+    private static final String VERTEX_NORMAL_PREFIX = "vn";
+    private static final String FACE_PREFIX = "f";
 
-	private static final String POSITION_COMPONENT = "POSITION";
-	private static final String TEXCOORD_COMPONENT = "TEXCOORD";
-	private static final String NORMAL_COMPONENT = "NORMAL";
+    private static final String POSITION_COMPONENT = "POSITION";
+    private static final String TEXCOORD_COMPONENT = "TEXCOORD";
+    private static final String NORMAL_COMPONENT = "NORMAL";
 
-	private static final int POSITION_SIZE = 3;
-	private static final int TEXCOORD_SIZE = 2;
-	private static final int NORMAL_SIZE = 3;
+    private static final int POSITION_SIZE = 3;
+    private static final int TEXCOORD_SIZE = 2;
+    private static final int NORMAL_SIZE = 3;
 
-	private OBJVertexSet knownVertices = new OBJVertexSet();
+    private OBJVertexSet knownVertices = new OBJVertexSet();
 
-	private static class OBJParseException extends ParseException {
+    private static class OBJParseException extends ParseException {
 
-		private final String file;
-		private final String remaining;
+        private final String file;
+        private final String remaining;
 
-		public OBJParseException ( final String s, final int errorOffset ) {
-			this ( s, null, errorOffset, null );
-		}
+        public OBJParseException(final String s, final int errorOffset) {
+            this(s, null, errorOffset, null);
+        }
 
-		public OBJParseException ( final String s, final String file, final int errorOffset ) {
-			this ( s, file, errorOffset, null );
-		}
+        public OBJParseException(final String s, final String file, final int errorOffset) {
+            this(s, file, errorOffset, null);
+        }
 
-		public OBJParseException ( final String s, final int errorOffset, final String remaining ) {
-			this ( s, null, errorOffset, remaining );
-		}
-
-		public OBJParseException ( final String s, final String file, final int errorOffset, final String remaining ) {
-			super ( s, errorOffset );
-			this.file = file;
-			this.remaining = remaining;
-		}
-
-		@Override
-		public String toString() {
-			final StringBuilder sbuilder = new StringBuilder ();
-			sbuilder.append ( super.toString () );
-			if ( file != null ) {
-				sbuilder.append ( " fileName: " );
-				sbuilder.append ( file );
-			}
-			sbuilder.append ( " line " );
-			sbuilder.append ( this.getErrorOffset () );
-			if ( remaining != null ) {
-				sbuilder.append ( ", remaining: " );
-				sbuilder.append ( remaining );
-			}
-			return sbuilder.toString ();
-		}
-
-	}
-
-	private static enum FaceModel { VERTEX, VERTEX_UV, VERTEX_UV_NORMAL, VERTEX_NORMAL }
-
-	public static final OBJLoader LOADER = new OBJLoader ();
-
-	private final List < float [] > vertices;
-	private final List < float [] > textures;
-	private final List < float [] > normals;
+        public OBJParseException(final String s, final int errorOffset, final String remaining) {
+            this(s, null, errorOffset, remaining);
+        }
+
+        public OBJParseException(final String s, final String file, final int errorOffset, final String remaining) {
+            super(s, errorOffset);
+            this.file = file;
+            this.remaining = remaining;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder sbuilder = new StringBuilder();
+            sbuilder.append(super.toString());
+            if (file != null) {
+                sbuilder.append(" fileName: ");
+                sbuilder.append(file);
+            }
+            sbuilder.append(" line ");
+            sbuilder.append(this.getErrorOffset());
+            if (remaining != null) {
+                sbuilder.append(", remaining: ");
+                sbuilder.append(remaining);
+            }
+            return sbuilder.toString();
+        }
+
+    }
+
+    private static enum FaceModel {VERTEX, VERTEX_UV, VERTEX_UV_NORMAL, VERTEX_NORMAL}
+
+    public static final OBJLoader LOADER = new OBJLoader();
+
+    private final List<float[]> vertices;
+    private final List<float[]> textures;
+    private final List<float[]> normals;
+
+    private final MeshBuilder builder;
+
+    // Lazily initialized fields
+    private String fileName;
+    private FaceModel model;
+    private int lineNo;
+
+    public OBJLoader() {
+
+        vertices = new ArrayList<float[]>();
+        textures = new ArrayList<float[]>();
+        normals = new ArrayList<float[]>();
 
-	private final MeshBuilder builder;
-
-	// Lazily initialized fields
-	private String fileName;
-	private FaceModel model;
-	private int lineNo;
+        builder = new MeshBuilder();
+        builder.createComponent(POSITION_COMPONENT, POSITION_SIZE);
+        builder.createComponent(TEXCOORD_COMPONENT, TEXCOORD_SIZE);
+        builder.createComponent(NORMAL_COMPONENT, NORMAL_SIZE);
 
-	public OBJLoader () {
+    }
 
-		vertices = new ArrayList < float [] > ();
-		textures = new ArrayList < float [] > ();
-		normals = new ArrayList < float [] > ();
+    public Mesh loadModel(final String filePath) throws ParseException, FileNotFoundException {
 
-		builder = new MeshBuilder ();
-		builder.createComponent ( POSITION_COMPONENT, POSITION_SIZE );
-		builder.createComponent ( TEXCOORD_COMPONENT, TEXCOORD_SIZE );
-		builder.createComponent ( NORMAL_COMPONENT, NORMAL_SIZE );
+        final File file = new File(filePath);
 
-	}
+        if (!file.exists()) {
 
-	public Mesh loadModel ( final String filePath ) throws ParseException, FileNotFoundException {
+            throw new FileNotFoundException("File " + filePath + " does not exist!");
+        }
 
-		final File file = new File ( filePath );
+        model = null;
+        fileName = filePath;
+        lineNo = 0;
+
+        final StringBuilder sourceBuilder = new StringBuilder();
 
-		if ( !file.exists () ) {
+        try (final Scanner pre = new Scanner(file)) {
+
+            while (pre.hasNextLine()) {
+
+                final String line = pre.nextLine().trim();
+                final String processedLine = line.replaceAll("/", " / ");
+                sourceBuilder.append(processedLine);
+                sourceBuilder.append("\n");
+            }
+        } catch (final Exception e) {
+
+            throw new OBJParseException("Unknown parsing error. No further information.", fileName, -1);
+        }
+
+        final Scanner scanner = new Scanner(sourceBuilder.toString());
+
+        while (scanner.hasNextLine()) {
+
+            if (scanner.hasNext(COMMENT_LINE_PREFIX)) {
+                // Comment line - skip it
+            } else if (scanner.hasNext(OBJECT_NAME_PREFIX)) {
+                // Object name - skip it
+            } else if (scanner.hasNext(MATERIAL_USE_PREFIX)) {
+                // Material - skip it
+            } else if (scanner.hasNext(SHADING_PREFIX)) {
+                // Shading - skip it
+            } else if (scanner.hasNext(VERTEX_TEXTURE_PREFIX)) {
+                // Vertex Texture UV
+                parseVT(scanner);
+            } else if (scanner.hasNext(VERTEX_NORMAL_PREFIX)) {
+                // Vertex Normal
+                parseVN(scanner);
+            } else if (scanner.hasNext(VERTEX_POSITION_PREFIX)) {
+                // Vertex Position
+                parseV(scanner /* , vertices */);
+            } else if (scanner.hasNext(FACE_PREFIX)) {
+                // Face
+                parseF(scanner);
+            } else {
+                // Unexpected ( at this time )
+                System.err.println(scanner.nextLine());
+                throw new OBJParseException("Unexpected token", fileName, lineNo, scanner.nextLine());
+            }
 
-			throw new FileNotFoundException ( "File " + filePath + " does not exist!" );
-		}
+            scanner.nextLine();
+            ++lineNo;
 
-		model = null;
-		fileName = filePath;
-		lineNo = 0;
+        }
 
-		final StringBuilder sourceBuilder = new StringBuilder ();
+        vertices.clear();
+        textures.clear();
+        normals.clear();
 
-		try ( final Scanner pre = new Scanner ( file ) ) {
+        return builder.build();
 
-			while ( pre.hasNextLine () ) {
+    }
 
-				final String line = pre.nextLine ().trim ();
-				final String processedLine = line.replaceAll ( "/", " / " );
-				sourceBuilder.append ( processedLine );
-				sourceBuilder.append ( "\n" );
-			}
-		} catch ( final Exception e ) {
+    private void parseV(final Scanner scanner) throws ParseException {
 
-			throw new OBJParseException ( "Unknown parsing error. No further information.", fileName, -1 );
-		}
+        scanner.next(VERTEX_POSITION_PREFIX);
 
-		final Scanner scanner = new Scanner ( sourceBuilder.toString () );
+        if (!scanner.hasNextFloat())
+            throw new OBJParseException("Expected float component 'x'", fileName, lineNo, scanner.nextLine());
+        final float x = scanner.nextFloat();
 
-		while ( scanner.hasNextLine () ) {
+        if (!scanner.hasNextFloat())
+            throw new OBJParseException("Expected float component 'y'", fileName, lineNo, scanner.nextLine());
+        final float y = scanner.nextFloat();
 
-			if ( scanner.hasNext ( COMMENT_LINE_PREFIX ) ) {
-				// Comment line - skip it
-			} else if ( scanner.hasNext ( OBJECT_NAME_PREFIX ) ) {
-				// Object name - skip it
-			} else if ( scanner.hasNext ( MATERIAL_USE_PREFIX ) ) {
-				// Material - skip it
-			} else if ( scanner.hasNext ( SHADING_PREFIX ) ) {
-				// Shading - skip it
-			} else if ( scanner.hasNext ( VERTEX_TEXTURE_PREFIX ) ) {
-				// Vertex Texture UV
-				parseVT ( scanner );
-			} else if ( scanner.hasNext ( VERTEX_NORMAL_PREFIX ) ) {
-				// Vertex Normal
-				parseVN ( scanner );
-			} else if ( scanner.hasNext ( VERTEX_POSITION_PREFIX ) ) {
-				// Vertex Position
-				parseV ( scanner /* , vertices */ );
-			} else if ( scanner.hasNext ( FACE_PREFIX ) ) {
-				// Face
-				parseF ( scanner );
-			} else {
-				// Unexpected ( at this time )
-				System.err.println ( scanner.nextLine () );
-				throw new OBJParseException ( "Unexpected token", fileName, lineNo, scanner.nextLine () );
-			}
+        if (!scanner.hasNextFloat())
+            throw new OBJParseException("Expected float component 'z'", fileName, lineNo, scanner.nextLine());
+        final float z = scanner.nextFloat();
 
-			scanner.nextLine ();
-			++lineNo;
+        final float w = scanner.hasNextFloat() ? scanner.nextFloat() : 1.0f;
 
-		}
+        vertices.add(new float[]{x, y, z});
 
-		vertices.clear ();
-		textures.clear ();
-		normals.clear ();
+    }
 
-		return builder.build ();
+    private void parseVT(final Scanner scanner) throws ParseException {
 
-	}
+        scanner.next(VERTEX_TEXTURE_PREFIX);
 
-	private void parseV ( final Scanner scanner ) throws ParseException {
+        if (!scanner.hasNextFloat())
+            throw new OBJParseException("Expected float component 'u'", fileName, lineNo, scanner.nextLine());
+        final float u = scanner.nextFloat();
+        if (u < 0.0f)
+            throw new OBJParseException("Float component 'u' is outside bounds! " + u + " < 0.0f", fileName, lineNo);
+        if (u > 1.0f)
+            throw new OBJParseException("Float component 'u' is outside bounds! " + u + " > 1.0f", fileName, lineNo);
 
-		scanner.next ( VERTEX_POSITION_PREFIX );
+        if (!scanner.hasNextFloat())
+            throw new OBJParseException("Expected float component 'v'", fileName, lineNo, scanner.nextLine());
+        final float v = scanner.nextFloat();
+        if (v < 0.0f)
+            throw new OBJParseException("Float component 'v' is outside bounds! " + v + " < 0.0f", fileName, lineNo);
+        if (v > 1.0f)
+            throw new OBJParseException("Float component 'v' is outside bounds! " + u + " > 1.0f", fileName, lineNo);
 
-		if ( !scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'x'", fileName, lineNo, scanner.nextLine () );
-		final float x = scanner.nextFloat ();
+        // W ( Weight ) component is optional
+        final float w;
+        if (scanner.hasNextFloat()) {
+            w = scanner.nextFloat();
+            if (w < 0.0f)
+                throw new OBJParseException("Float component 'w' is outside bounds! " + w + " < 0.0f", fileName, lineNo);
+            if (w > 1.0f)
+                throw new OBJParseException("Float component 'w' is outside bounds! " + w + " > 1.0f", fileName, lineNo);
+        } else {
+            w = 0.0f;
+        }
 
-		if ( !scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'y'", fileName, lineNo, scanner.nextLine () );
-		final float y = scanner.nextFloat ();
+        textures.add(new float[]{u, v});
 
-		if ( !scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'z'", fileName, lineNo, scanner.nextLine () );
-		final float z = scanner.nextFloat ();
+    }
 
-		 final float w = scanner.hasNextFloat () ? scanner.nextFloat () : 1.0f;
+    private void parseVN(final Scanner scanner) throws ParseException {
 
-		vertices.add ( new float [] { x, y, z } );
+        scanner.next(VERTEX_NORMAL_PREFIX);
 
-	}
+        if (!scanner.hasNextFloat())
+            throw new OBJParseException("Expected float component 'x'", fileName, lineNo, scanner.nextLine());
+        final float x = scanner.nextFloat();
 
-	private void parseVT ( final Scanner scanner ) throws ParseException {
+        if (!scanner.hasNextFloat())
+            throw new OBJParseException("Expected float component 'y'", fileName, lineNo, scanner.nextLine());
+        final float y = scanner.nextFloat();
 
-		scanner.next ( VERTEX_TEXTURE_PREFIX );
+        if (!scanner.hasNextFloat())
+            throw new OBJParseException("Expected float component 'z'", fileName, lineNo, scanner.nextLine());
+        final float z = scanner.nextFloat();
 
-		if ( ! scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'u'", fileName, lineNo, scanner.nextLine () );
-		final float u = scanner.nextFloat ();
-		if ( u < 0.0f) throw new OBJParseException ( "Float component 'u' is outside bounds! " + u + " < 0.0f", fileName, lineNo );
-		if ( u > 1.0f ) throw new OBJParseException ( "Float component 'u' is outside bounds! " + u + " > 1.0f", fileName, lineNo );
+        normals.add(new float[]{x, y, z});
 
-		if ( ! scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'v'", fileName, lineNo, scanner.nextLine () );
-		final float v = scanner.nextFloat ();
-		if ( v < 0.0f ) throw new OBJParseException ( "Float component 'v' is outside bounds! " + v + " < 0.0f", fileName, lineNo );
-		if ( v > 1.0f ) throw new OBJParseException ( "Float component 'v' is outside bounds! " + u + " > 1.0f", fileName, lineNo );
+    }
 
-		// W ( Weight ) component is optional
-		final float w;
-		if ( scanner.hasNextFloat () ) {
-			w = scanner.nextFloat ();
-			if ( w < 0.0f ) throw new OBJParseException ( "Float component 'w' is outside bounds! " + w + " < 0.0f", fileName, lineNo );
-			if ( w > 1.0f ) throw new OBJParseException ( "Float component 'w' is outside bounds! " + w + " > 1.0f", fileName, lineNo );
-		} else {
-			w = 0.0f;
-		}
+    private void parseF(final Scanner scanner) throws ParseException {
 
-		textures.add ( new float [] { u, v } );
+        scanner.next(FACE_PREFIX);
 
-	}
+        for (int i = 0; i < 3; ++i) {
 
-	private void parseVN ( final Scanner scanner ) throws ParseException {
+            parseFaceVertex(scanner);
 
-		scanner.next ( VERTEX_NORMAL_PREFIX );
+        }
 
-		if ( ! scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'x'", fileName, lineNo, scanner.nextLine () );
-		final float x = scanner.nextFloat ();
+    }
 
-		if ( ! scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'y'", fileName, lineNo, scanner.nextLine () );
-		final float y = scanner.nextFloat ();
+    private void parseFaceVertex(final Scanner scanner) throws ParseException {
 
-		if ( ! scanner.hasNextFloat () ) throw new OBJParseException ( "Expected float component 'z'", fileName, lineNo, scanner.nextLine () );
-		final float z = scanner.nextFloat ();
+        if (!scanner.hasNextInt())
+            throw new OBJParseException("Expected int component 'position index'", fileName, lineNo, scanner.nextLine());
+        final int positionIndex = scanner.nextInt();
+        if (positionIndex < 1)
+            throw new OBJParseException("Int component 'position index' is invalid! " + positionIndex + " < 1 ", fileName, lineNo);
 
-		normals.add( new float [] { x, y, z } );
+        final FaceModel currentModel;
 
-	}
+        final float[] pRef = vertices.get(positionIndex - 1);
+        builder.addToComponent(POSITION_COMPONENT, pRef);
 
-	private void parseF ( final Scanner scanner ) throws ParseException {
+        if (scanner.hasNext("/")) {
 
-		scanner.next ( FACE_PREFIX );
+            scanner.next("/");
 
-		for ( int i = 0; i < 3; ++i ) {
+            if (scanner.hasNextInt()) {
 
-			parseFaceVertex(scanner);
+                final int texCoordIndex = scanner.nextInt();
+                if (texCoordIndex < 1)
+                    throw new OBJParseException("Int component 'normal index' is invalid! " + texCoordIndex + " < 1 ", fileName, lineNo);
 
-		}
+                final float[] uvRef = textures.get(texCoordIndex - 1);
+                builder.addToComponent(TEXCOORD_COMPONENT, uvRef);
 
-	}
+                if (scanner.hasNext("/")) {
 
-	private void parseFaceVertex ( final Scanner scanner ) throws ParseException {
+                    scanner.next("/");
 
-		if ( ! scanner.hasNextInt () ) throw new OBJParseException ( "Expected int component 'position index'", fileName, lineNo, scanner.nextLine () );
-		final int positionIndex = scanner.nextInt ();
-		if ( positionIndex < 1 ) throw new OBJParseException ( "Int component 'position index' is invalid! " + positionIndex + " < 1 ", fileName, lineNo );
+                    if (!scanner.hasNextInt())
+                        throw new OBJParseException("Expected int component 'normal index'", fileName, lineNo, scanner.nextLine());
+                    final int normalIndex = scanner.nextInt();
+                    if (normalIndex < 1)
+                        throw new OBJParseException("Int component 'normal index' is invalid! " + normalIndex + " < 1 ", fileName, lineNo);
 
-		final FaceModel currentModel;
+                    final float[] nRef = normals.get(normalIndex - 1);
+                    builder.addToComponent(NORMAL_COMPONENT, nRef);
+                    // knownVertices.addIndex(pRef, uvRef, normalIndex);
 
-		final float [] pRef = vertices.get ( positionIndex - 1 );
-		builder.addToComponent ( POSITION_COMPONENT, pRef );
+                    if (model == null) {
 
-		if ( scanner.hasNext ( "/" ) ) {
+                        model = FaceModel.VERTEX_UV_NORMAL;
+                        return;
 
-			scanner.next ( "/" );
+                    }
 
-			if ( scanner.hasNextInt () ) {
+                    currentModel = FaceModel.VERTEX_UV_NORMAL;
 
-				final int texCoordIndex = scanner.nextInt ();
-				if ( texCoordIndex < 1 ) throw new OBJParseException ( "Int component 'normal index' is invalid! " + texCoordIndex + " < 1 ", fileName, lineNo );
+                } else {
 
-				final float [] uvRef = textures.get ( texCoordIndex - 1 );
-				builder.addToComponent ( TEXCOORD_COMPONENT, uvRef );
+                    if (model == null) {
 
-				if ( scanner.hasNext ( "/" ) ) {
+                        model = FaceModel.VERTEX_UV;
+                        return;
 
-					scanner.next ( "/" );
+                    }
 
-					if ( ! scanner.hasNextInt () ) throw new OBJParseException ( "Expected int component 'normal index'", fileName, lineNo, scanner.nextLine () );
-					final int normalIndex = scanner.nextInt ();
-					if ( normalIndex < 1 ) throw new OBJParseException ( "Int component 'normal index' is invalid! " + normalIndex + " < 1 ", fileName, lineNo );
+                    currentModel = FaceModel.VERTEX_UV;
 
-					final float [] nRef = normals.get ( normalIndex - 1 );
-					builder.addToComponent ( NORMAL_COMPONENT, nRef );
-					// knownVertices.addIndex(pRef, uvRef, normalIndex);
+                }
 
-					if ( model == null ) {
+            } else if (scanner.hasNext("/")) {
 
-						model = FaceModel.VERTEX_UV_NORMAL;
-						return;
+                scanner.next("/");
 
-					}
+                if (!scanner.hasNextInt())
+                    throw new OBJParseException("Expected int component 'normal index'", fileName, lineNo, scanner.nextLine());
+                final int normalIndex = scanner.nextInt();
+                if (normalIndex < 1)
+                    throw new OBJParseException("Int component 'normal index' is invalid! " + normalIndex + " < 1 ", fileName, lineNo);
 
-					currentModel = FaceModel.VERTEX_UV_NORMAL;
+                final float[] nRef = normals.get(normalIndex - 1);
+                builder.addToComponent(NORMAL_COMPONENT, nRef);
 
-				} else {
+                if (model == null) {
 
-					if ( model == null ) {
+                    model = FaceModel.VERTEX_NORMAL;
+                    return;
 
-						model = FaceModel.VERTEX_UV;
-						return;
+                }
 
-					}
+                currentModel = FaceModel.VERTEX_NORMAL;
 
-					currentModel = FaceModel.VERTEX_UV;
+            } else {
 
-				}
+                throw new OBJParseException("Expected int component 'uv index' or 'normal index'", fileName, lineNo, scanner.nextLine());
 
-			} else if ( scanner.hasNext ( "/" ) ) {
+            }
 
-				scanner.next ( "/" );
+        } else {
 
-				if ( ! scanner.hasNextInt () ) throw new OBJParseException ( "Expected int component 'normal index'", fileName, lineNo, scanner.nextLine () );
-				final int normalIndex = scanner.nextInt ();
-				if ( normalIndex < 1 ) throw new OBJParseException ( "Int component 'normal index' is invalid! " + normalIndex + " < 1 ", fileName, lineNo );
+            if (model == null) {
 
-				final float [] nRef = normals.get ( normalIndex - 1 );
-				builder.addToComponent ( NORMAL_COMPONENT, nRef );
+                model = FaceModel.VERTEX;
+                return;
 
-				if ( model == null ) {
+            }
 
-					model = FaceModel.VERTEX_NORMAL;
-					return;
+            currentModel = FaceModel.VERTEX;
 
-				}
+        }
 
-				currentModel = FaceModel.VERTEX_NORMAL;
+        if (model != currentModel) {
 
-			} else {
+            throw new OBJParseException("Unexpected and inconsistent change in face format ( old: " + model + ", new: " + currentModel + " )", fileName, lineNo);
 
-				throw new OBJParseException ( "Expected int component 'uv index' or 'normal index'", fileName, lineNo, scanner.nextLine () );
+        }
 
-			}
+        builder.addIndex(positionIndex);
 
-		} else {
+    }
 
-			if ( model == null ) {
+    private static class OBJVertexSet {
 
-				model = FaceModel.VERTEX;
-				return;
+        private final Map<Integer, Integer> idToVertexMap = new HashMap<>();
 
-			}
+        public void addIndex(final int p, final int t, final int n) {
 
-			currentModel = FaceModel.VERTEX;
+            final int hash = hash(p, t, n);
+        }
 
-		}
+        public int getIndex(final int p, final int t, final int n) {
 
-		if ( model != currentModel ) {
+            final int hash = hash(p, t, n);
+            return idToVertexMap.get(hash);
+        }
+    }
 
-			throw new OBJParseException ( "Unexpected and inconsistent change in face format ( old: " + model + ", new: " + currentModel + " )", fileName, lineNo );
+    private static int hash(final int p, final int t, final int n) {
 
-		}
-
-		builder.addIndex ( positionIndex );
-
-	}
-
-	private static class OBJVertexSet {
-
-		private final Map<Integer, Integer> idToVertexMap = new HashMap<>();
-
-		public void addIndex(final int p, final int t, final int n) {
-
-			final int hash = hash(p, t, n);
-		}
-
-		public int getIndex(final int p, final int t, final int n) {
-
-			final int hash = hash(p ,t, n);
-			return idToVertexMap.get(hash);
-		}
-	}
-
-	private static int hash(final int p, final int t, final int n) {
-
-		return 31 * (31 * p * t) + n;
-	}
+        return 31 * (31 * p * t) + n;
+    }
 
 }

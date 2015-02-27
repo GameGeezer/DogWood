@@ -10,24 +10,24 @@ import framework.scene.Entity;
 public abstract class KeyboardListenerComponent extends Entity.EntityComponent implements KeyboardListener {
 
     @Override
-    protected void onAttach () {
+    protected void onAttach() {
 
         Application.KEYBOARD.addListener(this);
     }
 
     @Override
-    protected void onDetach () {
+    protected void onDetach() {
 
-        Application.KEYBOARD.removeListener ( this );
+        Application.KEYBOARD.removeListener(this);
     }
 
     @Override
-    protected void onComponentAttachedToParent ( final Entity.EntityComponent component ) {
+    protected void onComponentAttachedToParent(final Entity.EntityComponent component) {
 
     }
 
     @Override
-    protected void onComponentDetachedFromParent ( final Entity.EntityComponent component ) {
+    protected void onComponentDetachedFromParent(final Entity.EntityComponent component) {
 
     }
 }

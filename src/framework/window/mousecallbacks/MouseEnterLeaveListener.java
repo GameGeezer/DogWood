@@ -8,14 +8,16 @@ package framework.window.mousecallbacks;
  */
 public interface MouseEnterLeaveListener {
 
-	/**
-	 * Called when the mouse cursor enters the window.
-	 */
-	public default void onMouseEnter () {}
+    /**
+     * Called when the mouse cursor enters the window.
+     */
+    public default void onMouseEnter() {
+    }
 
-	/**
-	 * Called when the mouse cursor leaves the window.
-	 */
-	public default void onMouseLeave () {}
+    /**
+     * Called when the mouse cursor leaves the window.
+     */
+    public default void onMouseLeave() {
+    }
 
 }
