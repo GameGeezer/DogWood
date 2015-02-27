@@ -1,4 +1,4 @@
-package framework.window.keyboardcallbakcs;
+package framework.window.keyboardcallbacks;
 
 import org.lwjgl.glfw.GLFWKeyCallback;
 

@@ -1,4 +1,4 @@
-package framework.window.keyboardcallbakcs;
+package framework.window.keyboardcallbacks;
 
 /**
  * An interface for Objects that want to subscribe to keyboard key events.

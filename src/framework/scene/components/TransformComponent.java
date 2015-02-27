@@ -7,7 +7,7 @@ import framework.scene.Entity.EntityComponent;
 import framework.util.exceptions.EntityException;
 import framework.util.math.Transform;
 import framework.util.math.Matrix4;
-import framework.util.math.Vector3;
+import framework.util.math.Vector3f;
 
 /**
  * Created by Will on 11/25/2014.
@@ -75,9 +75,9 @@ public class TransformComponent extends EntityComponent implements IUniformWrapp
         return this;
     }
 
-    public TransformComponent translate(Vector3 translation) {
+    public TransformComponent translate(Vector3f translation) {
 
-        return translate(translation.getX(), translation.getY(), translation.getZ());
+        return translate(translation.x, translation.y, translation.z);
     }
 
     public TransformComponent setTranslation(float x, float y, float z) {
@@ -88,9 +88,9 @@ public class TransformComponent extends EntityComponent implements IUniformWrapp
         return this;
     }
 
-    public TransformComponent setTranslation(Vector3 translation) {
+    public TransformComponent setTranslation(Vector3f translation) {
 
-        return setTranslation(translation.getX(), translation.getY(), translation.getZ());
+        return setTranslation(translation.x, translation.y, translation.z);
     }
 
     public TransformComponent setScale(float x, float y, float z) {
@@ -101,9 +101,9 @@ public class TransformComponent extends EntityComponent implements IUniformWrapp
         return this;
     }
 
-    public TransformComponent setScale(Vector3 scale) {
+    public TransformComponent setScale(Vector3f scale) {
 
-        return setScale(scale.getX(), scale.getY(), scale.getZ());
+        return setScale(scale.x, scale.y, scale.z);
     }
 
     public TransformComponent setOrientationEuler(float roll, float pitch, float yaw) {
@@ -122,9 +122,9 @@ public class TransformComponent extends EntityComponent implements IUniformWrapp
         return this;
     }
 
-    public TransformComponent rotateEuler(Vector3 euler) {
+    public TransformComponent rotateEuler(Vector3f euler) {
 
-        return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
+        return rotateEuler(euler.x, euler.y, euler.z);
     }
 
     public Transform getTransform() {

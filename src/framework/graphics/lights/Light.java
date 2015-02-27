@@ -1,7 +1,7 @@
 package framework.graphics.lights;
 
 import framework.graphics.Color;
-import framework.util.math.Vector3;
+import framework.util.math.Vector3f;
 
 /**
  * TODO
@@ -9,7 +9,7 @@ import framework.util.math.Vector3;
  */
 public class Light {
 
-    private final Vector3 attenuation = new Vector3();
+    private final Vector3f attenuation = new Vector3f();
     private final Color color;
 
     private Light(Color color) {

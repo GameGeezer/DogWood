@@ -8,6 +8,7 @@ public class Quaternion {
 
     private float x, y, z, w;
 
+
     public Quaternion() {
         this(0.0f, 0.0f, 0.0f, 1.0f);
     }
@@ -22,10 +23,10 @@ public class Quaternion {
 
     public static void multiply(Quaternion left, Quaternion right, Quaternion targer) {
 
-        float x = left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z;
-        float y = left.w * right.x + left.x * right.w + left.y * right.z - left.z * right.y;
-        float z = left.w * right.y - left.x * right.z + left.y * right.w + left.z * right.x;
-        float w = left.w * right.z + left.x * right.y - left.y * right.x + left.z * right.w;
+        final float x = left.w * right.w - left.x * right.x - left.y * right.y - left.z * right.z;
+        final float y = left.w * right.x + left.x * right.w + left.y * right.z - left.z * right.y;
+        final float z = left.w * right.y - left.x * right.z + left.y * right.w + left.z * right.x;
+        final float w = left.w * right.z + left.x * right.y - left.y * right.x + left.z * right.w;
         targer.x = x;
         targer.y = y;
         targer.z = z;
@@ -44,7 +45,7 @@ public class Quaternion {
 
     public void inverse() {
 
-        float length = length2();
+        final float length = length2();
 
         x /= length;
         y /= length;
@@ -54,7 +55,7 @@ public class Quaternion {
 
     public Quaternion normalize() {
 
-        float norm = (float) Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
+        final float norm = (float) Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
 
         if (norm > 0.0f) {
 

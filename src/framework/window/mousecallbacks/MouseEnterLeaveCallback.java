@@ -1,4 +1,4 @@
-package framework.window.mousecallbakcs;
+package framework.window.mousecallbacks;
 
 import org.lwjgl.glfw.GLFWCursorEnterCallback;
 

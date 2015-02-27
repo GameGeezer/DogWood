@@ -9,7 +9,7 @@ import framework.scene.components.general.CameraReferenceComponent;
 import framework.scene.components.TransformComponent;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
-import framework.util.math.Vector2;
+import framework.util.math.Vector2f;
 import game.Scene;
 import framework.scene.components.graphics.SpriteComponent;
 import org.jbox2d.dynamics.BodyType;
@@ -45,7 +45,7 @@ public class BasicBullet extends Entity {
 
     private TransformComponent bulletTransform;
 
-    public BasicBullet(float x, float y, float z, Vector2 direction) {
+    public BasicBullet(float x, float y, float z, Vector2f direction) {
 
         ShaderProgram bulletShader = null;
 
@@ -74,7 +74,7 @@ public class BasicBullet extends Entity {
             addComponent(new CameraReferenceComponent(Scene.getCamera()));
             PhysicsBodyComponent body = new PhysicsBodyComponent(BodyType.DYNAMIC, x, y);
            // body.move(x, y);
-            body.setLinearVelocity(10f * direction.getX(), 10f * direction.getY());
+            body.setLinearVelocity(10f * direction.x, 10f * direction.y);
             addComponent(body);
             addComponent(new BoxFixtureComponent(0.05f, 0.05f, 0, 0, 0));
 

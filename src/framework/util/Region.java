@@ -1,19 +1,19 @@
 package framework.util;
 
-import framework.util.math.Vector2;
+import framework.util.math.Vector2f;
 
 /**
  * Created by Will on 12/23/2014.
  */
 public class Region {
 
-    private Vector2 lower, upper;
+    private Vector2f lower, upper;
     private float width, height;
 
     public Region(float x1, float y1, float x2, float y2) {
 
-        lower = new Vector2(x1, y1);
-        upper = new Vector2(x2, y2);
+        lower = new Vector2f(x1, y1);
+        upper = new Vector2f(x2, y2);
 
         ensureStateLegalityX();
         ensureStateLegalityY();
@@ -35,7 +35,7 @@ public class Region {
 
     public Region setLowerX(float x) {
 
-        lower.setX(x);
+        lower.x = x;
 
         ensureStateLegalityX();
 
@@ -46,7 +46,7 @@ public class Region {
 
     public Region setLowerY(float y) {
 
-        lower.setY(y);
+        lower.y = y;
 
         ensureStateLegalityY();
 
@@ -69,7 +69,7 @@ public class Region {
 
     public Region setUpperX(float x) {
 
-        upper.setX(x);
+        upper.x = x;
 
         ensureStateLegalityX();
 
@@ -80,7 +80,7 @@ public class Region {
 
     public Region setUpperY(float y) {
 
-        upper.setY(y);
+        upper.y = y;
 
         ensureStateLegalityY();
 
@@ -99,32 +99,32 @@ public class Region {
 
     public float getLowerX() {
 
-        return lower.getX();
+        return lower.x;
     }
 
     public float getLowerY() {
 
-        return lower.getY();
+        return lower.y;
     }
 
     public float getUpperX() {
 
-        return upper.getX();
+        return upper.x;
     }
 
     public float getUpperY() {
 
-        return upper.getY();
+        return upper.y;
     }
 
     public float findCenterX() {
 
-        return lower.getX() + (width / 2);
+        return lower.x + (width / 2.0f);
     }
 
     public float findCenterY() {
 
-        return lower.getY() + (height / 2);
+        return lower.y + (height / 2.0f);
     }
 
     public float getWidth() {
@@ -137,21 +137,21 @@ public class Region {
         return height;
     }
 
-    public Vector2 getLower() {
+    public Vector2f getLower() {
 
         return lower;
     }
 
-    public Vector2 getUpper() {
+    public Vector2f getUpper() {
 
         return upper;
     }
 
     private void updateBounds() {
 
-        width = Math.abs(upper.getX() - lower.getX());
+        width = Math.abs(upper.x - lower.x);
 
-        height = Math.abs(upper.getY() - lower.getY());
+        height = Math.abs(upper.y - lower.y);
     }
 
     private void ensureStateLegalityX() {
@@ -159,18 +159,18 @@ public class Region {
         if (getLowerX() > getUpperX()) {
 
             float x = getLowerX();
-            lower.setX(getUpperX());
-            upper.setX(x);
+            lower.x = upper.x;
+            upper.x = x;
         }
     }
 
     private void ensureStateLegalityY() {
 
-        if (lower.getY() > upper.getY()) {
+        if (lower.y > upper.y) {
 
-            float y = lower.getY();
-            lower.setY(upper.getY());
-            upper.setY(y);
+            float y = lower.y;
+            lower.y = upper.y;
+            upper.y = y;
         }
     }
 }

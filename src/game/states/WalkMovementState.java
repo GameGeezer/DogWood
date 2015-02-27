@@ -33,7 +33,7 @@ public class WalkMovementState extends MovementState {
     @Override
     public void move() {
 
-        getBodyComponent().applyForceToCenter(getMoveDirection().getX() * force, getMoveDirection().getY() * force);
+        getBodyComponent().applyForceToCenter(getMoveDirection().x * force, getMoveDirection().y * force);
 
         float velX = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityX(), -maxVelocity, maxVelocity);
         float velY = RangeUtil.forceIntoRange(getBodyComponent().getLinearVelocityY(), -maxVelocity, maxVelocity);

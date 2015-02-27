@@ -5,7 +5,7 @@ import framework.graphics.opengl.uniform.IUniformWrapper;
 import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.util.math.Matrix4;
 import framework.util.math.Transform;
-import framework.util.math.Vector3;
+import framework.util.math.Vector3f;
 
 /**
  * Created by Will on 2/7/14.
@@ -59,7 +59,7 @@ public class Camera implements IUniformWrapper {
      *
      * @param point
      */
-    public void lookAt(Vector3 point) {
+    public void lookAt(Vector3f point) {
 
     }
 

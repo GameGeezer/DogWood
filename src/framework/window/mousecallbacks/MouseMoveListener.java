@@ -1,4 +1,4 @@
-package framework.window.mousecallbakcs;
+package framework.window.mousecallbacks;
 
 /**
  * An interface for Objects that want to subscribe to mouse movement events.

@@ -1,7 +1,7 @@
 package framework.window;
 
-import framework.window.keyboardcallbakcs.KeyboardCallback;
-import framework.window.keyboardcallbakcs.KeyboardListener;
+import framework.window.keyboardcallbacks.KeyboardCallback;
+import framework.window.keyboardcallbacks.KeyboardListener;
 import framework.util.Timer;
 import framework.window.windowcallbacks.*;
 import groovy.lang.GroovyShell;

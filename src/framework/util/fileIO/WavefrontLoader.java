@@ -3,8 +3,8 @@ package framework.util.fileIO;
 import framework.graphics.Mesh;
 import framework.util.MeshBuilder;
 import framework.util.dataTypes.DatatypeUtil;
-import framework.util.math.Vector2;
-import framework.util.math.Vector3;
+import framework.util.math.Vector2f;
+import framework.util.math.Vector3f;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,9 +37,9 @@ public class WavefrontLoader {
 
     private VertexType expectedVertexType;
 
-    private List<Vector3> positions = new ArrayList< >();
-    private List<Vector2> textureCoordinates = new ArrayList< >();
-    private List<Vector3> normals = new ArrayList< >();
+    private List<Vector3f> positions = new ArrayList< >();
+    private List<Vector2f> textureCoordinates = new ArrayList< >();
+    private List<Vector3f> normals = new ArrayList< >();
 
     private Map<String, Integer> knownVertices = new HashMap< >();
     private int vertexCount = 0;
@@ -63,17 +63,17 @@ public class WavefrontLoader {
                 case "v":
                     if (data.length < 4)
                         throw new IOException("Line has an invalid number objects: " + line);
-                    positions.add(new Vector3(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2]), DatatypeUtil.parseFloat(data[3])));
+                    positions.add(new Vector3f(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2]), DatatypeUtil.parseFloat(data[3])));
                     break;
                 case "vn":
                     if (data.length < 4)
                         throw new IOException("Line has an invalid number objects: " + line);
-                    normals.add(new Vector3(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2]), DatatypeUtil.parseFloat(data[3])));
+                    normals.add(new Vector3f(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2]), DatatypeUtil.parseFloat(data[3])));
                     break;
                 case "vt":
                     if (data.length < 3)
                         throw new IOException("Line has an invalid number objects: " + line);
-                    textureCoordinates.add(new Vector2(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2])));
+                    textureCoordinates.add(new Vector2f(DatatypeUtil.parseFloat(data[1]), DatatypeUtil.parseFloat(data[2])));
                     break;
                 case "f":
                     if (data.length < 4 || data.length > 5)
@@ -150,19 +150,19 @@ public class WavefrontLoader {
             if (!expectedVertexType.equals(VertexType.POSITION_NORMAL))
                 throw new IOException("Inconsistant vertex: " + data);
             int index = Integer.parseInt(components[0]) - 1;
-            Vector3 position = positions.get(index);
-            builder.addToComponent(POSITION_COMPONENT, position.getX(), position.getY(), position.getZ());
+            Vector3f position = positions.get(index);
+            builder.addToComponent(POSITION_COMPONENT, position.x, position.y, position.z);
 
             index = Integer.parseInt(components[1]) - 1;
-            Vector3 normal = normals.get(index);
-            builder.addToComponent(NORMAL_COMPONENT, normal.getX(), normal.getY(), normal.getZ());
+            Vector3f normal = normals.get(index);
+            builder.addToComponent(NORMAL_COMPONENT, normal.x, normal.y, normal.z);
 
         } else if ((components = data.split("/")).length == 1) { // position
             if (!expectedVertexType.equals(VertexType.POSITION))
                 throw new IOException("Inconsistant vertex: " + data);
             int index = Integer.parseInt(components[0]) - 1;
-            Vector3 position = positions.get(index);
-            builder.addToComponent(POSITION_COMPONENT, position.getX(), position.getY(), position.getZ());
+            Vector3f position = positions.get(index);
+            builder.addToComponent(POSITION_COMPONENT, position.x, position.y, position.z);
 
         } else if (components.length == 2) { // position texcoord
 
@@ -170,12 +170,12 @@ public class WavefrontLoader {
                 throw new IOException("Inconsistant vertex: " + data);
 
             int index = Integer.parseInt(components[0]) - 1;
-            Vector3 vec3 = positions.get(index);
-            builder.addToComponent(POSITION_COMPONENT, vec3.getX(), vec3.getY(), vec3.getZ());
+            Vector3f vec3 = positions.get(index);
+            builder.addToComponent(POSITION_COMPONENT, vec3.x, vec3.y, vec3.z);
 
             index = Integer.parseInt(components[1]) - 1;
-            Vector2 vec2 = textureCoordinates.get(index);
-            builder.addToComponent(TEXCOORD_COMPONENT, vec2.getX(), vec2.getY());
+            Vector2f vec2 = textureCoordinates.get(index);
+            builder.addToComponent(TEXCOORD_COMPONENT, vec2.x, vec2.y);
 
         } else if (components.length == 3) { // position texcoord normal
 
@@ -183,16 +183,16 @@ public class WavefrontLoader {
                 throw new IOException("Inconsistant vertex: " + data);
 
             int index = Math.abs(Integer.parseInt(components[0])) - 1;
-            Vector3 position = positions.get(index);
-            builder.addToComponent(POSITION_COMPONENT, position.getX(), position.getY(), position.getZ());
+            Vector3f position = positions.get(index);
+            builder.addToComponent(POSITION_COMPONENT, position.x, position.y, position.z);
 
             index = Integer.parseInt(components[1]) - 1;
-            Vector2 texCoord = textureCoordinates.get(index);
-            builder.addToComponent(TEXCOORD_COMPONENT, texCoord.getX(), texCoord.getY());
+            Vector2f texCoord = textureCoordinates.get(index);
+            builder.addToComponent(TEXCOORD_COMPONENT, texCoord.x, texCoord.y);
 
             index = Integer.parseInt(components[2]) - 1;
-            Vector3 normal = normals.get(index);
-            builder.addToComponent(NORMAL_COMPONENT, normal.getX(), normal.getY(), normal.getZ());
+            Vector3f normal = normals.get(index);
+            builder.addToComponent(NORMAL_COMPONENT, normal.x, normal.y, normal.z);
         } else {
 
             throw new IOException("Vertex could not be parsed: " + data);

@@ -1,7 +1,7 @@
 package framework.scene.components.input;
 
 import framework.window.Application;
-import framework.window.keyboardcallbakcs.KeyboardListener;
+import framework.window.keyboardcallbacks.KeyboardListener;
 import framework.scene.Entity;
 
 /**

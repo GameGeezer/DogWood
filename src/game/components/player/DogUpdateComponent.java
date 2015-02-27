@@ -6,7 +6,7 @@ import framework.scene.components.TransformComponent;
 import framework.scene.components.UpdateComponent;
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.util.exceptions.EntityException;
-import framework.util.math.Vector2;
+import framework.util.math.Vector2f;
 import game.states.DecelerateMovementState;
 import game.states.MovementState;
 import game.states.WalkMovementState;
@@ -29,7 +29,7 @@ public class DogUpdateComponent extends UpdateComponent {
 
     private Entity master;
 
-    private Vector2 dummyVector = new Vector2();
+    private Vector2f dummyVector = new Vector2f();
 
     public DogUpdateComponent(Entity master) {
 
@@ -40,8 +40,8 @@ public class DogUpdateComponent extends UpdateComponent {
     public void update(int delta) {
         TransformComponent masterTransform = (TransformComponent) master.getFirstComponentOfType(TransformComponent.class);
 
-        Vector2 direction = dummyVector.set(masterTransform.getX(), masterTransform.getY()).sub(transformComponent.getX(), transformComponent.getY()).normalize();
-        walkState.setDirection(direction.getX(), direction.getY());
+        Vector2f direction = dummyVector.set(masterTransform.getX(), masterTransform.getY()).sub(transformComponent.getX(), transformComponent.getY()).normalize();
+        walkState.setDirection(direction.x, direction.y);
 
         dummyVector.set(masterTransform.getX(), masterTransform.getY()).sub(transformComponent.getX(), transformComponent.getY());
         if(movementStack.peek().equals(decelerationState)) {

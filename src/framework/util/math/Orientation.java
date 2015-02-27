@@ -5,7 +5,7 @@ package framework.util.math;
  */
 public class Orientation extends Quaternion {
 
-    private Vector3 eulerRepresentation = new Vector3();
+    private final Vector3f eulerRepresentation = new Vector3f();
 
     public Orientation() {
 
@@ -20,40 +20,40 @@ public class Orientation extends Quaternion {
 
         eulerRepresentation.set(roll, pitch, yaw);
 
-        createFromEuler(eulerRepresentation.getX(), eulerRepresentation.getY(), eulerRepresentation.getZ());
+        createFromEuler(eulerRepresentation.x, eulerRepresentation.y, eulerRepresentation.z);
 
         return this;
     }
 
-    public Orientation setEuler(Vector3 euler) {
+    public Orientation setEuler(Vector3f euler) {
 
-        return setEuler(euler.getX(), euler.getY(), euler.getZ());
+        return setEuler(euler.x, euler.y, euler.z);
     }
 
     public Orientation rotateEuler(float roll, float pitch, float yaw) {
 
         eulerRepresentation.add(roll, pitch, yaw);
 
-        createFromEuler(eulerRepresentation.getX(), eulerRepresentation.getY(), eulerRepresentation.getZ());
+        createFromEuler(eulerRepresentation.x, eulerRepresentation.y, eulerRepresentation.z);
 
         return this;
     }
 
-    public Orientation rotateEuler(Vector3 euler) {
+    public Orientation rotateEuler(Vector3f euler) {
 
-        return rotateEuler(euler.getX(), euler.getY(), euler.getZ());
+        return rotateEuler(euler.x, euler.y, euler.z);
     }
 
     public Matrix4 computeMatrix() {
 
-        float sqx = getX() * getX();
-        float sqy = getY() * getY();
-        float sqz = getZ() * getZ();
-        float sqw = getW() * getW();
+        final float sqx = getX() * getX();
+        final float sqy = getY() * getY();
+        final float sqz = getZ() * getZ();
+        final float sqw = getW() * getW();
 
-        float inverseSquare = 1 / length2();
+        final float inverseSquare = 1 / length2();
 
-        Matrix4 matrix = new Matrix4();
+        final Matrix4 matrix = new Matrix4();
 
         matrix.data[Matrix4.M00] = (sqx - sqy - sqz + sqw) * inverseSquare;
         matrix.data[Matrix4.M11] = (-sqx + sqy - sqz + sqw) * inverseSquare;
@@ -79,17 +79,17 @@ public class Orientation extends Quaternion {
 
     public float getRoll() {
 
-        return eulerRepresentation.getX();
+        return eulerRepresentation.x;
     }
 
     public float getPitch() {
 
-        return eulerRepresentation.getY();
+        return eulerRepresentation.y;
     }
 
     public float getYaw() {
 
-        return eulerRepresentation.getZ();
+        return eulerRepresentation.z;
     }
 
     private void createFromEuler(float roll, float pitch, float yaw) {
@@ -108,5 +108,4 @@ public class Orientation extends Quaternion {
         setZ(cy * sp * cr - sy * cp * sr);
         setW(cr * cp * cy - sr * sp * sy);
     }
-
 }

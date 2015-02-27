@@ -4,9 +4,9 @@ import framework.scene.Entity;
 import framework.scene.components.TransformComponent;
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.UpdateComponent;
-import framework.util.math.Vector2;
+import framework.util.math.Vector2f;
 import framework.window.Application;
-import framework.window.keyboardcallbakcs.KeyboardListener;
+import framework.window.keyboardcallbacks.KeyboardListener;
 import game.Scene;
 import game.SpriteAnimation;
 import framework.scene.components.graphics.SpriteComponent;
@@ -53,15 +53,15 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
     private SpriteAnimation currentAnimation;
 
-    private LinkedList<Vector2> faceDirectionList = new LinkedList();
-    private Vector2 faceDirection = null;
+    private LinkedList<Vector2f> faceDirectionList = new LinkedList();
+    private Vector2f faceDirection = null;
 
     private int animationStartTime;
 
     public PlayerUpdateComponent() {
         currentAnimation = walkDownAnimation;
         animationStartTime = (int) System.currentTimeMillis();
-        faceDirection = Vector2.DOWN;
+        faceDirection = Vector2f.DOWN;
     }
 
     @Override
@@ -156,25 +156,25 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
             case GLFW_KEY_A:
                 horizontalMovement += 1f;
-                removeFaceDirection(Vector2.LEFT);
+                removeFaceDirection(Vector2f.LEFT);
 
                 break;
 
             case GLFW_KEY_D:
                 horizontalMovement -= 1f;
-                removeFaceDirection(Vector2.RIGHT);
+                removeFaceDirection(Vector2f.RIGHT);
 
                 break;
 
             case GLFW_KEY_W:
                 verticalMovement -= 1f;
-                removeFaceDirection(Vector2.UP);
+                removeFaceDirection(Vector2f.UP);
 
                 break;
 
             case GLFW_KEY_S:
                 verticalMovement += 1f;
-                removeFaceDirection(Vector2.DOWN);
+                removeFaceDirection(Vector2f.DOWN);
 
                 break;
 
@@ -190,30 +190,30 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
             case GLFW_KEY_A:
                 horizontalMovement -= 1f;
-                setFaceDirection(Vector2.LEFT);
+                setFaceDirection(Vector2f.LEFT);
 
                 break;
 
             case GLFW_KEY_D:
                 horizontalMovement += 1f;
-                setFaceDirection(Vector2.RIGHT);
+                setFaceDirection(Vector2f.RIGHT);
 
                 break;
 
             case GLFW_KEY_W:
                 verticalMovement += 1f;
-                setFaceDirection(Vector2.UP);
+                setFaceDirection(Vector2f.UP);
 
                 break;
 
             case GLFW_KEY_S:
                 verticalMovement -= 1f;
-                setFaceDirection(Vector2.DOWN);
+                setFaceDirection(Vector2f.DOWN);
 
                 break;
 
             case GLFW_KEY_SPACE:
-                fireBullet();
+                    fireBullet();
                 break;
         }
 
@@ -247,31 +247,31 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
     private void fireBullet() {
 
-        Scene.addEntity(new BasicBullet(transformComponent.getX() + (0.3f * faceDirection.getX()), transformComponent.getY() + (0.3f * faceDirection.getY()), transformComponent.getZ(), faceDirection));
+        Scene.addEntity(new BasicBullet(transformComponent.getX() + (0.3f * faceDirection.x), transformComponent.getY() + (0.3f * faceDirection.y), transformComponent.getZ(), faceDirection));
     }
 
     private void setAnimation() {
 
         if(movementStack.peek().equals(decelerationState)) {
 
-            if(faceDirection == Vector2.UP){
+            if(faceDirection == Vector2f.UP){
                 currentAnimation = idleUpAnimation;
-            } else if(faceDirection == Vector2.DOWN) {
+            } else if(faceDirection == Vector2f.DOWN) {
                 currentAnimation = idleDownAnimation;
-            } else if (faceDirection == Vector2.LEFT) {
+            } else if (faceDirection == Vector2f.LEFT) {
                 currentAnimation = idleLeftAnimation;
-            } else if (faceDirection == Vector2.RIGHT) {
+            } else if (faceDirection == Vector2f.RIGHT) {
                 currentAnimation = idleRightAnimation;
             }
         } else if (movementStack.peek().equals(walkState)) {
 
-            if(faceDirection == Vector2.UP){
+            if(faceDirection == Vector2f.UP){
                 currentAnimation = walkUpAnimation;
-            } else if(faceDirection == Vector2.DOWN) {
+            } else if(faceDirection == Vector2f.DOWN) {
                 currentAnimation = walkDownAnimation;
-            } else if (faceDirection == Vector2.LEFT) {
+            } else if (faceDirection == Vector2f.LEFT) {
                 currentAnimation = walkLeftAnimation;
-            }else if (faceDirection == Vector2.RIGHT) {
+            }else if (faceDirection == Vector2f.RIGHT) {
                 currentAnimation = walkRightAnimation;
             }
         }
@@ -322,18 +322,18 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
     }
 
-    private void removeFaceDirection(Vector2 direction) {
+    private void removeFaceDirection(Vector2f direction) {
 
         faceDirectionList.remove(direction);
 
         if(faceDirectionList.size() > 0) {
-            if(!(horizontalMovement == 0 && (direction.equals(Vector2.UP) ||direction.equals(Vector2.DOWN) ))) {
+            if(!(horizontalMovement == 0 && (direction.equals(Vector2f.UP) ||direction.equals(Vector2f.DOWN) ))) {
                 faceDirection = faceDirectionList.peek();
             }
         }
     }
 
-    private void setFaceDirection(Vector2 direction) {
+    private void setFaceDirection(Vector2f direction) {
 
         faceDirectionList.addLast(direction);
 
@@ -341,11 +341,11 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
             if(verticalMovement != 0) {
                 if(verticalMovement == 1) {
-                    faceDirectionList.remove(Vector2.UP);
-                    faceDirectionList.push(Vector2.UP);
+                    faceDirectionList.remove(Vector2f.UP);
+                    faceDirectionList.push(Vector2f.UP);
                 } else {
-                    faceDirectionList.remove(Vector2.DOWN);
-                    faceDirectionList.push(Vector2.DOWN);
+                    faceDirectionList.remove(Vector2f.DOWN);
+                    faceDirectionList.push(Vector2f.DOWN);
                 }
             }
         }

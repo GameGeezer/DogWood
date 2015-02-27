@@ -2,7 +2,7 @@ package game.states;
 
 import framework.scene.StateStack;
 import framework.scene.components.collision.PhysicsBodyComponent;
-import framework.util.math.Vector2;
+import framework.util.math.Vector2f;
 
 /**
  * Created by Will on 2/2/2015.
@@ -10,7 +10,7 @@ import framework.util.math.Vector2;
 public abstract class MovementState extends StateStack.State{
 
     private PhysicsBodyComponent bodyComponent;
-    private Vector2 moveDirection = new Vector2();
+    private Vector2f moveDirection = new Vector2f();
 
     public MovementState(PhysicsBodyComponent bodyComponent) {
 
@@ -30,7 +30,7 @@ public abstract class MovementState extends StateStack.State{
         moveDirection.normalize();
     }
 
-    public Vector2 getMoveDirection() {
+    public Vector2f getMoveDirection() {
 
         return moveDirection;
     }
