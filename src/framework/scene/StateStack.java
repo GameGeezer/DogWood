@@ -24,7 +24,7 @@ public class StateStack<E extends StateStack.State> {
         return states.peek();
     }
 
-    public void push(E state) {
+    public void push(final E state) {
 
         if (states.peek() != null)
             states.peek().onLeaveTop();
@@ -52,7 +52,7 @@ public class StateStack<E extends StateStack.State> {
 
         protected abstract void onBecomeTop();
 
-        protected void setParentStack(StateStack parentStack) {
+        protected void setParentStack(final StateStack parentStack) {
 
             this.parentStack = parentStack;
         }

@@ -1,20 +1,19 @@
 package game;
 
-import framework.window.Application;
-import framework.window.IScreen;
 import framework.graphics.DeferredRenderer;
-import framework.graphics.Mesh;
-import framework.scene.components.graphics.TexturedMeshComponent;
-import framework.scene.components.general.CameraReferenceComponent;
-import framework.scene.components.TransformComponent;
 import framework.graphics.Image;
-import framework.graphics.opengl.*;
+import framework.graphics.Mesh;
+import framework.graphics.opengl.ShaderProgram;
 import framework.scene.Entity;
-import framework.util.Timer;
+import framework.scene.components.TransformComponent;
+import framework.scene.components.general.CameraReferenceComponent;
+import framework.scene.components.graphics.TexturedMeshComponent;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import framework.util.fileIO.WavefrontLoader;
 import framework.util.math.Transform;
+import framework.window.Application;
+import framework.window.IScreen;
 import groovy.lang.Script;
 
 import java.io.File;
@@ -59,17 +58,17 @@ public class GameScreen implements IScreen {
             dogTransform.setScale(0.2f, 0.2f, 0);
 
             Transform tree1Transform = new Transform();
-            tree1Transform.setTranslation(0, 0, -1.05f);
+            tree1Transform.setTranslation(0, 1, -1.05f);
             tree1Transform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
             tree1Transform.setScale(1f, 1f, 0);
 
             Transform tree2Transform = new Transform();
-            tree2Transform.setTranslation(-50, 0, -1.05f);
+            tree2Transform.setTranslation(-0.5f, 1, -1.05f);
             tree2Transform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
             tree2Transform.setScale(1f, 1f, 0);
 
             Transform tree3Transform = new Transform();
-            tree3Transform.setTranslation(5, 0, -1.05f);
+            tree3Transform.setTranslation(0.5f, 1, -1.05f);
             tree3Transform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
             tree3Transform.setScale(1f, 1f, 0);
 
@@ -97,7 +96,6 @@ public class GameScreen implements IScreen {
         ctTransform.setTranslation(0f, 1f, -1.7f);
         ctTransform.setScale(3, 3, 3);
 
-
         try {
 
             TexturedMeshComponent ctsprite = new TexturedMeshComponent(treeMesh, spriteSheet, treeShader);
@@ -111,8 +109,6 @@ public class GameScreen implements IScreen {
 
             e.printStackTrace();
         }
-
-
     }
 
     @Override

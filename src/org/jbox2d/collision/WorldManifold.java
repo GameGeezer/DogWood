@@ -23,11 +23,7 @@
  ******************************************************************************/
 package org.jbox2d.collision;
 
-import org.jbox2d.dynamics.contacts.common.MathUtils;
-import org.jbox2d.dynamics.contacts.common.Rot;
-import org.jbox2d.dynamics.contacts.common.Settings;
-import org.jbox2d.dynamics.contacts.common.Transform;
-import org.jbox2d.dynamics.contacts.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.*;
 
 /**
  * This is used to compute the current state of a contact manifold.

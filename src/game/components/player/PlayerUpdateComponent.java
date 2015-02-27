@@ -1,31 +1,27 @@
 package game.components.player;
 
 import framework.scene.Entity;
+import framework.scene.StateStack;
 import framework.scene.components.TransformComponent;
-import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.UpdateComponent;
+import framework.scene.components.collision.PhysicsBodyComponent;
+import framework.scene.components.graphics.SpriteComponent;
 import framework.util.math.Vector2f;
 import framework.window.Application;
 import framework.window.keyboardcallbacks.KeyboardListener;
-import game.Scene;
 import game.SpriteAnimation;
-import framework.scene.components.graphics.SpriteComponent;
 import game.states.DecelerateMovementState;
 import game.states.MovementState;
-import framework.scene.StateStack;
 import game.states.TimedMovementState;
 import game.states.WalkMovementState;
-import game.weapons.BasicBullet;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 
 /**
- * Created by Will on 12/24/2014.
+ * @author William Gervasio
  */
 public class PlayerUpdateComponent extends UpdateComponent implements KeyboardListener{
 
@@ -211,10 +207,6 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
                 setFaceDirection(Vector2f.DOWN);
 
                 break;
-
-            case GLFW_KEY_SPACE:
-                    fireBullet();
-                break;
         }
 
         walkInDirection(horizontalMovement, verticalMovement);
@@ -243,11 +235,6 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
                 rollInDirection(0f, -1f);
                 break;
         }
-    }
-
-    private void fireBullet() {
-
-        Scene.addEntity(new BasicBullet(transformComponent.getX() + (0.3f * faceDirection.x), transformComponent.getY() + (0.3f * faceDirection.y), transformComponent.getZ(), faceDirection));
     }
 
     private void setAnimation() {

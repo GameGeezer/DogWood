@@ -28,6 +28,7 @@ public class FloatArrayList {
     }
 
     public int size() {
+
         return size;
     }
 

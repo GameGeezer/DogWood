@@ -46,8 +46,8 @@
 
 package org.jbox2d.dynamics.joints;
 
-import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * Revolute joint definition. This requires defining an anchor point where the bodies are joined.

@@ -45,7 +45,7 @@ public Entity buildPlayer(Transform transform) {
 
     SpriteComponent spriteComponent = new SpriteComponent(playerImage, shader, 3, 4);
 
-    PhysicsBodyComponent bodyComponent = new PhysicsBodyComponent(BodyType.DYNAMIC, 0, 1.5f);
+    PhysicsBodyComponent bodyComponent = new PhysicsBodyComponent(BodyType.DYNAMIC);
 
     BoxFixtureComponent fixtureComponent = new BoxFixtureComponent(0.1f, 0.02f, 0, 0, 0);
 
@@ -79,7 +79,7 @@ public Entity buildTestEnemy(Transform transform, Entity master) {
 
     SpriteComponent spriteComponent = new SpriteComponent(playerImage, shader, 1, 1);
 
-    PhysicsBodyComponent bodyComponent = new PhysicsBodyComponent(BodyType.DYNAMIC, 0, 1.5f);
+    PhysicsBodyComponent bodyComponent = new PhysicsBodyComponent(BodyType.DYNAMIC);
 
     BoxFixtureComponent fixtureComponent = new BoxFixtureComponent(0.1f, 0.02f, 0, 0, 0);
 
@@ -115,7 +115,7 @@ public Entity buildTree(Transform transform) {
 
     SpriteComponent spriteComponent = new SpriteComponent(playerImage, shader, 1, 1);
 
-    PhysicsBodyComponent bodyComponent = new PhysicsBodyComponent(BodyType.STATIC, 0, 1.5f);
+    PhysicsBodyComponent bodyComponent = new PhysicsBodyComponent(BodyType.STATIC);
 
     BoxFixtureComponent fixtureComponent = new BoxFixtureComponent(0.03f, 0.02f, 0, -0.15f, 0);
     entity.addComponent(spriteComponent);

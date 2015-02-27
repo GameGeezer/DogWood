@@ -26,8 +26,8 @@
  */
 package org.jbox2d.dynamics.joints;
 
-import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * Friction joint definition.

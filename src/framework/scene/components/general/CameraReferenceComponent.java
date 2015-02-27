@@ -1,19 +1,19 @@
 package framework.scene.components.general;
 
-import framework.graphics.opengl.uniform.IUniformWrapper;
-import framework.scene.Entity;
-import framework.scene.Camera;
 import framework.graphics.opengl.ShaderProgram;
+import framework.graphics.opengl.uniform.IUniformWrapper;
+import framework.scene.Camera;
+import framework.scene.Entity;
 import framework.util.exceptions.EntityException;
 
 /**
- * Created by Will on 1/4/2015.
+ * @author William Gervasio
  */
 public class CameraReferenceComponent extends Entity.EntityComponent implements IUniformWrapper {
 
-    private Camera camera;
+    private final Camera camera;
 
-    public CameraReferenceComponent(Camera camera) {
+    public CameraReferenceComponent(final Camera camera) {
 
         this.camera = camera;
     }
@@ -35,23 +35,23 @@ public class CameraReferenceComponent extends Entity.EntityComponent implements 
     }
 
     @Override
-    protected void onComponentAttachedToParent(Entity.EntityComponent component) {
+    protected void onComponentAttachedToParent(final Entity.EntityComponent component) {
 
     }
 
     @Override
-    protected void onComponentDetachedFromParent(Entity.EntityComponent component) {
+    protected void onComponentDetachedFromParent(final Entity.EntityComponent component) {
 
     }
 
     @Override
-    public void addListener(ShaderProgram shader) {
+    public void addListener(final ShaderProgram shader) {
 
         camera.addListener(shader);
     }
 
     @Override
-    public void removeListener(ShaderProgram shader) {
+    public void removeListener(final ShaderProgram shader) {
 
         camera.removeListener(shader);
     }

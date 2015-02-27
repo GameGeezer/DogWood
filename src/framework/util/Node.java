@@ -19,16 +19,12 @@ public class Node<T> {
     private Node parent;
     private final List<Node<T>> subnodes = new ArrayList<Node<T>>();
 
-    public Node() {
-
-    }
-
     /**
      * Add node as a child
      *
      * @param node The node being attached
      */
-    public void attach(Node<T> node) {
+    public final void attach(final Node<T> node) {
 
         subnodes.add(node);
         node.parent = this;
@@ -37,7 +33,8 @@ public class Node<T> {
     /**
      * Clear all child nodes
      */
-    public void clearNodes() {
+    public final void clearNodes() {
+
         subnodes.clear();
     }
 
@@ -46,7 +43,8 @@ public class Node<T> {
      *
      * @param node The node being detached
      */
-    public void detach(Node<T> node) {
+    public final void detach(final Node<T> node) {
+
         subnodes.remove(node);
     }
 
@@ -55,8 +53,10 @@ public class Node<T> {
      *
      * @param node The node being detached
      */
-    public void deepDetach(T node) {
+    public final void deepDetach(final T node) {
+
         subnodes.remove(node);
+
         for (Node<T> i : subnodes) {
             i.deepDetach(node);
         }
@@ -68,15 +68,20 @@ public class Node<T> {
      * @param child The node being searched for
      * @return
      */
-    public boolean hasChild(Node<T> child) {
+    public boolean hasChild(final Node<T> child) {
+
         return subnodes.contains(child);
     }
 
-    public boolean hasChildRecursive(Node<T> child) {
+    public boolean hasChildRecursive(final Node<T> child) {
+
         if (hasChild(child)) {
+
             return true;
         } else {
+
             for (Node<T> node : subnodes) {
+
                 node.hasChild(child);
             }
         }
@@ -85,10 +90,12 @@ public class Node<T> {
     }
 
     public List<Node<T>> getSubnodes() {
+
         return subnodes;
     }
 
     public Node getParent() {
+
         return parent;
     }
 }

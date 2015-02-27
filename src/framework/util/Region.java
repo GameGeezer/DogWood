@@ -3,14 +3,14 @@ package framework.util;
 import framework.util.math.Vector2f;
 
 /**
- * Created by Will on 12/23/2014.
+ * @author William Gervasio
  */
 public class Region {
 
     private final Vector2f lower, upper;
     private float width, height;
 
-    public Region(float x1, float y1, float x2, float y2) {
+    public Region(final float x1, final float y1, final float x2, final float y2) {
 
         lower = new Vector2f(x1, y1);
         upper = new Vector2f(x2, y2);
@@ -21,7 +21,7 @@ public class Region {
         updateBounds();
     }
 
-    public Region setLower(float x1, float y1) {
+    public final Region setLower(final float x1, final float y1) {
 
         lower.set(x1, y1);
 
@@ -33,7 +33,7 @@ public class Region {
         return this;
     }
 
-    public Region setLowerX(float x) {
+    public final Region setLowerX(final float x) {
 
         lower.x = x;
 
@@ -44,7 +44,7 @@ public class Region {
         return this;
     }
 
-    public Region setLowerY(float y) {
+    public final Region setLowerY(final float y) {
 
         lower.y = y;
 
@@ -55,7 +55,7 @@ public class Region {
         return this;
     }
 
-    public Region setUpper(float x2, float y2) {
+    public final Region setUpper(final float x2,final  float y2) {
 
         upper.set(x2, y2);
 
@@ -67,7 +67,7 @@ public class Region {
         return this;
     }
 
-    public Region setUpperX(float x) {
+    public final Region setUpperX(final float x) {
 
         upper.x = x;
 
@@ -78,7 +78,7 @@ public class Region {
         return this;
     }
 
-    public Region setUpperY(float y) {
+    public final Region setUpperY(final float y) {
 
         upper.y = y;
 
@@ -89,7 +89,7 @@ public class Region {
         return this;
     }
 
-    public Region shift(float x, float y) {
+    public final Region shift(final float x, final float y) {
 
         lower.add(x, y);
         upper.add(x, y);
@@ -97,54 +97,44 @@ public class Region {
         return this;
     }
 
-    public float getLowerX() {
+    public final float getLowerX() {
 
         return lower.x;
     }
 
-    public float getLowerY() {
+    public final float getLowerY() {
 
         return lower.y;
     }
 
-    public float getUpperX() {
+    public final float getUpperX() {
 
         return upper.x;
     }
 
-    public float getUpperY() {
+    public final float getUpperY() {
 
         return upper.y;
     }
 
-    public float findCenterX() {
+    public final float findCenterX() {
 
         return lower.x + (width / 2.0f);
     }
 
-    public float findCenterY() {
+    public final float findCenterY() {
 
         return lower.y + (height / 2.0f);
     }
 
-    public float getWidth() {
+    public final float getWidth() {
 
         return width;
     }
 
-    public float getHeight() {
+    public final float getHeight() {
 
         return height;
-    }
-
-    public Vector2f getLower() {
-
-        return lower;
-    }
-
-    public Vector2f getUpper() {
-
-        return upper;
     }
 
     private void updateBounds() {
@@ -158,7 +148,7 @@ public class Region {
 
         if (getLowerX() > getUpperX()) {
 
-            float x = getLowerX();
+            final float x = getLowerX();
             lower.x = upper.x;
             upper.x = x;
         }
@@ -168,7 +158,7 @@ public class Region {
 
         if (lower.y > upper.y) {
 
-            float y = lower.y;
+            final float y = lower.y;
             lower.y = upper.y;
             upper.y = y;
         }

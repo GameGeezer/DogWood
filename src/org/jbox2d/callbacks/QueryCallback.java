@@ -27,7 +27,6 @@
 package org.jbox2d.callbacks;
 
 import org.jbox2d.dynamics.Fixture;
-import org.jbox2d.dynamics.World;
 
 /**
  * Callback class for AABB queries.

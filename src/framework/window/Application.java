@@ -1,8 +1,8 @@
 package framework.window;
 
+import framework.util.Timer;
 import framework.window.keyboardcallbacks.KeyboardCallback;
 import framework.window.keyboardcallbacks.KeyboardListener;
-import framework.util.Timer;
 import framework.window.windowcallbacks.*;
 import groovy.lang.GroovyShell;
 import org.jbox2d.dynamics.World;
@@ -16,9 +16,7 @@ import java.nio.ByteBuffer;
 
 import static org.lwjgl.glfw.Callbacks.errorCallbackPrint;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.GL_FALSE;
-import static org.lwjgl.opengl.GL11.GL_TRUE;
-import static org.lwjgl.opengl.GL11.glClearColor;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 /**

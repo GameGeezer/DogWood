@@ -2,7 +2,10 @@ package framework.scene;
 
 import framework.util.exceptions.EntityException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author William Gervasio
@@ -11,7 +14,7 @@ public class Entity {
 
     private final Map<Class, List<EntityComponent>> componentMap = new HashMap<>();
 
-    public void addComponent(EntityComponent component) throws EntityException {
+    public final void addComponent(final EntityComponent component) throws EntityException {
 
         // Make sure the component isn't already attached to another entity
         if (component.hasParent()) {
@@ -42,7 +45,7 @@ public class Entity {
         });
     }
 
-    public void removeComponent(EntityComponent component) {
+    public final void removeComponent(final EntityComponent component) {
 
         // Return early if the list isn't there to prevent a null reference exception
         if (componentMap.get(component.getClass()) == null) {
@@ -63,7 +66,7 @@ public class Entity {
         component.setParent(null);
     }
 
-    public List<EntityComponent> getComponentsOfType(Class type) {
+    public final List<EntityComponent> getComponentsOfType(final Class type) {
 
         // If there isn't a reference to components if this type they may still exist as parent components
         if (componentMap.get(type) == null) {
@@ -84,21 +87,21 @@ public class Entity {
         return componentMap.get(type);
     }
 
-    public boolean hasComponentOfType(Class type) {
+    public final boolean hasComponentOfType(final Class type) {
 
         List<EntityComponent> componentsOfType = componentMap.get(type);
 
         return componentsOfType != null && componentsOfType.size() > 0;
     }
 
-    public boolean hasComponent(EntityComponent component) {
+    public final boolean hasComponent(EntityComponent component) {
 
         List<EntityComponent> componentsOfType = getComponentsOfType(component.getClass());
 
         return componentsOfType != null && componentsOfType.contains(component);
     }
 
-    public EntityComponent getFirstComponentOfType(Class type) {
+    public final EntityComponent getFirstComponentOfType(final Class type) {
 
         return hasComponentOfType(type) ? getComponentsOfType(type).get(0) : null;
     }
@@ -110,7 +113,7 @@ public class Entity {
 
         private Entity parentEntity;
 
-        public List<EntityComponent> getComponentsOfType(Class type) {
+        public List<EntityComponent> getComponentsOfType(final Class type) {
 
             return parentEntity.getComponentsOfType(type);
         }
@@ -134,11 +137,11 @@ public class Entity {
 
         protected abstract void onDetach();
 
-        protected abstract void onComponentAttachedToParent(EntityComponent component);
+        protected abstract void onComponentAttachedToParent(final EntityComponent component);
 
-        protected abstract void onComponentDetachedFromParent(EntityComponent component);
+        protected abstract void onComponentDetachedFromParent(final EntityComponent component);
 
-        private void setParent(Entity entity) {
+        private void setParent(final Entity entity) {
 
             this.parentEntity = entity;
         }

@@ -13,19 +13,19 @@ import java.util.List;
  */
 public abstract class RenderComponent extends EntityComponent {
 
-    private ShaderProgram shader;
+    private final ShaderProgram shader;
 
-    public RenderComponent(ShaderProgram shader) {
+    public RenderComponent(final ShaderProgram shader) {
 
         this.shader = shader;
     }
 
-    public abstract void render(int delta);
+    public abstract void render(final int delta);
 
     @Override
     protected void onAttach() {
 
-        List<IUniformWrapper> uniformComponents = (List<IUniformWrapper>) (List<?>) getParent().getComponentsOfType(IUniformWrapper.class);
+        final List<IUniformWrapper> uniformComponents = (List<IUniformWrapper>) (List<?>) getParent().getComponentsOfType(IUniformWrapper.class);
 
         uniformComponents.forEach((component) -> component.addListener(getShader()));
     }
@@ -33,13 +33,13 @@ public abstract class RenderComponent extends EntityComponent {
     @Override
     protected void onDetach() {
 
-        List<IUniformWrapper> uniformComponents = (List<IUniformWrapper>) (List<?>) getParent().getComponentsOfType(IUniformWrapper.class);
+        final List<IUniformWrapper> uniformComponents = (List<IUniformWrapper>) (List<?>) getParent().getComponentsOfType(IUniformWrapper.class);
 
         uniformComponents.forEach((component) -> component.removeListener(getShader()));
     }
 
     @Override
-    protected void onComponentAttachedToParent(EntityComponent component) {
+    protected void onComponentAttachedToParent(final EntityComponent component) {
 
         if (component instanceof IUniformWrapper) {
 
@@ -48,7 +48,7 @@ public abstract class RenderComponent extends EntityComponent {
     }
 
     @Override
-    protected void onComponentDetachedFromParent(EntityComponent component) {
+    protected void onComponentDetachedFromParent(final EntityComponent component) {
 
         if (component instanceof IUniformWrapper) {
 
@@ -57,6 +57,7 @@ public abstract class RenderComponent extends EntityComponent {
     }
 
     public ShaderProgram getShader() {
+
         return shader;
     }
 }

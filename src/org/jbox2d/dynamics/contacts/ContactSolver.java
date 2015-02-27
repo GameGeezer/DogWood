@@ -27,16 +27,11 @@ import org.jbox2d.collision.Manifold;
 import org.jbox2d.collision.ManifoldPoint;
 import org.jbox2d.collision.WorldManifold;
 import org.jbox2d.collision.shapes.Shape;
-import org.jbox2d.dynamics.contacts.common.Mat22;
-import org.jbox2d.dynamics.contacts.common.MathUtils;
-import org.jbox2d.dynamics.contacts.common.Rot;
-import org.jbox2d.dynamics.contacts.common.Settings;
-import org.jbox2d.dynamics.contacts.common.Transform;
-import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.TimeStep;
 import org.jbox2d.dynamics.contacts.ContactVelocityConstraint.VelocityConstraintPoint;
+import org.jbox2d.dynamics.contacts.common.*;
 
 /**
  * @author Daniel

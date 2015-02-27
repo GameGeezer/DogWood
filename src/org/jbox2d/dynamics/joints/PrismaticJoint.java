@@ -23,15 +23,9 @@
  ******************************************************************************/
 package org.jbox2d.dynamics.joints;
 
-import org.jbox2d.dynamics.contacts.common.Mat22;
-import org.jbox2d.dynamics.contacts.common.Mat33;
-import org.jbox2d.dynamics.contacts.common.MathUtils;
-import org.jbox2d.dynamics.contacts.common.Rot;
-import org.jbox2d.dynamics.contacts.common.Settings;
-import org.jbox2d.dynamics.contacts.common.Vec2;
-import org.jbox2d.dynamics.contacts.common.Vec3;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.SolverData;
+import org.jbox2d.dynamics.contacts.common.*;
 import org.jbox2d.pooling.IWorldPool;
 
 //Linear constraint (point-to-line)

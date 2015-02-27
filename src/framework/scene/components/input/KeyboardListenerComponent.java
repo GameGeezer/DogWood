@@ -1,8 +1,8 @@
 package framework.scene.components.input;
 
+import framework.scene.Entity;
 import framework.window.Application;
 import framework.window.keyboardcallbacks.KeyboardListener;
-import framework.scene.Entity;
 
 /**
  * @author William Gervasio

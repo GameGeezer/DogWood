@@ -20,6 +20,19 @@ public final class RangeUtil {
     }
 
     /**
+     * Used to force a value is within a given range
+     *
+     * @param value
+     * @param min
+     * @param max
+     * @return The new limited value
+     */
+    public static int forceIntoRange(int value, int min, int max) {
+
+        return value <= max ? value >= min ? value : min : max;
+    }
+
+    /**
      * Used to make sure a value is within a given range
      *
      * @param value

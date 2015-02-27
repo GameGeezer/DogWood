@@ -26,8 +26,8 @@
  */
 package org.jbox2d.dynamics.joints;
 
-import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * Wheel joint definition. This requires defining a line of motion using an axis and an anchor

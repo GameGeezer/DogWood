@@ -26,8 +26,8 @@
  */
 package org.jbox2d.callbacks;
 
-import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.Fixture;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * Callback class for ray casts.

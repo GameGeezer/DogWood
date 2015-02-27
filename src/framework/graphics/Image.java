@@ -6,8 +6,8 @@ package framework.graphics;
  *
  */
 
-import framework.util.fileIO.PNGDecoder;
 import framework.util.exceptions.DogWoodException;
+import framework.util.fileIO.PNGDecoder;
 
 import java.io.*;
 import java.nio.ByteBuffer;

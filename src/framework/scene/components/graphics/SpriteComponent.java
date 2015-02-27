@@ -6,8 +6,8 @@ import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
 import framework.graphics.opengl.uniform.FloatVectorUniform;
 import framework.graphics.opengl.uniform.VectorUniform;
-import framework.graphics.vertices.VertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
+import framework.graphics.vertices.VertexAttribute;
 
 import java.util.ArrayList;
 import java.util.List;

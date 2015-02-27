@@ -19,13 +19,13 @@ public class Vector2f implements Cloneable {
         this.y = 0;
     }
 
-    public Vector2f(float x, float y) {
+    public Vector2f(final float x, final float y) {
 
         this.x = x;
         this.y = y;
     }
 
-    public Vector2f set(float x, float y) {
+    public Vector2f set(final float x, final float y) {
 
         this.x = x;
         this.y = y;
@@ -33,7 +33,7 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public Vector2f set(Vector2f other) {
+    public Vector2f set(final Vector2f other) {
 
         this.x = other.x;
         this.y = other.y;
@@ -41,7 +41,7 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public Vector2f add(float x, float y) {
+    public Vector2f add(final float x, final float y) {
 
         this.x += x;
         this.y += y;
@@ -49,7 +49,7 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public static Vector2f add(Vector2f left, Vector2f right, Vector2f result) {
+    public static Vector2f add(final Vector2f left, final Vector2f right, final Vector2f result) {
 
         result.x = left.x + right.x;
         result.y = left.y + right.y;
@@ -57,7 +57,7 @@ public class Vector2f implements Cloneable {
         return result;
     }
 
-    public Vector2f sub(float x, float y) {
+    public Vector2f sub(final float x, final float y) {
 
         this.x -= x;
         this.y -= y;
@@ -65,7 +65,7 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public static Vector2f sub(Vector2f left, Vector2f right, Vector2f result) {
+    public static Vector2f sub(final Vector2f left, final Vector2f right, final Vector2f result) {
 
         result.x = left.x - right.x;
         result.y = left.y - right.y;
@@ -73,7 +73,7 @@ public class Vector2f implements Cloneable {
         return result;
     }
 
-    public Vector2f mul(float x, float y) {
+    public Vector2f mul(final float x, final float y) {
 
         this.x *= x;
         this.y *= y;
@@ -81,7 +81,7 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public static Vector2f mul(Vector2f left, Vector2f right, Vector2f result) {
+    public static Vector2f mul(final Vector2f left, final Vector2f right, final Vector2f result) {
 
         result.x = left.x * right.x;
         result.y = left.y * right.y;
@@ -89,7 +89,7 @@ public class Vector2f implements Cloneable {
         return result;
     }
 
-    public Vector2f div(float x, float y) {
+    public Vector2f div(final float x, final float y) {
 
         this.x /= x;
         this.y /= y;
@@ -97,7 +97,7 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public static Vector2f div(Vector2f left, Vector2f right, Vector2f result) {
+    public static Vector2f div(final Vector2f left, final Vector2f right, final Vector2f result) {
 
         result.x = left.x / right.x;
         result.y = left.y / right.y;
@@ -105,7 +105,7 @@ public class Vector2f implements Cloneable {
         return result;
     }
 
-    public Vector2f scale(float scalar) {
+    public Vector2f scale(final float scalar) {
 
         this.x *= scalar;
         this.y *= scalar;
@@ -113,7 +113,7 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public static float dotProduct(Vector2f vector1, Vector2f vector2) {
+    public static float dotProduct(final Vector2f vector1, final Vector2f vector2) {
 
         return (vector1.x * vector2.x) + (vector1.y * vector2.y);
     }
@@ -138,7 +138,7 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public static Vector2f rotate(Vector2f vector, Vector2f axis, Vector2f result, double angle) {
+    public static Vector2f rotate(final Vector2f vector, final Vector2f axis, final Vector2f result, final double angle) {
 
         result.set(vector);
         Vector2f.sub(result, axis, result);
@@ -148,7 +148,7 @@ public class Vector2f implements Cloneable {
         return result;
     }
 
-    public Vector2f rotate(double angle) {
+    public Vector2f rotate(final double angle) {
 
         final float xh = x;
         final float yh = y;
@@ -159,17 +159,17 @@ public class Vector2f implements Cloneable {
         return this;
     }
 
-    public static void projectAlongX(Vector2f vector, Vector2f result) {
+    public static void projectAlongX(final Vector2f vector, final Vector2f result) {
 
         result.set(Vector2f.dotProduct(vector, RIGHT), 0);
     }
 
-    public static void projectAlongY(Vector2f vector, Vector2f result) {
+    public static void projectAlongY(final Vector2f vector, final Vector2f result) {
 
         result.set(0, Vector2f.dotProduct(vector, UP));
     }
 
-    public static void project(Vector2f vector, Vector2f against, Vector2f result) {
+    public static void project(final Vector2f vector, final Vector2f against, final Vector2f result) {
 
         final float dp = Vector2f.dotProduct(vector, against);
         final float dpByLength2 = dp / against.length2();
@@ -180,12 +180,12 @@ public class Vector2f implements Cloneable {
         result.set(x, y);
     }
 
-    public static void findRightHandNormal(Vector2f vector, Vector2f resultVector) {
+    public static void findRightHandNormal(final Vector2f vector, final Vector2f resultVector) {
 
         resultVector.set(-vector.y, vector.x);
     }
 
-    public static void findLeftHandNormal(Vector2f vector, Vector2f resultVector) {
+    public static void findLeftHandNormal(final Vector2f vector, final Vector2f resultVector) {
 
         resultVector.set(vector.y, -vector.x);
     }

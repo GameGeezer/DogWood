@@ -26,9 +26,9 @@
  */
 package org.jbox2d.dynamics.joints;
 
+import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.contacts.common.Settings;
 import org.jbox2d.dynamics.contacts.common.Vec2;
-import org.jbox2d.dynamics.Body;
 
 /**
  * Pulley joint definition. This requires two ground anchors, two dynamic body anchor points, and a

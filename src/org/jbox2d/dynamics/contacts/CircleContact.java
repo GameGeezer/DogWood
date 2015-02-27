@@ -26,8 +26,8 @@ package org.jbox2d.dynamics.contacts;
 import org.jbox2d.collision.Manifold;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.ShapeType;
-import org.jbox2d.dynamics.contacts.common.Transform;
 import org.jbox2d.dynamics.Fixture;
+import org.jbox2d.dynamics.contacts.common.Transform;
 import org.jbox2d.pooling.IWorldPool;
 
 public class CircleContact extends Contact {

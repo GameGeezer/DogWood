@@ -4,13 +4,13 @@ import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 
 /**
- * Created by Will on 1/4/2015.
+ * @author William Gervasio
  */
 public class MeshComponent extends RenderComponent {
 
     private Mesh mesh;
 
-    public MeshComponent(Mesh mesh, ShaderProgram shader) {
+    public MeshComponent(final Mesh mesh, final ShaderProgram shader) {
 
         super(shader);
 

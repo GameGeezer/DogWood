@@ -8,7 +8,7 @@ public class Grid3D<E> {
     private final E[][][] grid;
     private final int length, height, depth;
 
-    public Grid3D(int length, int height, int depth) {
+    public Grid3D(final int length, final int height, final int depth) {
 
         this.length = length;
         this.height = height;
@@ -17,7 +17,7 @@ public class Grid3D<E> {
         grid = (E[][][]) new Object[length][height][depth];
     }
 
-    public E get(int x, int y, int z) {
+    public E get(final int x, final int y, final int z) {
 
         return grid[x][y][z];
     }

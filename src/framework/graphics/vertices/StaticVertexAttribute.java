@@ -5,7 +5,7 @@ package framework.graphics.vertices;
  *
  * @author William Gervasio
  */
-public class StaticVertexAttribute implements VertexAttribute {
+public final class StaticVertexAttribute implements VertexAttribute {
 
     private final float[] data;
     private final int elementsPerVertex;

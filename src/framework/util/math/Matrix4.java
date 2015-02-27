@@ -5,8 +5,6 @@ package framework.util.math;
  */
 public class Matrix4 implements Cloneable {
 
-    public static int NUMBER_OF_CELLS = 16;
-
     public static final int M00 = 0, M10 = 1, M20 = 2, M30 = 3,
             M01 = 4, M11 = 5, M21 = 6, M31 = 7,
             M02 = 8, M12 = 9, M22 = 10, M32 = 11,
@@ -15,18 +13,21 @@ public class Matrix4 implements Cloneable {
     public final float[] data = new float[16];
 
     public Matrix4() {
+
         loadIdentity();
     }
 
-    public Matrix4(float[][] data) {
+    public Matrix4(final float[][] data) {
+
         set(data);
     }
 
-    public Matrix4(float[] data) {
+    public Matrix4(final float[] data) {
+
         set(data);
     }
 
-    public static void add(Matrix4 left, Matrix4 right, Matrix4 target) {
+    public static void add(final Matrix4 left, final Matrix4 right, final Matrix4 target) {
 
         target.data[M00] = left.data[M00] + right.data[M00];
         target.data[M10] = left.data[M10] + right.data[M10];
@@ -46,7 +47,7 @@ public class Matrix4 implements Cloneable {
         target.data[M33] = left.data[M33] + right.data[M33];
     }
 
-    public static void subtract(Matrix4 left, Matrix4 right, Matrix4 target) {
+    public static void subtract(final Matrix4 left, final Matrix4 right,final  Matrix4 target) {
 
         target.data[M00] = left.data[M00] - right.data[M00];
         target.data[M10] = left.data[M10] - right.data[M10];
@@ -66,27 +67,27 @@ public class Matrix4 implements Cloneable {
         target.data[M33] = left.data[M33] - right.data[M33];
     }
 
-    public static void multiply(Matrix4 left, Matrix4 right, Matrix4 target) {
+    public static void multiply(final Matrix4 left, final Matrix4 right, final Matrix4 target) {
 
-        float m00 = left.data[M00] * right.data[M00] + left.data[M10] * right.data[M01] + left.data[M20] * right.data[M02] + left.data[M30] * right.data[M03];
-        float m10 = left.data[M00] * right.data[M10] + left.data[M10] * right.data[M11] + left.data[M20] * right.data[M12] + left.data[M30] * right.data[M13];
-        float m20 = left.data[M00] * right.data[M20] + left.data[M10] * right.data[M21] + left.data[M20] * right.data[M22] + left.data[M30] * right.data[M23];
-        float m30 = left.data[M00] * right.data[M30] + left.data[M10] * right.data[M31] + left.data[M20] * right.data[M32] + left.data[M30] * right.data[M33];
+        final float m00 = left.data[M00] * right.data[M00] + left.data[M10] * right.data[M01] + left.data[M20] * right.data[M02] + left.data[M30] * right.data[M03];
+        final float m10 = left.data[M00] * right.data[M10] + left.data[M10] * right.data[M11] + left.data[M20] * right.data[M12] + left.data[M30] * right.data[M13];
+        final float m20 = left.data[M00] * right.data[M20] + left.data[M10] * right.data[M21] + left.data[M20] * right.data[M22] + left.data[M30] * right.data[M23];
+        final float m30 = left.data[M00] * right.data[M30] + left.data[M10] * right.data[M31] + left.data[M20] * right.data[M32] + left.data[M30] * right.data[M33];
 
-        float m01 = left.data[M01] * right.data[M00] + left.data[M11] * right.data[M01] + left.data[M21] * right.data[M02] + left.data[M31] * right.data[M03];
-        float m11 = left.data[M01] * right.data[M10] + left.data[M11] * right.data[M11] + left.data[M21] * right.data[M12] + left.data[M31] * right.data[M13];
-        float m21 = left.data[M01] * right.data[M20] + left.data[M11] * right.data[M21] + left.data[M21] * right.data[M22] + left.data[M31] * right.data[M23];
-        float m31 = left.data[M01] * right.data[M30] + left.data[M11] * right.data[M31] + left.data[M21] * right.data[M32] + left.data[M31] * right.data[M33];
+        final float m01 = left.data[M01] * right.data[M00] + left.data[M11] * right.data[M01] + left.data[M21] * right.data[M02] + left.data[M31] * right.data[M03];
+        final float m11 = left.data[M01] * right.data[M10] + left.data[M11] * right.data[M11] + left.data[M21] * right.data[M12] + left.data[M31] * right.data[M13];
+        final float m21 = left.data[M01] * right.data[M20] + left.data[M11] * right.data[M21] + left.data[M21] * right.data[M22] + left.data[M31] * right.data[M23];
+        final float m31 = left.data[M01] * right.data[M30] + left.data[M11] * right.data[M31] + left.data[M21] * right.data[M32] + left.data[M31] * right.data[M33];
 
-        float m02 = left.data[M02] * right.data[M00] + left.data[M12] * right.data[M01] + left.data[M22] * right.data[M02] + left.data[M32] * right.data[M03];
-        float m12 = left.data[M02] * right.data[M10] + left.data[M12] * right.data[M11] + left.data[M22] * right.data[M12] + left.data[M32] * right.data[M13];
-        float m22 = left.data[M02] * right.data[M20] + left.data[M12] * right.data[M21] + left.data[M22] * right.data[M22] + left.data[M32] * right.data[M23];
-        float m32 = left.data[M02] * right.data[M30] + left.data[M12] * right.data[M31] + left.data[M22] * right.data[M32] + left.data[M32] * right.data[M33];
+        final float m02 = left.data[M02] * right.data[M00] + left.data[M12] * right.data[M01] + left.data[M22] * right.data[M02] + left.data[M32] * right.data[M03];
+        final float m12 = left.data[M02] * right.data[M10] + left.data[M12] * right.data[M11] + left.data[M22] * right.data[M12] + left.data[M32] * right.data[M13];
+        final float m22 = left.data[M02] * right.data[M20] + left.data[M12] * right.data[M21] + left.data[M22] * right.data[M22] + left.data[M32] * right.data[M23];
+        final float m32 = left.data[M02] * right.data[M30] + left.data[M12] * right.data[M31] + left.data[M22] * right.data[M32] + left.data[M32] * right.data[M33];
 
-        float m03 = left.data[M03] * right.data[M00] + left.data[M13] * right.data[M01] + left.data[M23] * right.data[M02] + left.data[M33] * right.data[M03];
-        float m13 = left.data[M03] * right.data[M10] + left.data[M13] * right.data[M11] + left.data[M23] * right.data[M12] + left.data[M33] * right.data[M13];
-        float m23 = left.data[M03] * right.data[M20] + left.data[M13] * right.data[M21] + left.data[M23] * right.data[M22] + left.data[M33] * right.data[M23];
-        float m33 = left.data[M03] * right.data[M30] + left.data[M13] * right.data[M31] + left.data[M23] * right.data[M32] + left.data[M33] * right.data[M33];
+        final float m03 = left.data[M03] * right.data[M00] + left.data[M13] * right.data[M01] + left.data[M23] * right.data[M02] + left.data[M33] * right.data[M03];
+        final float m13 = left.data[M03] * right.data[M10] + left.data[M13] * right.data[M11] + left.data[M23] * right.data[M12] + left.data[M33] * right.data[M13];
+        final float m23 = left.data[M03] * right.data[M20] + left.data[M13] * right.data[M21] + left.data[M23] * right.data[M22] + left.data[M33] * right.data[M23];
+        final float m33 = left.data[M03] * right.data[M30] + left.data[M13] * right.data[M31] + left.data[M23] * right.data[M32] + left.data[M33] * right.data[M33];
 
         target.data[M00] = m00;
         target.data[M10] = m10;
@@ -106,18 +107,7 @@ public class Matrix4 implements Cloneable {
         target.data[M33] = m33;
     }
 
-    /**
-     * TODO
-     *
-     * @param other
-     * @return
-     */
-    public static void divide(Matrix4 other) {
-
-
-    }
-
-    public Matrix4 set(Matrix4 other) {
+    public final Matrix4 set(final Matrix4 other) {
 
         data[M00] = other.data[M00];
         data[M10] = other.data[M10];
@@ -139,7 +129,7 @@ public class Matrix4 implements Cloneable {
         return this;
     }
 
-    public Matrix4 set(float[][] data) {
+    public final Matrix4 set(final float[][] data) {
 
         this.data[M00] = data[0][0];
         this.data[M10] = data[1][0];
@@ -161,7 +151,7 @@ public class Matrix4 implements Cloneable {
         return this;
     }
 
-    public Matrix4 set(float[] data) {
+    public final Matrix4 set(final float[] data) {
 
         this.data[M00] = data[M00];
         this.data[M10] = data[M10];
@@ -183,7 +173,7 @@ public class Matrix4 implements Cloneable {
         return this;
     }
 
-    public Matrix4 loadIdentity() {
+    public final Matrix4 loadIdentity() {
 
         data[M00] = 1;
         data[M10] = 0;
@@ -205,7 +195,7 @@ public class Matrix4 implements Cloneable {
         return this;
     }
 
-    public Matrix4 loadZero() {
+    public final Matrix4 loadZero() {
 
         data[M00] = 0;
         data[M10] = 0;
@@ -227,7 +217,7 @@ public class Matrix4 implements Cloneable {
         return this;
     }
 
-    public Matrix4 clone() {
+    public final Matrix4 clone() {
 
         return new Matrix4(data);
     }

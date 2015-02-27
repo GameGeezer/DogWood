@@ -14,14 +14,14 @@ public class Vector3i implements Cloneable {
         this.z = 0;
     }
 
-    public Vector3i(int x, int y, int z) {
+    public Vector3i(final int x, final int y, final int z) {
 
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public final Vector3i set(int x, int y, int z) {
+    public final Vector3i set(final int x, final int y, final int z) {
 
         this.x = x;
         this.y = y;
@@ -30,7 +30,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public final Vector3i set(Vector3i other) {
+    public final Vector3i set(final Vector3i other) {
 
         this.x = other.x;
         this.y = other.y;
@@ -39,7 +39,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public final Vector3i add(int x, int y, int z) {
+    public final Vector3i add(final int x, final int y, final int z) {
 
         this.x += x;
         this.y += y;
@@ -48,7 +48,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static Vector3i add(Vector3i left, Vector3i right, Vector3i result) {
+    public static Vector3i add(final Vector3i left, final Vector3i right, final Vector3i result) {
 
         result.x = left.x + right.x;
         result.y = left.y + right.y;
@@ -57,7 +57,7 @@ public class Vector3i implements Cloneable {
         return result;
     }
 
-    public final Vector3i sub(int x, int y, int z) {
+    public final Vector3i sub(final int x, final int y, final int z) {
 
         this.x -= x;
         this.y -= y;
@@ -66,7 +66,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static Vector3i sub(Vector3i left, Vector3i right, Vector3i result) {
+    public static Vector3i sub(final Vector3i left, final Vector3i right, final Vector3i result) {
 
         result.x = left.x - right.x;
         result.y = left.y - right.y;
@@ -75,7 +75,7 @@ public class Vector3i implements Cloneable {
         return result;
     }
 
-    public final Vector3i mul(int x, int y, int z) {
+    public final Vector3i mul(final int x, final int y, final int z) {
 
         this.x *= x;
         this.y *= y;
@@ -84,7 +84,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static Vector3i mul(Vector3i left, Vector3i right, Vector3i result) {
+    public static Vector3i mul(final Vector3i left, final Vector3i right, final Vector3i result) {
 
         result.x = left.x * right.x;
         result.y = left.y * right.y;
@@ -93,7 +93,7 @@ public class Vector3i implements Cloneable {
         return result;
     }
 
-    public final Vector3i div(int x, int y, int z) {
+    public final Vector3i div(final int x, final int y, final int z) {
 
         this.x /= x;
         this.y /= y;
@@ -102,7 +102,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static Vector3f div(Vector3i left, Vector3i right, Vector3f result) {
+    public static Vector3f div(final Vector3i left, final Vector3i right, final Vector3f result) {
 
         result.x = (float) left.x / (float) right.x;
         result.y = (float) left.y / (float) right.y;
@@ -111,7 +111,7 @@ public class Vector3i implements Cloneable {
         return result;
     }
 
-    public final Vector3i scale(int scalar) {
+    public final Vector3i scale(final int scalar) {
 
         this.x *= scalar;
         this.y *= scalar;
@@ -120,7 +120,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static int dot(Vector3i vector1, Vector3i vector2) {
+    public static int dot(final Vector3i vector1, final Vector3i vector2) {
 
         return (vector1.x * vector2.x) + (vector1.y * vector2.y) + (vector1.z * vector2.z);
     }
@@ -150,6 +150,7 @@ public class Vector3i implements Cloneable {
     }
 
     public int[] getElements() {
+
         return new int[]{x, y, z};
     }
 }

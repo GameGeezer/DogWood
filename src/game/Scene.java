@@ -4,10 +4,10 @@ package game;
  * Created by Will on 12/30/2014.
  */
 
-import framework.scene.Entity;
-import framework.scene.components.graphics.RenderComponent;
-import framework.scene.components.UpdateComponent;
 import framework.scene.Camera;
+import framework.scene.Entity;
+import framework.scene.components.UpdateComponent;
+import framework.scene.components.graphics.RenderComponent;
 import framework.window.Application;
 
 import java.util.ArrayList;

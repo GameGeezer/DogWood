@@ -28,8 +28,8 @@ import org.jbox2d.collision.shapes.ChainShape;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.EdgeShape;
 import org.jbox2d.collision.shapes.ShapeType;
-import org.jbox2d.dynamics.contacts.common.Transform;
 import org.jbox2d.dynamics.Fixture;
+import org.jbox2d.dynamics.contacts.common.Transform;
 import org.jbox2d.pooling.IWorldPool;
 
 public class ChainAndCircleContact extends Contact {

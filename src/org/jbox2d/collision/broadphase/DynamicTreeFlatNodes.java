@@ -28,11 +28,7 @@ import org.jbox2d.callbacks.TreeCallback;
 import org.jbox2d.callbacks.TreeRayCastCallback;
 import org.jbox2d.collision.AABB;
 import org.jbox2d.collision.RayCastInput;
-import org.jbox2d.dynamics.contacts.common.BufferUtils;
-import org.jbox2d.dynamics.contacts.common.Color3f;
-import org.jbox2d.dynamics.contacts.common.MathUtils;
-import org.jbox2d.dynamics.contacts.common.Settings;
-import org.jbox2d.dynamics.contacts.common.Vec2;
+import org.jbox2d.dynamics.contacts.common.*;
 
 public class DynamicTreeFlatNodes implements BroadPhaseStrategy {
   public static final int MAX_STACK_SIZE = 64;

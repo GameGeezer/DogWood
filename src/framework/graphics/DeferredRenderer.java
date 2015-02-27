@@ -1,8 +1,8 @@
 package framework.graphics;
 
-import framework.graphics.opengl.bufferObjects.AttachmentType;
 import framework.graphics.opengl.OGLColorType;
 import framework.graphics.opengl.Texture;
+import framework.graphics.opengl.bufferObjects.AttachmentType;
 import framework.graphics.opengl.bufferObjects.FBO;
 import framework.graphics.opengl.bufferObjects.RBO;
 import framework.util.exceptions.GraphicsException;

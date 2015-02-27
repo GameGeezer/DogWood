@@ -5,8 +5,8 @@ import framework.graphics.opengl.uniform.IUniformWrapper;
 import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.scene.Entity.EntityComponent;
 import framework.util.exceptions.EntityException;
-import framework.util.math.Transform;
 import framework.util.math.Matrix4;
+import framework.util.math.Transform;
 import framework.util.math.Vector3f;
 
 /**

@@ -11,10 +11,10 @@ import org.lwjgl.opengl.GL13;
  */
 public class TexturedMeshComponent extends RenderComponent {
 
-    private Mesh mesh;
-    private Texture texture;
+    private final Mesh mesh;
+    private final Texture texture;
 
-    public TexturedMeshComponent(Mesh mesh, Image image, ShaderProgram shader) {
+    public TexturedMeshComponent(final Mesh mesh, final Image image, final ShaderProgram shader) {
 
         super(shader);
 
@@ -23,7 +23,7 @@ public class TexturedMeshComponent extends RenderComponent {
     }
 
     @Override
-    public void render(int delta) {
+    public void render(final int delta) {
 
         getShader().bind();
         texture.bind();

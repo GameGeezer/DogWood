@@ -1,7 +1,7 @@
 package framework.util.math;
 
 /**
- * Created by Will on 1/6/2015.
+ * @author William Gervasio
  */
 public class ImmutableVector2f extends Vector2f {
 

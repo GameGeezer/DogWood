@@ -7,9 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
-import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
-import static org.lwjgl.glfw.GLFW.GLFW_REPEAT;
+import static org.lwjgl.glfw.GLFW.*;
 
 /**
  * A GLFWKeyCallback for dispatching KeyboardListener events.
@@ -37,10 +35,12 @@ public final class KeyboardCallback extends GLFWKeyCallback {
                 final int currentTime = (int) System.currentTimeMillis();
 
                 if (pressedLastMap.get(key) != null && currentTime - pressedLastMap.get(key) <= pressedTwiceTime) {
+
                     for (final KeyboardListener listener : listeners) listener.onKeyDoublePressed(key);
                 }
 
                 pressedLastMap.put(key, currentTime);
+
                 break;
             case GLFW_RELEASE:
                 for (final KeyboardListener listener : listeners) listener.onKeyUp(key);

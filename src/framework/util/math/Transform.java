@@ -14,18 +14,13 @@ public class Transform {
 
     }
 
-    public Transform translate(float x, float y, float z) {
+    public Transform translate(final float x, final float y, final float z) {
 
         position.data[Matrix4.M03] += x;
         position.data[Matrix4.M13] += y;
         position.data[Matrix4.M23] += z;
 
         return this;
-    }
-
-    public Transform translate(Vector3f translation) {
-
-        return translate(translation.x, translation.y, translation.z);
     }
 
     public Transform setTranslation(float x, float y, float z) {
@@ -35,11 +30,6 @@ public class Transform {
         position.data[Matrix4.M23] = z;
 
         return this;
-    }
-
-    public Transform setTranslation(Vector3f translation) {
-
-        return setTranslation(translation.x, translation.y, translation.z);
     }
 
     public Transform setScale(float x, float y, float z) {
@@ -68,11 +58,6 @@ public class Transform {
         orientation.rotateEuler(roll, pitch, yaw);
 
         return this;
-    }
-
-    public Transform rotateEuler(Vector3f euler) {
-
-        return rotateEuler(euler.x, euler.y, euler.z);
     }
 
     //rotation

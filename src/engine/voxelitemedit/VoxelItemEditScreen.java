@@ -1,7 +1,6 @@
 package engine.voxelitemedit;
 
 import framework.util.Grid3D;
-import framework.util.math.Vector3i;
 import framework.window.IScreen;
 
 /**
@@ -10,7 +9,7 @@ import framework.window.IScreen;
 public class VoxelItemEditScreen implements IScreen{
 
     private final Grid3D grid = new Grid3D(1,1,1);
-    private final Vector3i gridPosition = new Vector3i();
+
 
     @Override
     public void onPause() {

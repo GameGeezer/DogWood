@@ -25,17 +25,9 @@ package org.jbox2d.dynamics;
 
 import org.jbox2d.callbacks.ContactImpulse;
 import org.jbox2d.callbacks.ContactListener;
-import org.jbox2d.dynamics.contacts.common.MathUtils;
-import org.jbox2d.dynamics.contacts.common.Settings;
-import org.jbox2d.dynamics.contacts.common.Sweep;
-import org.jbox2d.dynamics.contacts.common.Timer;
-import org.jbox2d.dynamics.contacts.common.Vec2;
-import org.jbox2d.dynamics.contacts.Contact;
-import org.jbox2d.dynamics.contacts.ContactSolver;
+import org.jbox2d.dynamics.contacts.*;
 import org.jbox2d.dynamics.contacts.ContactSolver.ContactSolverDef;
-import org.jbox2d.dynamics.contacts.ContactVelocityConstraint;
-import org.jbox2d.dynamics.contacts.Position;
-import org.jbox2d.dynamics.contacts.Velocity;
+import org.jbox2d.dynamics.contacts.common.*;
 import org.jbox2d.dynamics.joints.Joint;
 
 /*

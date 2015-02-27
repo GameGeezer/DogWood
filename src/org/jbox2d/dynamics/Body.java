@@ -26,13 +26,9 @@ package org.jbox2d.dynamics;
 import org.jbox2d.collision.broadphase.BroadPhase;
 import org.jbox2d.collision.shapes.MassData;
 import org.jbox2d.collision.shapes.Shape;
-import org.jbox2d.dynamics.contacts.common.MathUtils;
-import org.jbox2d.dynamics.contacts.common.Rot;
-import org.jbox2d.dynamics.contacts.common.Sweep;
-import org.jbox2d.dynamics.contacts.common.Transform;
-import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.contacts.Contact;
 import org.jbox2d.dynamics.contacts.ContactEdge;
+import org.jbox2d.dynamics.contacts.common.*;
 import org.jbox2d.dynamics.joints.JointEdge;
 
 /**

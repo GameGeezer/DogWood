@@ -1,6 +1,7 @@
 package framework.graphics;
 
-import framework.graphics.opengl.*;
+import framework.graphics.opengl.Descriptor;
+import framework.graphics.opengl.VAO;
 import framework.graphics.opengl.bufferObjects.BufferedObjectUsage;
 import framework.graphics.opengl.bufferObjects.IBO;
 import framework.graphics.opengl.bufferObjects.VBO;

@@ -23,8 +23,8 @@
  ******************************************************************************/
 package org.jbox2d.dynamics.joints;
 
-import org.jbox2d.dynamics.contacts.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.contacts.common.Vec2;
 
 /**
  * Created at 3:38:52 AM Jan 15, 2011

@@ -1,6 +1,5 @@
 package org.jbox2d.callbacks;
 
-import org.jbox2d.dynamics.World;
 import org.jbox2d.particle.ParticleGroup;
 
 public interface ParticleDestructionListener {

@@ -5,7 +5,9 @@ import framework.graphics.vertices.DynamicVertexAttribute;
 import framework.graphics.vertices.VertexAttribute;
 import framework.util.dataTypes.IntArrayList;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**

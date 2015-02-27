@@ -21,7 +21,7 @@ public final class Color implements Cloneable {
         this(MINIMUM_CHANNEL_VALUE, MINIMUM_CHANNEL_VALUE, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
     }
 
-    public Color(float r, float g, float b, float a) {
+    public Color(final float r, final float g, final float b, final float a) {
 
         set(r, g, b, a);
     }
@@ -37,7 +37,7 @@ public final class Color implements Cloneable {
      * @param percentage The percentage must be in decimal form on the interval of [0, 1]
      * @return This object
      */
-    public final Color brighten(float percentage) {
+    public final Color brighten(final float percentage) {
 
         final float brightenPercentage = 1.0f + percentage;
         setRed(r * brightenPercentage);
@@ -95,14 +95,14 @@ public final class Color implements Cloneable {
         return this;
     }
 
-    public final Color setBlue(float b) {
+    public final Color setBlue(final float b) {
 
         this.b = RangeUtil.forceIntoRange(b, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
 
         return this;
     }
 
-    public final Color setAlpha(float a) {
+    public final Color setAlpha(final float a) {
 
         this.a = RangeUtil.forceIntoRange(a, MINIMUM_CHANNEL_VALUE, MAXIMUM_CHANNEL_VALUE);
 
