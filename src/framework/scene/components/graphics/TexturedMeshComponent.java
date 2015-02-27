@@ -7,7 +7,7 @@ import framework.graphics.opengl.Texture;
 import org.lwjgl.opengl.GL13;
 
 /**
- * Created by Will on 12/8/2014.
+ * @author William Gervasio
  */
 public class TexturedMeshComponent extends RenderComponent {
 

@@ -1,7 +1,7 @@
 package game;
 
 import framework.window.Game;
-import framework.window.IScreen;
+import framework.window.Screen;
 
 /**
  * Created by Will on 4/29/14.
@@ -10,7 +10,7 @@ public class DogWoodGame extends Game {
 
     public void init() {
 
-        IScreen gameScreen = new GameScreen();
+        Screen gameScreen = new GameScreen();
 
         setScreen(gameScreen);
     }

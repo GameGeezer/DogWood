@@ -1,9 +1,9 @@
 package framework.window;
 
 /**
- * Created by Will on 12/6/2014.
+ * @author William Gervasio
  */
-public interface IScreen {
+public interface Screen {
 
     public abstract void onPause();
 

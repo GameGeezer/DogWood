@@ -6,7 +6,7 @@ package framework.window;
 
 public abstract class Game {
 
-    private IScreen screen;
+    private Screen screen;
 
     public Game() {
 
@@ -22,7 +22,7 @@ public abstract class Game {
         screen.update(delta);
     }
 
-    public void setScreen(IScreen screen) {
+    public void setScreen(Screen screen) {
 
         if (this.screen != null)
             this.screen.onLeave();

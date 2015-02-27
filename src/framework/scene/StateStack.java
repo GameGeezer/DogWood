@@ -3,7 +3,7 @@ package framework.scene;
 import java.util.LinkedList;
 
 /**
- * Created by Will on 2/2/2015.
+ * @author William Gervasio
  */
 public class StateStack<E extends StateStack.State> {
 

@@ -1,7 +1,7 @@
 package framework.util.math;
 
 /**
- * Created by Will on 12/6/2014.
+ * @author William Gervasio
  */
 public class Orientation {
 

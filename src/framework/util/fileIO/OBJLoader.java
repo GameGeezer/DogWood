@@ -88,9 +88,9 @@ public class OBJLoader {
 
     public OBJLoader() {
 
-        vertices = new ArrayList<float[]>();
-        textures = new ArrayList<float[]>();
-        normals = new ArrayList<float[]>();
+        vertices = new ArrayList<>();
+        textures = new ArrayList<>();
+        normals = new ArrayList<>();
 
         builder = new MeshBuilder();
         builder.createComponent(POSITION_COMPONENT, POSITION_SIZE);

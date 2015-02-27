@@ -3,7 +3,7 @@ package framework.util.fileIO;
 import java.io.File;
 
 /**
- * Created by Will on 2/17/2015.
+ *@author William Gervasio
  */
 public class TiledLoader {
 

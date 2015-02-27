@@ -8,7 +8,7 @@ import framework.util.math.Transform;
 import framework.util.math.Vector3f;
 
 /**
- * Created by Will on 2/7/14.
+ * @author William Gervasio
  */
 public class Camera implements IUniformWrapper {
 

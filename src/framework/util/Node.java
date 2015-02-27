@@ -17,7 +17,7 @@ import java.util.List;
 public class Node<T> {
 
     private Node parent;
-    private final List<Node<T>> subnodes = new ArrayList<Node<T>>();
+    private final List<Node<T>> subnodes = new ArrayList<>();
 
     /**
      * Add node as a child

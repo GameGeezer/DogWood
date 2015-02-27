@@ -1,7 +1,7 @@
 package framework.util;
 
 /**
- * Created by Will on 1/2/2015.
+ * @author William Gervasio
  */
 public class Grid3D<E> {
 

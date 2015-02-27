@@ -1,7 +1,7 @@
 package framework.util.exceptions;
 
 /**
- * Created by Will on 1/12/2015.
+ * @author William Gervasio
  */
 public class EntityException extends DogWoodException {
 

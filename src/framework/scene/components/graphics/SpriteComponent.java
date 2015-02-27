@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Will on 12/24/2014.
+ * @author William Gervasio
  */
 public class SpriteComponent extends RenderComponent {
 

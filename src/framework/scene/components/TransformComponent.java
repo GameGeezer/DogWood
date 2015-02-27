@@ -10,7 +10,7 @@ import framework.util.math.Transform;
 import framework.util.math.Vector3f;
 
 /**
- * Created by Will on 11/25/2014.
+ * @author William Gervasio
  */
 public class TransformComponent extends EntityComponent implements IUniformWrapper {
 

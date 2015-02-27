@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Created by Will on 12/7/2014.
+ * @author William Gervasio
  */
 public class MeshBuilder {
 
@@ -36,7 +36,7 @@ public class MeshBuilder {
 
     public Mesh build() {
 
-        final List<VertexAttribute> attributes = components.entrySet().stream().map(pairs -> pairs.getValue()).collect(Collectors.toList());
+        final List<VertexAttribute> attributes = components.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
 
         return new Mesh(indices.toArray(), attributes);
     }

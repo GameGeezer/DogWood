@@ -1,7 +1,7 @@
 package engine;
 
 import framework.window.Game;
-import framework.window.IScreen;
+import framework.window.Screen;
 import game.GameScreen;
 
 /**
@@ -12,7 +12,7 @@ public class Engine extends Game {
     @Override
     public void init() {
 
-        IScreen gameScreen = new GameScreen();
+        Screen gameScreen = new GameScreen();
 
         setScreen(gameScreen);
     }

@@ -1,7 +1,7 @@
 package framework.util.dataTypes;
 
 /**
- * Created by Will on 12/7/2014.
+ * @author William Gervasio
  */
 public class IntArrayList {
 

@@ -13,7 +13,7 @@ import framework.util.fileIO.FileUtil;
 import framework.util.fileIO.WavefrontLoader;
 import framework.util.math.Transform;
 import framework.window.Application;
-import framework.window.IScreen;
+import framework.window.Screen;
 import groovy.lang.Script;
 
 import java.io.File;
@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * @author William Gervasio
  */
-public class GameScreen implements IScreen {
+public class GameScreen implements Screen {
 
     private DeferredRenderer renderer;
     TransformComponent ctTransform;
