@@ -48,7 +48,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static final Vector3i add(Vector3i left, Vector3i right, Vector3i result) {
+    public static Vector3i add(Vector3i left, Vector3i right, Vector3i result) {
 
         result.x = left.x + right.x;
         result.y = left.y + right.y;
@@ -66,7 +66,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static final Vector3i sub(Vector3i left, Vector3i right, Vector3i result) {
+    public static Vector3i sub(Vector3i left, Vector3i right, Vector3i result) {
 
         result.x = left.x - right.x;
         result.y = left.y - right.y;
@@ -84,7 +84,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static final Vector3i mul(Vector3i left, Vector3i right, Vector3i result) {
+    public static Vector3i mul(Vector3i left, Vector3i right, Vector3i result) {
 
         result.x = left.x * right.x;
         result.y = left.y * right.y;
@@ -102,7 +102,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static final Vector3f div(Vector3i left, Vector3i right, Vector3f result) {
+    public static Vector3f div(Vector3i left, Vector3i right, Vector3f result) {
 
         result.x = (float) left.x / (float) right.x;
         result.y = (float) left.y / (float) right.y;
@@ -120,7 +120,7 @@ public class Vector3i implements Cloneable {
         return this;
     }
 
-    public static final int dot(Vector3i vector1, Vector3i vector2) {
+    public static int dot(Vector3i vector1, Vector3i vector2) {
 
         return (vector1.x * vector2.x) + (vector1.y * vector2.y) + (vector1.z * vector2.z);
     }
@@ -145,6 +145,7 @@ public class Vector3i implements Cloneable {
     }
 
     public Vector3i clone() {
+
         return new Vector3i(x, y, z);
     }
 

@@ -7,7 +7,7 @@ import framework.util.math.Vector2f;
  */
 public class Region {
 
-    private Vector2f lower, upper;
+    private final Vector2f lower, upper;
     private float width, height;
 
     public Region(float x1, float y1, float x2, float y2) {

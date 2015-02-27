@@ -5,20 +5,12 @@ import framework.graphics.Mesh;
 import framework.graphics.opengl.ShaderProgram;
 import framework.graphics.opengl.Texture;
 import framework.graphics.opengl.uniform.FloatVectorUniform;
-import framework.graphics.opengl.uniform.MatrixUniform;
 import framework.graphics.opengl.uniform.VectorUniform;
 import framework.graphics.vertices.VertexAttribute;
 import framework.graphics.vertices.StaticVertexAttribute;
-import framework.scene.components.graphics.RenderComponent;
-import framework.util.math.Matrix4;
-import game.SpriteAnimation;
-import javafx.animation.Animation;
-import org.lwjgl.opengl.GL13;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Will on 12/24/2014.

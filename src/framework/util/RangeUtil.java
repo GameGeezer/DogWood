@@ -14,7 +14,7 @@ public final class RangeUtil {
      * @param max
      * @return The new limited value
      */
-    public static final float forceIntoRange(float value, float min, float max) {
+    public static float forceIntoRange(float value, float min, float max) {
 
         return value <= max ? value >= min ? value : min : max;
     }
@@ -27,7 +27,7 @@ public final class RangeUtil {
      * @param max
      * @return True if the value is within range.
      */
-    public static final boolean isWithinRange(float value, float min, float max) {
+    public static boolean isWithinRange(float value, float min, float max) {
 
         return value <= max && (value >= min);
     }

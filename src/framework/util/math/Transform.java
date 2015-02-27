@@ -7,8 +7,8 @@ package framework.util.math;
  */
 public class Transform {
 
-    private Matrix4 position = new Matrix4(), scale = new Matrix4();
-    private Orientation orientation = new Orientation();
+    private final Matrix4 position = new Matrix4(), scale = new Matrix4();
+    private final Orientation orientation = new Orientation();
 
     public Transform() {
 

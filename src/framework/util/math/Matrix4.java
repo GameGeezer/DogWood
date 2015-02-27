@@ -12,7 +12,7 @@ public class Matrix4 implements Cloneable {
             M02 = 8, M12 = 9, M22 = 10, M32 = 11,
             M03 = 12, M13 = 13, M23 = 14, M33 = 15;
 
-    public float[] data = new float[16];
+    public final float[] data = new float[16];
 
     public Matrix4() {
         loadIdentity();

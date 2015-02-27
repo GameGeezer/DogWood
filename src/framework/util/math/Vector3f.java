@@ -48,7 +48,7 @@ public class Vector3f implements Cloneable {
         return this;
     }
 
-    public static final Vector3f add(Vector3f left, Vector3f right, Vector3f result) {
+    public static Vector3f add(Vector3f left, Vector3f right, Vector3f result) {
 
         result.x = left.x + right.x;
         result.y = left.y + right.y;
@@ -66,7 +66,7 @@ public class Vector3f implements Cloneable {
         return this;
     }
 
-    public static final Vector3f sub(Vector3f left, Vector3f right, Vector3f result) {
+    public static Vector3f sub(Vector3f left, Vector3f right, Vector3f result) {
 
         result.x = left.x - right.x;
         result.y = left.y - right.y;
@@ -84,7 +84,7 @@ public class Vector3f implements Cloneable {
         return this;
     }
 
-    public static final Vector3f mul(Vector3f left, Vector3f right, Vector3f result) {
+    public static Vector3f mul(Vector3f left, Vector3f right, Vector3f result) {
 
         result.x = left.x * right.x;
         result.y = left.y * right.y;
@@ -102,7 +102,7 @@ public class Vector3f implements Cloneable {
         return this;
     }
 
-    public static final Vector3f div(Vector3f left, Vector3f right, Vector3f result) {
+    public static Vector3f div(Vector3f left, Vector3f right, Vector3f result) {
 
         result.x = left.x * right.x;
         result.y = left.y * right.y;
@@ -120,7 +120,7 @@ public class Vector3f implements Cloneable {
         return this;
     }
 
-    public static final float dot(Vector3f vector1, Vector3f vector2) {
+    public static float dot(Vector3f vector1, Vector3f vector2) {
 
         return (vector1.x * vector2.x) + (vector1.y * vector2.y) + (vector1.z * vector2.z);
     }

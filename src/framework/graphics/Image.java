@@ -41,7 +41,7 @@ public final class Image {
         this.buffer = buffer;
     }
 
-    public final static Image loadPNG(final File file, final ImageFormat format) throws DogWoodException {
+    public static Image loadPNG(final File file, final ImageFormat format) throws DogWoodException {
 
         ByteBuffer buffer;
         int width, height;

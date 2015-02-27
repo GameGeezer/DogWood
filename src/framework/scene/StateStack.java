@@ -7,7 +7,7 @@ import java.util.LinkedList;
  */
 public class StateStack<E extends StateStack.State> {
 
-    private LinkedList<E> states = new LinkedList<>();
+    private final LinkedList<E> states = new LinkedList<>();
 
     public E pop() {
 

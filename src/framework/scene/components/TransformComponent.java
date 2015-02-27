@@ -16,10 +16,10 @@ public class TransformComponent extends EntityComponent implements IUniformWrapp
 
     public static final String MODEL_UNIFORM = "u_modelMatrix";
 
-    private MatrixUniform modelUniform = new MatrixUniform(MODEL_UNIFORM, MatrixUniform.MatrixUniformType.MATRIX4);
+    private final  MatrixUniform modelUniform = new MatrixUniform(MODEL_UNIFORM, MatrixUniform.MatrixUniformType.MATRIX4);
 
-    private Transform transform = new Transform();
-    private Matrix4 model = new Matrix4();
+    private final Transform transform = new Transform();
+    private final  Matrix4 model = new Matrix4();
 
     public TransformComponent() {
 
