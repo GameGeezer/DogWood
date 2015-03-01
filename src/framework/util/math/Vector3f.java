@@ -104,9 +104,9 @@ public class Vector3f implements Cloneable {
 
     public static Vector3f div(final Vector3f left, final Vector3f right, final Vector3f result) {
 
-        result.x = left.x * right.x;
-        result.y = left.y * right.y;
-        result.z = left.z * right.z;
+        result.x = left.x / right.x;
+        result.y = left.y / right.y;
+        result.z = left.z / right.z;
 
         return result;
     }
