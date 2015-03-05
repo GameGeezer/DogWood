@@ -1,5 +1,6 @@
 package game;
 
+import engine.voxelitemedit.CubicMeshExtractor;
 import framework.graphics.DeferredRenderer;
 import framework.graphics.Image;
 import framework.graphics.Mesh;
@@ -8,6 +9,8 @@ import framework.scene.Entity;
 import framework.scene.components.TransformComponent;
 import framework.scene.components.general.CameraReferenceComponent;
 import framework.scene.components.graphics.TexturedMeshComponent;
+import framework.util.Grid3D;
+import framework.util.GridUtil;
 import framework.util.exceptions.DogWoodException;
 import framework.util.fileIO.FileUtil;
 import framework.util.fileIO.WavefrontLoader;
@@ -20,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author William Gervasio
@@ -46,7 +50,7 @@ public class GameScreen implements Screen {
             attributes.put(1, "in_TextureCoord");
 
             treeShader = new ShaderProgram(FileUtil.readText("res/shaders/DeferredMeshShader.vert"), FileUtil.readText("res/shaders/DeferredMeshShader.frag"), attributes);
-            spriteSheet = Image.loadPNG(new File("res/textures/walls128.png"), Image.ImageFormat.RGBA);
+            spriteSheet = Image.loadPNG(new File("res/textures/blockImage.png"), Image.ImageFormat.RGBA);
             Transform playerTransform = new Transform();
             playerTransform.setTranslation(0, 0, -1.5f);
             playerTransform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
@@ -90,15 +94,33 @@ public class GameScreen implements Screen {
             e.printStackTrace();
         }
 
+        Grid3D<Integer> testVoxelGrid = new Grid3D<>(5, 5, 5);
+        Random r = new Random();
+        for(int x = 0; x < testVoxelGrid.getLength(); ++x) {
+
+            for(int y = 0; y < testVoxelGrid.getHeight(); ++y) {
+
+                for(int z = 0; z < testVoxelGrid.getDepth(); ++z) {
+
+                    testVoxelGrid.set(x, y, z, r.nextInt(2));
+                    System.out.println(r.nextInt(2));
+                }
+            }
+        }
+
+        GridUtil.setEdges(testVoxelGrid, 0);
+
+        Mesh voxelMesh = CubicMeshExtractor.extractDirty(testVoxelGrid);
+
         Entity collisionTestEntity = new Entity();
 
         ctTransform = new TransformComponent();
         ctTransform.setTranslation(0f, 1f, -1.7f);
-        ctTransform.setScale(3, 3, 3);
+        ctTransform.setScale(0.5f, 0.2f, 0.25f);
 
         try {
 
-            TexturedMeshComponent ctsprite = new TexturedMeshComponent(treeMesh, spriteSheet, treeShader);
+            TexturedMeshComponent ctsprite = new TexturedMeshComponent(voxelMesh, spriteSheet, treeShader);
             collisionTestEntity.addComponent(ctsprite);
             collisionTestEntity.addComponent(ctTransform);
             collisionTestEntity.addComponent(new CameraReferenceComponent(Scene.getCamera()));

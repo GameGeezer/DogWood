@@ -26,6 +26,11 @@ public final class Color implements Cloneable {
         set(r, g, b, a);
     }
 
+    public Color(final long hex) {
+
+        set(hex);
+    }
+
     public Color(final Color color) {
 
         this(color.r, color.g, color.b, color.a);
@@ -77,6 +82,16 @@ public final class Color implements Cloneable {
         setGreen(g);
         setBlue(b);
         setAlpha(a);
+
+        return this;
+    }
+
+    public final Color set(final long hex) {
+
+        a = (hex & 0xFF000000L) >> 24;
+        r = (hex & 0xFF0000L) >> 16;
+        g = (hex & 0xFF00L) >> 8;
+        b = (hex & 0xFFL);
 
         return this;
     }

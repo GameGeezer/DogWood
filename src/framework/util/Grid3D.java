@@ -22,6 +22,11 @@ public class Grid3D<E> {
         return grid[x][y][z];
     }
 
+    public void set(final int x, final int y, final int z, E value) {
+
+        grid[x][y][z] = value;
+    }
+
     public int getLength() {
 
         return length;

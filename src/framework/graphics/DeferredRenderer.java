@@ -27,8 +27,6 @@ public class DeferredRenderer {
     private final Texture normalBuffer;
     private final Texture diffuseBuffer;
 
-//    private final Texture screenTexture;
-
     private final FBO fbo;
     private final RBO fboDepthBuffer;
 
@@ -43,8 +41,6 @@ public class DeferredRenderer {
         positionBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT0.ID, OGLColorType.RGBA);
         normalBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT1.ID, OGLColorType.RGBA);
         diffuseBuffer = new Texture(width, height, AttachmentType.COLOR_ATTACHMENT2.ID, OGLColorType.RGBA);
-
-//        screenTexture = new Texture(width, height, SCREEN_BUFFER_BINDING, OGLColorType.RGBA);
 
         fbo = new FBO();
         fboDepthBuffer = new RBO(width, height, AttachmentType.DEPTH_ATTACHMENT);
@@ -66,10 +62,12 @@ public class DeferredRenderer {
         GL20.glDrawBuffers(buffer);
 
         if (!fbo.checkForErrors()) {
+
             throw new GraphicsException("Could not compile FBO");
         }
 
         fboDepthBuffer.unbind();
+
         fbo.unbind();
     }
 
@@ -84,7 +82,6 @@ public class DeferredRenderer {
     }
 
     public void endDrawing() {
-
 
         fbo.unbind();
 

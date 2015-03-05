@@ -26,8 +26,6 @@ public class Entity {
             // If it hasn't add a list of the type to the map for easy access
             componentMap.put(component.getClass(), new ArrayList<>());
         }
-        // Notify every component that a new one has been added in case they're interested
-        componentMap.entrySet().forEach((mapEntry) -> mapEntry.getValue().forEach((componentEntry) -> componentEntry.onComponentAttachedToParent(component)));
 
         // Add the component to the map
         componentMap.get(component.getClass()).add(component);
@@ -35,6 +33,8 @@ public class Entity {
         component.setParent(this);
         // Call the component specific "onAttach" method
         component.onAttach();
+        // Notify every component that a new one has been added in case they're interested
+        componentMap.entrySet().forEach((mapEntry) -> mapEntry.getValue().forEach((componentEntry) -> componentEntry.onComponentAttachedToParent(component)));
         // Loop each entry in the map
         componentMap.entrySet().forEach((mapEntry) -> {
             // Check to see if the entry type is a parent type of the entity

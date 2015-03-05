@@ -65,6 +65,7 @@ public abstract class Uniform {
     protected abstract void updateProgram(int uniformHandle);
 
     /**
+     * Update the shader uniform
      * @param shader the program to be updated
      */
     private void passUniformToShader(ShaderProgram shader) {

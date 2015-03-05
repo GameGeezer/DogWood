@@ -1,34 +1,46 @@
 package framework.graphics.opengl.bufferObjects;
 
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL31;
+import java.nio.ByteBuffer;
 
-/**
- * TODO
- *
- * @author William Gervasio
- */
+import static org.lwjgl.opengl.GL15.*;
+
+import static org.lwjgl.opengl.GL15.glBindBuffer;
+import static org.lwjgl.opengl.GL30.glBindBufferRange;
+import static org.lwjgl.opengl.GL31.GL_UNIFORM_BUFFER;
+
 public class UBO {
 
-    private final int handle;
+    private final int handle, binding;
+    private ByteBuffer buffer;
 
-    public UBO() {
+    /**
+     *
+     * @param usage streamdraw
+     */
+    public UBO(final int binding, final ByteBuffer buffer, final BufferedObjectUsage usage) {
 
-        handle = GL15.glGenBuffers();
+        this.binding = binding;
+        this.buffer = buffer;
+        handle = glGenBuffers();
+
+        glBindBuffer(GL_UNIFORM_BUFFER, handle);
+        glBufferData(GL_UNIFORM_BUFFER, buffer.capacity(), usage.ID);
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
     }
 
     public void bind() {
 
-        GL15.glBindBuffer(GL31.GL_UNIFORM_BUFFER, handle);
+        glBindBuffer(GL_UNIFORM_BUFFER, handle);
+        glBindBufferRange(GL_UNIFORM_BUFFER, binding, handle, 0, buffer.capacity());
     }
 
     public void unbind() {
 
-        GL15.glBindBuffer(GL31.GL_UNIFORM_BUFFER, 0);
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
     }
 
     public void destroy() {
 
-
+        glDeleteBuffers(handle);
     }
 }

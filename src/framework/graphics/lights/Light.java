@@ -13,6 +13,7 @@ public class Light {
     private final Color color;
 
     private Light(Color color) {
+
         this.color = color;
     }
 }

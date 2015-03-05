@@ -1,15 +1,11 @@
 package engine.voxelitemedit;
 
-import framework.util.Grid3D;
 import framework.window.Screen;
 
 /**
  * @author William Gervasio
  */
 public class VoxelItemEditScreen implements Screen {
-
-    private final Grid3D grid = new Grid3D(1,1,1);
-
 
     @Override
     public void onPause() {
