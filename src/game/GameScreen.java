@@ -94,7 +94,7 @@ public class GameScreen implements Screen {
             e.printStackTrace();
         }
 
-        Grid3D<Integer> testVoxelGrid = new Grid3D<>(5, 5, 5);
+        Grid3D<Integer> testVoxelGrid = new Grid3D<>(50, 50, 5);
         Random r = new Random();
         for(int x = 0; x < testVoxelGrid.getLength(); ++x) {
 
@@ -103,7 +103,6 @@ public class GameScreen implements Screen {
                 for(int z = 0; z < testVoxelGrid.getDepth(); ++z) {
 
                     testVoxelGrid.set(x, y, z, r.nextInt(2));
-                    System.out.println(r.nextInt(2));
                 }
             }
         }
@@ -115,8 +114,8 @@ public class GameScreen implements Screen {
         Entity collisionTestEntity = new Entity();
 
         ctTransform = new TransformComponent();
-        ctTransform.setTranslation(0f, 1f, -1.7f);
-        ctTransform.setScale(0.5f, 0.2f, 0.25f);
+        ctTransform.setTranslation(0f, 0f, -1.7f);
+        ctTransform.setScale(0.08f, 0.08f, 0.08f);
 
         try {
 
