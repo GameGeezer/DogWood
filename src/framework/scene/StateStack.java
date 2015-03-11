@@ -1,5 +1,7 @@
 package framework.scene;
 
+import framework.util.Timer;
+
 import java.util.LinkedList;
 
 /**
@@ -42,10 +44,23 @@ public class StateStack<E extends StateStack.State> {
     public abstract static class State {
 
         private StateStack parentStack;
+        private Timer timeSinceTopTimer = new Timer();
+
+        public State() {
+
+            timeSinceTopTimer.start();
+            timeSinceTopTimer.reset();
+        }
 
         protected void popStack() {
 
-            parentStack.pop();
+            if(parentStack.peek().equals(this)) {
+
+                parentStack.pop();
+                timeSinceTopTimer.start();
+                timeSinceTopTimer.reset();
+            }
+
         }
 
         protected abstract void onLeaveTop();
@@ -55,6 +70,11 @@ public class StateStack<E extends StateStack.State> {
         protected void setParentStack(final StateStack parentStack) {
 
             this.parentStack = parentStack;
+        }
+
+        public long getTimeSinceTop() {
+
+            return timeSinceTopTimer.getElapsedTimeMS();
         }
     }
 }

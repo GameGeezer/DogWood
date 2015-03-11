@@ -8,6 +8,9 @@ import static org.lwjgl.opengl.GL15.glBindBuffer;
 import static org.lwjgl.opengl.GL30.glBindBufferRange;
 import static org.lwjgl.opengl.GL31.GL_UNIFORM_BUFFER;
 
+/**
+ * @author William Gervasio
+ */
 public class UBO {
 
     private final int handle, binding;

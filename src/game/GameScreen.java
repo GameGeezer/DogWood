@@ -76,24 +76,39 @@ public class GameScreen implements Screen {
             tree3Transform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
             tree3Transform.setScale(1f, 1f, 0);
 
+            Transform tree4Transform = new Transform();
+            tree4Transform.setTranslation(0.5f, 0, -1.05f);
+            tree4Transform.rotateEuler((float)Math.PI / 2.5f, 0f, 0f);
+            tree4Transform.setScale(1f, 1f, 0);
+
             Script s = Application.GROOVY_SHELL.parse( new File( "res/scripts/BuildScripts.groovy" ) );
+
 
             player = (Entity) s.invokeMethod("buildPlayer", playerTransform);
             enemy = (Entity) s.invokeMethod("buildTestEnemy", new Object[]{dogTransform, player});
             tree = (Entity) s.invokeMethod("buildTree", tree1Transform);
+            Entity netSensor = (Entity) s.invokeMethod("buildPlayerNetSensor", player);
+
             Scene.addEntity(player);
             Scene.addEntity(enemy);
             Scene.addEntity(tree);
+            Scene.addEntity((Entity) s.invokeMethod("buildTileMap", new Object[]{}));
             Scene.addEntity((Entity) s.invokeMethod("buildTree", tree2Transform));
             Scene.addEntity((Entity) s.invokeMethod("buildTree", tree3Transform));
+            Scene.addEntity((Entity) s.invokeMethod("buildTree", tree4Transform));
+            Scene.addEntity(netSensor);
             treeMesh = WavefrontLoader.LOADER.load(new File("res/models/Plane.obj"));
 	        renderer = new DeferredRenderer(800, 600);
+
         } catch (DogWoodException e) {
+
             e.printStackTrace();
         } catch (IOException e) {
+
             e.printStackTrace();
         }
 
+        /*
         Grid3D<Integer> testVoxelGrid = new Grid3D<>(50, 50, 5);
         Random r = new Random();
         for(int x = 0; x < testVoxelGrid.getLength(); ++x) {
@@ -111,15 +126,16 @@ public class GameScreen implements Screen {
 
         Mesh voxelMesh = CubicMeshExtractor.extractDirty(testVoxelGrid);
 
+        */
         Entity collisionTestEntity = new Entity();
 
         ctTransform = new TransformComponent();
         ctTransform.setTranslation(0f, 0f, -1.7f);
-        ctTransform.setScale(0.08f, 0.08f, 0.08f);
+        ctTransform.setScale(0.25f, 0.25f, 0.25f);
 
         try {
 
-            TexturedMeshComponent ctsprite = new TexturedMeshComponent(voxelMesh, spriteSheet, treeShader);
+            TexturedMeshComponent ctsprite = new TexturedMeshComponent(treeMesh, spriteSheet, treeShader);
             collisionTestEntity.addComponent(ctsprite);
             collisionTestEntity.addComponent(ctTransform);
             collisionTestEntity.addComponent(new CameraReferenceComponent(Scene.getCamera()));
@@ -145,7 +161,7 @@ public class GameScreen implements Screen {
     @Override
     public void update(int delta) {
 
-     //   ctTransform.rotateEuler((float)Math.PI / 1000f, 0f, 0f);
+        // ctTransform.rotateEuler((float)Math.PI / 1000f, 0f, 0f);
         TransformComponent playerTransform = (TransformComponent) player.getComponentsOfType(TransformComponent.class).get(0);
         Scene.getCamera().setTranslation(-playerTransform.getX(), -playerTransform.getY() + 1f, -playerTransform.getZ() - 1);
         Scene.update(delta);

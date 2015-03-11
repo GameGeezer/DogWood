@@ -6,10 +6,10 @@ package framework.util.math;
 
 public class Vector2f implements Cloneable {
 
-    public static final Vector2f UP = new ImmutableVector2f(0, 1);
-    public static final Vector2f DOWN = new ImmutableVector2f(0, -1);
-    public static final Vector2f RIGHT = new ImmutableVector2f(1, 0);
-    public static final Vector2f LEFT = new ImmutableVector2f(-1, 0);
+    public static final Vector2f UP = new Vector2f(0, 1);
+    public static final Vector2f DOWN = new Vector2f(0, -1);
+    public static final Vector2f RIGHT = new Vector2f(1, 0);
+    public static final Vector2f LEFT = new Vector2f(-1, 0);
 
     public float x, y;
 

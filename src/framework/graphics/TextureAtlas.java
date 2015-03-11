@@ -1,21 +1,19 @@
 package framework.graphics;
 
 import framework.graphics.opengl.Texture;
-import framework.util.math.Matrix4;
 
 /**
- * TODO
- * Created by Will on 12/27/2014.
+ * @author William Gervasio
  */
 public class TextureAtlas {
 
     private Texture texture;
-    private Matrix4 textureMatrix = new Matrix4();
     private int cellWidth, cellHeight, cellsWide, cellsHigh;
     private float textureCoordinateWidth, textureCoordinateHeight;
 
-    public TextureAtlas(Texture texture, int cellWidth, int cellHeight) {
+    public TextureAtlas(Image image, int cellWidth, int cellHeight) {
 
+        this.texture = new Texture(image, 0);
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
         cellsWide = (int) Math.floor(texture.getWidth() / cellWidth);
@@ -30,5 +28,25 @@ public class TextureAtlas {
 
     public void unbindTexture() {
         texture.unbind();
+    }
+
+    public int getCellsWide() {
+
+        return cellsWide;
+    }
+
+    public int getCellsHigh() {
+
+        return  cellsHigh;
+    }
+
+    public float getTextureCoordinateWidth() {
+
+        return textureCoordinateWidth;
+    }
+
+    public float getTextureCoordinateHeight() {
+
+        return textureCoordinateHeight;
     }
 }

@@ -33,6 +33,7 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
     private MovementState decelerationState;
     private MovementState walkState;
     private MovementState rollState;
+    private MovementState swingNetState;
 
     private float horizontalMovement = 0f;
     private float verticalMovement = 0f;
@@ -207,6 +208,9 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
                 setFaceDirection(Vector2f.DOWN);
 
                 break;
+            case GLFW_KEY_SPACE:
+                swingNet();
+                break;
         }
 
         walkInDirection(horizontalMovement, verticalMovement);
@@ -273,7 +277,8 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         bodyComponent = body;
         decelerationState = new DecelerateMovementState(bodyComponent, 200f);
         walkState = new WalkMovementState(bodyComponent, 2000f, 18f);
-        rollState = new TimedMovementState(bodyComponent, 20000f, 23f, 350f);
+        rollState = new TimedMovementState(bodyComponent, 100f, 20000f, 23f, 350f);
+        swingNetState = new TimedMovementState(bodyComponent, 500f, 0f, 23f, 350f);
         movementStack.push(decelerationState);
     }
 
@@ -286,12 +291,22 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
         decelerationState = null;
         walkState = null;
         rollState = null;
+        swingNetState = null;
         movementStack.clear();
+    }
+
+
+    private void swingNet() {
+
+        if((movementStack.peek().equals(decelerationState) || movementStack.peek().equals(walkState) && swingNetState.getTimeSinceTop() > 350f)) {
+
+            movementStack.push(swingNetState);
+        }
     }
 
     private void rollInDirection(float x, float y) {
 
-        if(movementStack.peek().equals(decelerationState) || movementStack.peek().equals(walkState)) {
+        if((movementStack.peek().equals(decelerationState) || movementStack.peek().equals(walkState) && rollState.getTimeSinceTop() > 350f)) {
 
             rollState.setDirection(x, y);
             movementStack.push(rollState);
@@ -342,5 +357,10 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
 
         setAnimation();
+    }
+
+    public Vector2f getFaceDirection() {
+
+        return faceDirection;
     }
 }

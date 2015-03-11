@@ -21,6 +21,11 @@ public class Grid2D<E> {
         return grid[x][y];
     }
 
+    public void set(final int x, final int y, final E value) {
+
+        grid[x][y] = value;
+    }
+
     public int getLength() {
 
         return length;

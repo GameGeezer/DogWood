@@ -149,4 +149,9 @@ public final class PhysicsBodyComponent extends UpdateComponent {
 
         body.setLinearDamping(amount);
     }
+
+    public void setPosition(final float x, final float y) {
+
+        body.setTransform(tempVec.set(x, y), body.getAngle());
+    }
 }
