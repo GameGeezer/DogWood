@@ -176,7 +176,7 @@ public Entity buildPlayerNetSensor(Entity player) {
 
 public Entity buildTileMap() {
 
-    Image playerImage = Image.loadPNG(new File("res/textures/HighResTiles.png"), Image.ImageFormat.RGBA);
+    Image playerImage = Image.loadPNG(new File("res/textures/highresolutionSheet.png"), Image.ImageFormat.RGBA);
 
     TextureAtlas atlas = new TextureAtlas(playerImage, 128, 128);
 
@@ -197,7 +197,7 @@ public Entity buildTileMap() {
 
         for(int y = 0; y < map.getHeight(); ++y) {
 
-            map.set(x, y, r.nextInt(16));
+            map.set(x, y, r.nextInt(225));
         }
     }
 
