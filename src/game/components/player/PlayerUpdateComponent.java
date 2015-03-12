@@ -6,6 +6,8 @@ import framework.scene.components.TransformComponent;
 import framework.scene.components.UpdateComponent;
 import framework.scene.components.collision.PhysicsBodyComponent;
 import framework.scene.components.graphics.SpriteComponent;
+import framework.sound.Sound;
+import framework.util.exceptions.DogWoodException;
 import framework.util.math.Vector2f;
 import framework.window.Application;
 import framework.window.keyboardcallbacks.KeyboardListener;
@@ -15,6 +17,7 @@ import game.states.MovementState;
 import game.states.TimedMovementState;
 import game.states.WalkMovementState;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,10 +58,19 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
 
     private int animationStartTime;
 
+    private Sound soundTest;
+
     public PlayerUpdateComponent() {
         currentAnimation = walkDownAnimation;
         animationStartTime = (int) System.currentTimeMillis();
         faceDirection = Vector2f.DOWN;
+
+        File soundFile = new File("res/sounds/dialog/narrator/story/StickWhatAndWhere.wav");
+        try {
+            soundTest = new Sound(soundFile);
+        }catch (DogWoodException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -210,6 +222,12 @@ public class PlayerUpdateComponent extends UpdateComponent implements KeyboardLi
                 break;
             case GLFW_KEY_SPACE:
                 swingNet();
+                try {
+                    soundTest.play();
+                } catch (DogWoodException e) {
+                    e.printStackTrace();
+                }
+
                 break;
         }
 

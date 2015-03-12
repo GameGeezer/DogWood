@@ -201,6 +201,7 @@ public Entity buildTileMap() {
         }
     }
 
+
     TileMapComponent tileMapComponent = new TileMapComponent(shader, map, atlas);
 
     Transform transform = new Transform();
