@@ -1,8 +1,5 @@
 package framework.graphics.opengl;
 
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GL31;
-import org.lwjgl.opengl.GL32;
 import org.lwjgl.opengl.GL33;
 
 import java.util.Map;

@@ -14,8 +14,10 @@ import java.nio.ByteBuffer;
 @SuppressWarnings("UnusedDeclaration")
 public class Texture {
 
-    private final int handle, textureUnit, width, height;
-    private final OGLColorType colorType;
+    private final int handle;
+
+    public final OGLColorType colorType;
+    public final int textureUnit, width, height;
 
     public Texture(final int width, final int height, final int textureUnit, final OGLColorType colorType, final ByteBuffer buffer) {
 
@@ -66,25 +68,5 @@ public class Texture {
     public void destroy() {
 
         GL11.glDeleteTextures(handle);
-    }
-
-    public int getWidth() {
-
-        return width;
-    }
-
-    public int getHeight() {
-
-        return height;
-    }
-
-    public int getUnit() {
-
-        return textureUnit;
-    }
-
-    public OGLColorType getColorType() {
-
-        return colorType;
     }
 }

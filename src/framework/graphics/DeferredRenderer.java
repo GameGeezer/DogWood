@@ -111,4 +111,5 @@ public class DeferredRenderer {
         normalBuffer.destroy();
         diffuseBuffer.destroy();
     }
+
 }

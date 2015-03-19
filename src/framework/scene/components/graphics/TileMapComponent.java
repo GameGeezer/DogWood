@@ -33,11 +33,11 @@ public class TileMapComponent extends RenderComponent{
     @Override
     public void render(int delta) {
 
-        textureAtlas.bindTexture();
+        textureAtlas.texture.bind();
         getShader().bind();
         mapMesh.draw();
         getShader().unbind();
-        textureAtlas.unbindTexture();
+        textureAtlas.texture.unbind();
     }
 
     private Mesh createMesh(final Grid2D<Integer> map, final TextureAtlas textureAtlas) {
@@ -58,14 +58,14 @@ public class TileMapComponent extends RenderComponent{
                 builder.addToComponent(POSITION_COMPONENT, x, y + 1, 0);
                 builder.addToComponent(POSITION_COMPONENT, x + 1, y + 1, 0);
 
-                float cellX = (float)map.get(x, y) % (float)textureAtlas.getCellsWide();
-                float cellY = (float) Math.floor((float)map.get(x, y) / (float)textureAtlas.getCellsWide());
+                float cellX = (float)map.get(x, y) % (float)textureAtlas.cellsWide;
+                float cellY = (float) Math.floor((float)map.get(x, y) / (float)textureAtlas.cellsWide);
 
-                float minTexX = cellX * textureAtlas.getTextureCoordinateWidth();
-                float maxTexX = minTexX + textureAtlas.getTextureCoordinateWidth();
+                float minTexX = cellX * textureAtlas.textureCoordinateWidth;
+                float maxTexX = minTexX + textureAtlas.textureCoordinateWidth;
 
-                float minTexY = cellY * textureAtlas.getTextureCoordinateHeight();
-                float maxTexY = minTexY + textureAtlas.getTextureCoordinateHeight();
+                float minTexY = cellY * textureAtlas.textureCoordinateHeight;
+                float maxTexY = minTexY + textureAtlas.textureCoordinateHeight;
 
                 builder.addToComponent(TEXTURE_COMPONENT, minTexX, minTexY);
                 builder.addToComponent(TEXTURE_COMPONENT, minTexX, maxTexY);

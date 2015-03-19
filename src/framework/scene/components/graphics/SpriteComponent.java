@@ -35,7 +35,7 @@ public class SpriteComponent extends RenderComponent {
 
         texture = new Texture(image, 0);
 
-        mesh = createMesh(texture.getWidth(), texture.getHeight());
+        mesh = createMesh(texture.width, texture.height);
 
         texCoordOffset.addListener(shader);
 

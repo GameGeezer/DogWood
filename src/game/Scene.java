@@ -1,9 +1,5 @@
 package game;
 
-/**
- * Created by Will on 12/30/2014.
- */
-
 import framework.scene.Camera;
 import framework.scene.Entity;
 import framework.scene.components.UpdateComponent;
@@ -18,7 +14,8 @@ import java.util.List;
  */
 public class Scene {
 
-    private static List<Entity> entities = new ArrayList<Entity>();
+   // private static List<Entity> entities = new ArrayList<>();
+    private static List<Entity> entities = new ArrayList<>();
     private static Camera camera = new Camera(800, 600, 0.1f, 100, 60);
 
     static {
